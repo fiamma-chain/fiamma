@@ -76,6 +76,10 @@ import (
 	ibckeeper "github.com/cosmos/ibc-go/v8/modules/core/keeper"
 
 	zkproofmodulekeeper "fiamma/x/zkproof/keeper"
+
+	wasmkeeper "github.com/CosmWasm/wasmd/x/wasm/keeper"
+	tmproto "github.com/cometbft/cometbft/proto/tendermint/types"
+
 	// this line is used by starport scaffolding # stargate/app/moduleImport
 
 	"fiamma/docs"
@@ -141,6 +145,11 @@ type App struct {
 	ScopedICAHostKeeper       capabilitykeeper.ScopedKeeper
 
 	ZkproofKeeper zkproofmodulekeeper.Keeper
+
+	// CosmWasm
+	WasmKeeper       wasmkeeper.Keeper
+	ScopedWasmKeeper capabilitykeeper.ScopedKeeper
+
 	// this line is used by starport scaffolding # stargate/app/keeperDeclaration
 
 	// simulation manager
@@ -357,7 +366,9 @@ func New(
 		return nil, err
 	}
 
-	return app, nil
+	return app, app.WasmKeeper.
+		InitializePinnedCodes(app.NewUncachedContext(true, tmproto.Header{}))
+
 }
 
 // LegacyAmino returns App's amino codec.
