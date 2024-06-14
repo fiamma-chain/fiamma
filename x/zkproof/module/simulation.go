@@ -27,6 +27,10 @@ const (
 	// TODO: Determine the simulation weight value
 	defaultWeightMsgSubmitGnarkPlonk int = 100
 
+	opWeightMsgVerifyProof = "op_weight_msg_verify_proof"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgVerifyProof int = 100
+
 	// this line is used by starport scaffolding # simapp/module/const
 )
 
@@ -61,6 +65,17 @@ func (am AppModule) WeightedOperations(simState module.SimulationState) []simtyp
 		zkproofsimulation.SimulateMsgSubmitGnarkPlonk(am.accountKeeper, am.bankKeeper, am.keeper),
 	))
 
+	var weightMsgVerifyProof int
+	simState.AppParams.GetOrGenerate(opWeightMsgVerifyProof, &weightMsgVerifyProof, nil,
+		func(_ *rand.Rand) {
+			weightMsgVerifyProof = defaultWeightMsgVerifyProof
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgVerifyProof,
+		zkproofsimulation.SimulateMsgVerifyProof(am.accountKeeper, am.bankKeeper, am.keeper),
+	))
+
 	// this line is used by starport scaffolding # simapp/module/operation
 
 	return operations
@@ -74,6 +89,14 @@ func (am AppModule) ProposalMsgs(simState module.SimulationState) []simtypes.Wei
 			defaultWeightMsgSubmitGnarkPlonk,
 			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
 				zkproofsimulation.SimulateMsgSubmitGnarkPlonk(am.accountKeeper, am.bankKeeper, am.keeper)
+				return nil
+			},
+		),
+		simulation.NewWeightedProposalMsg(
+			opWeightMsgVerifyProof,
+			defaultWeightMsgVerifyProof,
+			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
+				zkproofsimulation.SimulateMsgVerifyProof(am.accountKeeper, am.bankKeeper, am.keeper)
 				return nil
 			},
 		),

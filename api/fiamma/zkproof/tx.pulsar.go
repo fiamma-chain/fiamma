@@ -2016,6 +2016,958 @@ func (x *fastReflection_MsgSubmitGnarkPlonkResponse) ProtoMethods() *protoiface.
 	}
 }
 
+var (
+	md_MsgVerifyProof         protoreflect.MessageDescriptor
+	fd_MsgVerifyProof_creator protoreflect.FieldDescriptor
+	fd_MsgVerifyProof_proofId protoreflect.FieldDescriptor
+	fd_MsgVerifyProof_result  protoreflect.FieldDescriptor
+)
+
+func init() {
+	file_fiamma_zkproof_tx_proto_init()
+	md_MsgVerifyProof = File_fiamma_zkproof_tx_proto.Messages().ByName("MsgVerifyProof")
+	fd_MsgVerifyProof_creator = md_MsgVerifyProof.Fields().ByName("creator")
+	fd_MsgVerifyProof_proofId = md_MsgVerifyProof.Fields().ByName("proofId")
+	fd_MsgVerifyProof_result = md_MsgVerifyProof.Fields().ByName("result")
+}
+
+var _ protoreflect.Message = (*fastReflection_MsgVerifyProof)(nil)
+
+type fastReflection_MsgVerifyProof MsgVerifyProof
+
+func (x *MsgVerifyProof) ProtoReflect() protoreflect.Message {
+	return (*fastReflection_MsgVerifyProof)(x)
+}
+
+func (x *MsgVerifyProof) slowProtoReflect() protoreflect.Message {
+	mi := &file_fiamma_zkproof_tx_proto_msgTypes[4]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+var _fastReflection_MsgVerifyProof_messageType fastReflection_MsgVerifyProof_messageType
+var _ protoreflect.MessageType = fastReflection_MsgVerifyProof_messageType{}
+
+type fastReflection_MsgVerifyProof_messageType struct{}
+
+func (x fastReflection_MsgVerifyProof_messageType) Zero() protoreflect.Message {
+	return (*fastReflection_MsgVerifyProof)(nil)
+}
+func (x fastReflection_MsgVerifyProof_messageType) New() protoreflect.Message {
+	return new(fastReflection_MsgVerifyProof)
+}
+func (x fastReflection_MsgVerifyProof_messageType) Descriptor() protoreflect.MessageDescriptor {
+	return md_MsgVerifyProof
+}
+
+// Descriptor returns message descriptor, which contains only the protobuf
+// type information for the message.
+func (x *fastReflection_MsgVerifyProof) Descriptor() protoreflect.MessageDescriptor {
+	return md_MsgVerifyProof
+}
+
+// Type returns the message type, which encapsulates both Go and protobuf
+// type information. If the Go type information is not needed,
+// it is recommended that the message descriptor be used instead.
+func (x *fastReflection_MsgVerifyProof) Type() protoreflect.MessageType {
+	return _fastReflection_MsgVerifyProof_messageType
+}
+
+// New returns a newly allocated and mutable empty message.
+func (x *fastReflection_MsgVerifyProof) New() protoreflect.Message {
+	return new(fastReflection_MsgVerifyProof)
+}
+
+// Interface unwraps the message reflection interface and
+// returns the underlying ProtoMessage interface.
+func (x *fastReflection_MsgVerifyProof) Interface() protoreflect.ProtoMessage {
+	return (*MsgVerifyProof)(x)
+}
+
+// Range iterates over every populated field in an undefined order,
+// calling f for each field descriptor and value encountered.
+// Range returns immediately if f returns false.
+// While iterating, mutating operations may only be performed
+// on the current field descriptor.
+func (x *fastReflection_MsgVerifyProof) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
+	if x.Creator != "" {
+		value := protoreflect.ValueOfString(x.Creator)
+		if !f(fd_MsgVerifyProof_creator, value) {
+			return
+		}
+	}
+	if x.ProofId != "" {
+		value := protoreflect.ValueOfString(x.ProofId)
+		if !f(fd_MsgVerifyProof_proofId, value) {
+			return
+		}
+	}
+	if x.Result != "" {
+		value := protoreflect.ValueOfString(x.Result)
+		if !f(fd_MsgVerifyProof_result, value) {
+			return
+		}
+	}
+}
+
+// Has reports whether a field is populated.
+//
+// Some fields have the property of nullability where it is possible to
+// distinguish between the default value of a field and whether the field
+// was explicitly populated with the default value. Singular message fields,
+// member fields of a oneof, and proto2 scalar fields are nullable. Such
+// fields are populated only if explicitly set.
+//
+// In other cases (aside from the nullable cases above),
+// a proto3 scalar field is populated if it contains a non-zero value, and
+// a repeated field is populated if it is non-empty.
+func (x *fastReflection_MsgVerifyProof) Has(fd protoreflect.FieldDescriptor) bool {
+	switch fd.FullName() {
+	case "fiamma.zkproof.MsgVerifyProof.creator":
+		return x.Creator != ""
+	case "fiamma.zkproof.MsgVerifyProof.proofId":
+		return x.ProofId != ""
+	case "fiamma.zkproof.MsgVerifyProof.result":
+		return x.Result != ""
+	default:
+		if fd.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.zkproof.MsgVerifyProof"))
+		}
+		panic(fmt.Errorf("message fiamma.zkproof.MsgVerifyProof does not contain field %s", fd.FullName()))
+	}
+}
+
+// Clear clears the field such that a subsequent Has call reports false.
+//
+// Clearing an extension field clears both the extension type and value
+// associated with the given field number.
+//
+// Clear is a mutating operation and unsafe for concurrent use.
+func (x *fastReflection_MsgVerifyProof) Clear(fd protoreflect.FieldDescriptor) {
+	switch fd.FullName() {
+	case "fiamma.zkproof.MsgVerifyProof.creator":
+		x.Creator = ""
+	case "fiamma.zkproof.MsgVerifyProof.proofId":
+		x.ProofId = ""
+	case "fiamma.zkproof.MsgVerifyProof.result":
+		x.Result = ""
+	default:
+		if fd.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.zkproof.MsgVerifyProof"))
+		}
+		panic(fmt.Errorf("message fiamma.zkproof.MsgVerifyProof does not contain field %s", fd.FullName()))
+	}
+}
+
+// Get retrieves the value for a field.
+//
+// For unpopulated scalars, it returns the default value, where
+// the default value of a bytes scalar is guaranteed to be a copy.
+// For unpopulated composite types, it returns an empty, read-only view
+// of the value; to obtain a mutable reference, use Mutable.
+func (x *fastReflection_MsgVerifyProof) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
+	switch descriptor.FullName() {
+	case "fiamma.zkproof.MsgVerifyProof.creator":
+		value := x.Creator
+		return protoreflect.ValueOfString(value)
+	case "fiamma.zkproof.MsgVerifyProof.proofId":
+		value := x.ProofId
+		return protoreflect.ValueOfString(value)
+	case "fiamma.zkproof.MsgVerifyProof.result":
+		value := x.Result
+		return protoreflect.ValueOfString(value)
+	default:
+		if descriptor.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.zkproof.MsgVerifyProof"))
+		}
+		panic(fmt.Errorf("message fiamma.zkproof.MsgVerifyProof does not contain field %s", descriptor.FullName()))
+	}
+}
+
+// Set stores the value for a field.
+//
+// For a field belonging to a oneof, it implicitly clears any other field
+// that may be currently set within the same oneof.
+// For extension fields, it implicitly stores the provided ExtensionType.
+// When setting a composite type, it is unspecified whether the stored value
+// aliases the source's memory in any way. If the composite value is an
+// empty, read-only value, then it panics.
+//
+// Set is a mutating operation and unsafe for concurrent use.
+func (x *fastReflection_MsgVerifyProof) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
+	switch fd.FullName() {
+	case "fiamma.zkproof.MsgVerifyProof.creator":
+		x.Creator = value.Interface().(string)
+	case "fiamma.zkproof.MsgVerifyProof.proofId":
+		x.ProofId = value.Interface().(string)
+	case "fiamma.zkproof.MsgVerifyProof.result":
+		x.Result = value.Interface().(string)
+	default:
+		if fd.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.zkproof.MsgVerifyProof"))
+		}
+		panic(fmt.Errorf("message fiamma.zkproof.MsgVerifyProof does not contain field %s", fd.FullName()))
+	}
+}
+
+// Mutable returns a mutable reference to a composite type.
+//
+// If the field is unpopulated, it may allocate a composite value.
+// For a field belonging to a oneof, it implicitly clears any other field
+// that may be currently set within the same oneof.
+// For extension fields, it implicitly stores the provided ExtensionType
+// if not already stored.
+// It panics if the field does not contain a composite type.
+//
+// Mutable is a mutating operation and unsafe for concurrent use.
+func (x *fastReflection_MsgVerifyProof) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
+	switch fd.FullName() {
+	case "fiamma.zkproof.MsgVerifyProof.creator":
+		panic(fmt.Errorf("field creator of message fiamma.zkproof.MsgVerifyProof is not mutable"))
+	case "fiamma.zkproof.MsgVerifyProof.proofId":
+		panic(fmt.Errorf("field proofId of message fiamma.zkproof.MsgVerifyProof is not mutable"))
+	case "fiamma.zkproof.MsgVerifyProof.result":
+		panic(fmt.Errorf("field result of message fiamma.zkproof.MsgVerifyProof is not mutable"))
+	default:
+		if fd.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.zkproof.MsgVerifyProof"))
+		}
+		panic(fmt.Errorf("message fiamma.zkproof.MsgVerifyProof does not contain field %s", fd.FullName()))
+	}
+}
+
+// NewField returns a new value that is assignable to the field
+// for the given descriptor. For scalars, this returns the default value.
+// For lists, maps, and messages, this returns a new, empty, mutable value.
+func (x *fastReflection_MsgVerifyProof) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
+	switch fd.FullName() {
+	case "fiamma.zkproof.MsgVerifyProof.creator":
+		return protoreflect.ValueOfString("")
+	case "fiamma.zkproof.MsgVerifyProof.proofId":
+		return protoreflect.ValueOfString("")
+	case "fiamma.zkproof.MsgVerifyProof.result":
+		return protoreflect.ValueOfString("")
+	default:
+		if fd.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.zkproof.MsgVerifyProof"))
+		}
+		panic(fmt.Errorf("message fiamma.zkproof.MsgVerifyProof does not contain field %s", fd.FullName()))
+	}
+}
+
+// WhichOneof reports which field within the oneof is populated,
+// returning nil if none are populated.
+// It panics if the oneof descriptor does not belong to this message.
+func (x *fastReflection_MsgVerifyProof) WhichOneof(d protoreflect.OneofDescriptor) protoreflect.FieldDescriptor {
+	switch d.FullName() {
+	default:
+		panic(fmt.Errorf("%s is not a oneof field in fiamma.zkproof.MsgVerifyProof", d.FullName()))
+	}
+	panic("unreachable")
+}
+
+// GetUnknown retrieves the entire list of unknown fields.
+// The caller may only mutate the contents of the RawFields
+// if the mutated bytes are stored back into the message with SetUnknown.
+func (x *fastReflection_MsgVerifyProof) GetUnknown() protoreflect.RawFields {
+	return x.unknownFields
+}
+
+// SetUnknown stores an entire list of unknown fields.
+// The raw fields must be syntactically valid according to the wire format.
+// An implementation may panic if this is not the case.
+// Once stored, the caller must not mutate the content of the RawFields.
+// An empty RawFields may be passed to clear the fields.
+//
+// SetUnknown is a mutating operation and unsafe for concurrent use.
+func (x *fastReflection_MsgVerifyProof) SetUnknown(fields protoreflect.RawFields) {
+	x.unknownFields = fields
+}
+
+// IsValid reports whether the message is valid.
+//
+// An invalid message is an empty, read-only value.
+//
+// An invalid message often corresponds to a nil pointer of the concrete
+// message type, but the details are implementation dependent.
+// Validity is not part of the protobuf data model, and may not
+// be preserved in marshaling or other operations.
+func (x *fastReflection_MsgVerifyProof) IsValid() bool {
+	return x != nil
+}
+
+// ProtoMethods returns optional fastReflectionFeature-path implementations of various operations.
+// This method may return nil.
+//
+// The returned methods type is identical to
+// "google.golang.org/protobuf/runtime/protoiface".Methods.
+// Consult the protoiface package documentation for details.
+func (x *fastReflection_MsgVerifyProof) ProtoMethods() *protoiface.Methods {
+	size := func(input protoiface.SizeInput) protoiface.SizeOutput {
+		x := input.Message.Interface().(*MsgVerifyProof)
+		if x == nil {
+			return protoiface.SizeOutput{
+				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+				Size:              0,
+			}
+		}
+		options := runtime.SizeInputToOptions(input)
+		_ = options
+		var n int
+		var l int
+		_ = l
+		l = len(x.Creator)
+		if l > 0 {
+			n += 1 + l + runtime.Sov(uint64(l))
+		}
+		l = len(x.ProofId)
+		if l > 0 {
+			n += 1 + l + runtime.Sov(uint64(l))
+		}
+		l = len(x.Result)
+		if l > 0 {
+			n += 1 + l + runtime.Sov(uint64(l))
+		}
+		if x.unknownFields != nil {
+			n += len(x.unknownFields)
+		}
+		return protoiface.SizeOutput{
+			NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+			Size:              n,
+		}
+	}
+
+	marshal := func(input protoiface.MarshalInput) (protoiface.MarshalOutput, error) {
+		x := input.Message.Interface().(*MsgVerifyProof)
+		if x == nil {
+			return protoiface.MarshalOutput{
+				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+				Buf:               input.Buf,
+			}, nil
+		}
+		options := runtime.MarshalInputToOptions(input)
+		_ = options
+		size := options.Size(x)
+		dAtA := make([]byte, size)
+		i := len(dAtA)
+		_ = i
+		var l int
+		_ = l
+		if x.unknownFields != nil {
+			i -= len(x.unknownFields)
+			copy(dAtA[i:], x.unknownFields)
+		}
+		if len(x.Result) > 0 {
+			i -= len(x.Result)
+			copy(dAtA[i:], x.Result)
+			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.Result)))
+			i--
+			dAtA[i] = 0x1a
+		}
+		if len(x.ProofId) > 0 {
+			i -= len(x.ProofId)
+			copy(dAtA[i:], x.ProofId)
+			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.ProofId)))
+			i--
+			dAtA[i] = 0x12
+		}
+		if len(x.Creator) > 0 {
+			i -= len(x.Creator)
+			copy(dAtA[i:], x.Creator)
+			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.Creator)))
+			i--
+			dAtA[i] = 0xa
+		}
+		if input.Buf != nil {
+			input.Buf = append(input.Buf, dAtA...)
+		} else {
+			input.Buf = dAtA
+		}
+		return protoiface.MarshalOutput{
+			NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+			Buf:               input.Buf,
+		}, nil
+	}
+	unmarshal := func(input protoiface.UnmarshalInput) (protoiface.UnmarshalOutput, error) {
+		x := input.Message.Interface().(*MsgVerifyProof)
+		if x == nil {
+			return protoiface.UnmarshalOutput{
+				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+				Flags:             input.Flags,
+			}, nil
+		}
+		options := runtime.UnmarshalInputToOptions(input)
+		_ = options
+		dAtA := input.Buf
+		l := len(dAtA)
+		iNdEx := 0
+		for iNdEx < l {
+			preIndex := iNdEx
+			var wire uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				wire |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			fieldNum := int32(wire >> 3)
+			wireType := int(wire & 0x7)
+			if wireType == 4 {
+				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: MsgVerifyProof: wiretype end group for non-group")
+			}
+			if fieldNum <= 0 {
+				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: MsgVerifyProof: illegal tag %d (wire type %d)", fieldNum, wire)
+			}
+			switch fieldNum {
+			case 1:
+				if wireType != 2 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Creator", wireType)
+				}
+				var stringLen uint64
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					stringLen |= uint64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				intStringLen := int(stringLen)
+				if intStringLen < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				postIndex := iNdEx + intStringLen
+				if postIndex < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if postIndex > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				x.Creator = string(dAtA[iNdEx:postIndex])
+				iNdEx = postIndex
+			case 2:
+				if wireType != 2 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field ProofId", wireType)
+				}
+				var stringLen uint64
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					stringLen |= uint64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				intStringLen := int(stringLen)
+				if intStringLen < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				postIndex := iNdEx + intStringLen
+				if postIndex < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if postIndex > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				x.ProofId = string(dAtA[iNdEx:postIndex])
+				iNdEx = postIndex
+			case 3:
+				if wireType != 2 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Result", wireType)
+				}
+				var stringLen uint64
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					stringLen |= uint64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				intStringLen := int(stringLen)
+				if intStringLen < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				postIndex := iNdEx + intStringLen
+				if postIndex < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if postIndex > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				x.Result = string(dAtA[iNdEx:postIndex])
+				iNdEx = postIndex
+			default:
+				iNdEx = preIndex
+				skippy, err := runtime.Skip(dAtA[iNdEx:])
+				if err != nil {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, err
+				}
+				if (skippy < 0) || (iNdEx+skippy) < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if (iNdEx + skippy) > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				if !options.DiscardUnknown {
+					x.unknownFields = append(x.unknownFields, dAtA[iNdEx:iNdEx+skippy]...)
+				}
+				iNdEx += skippy
+			}
+		}
+
+		if iNdEx > l {
+			return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+		}
+		return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, nil
+	}
+	return &protoiface.Methods{
+		NoUnkeyedLiterals: struct{}{},
+		Flags:             protoiface.SupportMarshalDeterministic | protoiface.SupportUnmarshalDiscardUnknown,
+		Size:              size,
+		Marshal:           marshal,
+		Unmarshal:         unmarshal,
+		Merge:             nil,
+		CheckInitialized:  nil,
+	}
+}
+
+var (
+	md_MsgVerifyProofResponse            protoreflect.MessageDescriptor
+	fd_MsgVerifyProofResponse_proofStaus protoreflect.FieldDescriptor
+)
+
+func init() {
+	file_fiamma_zkproof_tx_proto_init()
+	md_MsgVerifyProofResponse = File_fiamma_zkproof_tx_proto.Messages().ByName("MsgVerifyProofResponse")
+	fd_MsgVerifyProofResponse_proofStaus = md_MsgVerifyProofResponse.Fields().ByName("proofStaus")
+}
+
+var _ protoreflect.Message = (*fastReflection_MsgVerifyProofResponse)(nil)
+
+type fastReflection_MsgVerifyProofResponse MsgVerifyProofResponse
+
+func (x *MsgVerifyProofResponse) ProtoReflect() protoreflect.Message {
+	return (*fastReflection_MsgVerifyProofResponse)(x)
+}
+
+func (x *MsgVerifyProofResponse) slowProtoReflect() protoreflect.Message {
+	mi := &file_fiamma_zkproof_tx_proto_msgTypes[5]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+var _fastReflection_MsgVerifyProofResponse_messageType fastReflection_MsgVerifyProofResponse_messageType
+var _ protoreflect.MessageType = fastReflection_MsgVerifyProofResponse_messageType{}
+
+type fastReflection_MsgVerifyProofResponse_messageType struct{}
+
+func (x fastReflection_MsgVerifyProofResponse_messageType) Zero() protoreflect.Message {
+	return (*fastReflection_MsgVerifyProofResponse)(nil)
+}
+func (x fastReflection_MsgVerifyProofResponse_messageType) New() protoreflect.Message {
+	return new(fastReflection_MsgVerifyProofResponse)
+}
+func (x fastReflection_MsgVerifyProofResponse_messageType) Descriptor() protoreflect.MessageDescriptor {
+	return md_MsgVerifyProofResponse
+}
+
+// Descriptor returns message descriptor, which contains only the protobuf
+// type information for the message.
+func (x *fastReflection_MsgVerifyProofResponse) Descriptor() protoreflect.MessageDescriptor {
+	return md_MsgVerifyProofResponse
+}
+
+// Type returns the message type, which encapsulates both Go and protobuf
+// type information. If the Go type information is not needed,
+// it is recommended that the message descriptor be used instead.
+func (x *fastReflection_MsgVerifyProofResponse) Type() protoreflect.MessageType {
+	return _fastReflection_MsgVerifyProofResponse_messageType
+}
+
+// New returns a newly allocated and mutable empty message.
+func (x *fastReflection_MsgVerifyProofResponse) New() protoreflect.Message {
+	return new(fastReflection_MsgVerifyProofResponse)
+}
+
+// Interface unwraps the message reflection interface and
+// returns the underlying ProtoMessage interface.
+func (x *fastReflection_MsgVerifyProofResponse) Interface() protoreflect.ProtoMessage {
+	return (*MsgVerifyProofResponse)(x)
+}
+
+// Range iterates over every populated field in an undefined order,
+// calling f for each field descriptor and value encountered.
+// Range returns immediately if f returns false.
+// While iterating, mutating operations may only be performed
+// on the current field descriptor.
+func (x *fastReflection_MsgVerifyProofResponse) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
+	if x.ProofStaus != uint64(0) {
+		value := protoreflect.ValueOfUint64(x.ProofStaus)
+		if !f(fd_MsgVerifyProofResponse_proofStaus, value) {
+			return
+		}
+	}
+}
+
+// Has reports whether a field is populated.
+//
+// Some fields have the property of nullability where it is possible to
+// distinguish between the default value of a field and whether the field
+// was explicitly populated with the default value. Singular message fields,
+// member fields of a oneof, and proto2 scalar fields are nullable. Such
+// fields are populated only if explicitly set.
+//
+// In other cases (aside from the nullable cases above),
+// a proto3 scalar field is populated if it contains a non-zero value, and
+// a repeated field is populated if it is non-empty.
+func (x *fastReflection_MsgVerifyProofResponse) Has(fd protoreflect.FieldDescriptor) bool {
+	switch fd.FullName() {
+	case "fiamma.zkproof.MsgVerifyProofResponse.proofStaus":
+		return x.ProofStaus != uint64(0)
+	default:
+		if fd.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.zkproof.MsgVerifyProofResponse"))
+		}
+		panic(fmt.Errorf("message fiamma.zkproof.MsgVerifyProofResponse does not contain field %s", fd.FullName()))
+	}
+}
+
+// Clear clears the field such that a subsequent Has call reports false.
+//
+// Clearing an extension field clears both the extension type and value
+// associated with the given field number.
+//
+// Clear is a mutating operation and unsafe for concurrent use.
+func (x *fastReflection_MsgVerifyProofResponse) Clear(fd protoreflect.FieldDescriptor) {
+	switch fd.FullName() {
+	case "fiamma.zkproof.MsgVerifyProofResponse.proofStaus":
+		x.ProofStaus = uint64(0)
+	default:
+		if fd.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.zkproof.MsgVerifyProofResponse"))
+		}
+		panic(fmt.Errorf("message fiamma.zkproof.MsgVerifyProofResponse does not contain field %s", fd.FullName()))
+	}
+}
+
+// Get retrieves the value for a field.
+//
+// For unpopulated scalars, it returns the default value, where
+// the default value of a bytes scalar is guaranteed to be a copy.
+// For unpopulated composite types, it returns an empty, read-only view
+// of the value; to obtain a mutable reference, use Mutable.
+func (x *fastReflection_MsgVerifyProofResponse) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
+	switch descriptor.FullName() {
+	case "fiamma.zkproof.MsgVerifyProofResponse.proofStaus":
+		value := x.ProofStaus
+		return protoreflect.ValueOfUint64(value)
+	default:
+		if descriptor.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.zkproof.MsgVerifyProofResponse"))
+		}
+		panic(fmt.Errorf("message fiamma.zkproof.MsgVerifyProofResponse does not contain field %s", descriptor.FullName()))
+	}
+}
+
+// Set stores the value for a field.
+//
+// For a field belonging to a oneof, it implicitly clears any other field
+// that may be currently set within the same oneof.
+// For extension fields, it implicitly stores the provided ExtensionType.
+// When setting a composite type, it is unspecified whether the stored value
+// aliases the source's memory in any way. If the composite value is an
+// empty, read-only value, then it panics.
+//
+// Set is a mutating operation and unsafe for concurrent use.
+func (x *fastReflection_MsgVerifyProofResponse) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
+	switch fd.FullName() {
+	case "fiamma.zkproof.MsgVerifyProofResponse.proofStaus":
+		x.ProofStaus = value.Uint()
+	default:
+		if fd.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.zkproof.MsgVerifyProofResponse"))
+		}
+		panic(fmt.Errorf("message fiamma.zkproof.MsgVerifyProofResponse does not contain field %s", fd.FullName()))
+	}
+}
+
+// Mutable returns a mutable reference to a composite type.
+//
+// If the field is unpopulated, it may allocate a composite value.
+// For a field belonging to a oneof, it implicitly clears any other field
+// that may be currently set within the same oneof.
+// For extension fields, it implicitly stores the provided ExtensionType
+// if not already stored.
+// It panics if the field does not contain a composite type.
+//
+// Mutable is a mutating operation and unsafe for concurrent use.
+func (x *fastReflection_MsgVerifyProofResponse) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
+	switch fd.FullName() {
+	case "fiamma.zkproof.MsgVerifyProofResponse.proofStaus":
+		panic(fmt.Errorf("field proofStaus of message fiamma.zkproof.MsgVerifyProofResponse is not mutable"))
+	default:
+		if fd.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.zkproof.MsgVerifyProofResponse"))
+		}
+		panic(fmt.Errorf("message fiamma.zkproof.MsgVerifyProofResponse does not contain field %s", fd.FullName()))
+	}
+}
+
+// NewField returns a new value that is assignable to the field
+// for the given descriptor. For scalars, this returns the default value.
+// For lists, maps, and messages, this returns a new, empty, mutable value.
+func (x *fastReflection_MsgVerifyProofResponse) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
+	switch fd.FullName() {
+	case "fiamma.zkproof.MsgVerifyProofResponse.proofStaus":
+		return protoreflect.ValueOfUint64(uint64(0))
+	default:
+		if fd.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.zkproof.MsgVerifyProofResponse"))
+		}
+		panic(fmt.Errorf("message fiamma.zkproof.MsgVerifyProofResponse does not contain field %s", fd.FullName()))
+	}
+}
+
+// WhichOneof reports which field within the oneof is populated,
+// returning nil if none are populated.
+// It panics if the oneof descriptor does not belong to this message.
+func (x *fastReflection_MsgVerifyProofResponse) WhichOneof(d protoreflect.OneofDescriptor) protoreflect.FieldDescriptor {
+	switch d.FullName() {
+	default:
+		panic(fmt.Errorf("%s is not a oneof field in fiamma.zkproof.MsgVerifyProofResponse", d.FullName()))
+	}
+	panic("unreachable")
+}
+
+// GetUnknown retrieves the entire list of unknown fields.
+// The caller may only mutate the contents of the RawFields
+// if the mutated bytes are stored back into the message with SetUnknown.
+func (x *fastReflection_MsgVerifyProofResponse) GetUnknown() protoreflect.RawFields {
+	return x.unknownFields
+}
+
+// SetUnknown stores an entire list of unknown fields.
+// The raw fields must be syntactically valid according to the wire format.
+// An implementation may panic if this is not the case.
+// Once stored, the caller must not mutate the content of the RawFields.
+// An empty RawFields may be passed to clear the fields.
+//
+// SetUnknown is a mutating operation and unsafe for concurrent use.
+func (x *fastReflection_MsgVerifyProofResponse) SetUnknown(fields protoreflect.RawFields) {
+	x.unknownFields = fields
+}
+
+// IsValid reports whether the message is valid.
+//
+// An invalid message is an empty, read-only value.
+//
+// An invalid message often corresponds to a nil pointer of the concrete
+// message type, but the details are implementation dependent.
+// Validity is not part of the protobuf data model, and may not
+// be preserved in marshaling or other operations.
+func (x *fastReflection_MsgVerifyProofResponse) IsValid() bool {
+	return x != nil
+}
+
+// ProtoMethods returns optional fastReflectionFeature-path implementations of various operations.
+// This method may return nil.
+//
+// The returned methods type is identical to
+// "google.golang.org/protobuf/runtime/protoiface".Methods.
+// Consult the protoiface package documentation for details.
+func (x *fastReflection_MsgVerifyProofResponse) ProtoMethods() *protoiface.Methods {
+	size := func(input protoiface.SizeInput) protoiface.SizeOutput {
+		x := input.Message.Interface().(*MsgVerifyProofResponse)
+		if x == nil {
+			return protoiface.SizeOutput{
+				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+				Size:              0,
+			}
+		}
+		options := runtime.SizeInputToOptions(input)
+		_ = options
+		var n int
+		var l int
+		_ = l
+		if x.ProofStaus != 0 {
+			n += 1 + runtime.Sov(uint64(x.ProofStaus))
+		}
+		if x.unknownFields != nil {
+			n += len(x.unknownFields)
+		}
+		return protoiface.SizeOutput{
+			NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+			Size:              n,
+		}
+	}
+
+	marshal := func(input protoiface.MarshalInput) (protoiface.MarshalOutput, error) {
+		x := input.Message.Interface().(*MsgVerifyProofResponse)
+		if x == nil {
+			return protoiface.MarshalOutput{
+				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+				Buf:               input.Buf,
+			}, nil
+		}
+		options := runtime.MarshalInputToOptions(input)
+		_ = options
+		size := options.Size(x)
+		dAtA := make([]byte, size)
+		i := len(dAtA)
+		_ = i
+		var l int
+		_ = l
+		if x.unknownFields != nil {
+			i -= len(x.unknownFields)
+			copy(dAtA[i:], x.unknownFields)
+		}
+		if x.ProofStaus != 0 {
+			i = runtime.EncodeVarint(dAtA, i, uint64(x.ProofStaus))
+			i--
+			dAtA[i] = 0x8
+		}
+		if input.Buf != nil {
+			input.Buf = append(input.Buf, dAtA...)
+		} else {
+			input.Buf = dAtA
+		}
+		return protoiface.MarshalOutput{
+			NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+			Buf:               input.Buf,
+		}, nil
+	}
+	unmarshal := func(input protoiface.UnmarshalInput) (protoiface.UnmarshalOutput, error) {
+		x := input.Message.Interface().(*MsgVerifyProofResponse)
+		if x == nil {
+			return protoiface.UnmarshalOutput{
+				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+				Flags:             input.Flags,
+			}, nil
+		}
+		options := runtime.UnmarshalInputToOptions(input)
+		_ = options
+		dAtA := input.Buf
+		l := len(dAtA)
+		iNdEx := 0
+		for iNdEx < l {
+			preIndex := iNdEx
+			var wire uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				wire |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			fieldNum := int32(wire >> 3)
+			wireType := int(wire & 0x7)
+			if wireType == 4 {
+				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: MsgVerifyProofResponse: wiretype end group for non-group")
+			}
+			if fieldNum <= 0 {
+				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: MsgVerifyProofResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+			}
+			switch fieldNum {
+			case 1:
+				if wireType != 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field ProofStaus", wireType)
+				}
+				x.ProofStaus = 0
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					x.ProofStaus |= uint64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+			default:
+				iNdEx = preIndex
+				skippy, err := runtime.Skip(dAtA[iNdEx:])
+				if err != nil {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, err
+				}
+				if (skippy < 0) || (iNdEx+skippy) < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if (iNdEx + skippy) > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				if !options.DiscardUnknown {
+					x.unknownFields = append(x.unknownFields, dAtA[iNdEx:iNdEx+skippy]...)
+				}
+				iNdEx += skippy
+			}
+		}
+
+		if iNdEx > l {
+			return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+		}
+		return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, nil
+	}
+	return &protoiface.Methods{
+		NoUnkeyedLiterals: struct{}{},
+		Flags:             protoiface.SupportMarshalDeterministic | protoiface.SupportUnmarshalDiscardUnknown,
+		Size:              size,
+		Marshal:           marshal,
+		Unmarshal:         unmarshal,
+		Merge:             nil,
+		CheckInitialized:  nil,
+	}
+}
+
 // Code generated by protoc-gen-go. DO NOT EDIT.
 // versions:
 // 	protoc-gen-go v1.27.0
@@ -2213,6 +3165,92 @@ func (x *MsgSubmitGnarkPlonkResponse) GetProofStaus() uint64 {
 	return 0
 }
 
+type MsgVerifyProof struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Creator string `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
+	ProofId string `protobuf:"bytes,2,opt,name=proofId,proto3" json:"proofId,omitempty"`
+	Result  string `protobuf:"bytes,3,opt,name=result,proto3" json:"result,omitempty"`
+}
+
+func (x *MsgVerifyProof) Reset() {
+	*x = MsgVerifyProof{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_fiamma_zkproof_tx_proto_msgTypes[4]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *MsgVerifyProof) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MsgVerifyProof) ProtoMessage() {}
+
+// Deprecated: Use MsgVerifyProof.ProtoReflect.Descriptor instead.
+func (*MsgVerifyProof) Descriptor() ([]byte, []int) {
+	return file_fiamma_zkproof_tx_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *MsgVerifyProof) GetCreator() string {
+	if x != nil {
+		return x.Creator
+	}
+	return ""
+}
+
+func (x *MsgVerifyProof) GetProofId() string {
+	if x != nil {
+		return x.ProofId
+	}
+	return ""
+}
+
+func (x *MsgVerifyProof) GetResult() string {
+	if x != nil {
+		return x.Result
+	}
+	return ""
+}
+
+type MsgVerifyProofResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	ProofStaus uint64 `protobuf:"varint,1,opt,name=proofStaus,proto3" json:"proofStaus,omitempty"`
+}
+
+func (x *MsgVerifyProofResponse) Reset() {
+	*x = MsgVerifyProofResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_fiamma_zkproof_tx_proto_msgTypes[5]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *MsgVerifyProofResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MsgVerifyProofResponse) ProtoMessage() {}
+
+// Deprecated: Use MsgVerifyProofResponse.ProtoReflect.Descriptor instead.
+func (*MsgVerifyProofResponse) Descriptor() ([]byte, []int) {
+	return file_fiamma_zkproof_tx_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *MsgVerifyProofResponse) GetProofStaus() uint64 {
+	if x != nil {
+		return x.ProofStaus
+	}
+	return 0
+}
+
 var File_fiamma_zkproof_tx_proto protoreflect.FileDescriptor
 
 var file_fiamma_zkproof_tx_proto_rawDesc = []byte{
@@ -2256,30 +3294,46 @@ var file_fiamma_zkproof_tx_proto_rawDesc = []byte{
 	0x0a, 0x1b, 0x4d, 0x73, 0x67, 0x53, 0x75, 0x62, 0x6d, 0x69, 0x74, 0x47, 0x6e, 0x61, 0x72, 0x6b,
 	0x50, 0x6c, 0x6f, 0x6e, 0x6b, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x1e, 0x0a,
 	0x0a, 0x70, 0x72, 0x6f, 0x6f, 0x66, 0x53, 0x74, 0x61, 0x75, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28,
-	0x04, 0x52, 0x0a, 0x70, 0x72, 0x6f, 0x6f, 0x66, 0x53, 0x74, 0x61, 0x75, 0x73, 0x32, 0xcc, 0x01,
-	0x0a, 0x03, 0x4d, 0x73, 0x67, 0x12, 0x58, 0x0a, 0x0c, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x50,
-	0x61, 0x72, 0x61, 0x6d, 0x73, 0x12, 0x1f, 0x2e, 0x66, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x2e, 0x7a,
-	0x6b, 0x70, 0x72, 0x6f, 0x6f, 0x66, 0x2e, 0x4d, 0x73, 0x67, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65,
-	0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x1a, 0x27, 0x2e, 0x66, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x2e,
-	0x7a, 0x6b, 0x70, 0x72, 0x6f, 0x6f, 0x66, 0x2e, 0x4d, 0x73, 0x67, 0x55, 0x70, 0x64, 0x61, 0x74,
-	0x65, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12,
-	0x64, 0x0a, 0x10, 0x53, 0x75, 0x62, 0x6d, 0x69, 0x74, 0x47, 0x6e, 0x61, 0x72, 0x6b, 0x50, 0x6c,
-	0x6f, 0x6e, 0x6b, 0x12, 0x23, 0x2e, 0x66, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x2e, 0x7a, 0x6b, 0x70,
-	0x72, 0x6f, 0x6f, 0x66, 0x2e, 0x4d, 0x73, 0x67, 0x53, 0x75, 0x62, 0x6d, 0x69, 0x74, 0x47, 0x6e,
-	0x61, 0x72, 0x6b, 0x50, 0x6c, 0x6f, 0x6e, 0x6b, 0x1a, 0x2b, 0x2e, 0x66, 0x69, 0x61, 0x6d, 0x6d,
-	0x61, 0x2e, 0x7a, 0x6b, 0x70, 0x72, 0x6f, 0x6f, 0x66, 0x2e, 0x4d, 0x73, 0x67, 0x53, 0x75, 0x62,
-	0x6d, 0x69, 0x74, 0x47, 0x6e, 0x61, 0x72, 0x6b, 0x50, 0x6c, 0x6f, 0x6e, 0x6b, 0x52, 0x65, 0x73,
-	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x1a, 0x05, 0x80, 0xe7, 0xb0, 0x2a, 0x01, 0x42, 0x97, 0x01, 0x0a,
-	0x12, 0x63, 0x6f, 0x6d, 0x2e, 0x66, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x2e, 0x7a, 0x6b, 0x70, 0x72,
-	0x6f, 0x6f, 0x66, 0x42, 0x07, 0x54, 0x78, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x1f,
-	0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x73, 0x64, 0x6b, 0x2e, 0x69, 0x6f, 0x2f, 0x61, 0x70, 0x69,
-	0x2f, 0x66, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x2f, 0x7a, 0x6b, 0x70, 0x72, 0x6f, 0x6f, 0x66, 0xa2,
-	0x02, 0x03, 0x46, 0x5a, 0x58, 0xaa, 0x02, 0x0e, 0x46, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x2e, 0x5a,
-	0x6b, 0x70, 0x72, 0x6f, 0x6f, 0x66, 0xca, 0x02, 0x0e, 0x46, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x5c,
-	0x5a, 0x6b, 0x70, 0x72, 0x6f, 0x6f, 0x66, 0xe2, 0x02, 0x1a, 0x46, 0x69, 0x61, 0x6d, 0x6d, 0x61,
-	0x5c, 0x5a, 0x6b, 0x70, 0x72, 0x6f, 0x6f, 0x66, 0x5c, 0x47, 0x50, 0x42, 0x4d, 0x65, 0x74, 0x61,
-	0x64, 0x61, 0x74, 0x61, 0xea, 0x02, 0x0f, 0x46, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x3a, 0x3a, 0x5a,
-	0x6b, 0x70, 0x72, 0x6f, 0x6f, 0x66, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x04, 0x52, 0x0a, 0x70, 0x72, 0x6f, 0x6f, 0x66, 0x53, 0x74, 0x61, 0x75, 0x73, 0x22, 0x6a, 0x0a,
+	0x0e, 0x4d, 0x73, 0x67, 0x56, 0x65, 0x72, 0x69, 0x66, 0x79, 0x50, 0x72, 0x6f, 0x6f, 0x66, 0x12,
+	0x18, 0x0a, 0x07, 0x63, 0x72, 0x65, 0x61, 0x74, 0x6f, 0x72, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09,
+	0x52, 0x07, 0x63, 0x72, 0x65, 0x61, 0x74, 0x6f, 0x72, 0x12, 0x18, 0x0a, 0x07, 0x70, 0x72, 0x6f,
+	0x6f, 0x66, 0x49, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x70, 0x72, 0x6f, 0x6f,
+	0x66, 0x49, 0x64, 0x12, 0x16, 0x0a, 0x06, 0x72, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x18, 0x03, 0x20,
+	0x01, 0x28, 0x09, 0x52, 0x06, 0x72, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x3a, 0x0c, 0x82, 0xe7, 0xb0,
+	0x2a, 0x07, 0x63, 0x72, 0x65, 0x61, 0x74, 0x6f, 0x72, 0x22, 0x38, 0x0a, 0x16, 0x4d, 0x73, 0x67,
+	0x56, 0x65, 0x72, 0x69, 0x66, 0x79, 0x50, 0x72, 0x6f, 0x6f, 0x66, 0x52, 0x65, 0x73, 0x70, 0x6f,
+	0x6e, 0x73, 0x65, 0x12, 0x1e, 0x0a, 0x0a, 0x70, 0x72, 0x6f, 0x6f, 0x66, 0x53, 0x74, 0x61, 0x75,
+	0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x0a, 0x70, 0x72, 0x6f, 0x6f, 0x66, 0x53, 0x74,
+	0x61, 0x75, 0x73, 0x32, 0xa3, 0x02, 0x0a, 0x03, 0x4d, 0x73, 0x67, 0x12, 0x58, 0x0a, 0x0c, 0x55,
+	0x70, 0x64, 0x61, 0x74, 0x65, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x12, 0x1f, 0x2e, 0x66, 0x69,
+	0x61, 0x6d, 0x6d, 0x61, 0x2e, 0x7a, 0x6b, 0x70, 0x72, 0x6f, 0x6f, 0x66, 0x2e, 0x4d, 0x73, 0x67,
+	0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x1a, 0x27, 0x2e, 0x66,
+	0x69, 0x61, 0x6d, 0x6d, 0x61, 0x2e, 0x7a, 0x6b, 0x70, 0x72, 0x6f, 0x6f, 0x66, 0x2e, 0x4d, 0x73,
+	0x67, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x52, 0x65, 0x73,
+	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x64, 0x0a, 0x10, 0x53, 0x75, 0x62, 0x6d, 0x69, 0x74, 0x47,
+	0x6e, 0x61, 0x72, 0x6b, 0x50, 0x6c, 0x6f, 0x6e, 0x6b, 0x12, 0x23, 0x2e, 0x66, 0x69, 0x61, 0x6d,
+	0x6d, 0x61, 0x2e, 0x7a, 0x6b, 0x70, 0x72, 0x6f, 0x6f, 0x66, 0x2e, 0x4d, 0x73, 0x67, 0x53, 0x75,
+	0x62, 0x6d, 0x69, 0x74, 0x47, 0x6e, 0x61, 0x72, 0x6b, 0x50, 0x6c, 0x6f, 0x6e, 0x6b, 0x1a, 0x2b,
+	0x2e, 0x66, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x2e, 0x7a, 0x6b, 0x70, 0x72, 0x6f, 0x6f, 0x66, 0x2e,
+	0x4d, 0x73, 0x67, 0x53, 0x75, 0x62, 0x6d, 0x69, 0x74, 0x47, 0x6e, 0x61, 0x72, 0x6b, 0x50, 0x6c,
+	0x6f, 0x6e, 0x6b, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x55, 0x0a, 0x0b, 0x56,
+	0x65, 0x72, 0x69, 0x66, 0x79, 0x50, 0x72, 0x6f, 0x6f, 0x66, 0x12, 0x1e, 0x2e, 0x66, 0x69, 0x61,
+	0x6d, 0x6d, 0x61, 0x2e, 0x7a, 0x6b, 0x70, 0x72, 0x6f, 0x6f, 0x66, 0x2e, 0x4d, 0x73, 0x67, 0x56,
+	0x65, 0x72, 0x69, 0x66, 0x79, 0x50, 0x72, 0x6f, 0x6f, 0x66, 0x1a, 0x26, 0x2e, 0x66, 0x69, 0x61,
+	0x6d, 0x6d, 0x61, 0x2e, 0x7a, 0x6b, 0x70, 0x72, 0x6f, 0x6f, 0x66, 0x2e, 0x4d, 0x73, 0x67, 0x56,
+	0x65, 0x72, 0x69, 0x66, 0x79, 0x50, 0x72, 0x6f, 0x6f, 0x66, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e,
+	0x73, 0x65, 0x1a, 0x05, 0x80, 0xe7, 0xb0, 0x2a, 0x01, 0x42, 0x97, 0x01, 0x0a, 0x12, 0x63, 0x6f,
+	0x6d, 0x2e, 0x66, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x2e, 0x7a, 0x6b, 0x70, 0x72, 0x6f, 0x6f, 0x66,
+	0x42, 0x07, 0x54, 0x78, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x1f, 0x63, 0x6f, 0x73,
+	0x6d, 0x6f, 0x73, 0x73, 0x64, 0x6b, 0x2e, 0x69, 0x6f, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x66, 0x69,
+	0x61, 0x6d, 0x6d, 0x61, 0x2f, 0x7a, 0x6b, 0x70, 0x72, 0x6f, 0x6f, 0x66, 0xa2, 0x02, 0x03, 0x46,
+	0x5a, 0x58, 0xaa, 0x02, 0x0e, 0x46, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x2e, 0x5a, 0x6b, 0x70, 0x72,
+	0x6f, 0x6f, 0x66, 0xca, 0x02, 0x0e, 0x46, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x5c, 0x5a, 0x6b, 0x70,
+	0x72, 0x6f, 0x6f, 0x66, 0xe2, 0x02, 0x1a, 0x46, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x5c, 0x5a, 0x6b,
+	0x70, 0x72, 0x6f, 0x6f, 0x66, 0x5c, 0x47, 0x50, 0x42, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74,
+	0x61, 0xea, 0x02, 0x0f, 0x46, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x3a, 0x3a, 0x5a, 0x6b, 0x70, 0x72,
+	0x6f, 0x6f, 0x66, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -2294,22 +3348,26 @@ func file_fiamma_zkproof_tx_proto_rawDescGZIP() []byte {
 	return file_fiamma_zkproof_tx_proto_rawDescData
 }
 
-var file_fiamma_zkproof_tx_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_fiamma_zkproof_tx_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_fiamma_zkproof_tx_proto_goTypes = []interface{}{
 	(*MsgUpdateParams)(nil),             // 0: fiamma.zkproof.MsgUpdateParams
 	(*MsgUpdateParamsResponse)(nil),     // 1: fiamma.zkproof.MsgUpdateParamsResponse
 	(*MsgSubmitGnarkPlonk)(nil),         // 2: fiamma.zkproof.MsgSubmitGnarkPlonk
 	(*MsgSubmitGnarkPlonkResponse)(nil), // 3: fiamma.zkproof.MsgSubmitGnarkPlonkResponse
-	(*Params)(nil),                      // 4: fiamma.zkproof.Params
+	(*MsgVerifyProof)(nil),              // 4: fiamma.zkproof.MsgVerifyProof
+	(*MsgVerifyProofResponse)(nil),      // 5: fiamma.zkproof.MsgVerifyProofResponse
+	(*Params)(nil),                      // 6: fiamma.zkproof.Params
 }
 var file_fiamma_zkproof_tx_proto_depIdxs = []int32{
-	4, // 0: fiamma.zkproof.MsgUpdateParams.params:type_name -> fiamma.zkproof.Params
+	6, // 0: fiamma.zkproof.MsgUpdateParams.params:type_name -> fiamma.zkproof.Params
 	0, // 1: fiamma.zkproof.Msg.UpdateParams:input_type -> fiamma.zkproof.MsgUpdateParams
 	2, // 2: fiamma.zkproof.Msg.SubmitGnarkPlonk:input_type -> fiamma.zkproof.MsgSubmitGnarkPlonk
-	1, // 3: fiamma.zkproof.Msg.UpdateParams:output_type -> fiamma.zkproof.MsgUpdateParamsResponse
-	3, // 4: fiamma.zkproof.Msg.SubmitGnarkPlonk:output_type -> fiamma.zkproof.MsgSubmitGnarkPlonkResponse
-	3, // [3:5] is the sub-list for method output_type
-	1, // [1:3] is the sub-list for method input_type
+	4, // 3: fiamma.zkproof.Msg.VerifyProof:input_type -> fiamma.zkproof.MsgVerifyProof
+	1, // 4: fiamma.zkproof.Msg.UpdateParams:output_type -> fiamma.zkproof.MsgUpdateParamsResponse
+	3, // 5: fiamma.zkproof.Msg.SubmitGnarkPlonk:output_type -> fiamma.zkproof.MsgSubmitGnarkPlonkResponse
+	5, // 6: fiamma.zkproof.Msg.VerifyProof:output_type -> fiamma.zkproof.MsgVerifyProofResponse
+	4, // [4:7] is the sub-list for method output_type
+	1, // [1:4] is the sub-list for method input_type
 	1, // [1:1] is the sub-list for extension type_name
 	1, // [1:1] is the sub-list for extension extendee
 	0, // [0:1] is the sub-list for field type_name
@@ -2370,6 +3428,30 @@ func file_fiamma_zkproof_tx_proto_init() {
 				return nil
 			}
 		}
+		file_fiamma_zkproof_tx_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*MsgVerifyProof); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_fiamma_zkproof_tx_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*MsgVerifyProofResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -2377,7 +3459,7 @@ func file_fiamma_zkproof_tx_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_fiamma_zkproof_tx_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   4,
+			NumMessages:   6,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

@@ -8866,6 +8866,51 @@ paths:
             description: MsgUpdateParams is the Msg/UpdateParams request type.
       tags:
         - Msg
+  /fiamma.zkproof.Msg/VerifyProof:
+    post:
+      operationId: FiammaZkproofMsg_VerifyProof
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              proofStaus:
+                type: string
+                format: uint64
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              creator:
+                type: string
+              proofId:
+                type: string
+              result:
+                type: string
+      tags:
+        - Msg
   /ibc.applications.fee.v1.Msg/PayPacketFee:
     post:
       summary: >-
@@ -19733,6 +19778,21 @@ definitions:
     description: |-
       MsgUpdateParamsResponse defines the response structure for executing a
       MsgUpdateParams message.
+  fiamma.zkproof.MsgVerifyProof:
+    type: object
+    properties:
+      creator:
+        type: string
+      proofId:
+        type: string
+      result:
+        type: string
+  fiamma.zkproof.MsgVerifyProofResponse:
+    type: object
+    properties:
+      proofStaus:
+        type: string
+        format: uint64
   ibc.applications.fee.v1.Fee:
     type: object
     properties:

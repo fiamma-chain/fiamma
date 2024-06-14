@@ -55,6 +55,12 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					Short:          "Send a submit-gnark-plonk tx",
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "proofId"}, {ProtoField: "proof"}, {ProtoField: "publicInputs"}, {ProtoField: "verifyingKey"}, {ProtoField: "metaData"}},
 				},
+				{
+					RpcMethod:      "VerifyProof",
+					Use:            "verify-proof [proof-id] [result]",
+					Short:          "Send a verify-proof tx",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "proofId"}, {ProtoField: "result"}},
+				},
 				// this line is used by ignite scaffolding # autocli/tx
 			},
 		},
