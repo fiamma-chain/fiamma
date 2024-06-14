@@ -18,6 +18,7 @@ service Msg {
   // parameters. The authority defaults to the x/gov module account.
   rpc UpdateParams     (MsgUpdateParams    ) returns (MsgUpdateParamsResponse    );
   rpc SubmitGnarkPlonk (MsgSubmitGnarkPlonk) returns (MsgSubmitGnarkPlonkResponse);
+  rpc VerifyProof      (MsgVerifyProof     ) returns (MsgVerifyProofResponse     );
 }
 // MsgUpdateParams is the Msg/UpdateParams request type.
 message MsgUpdateParams {
@@ -48,6 +49,17 @@ message MsgSubmitGnarkPlonk {
 }
 
 message MsgSubmitGnarkPlonkResponse {
+  uint64 proofStaus = 1;
+}
+
+message MsgVerifyProof {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator = 1;
+  string proofId = 2;
+  string result  = 3;
+}
+
+message MsgVerifyProofResponse {
   uint64 proofStaus = 1;
 }
 
