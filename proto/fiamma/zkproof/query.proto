@@ -1,4 +1,5 @@
 syntax = "proto3";
+
 package fiamma.zkproof;
 
 import "amino/amino.proto";
@@ -6,25 +7,41 @@ import "gogoproto/gogo.proto";
 import "google/api/annotations.proto";
 import "cosmos/base/query/v1beta1/pagination.proto";
 import "fiamma/zkproof/params.proto";
+import "fiamma/zkproof/zkproof.proto";
 
 option go_package = "fiamma/x/zkproof/types";
 
 // Query defines the gRPC querier service.
 service Query {
+  
   // Parameters queries the parameters of the module.
-  rpc Params(QueryParamsRequest) returns (QueryParamsResponse) {
+  rpc Params (QueryParamsRequest) returns (QueryParamsResponse) {
     option (google.api.http).get = "/fiamma/zkproof/params";
+  
+  }
+  
+  // Queries a list of PendingProof items.
+  rpc PendingProof (QueryPendingProofRequest) returns (QueryPendingProofResponse) {
+    option (google.api.http).get = "/fiamma/zkproof/pending_proof";
+  
   }
 }
-
 // QueryParamsRequest is request type for the Query/Params RPC method.
 message QueryParamsRequest {}
 
 // QueryParamsResponse is response type for the Query/Params RPC method.
 message QueryParamsResponse {
+  
   // params holds all the parameters of this module.
-  Params params = 1 [
-    (gogoproto.nullable) = false,
-    (amino.dont_omitempty) = true
-  ];
+  Params params = 1 [(gogoproto.nullable) = false, (amino.dont_omitempty) = true];
 }
+
+message QueryPendingProofRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryPendingProofResponse {
+  Zkproof                                zkproof    = 1;
+  cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
