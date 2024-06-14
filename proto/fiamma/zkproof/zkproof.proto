@@ -1,0 +1,12 @@
+syntax = "proto3";
+package fiamma.zkproof;
+
+option go_package = "fiamma/x/zkproof/types";
+
+message Zkproof {
+  
+  string creator = 1; 
+  string proofId = 2; 
+  uint64 proofType = 3; 
+  uint64 proofStatus = 4; 
+}
