@@ -24,6 +24,9 @@ import (
 	"github.com/spf13/viper"
 
 	"fiamma/app"
+
+	"github.com/CosmWasm/wasmd/x/wasm"
+	wasmcli "github.com/CosmWasm/wasmd/x/wasm/client/cli"
 )
 
 func initRootCmd(
@@ -49,10 +52,16 @@ func initRootCmd(
 		txCommand(),
 		keys.Commands(),
 	)
+	wasmcli.ExtendUnsafeResetAllCmd(
+		rootCmd,
+	)
+
 }
 
 func addModuleInitFlags(startCmd *cobra.Command) {
 	crisis.AddModuleInitFlags(startCmd)
+	wasm.AddModuleInitFlags(startCmd)
+
 }
 
 // genesisCommand builds genesis-related `fiammad genesis` command. Users may provide application specific commands as a parameter
