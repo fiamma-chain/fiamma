@@ -8,6 +8,7 @@ package zkproof
 
 import (
 	context "context"
+
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -19,10 +20,11 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	Msg_UpdateParams_FullMethodName     = "/fiamma.zkproof.Msg/UpdateParams"
-	Msg_SubmitGnarkPlonk_FullMethodName = "/fiamma.zkproof.Msg/SubmitGnarkPlonk"
-	Msg_VerifyProof_FullMethodName      = "/fiamma.zkproof.Msg/VerifyProof"
-	Msg_SubmitSp1_FullMethodName        = "/fiamma.zkproof.Msg/SubmitSp1"
+	Msg_UpdateParams_FullMethodName       = "/fiamma.zkproof.Msg/UpdateParams"
+	Msg_SubmitGnarkPlonk_FullMethodName   = "/fiamma.zkproof.Msg/SubmitGnarkPlonk"
+	Msg_VerifyProof_FullMethodName        = "/fiamma.zkproof.Msg/VerifyProof"
+	Msg_SubmitSp1_FullMethodName          = "/fiamma.zkproof.Msg/SubmitSp1"
+	Msg_SubmitGnarkGroth16_FullMethodName = "/fiamma.zkproof.Msg/SubmitGnarkGroth16"
 )
 
 // MsgClient is the client API for Msg service.
@@ -35,6 +37,7 @@ type MsgClient interface {
 	SubmitGnarkPlonk(ctx context.Context, in *MsgSubmitGnarkPlonk, opts ...grpc.CallOption) (*MsgSubmitGnarkPlonkResponse, error)
 	VerifyProof(ctx context.Context, in *MsgVerifyProof, opts ...grpc.CallOption) (*MsgVerifyProofResponse, error)
 	SubmitSp1(ctx context.Context, in *MsgSubmitSp1, opts ...grpc.CallOption) (*MsgSubmitSp1Response, error)
+	SubmitGnarkGroth16(ctx context.Context, in *MsgSubmitGnarkGroth16, opts ...grpc.CallOption) (*MsgSubmitGnarkGroth16Response, error)
 }
 
 type msgClient struct {
@@ -81,6 +84,15 @@ func (c *msgClient) SubmitSp1(ctx context.Context, in *MsgSubmitSp1, opts ...grp
 	return out, nil
 }
 
+func (c *msgClient) SubmitGnarkGroth16(ctx context.Context, in *MsgSubmitGnarkGroth16, opts ...grpc.CallOption) (*MsgSubmitGnarkGroth16Response, error) {
+	out := new(MsgSubmitGnarkGroth16Response)
+	err := c.cc.Invoke(ctx, Msg_SubmitGnarkGroth16_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // MsgServer is the server API for Msg service.
 // All implementations must embed UnimplementedMsgServer
 // for forward compatibility
@@ -91,6 +103,7 @@ type MsgServer interface {
 	SubmitGnarkPlonk(context.Context, *MsgSubmitGnarkPlonk) (*MsgSubmitGnarkPlonkResponse, error)
 	VerifyProof(context.Context, *MsgVerifyProof) (*MsgVerifyProofResponse, error)
 	SubmitSp1(context.Context, *MsgSubmitSp1) (*MsgSubmitSp1Response, error)
+	SubmitGnarkGroth16(context.Context, *MsgSubmitGnarkGroth16) (*MsgSubmitGnarkGroth16Response, error)
 	mustEmbedUnimplementedMsgServer()
 }
 
@@ -109,6 +122,9 @@ func (UnimplementedMsgServer) VerifyProof(context.Context, *MsgVerifyProof) (*Ms
 }
 func (UnimplementedMsgServer) SubmitSp1(context.Context, *MsgSubmitSp1) (*MsgSubmitSp1Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SubmitSp1 not implemented")
+}
+func (UnimplementedMsgServer) SubmitGnarkGroth16(context.Context, *MsgSubmitGnarkGroth16) (*MsgSubmitGnarkGroth16Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SubmitGnarkGroth16 not implemented")
 }
 func (UnimplementedMsgServer) mustEmbedUnimplementedMsgServer() {}
 
@@ -195,6 +211,24 @@ func _Msg_SubmitSp1_Handler(srv interface{}, ctx context.Context, dec func(inter
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Msg_SubmitGnarkGroth16_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgSubmitGnarkGroth16)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MsgServer).SubmitGnarkGroth16(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Msg_SubmitGnarkGroth16_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MsgServer).SubmitGnarkGroth16(ctx, req.(*MsgSubmitGnarkGroth16))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Msg_ServiceDesc is the grpc.ServiceDesc for Msg service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -217,6 +251,10 @@ var Msg_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SubmitSp1",
 			Handler:    _Msg_SubmitSp1_Handler,
+		},
+		{
+			MethodName: "SubmitGnarkGroth16",
+			Handler:    _Msg_SubmitGnarkGroth16_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

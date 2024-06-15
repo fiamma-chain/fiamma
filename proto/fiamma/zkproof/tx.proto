@@ -16,10 +16,11 @@ service Msg {
   
   // UpdateParams defines a (governance) operation for updating the module
   // parameters. The authority defaults to the x/gov module account.
-  rpc UpdateParams     (MsgUpdateParams    ) returns (MsgUpdateParamsResponse    );
-  rpc SubmitGnarkPlonk (MsgSubmitGnarkPlonk) returns (MsgSubmitGnarkPlonkResponse);
-  rpc VerifyProof      (MsgVerifyProof     ) returns (MsgVerifyProofResponse     );
-  rpc SubmitSp1        (MsgSubmitSp1       ) returns (MsgSubmitSp1Response       );
+  rpc UpdateParams       (MsgUpdateParams      ) returns (MsgUpdateParamsResponse      );
+  rpc SubmitGnarkPlonk   (MsgSubmitGnarkPlonk  ) returns (MsgSubmitGnarkPlonkResponse  );
+  rpc VerifyProof        (MsgVerifyProof       ) returns (MsgVerifyProofResponse       );
+  rpc SubmitSp1          (MsgSubmitSp1         ) returns (MsgSubmitSp1Response         );
+  rpc SubmitGnarkGroth16 (MsgSubmitGnarkGroth16) returns (MsgSubmitGnarkGroth16Response);
 }
 // MsgUpdateParams is the Msg/UpdateParams request type.
 message MsgUpdateParams {
@@ -72,6 +73,19 @@ message MsgSubmitSp1 {
 }
 
 message MsgSubmitSp1Response {
+  uint64 proofStaus = 1;
+}
+
+message MsgSubmitGnarkGroth16 {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator      = 1;
+  string proof        = 2;
+  string publicInputs = 3;
+  string verifyingKey = 4;
+  string metaData     = 5;
+}
+
+message MsgSubmitGnarkGroth16Response {
   uint64 proofStaus = 1;
 }
 
