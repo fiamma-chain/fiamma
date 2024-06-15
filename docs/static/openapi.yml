@@ -8762,6 +8762,55 @@ paths:
           type: boolean
       tags:
         - Query
+  /fiamma.zkproof.Msg/SubmitGnarkGroth16:
+    post:
+      operationId: FiammaZkproofMsg_SubmitGnarkGroth16
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              proofStaus:
+                type: string
+                format: uint64
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              creator:
+                type: string
+              proof:
+                type: string
+              publicInputs:
+                type: string
+              verifyingKey:
+                type: string
+              metaData:
+                type: string
+      tags:
+        - Msg
   /fiamma.zkproof.Msg/SubmitGnarkPlonk:
     post:
       operationId: FiammaZkproofMsg_SubmitGnarkPlonk
@@ -19783,6 +19832,25 @@ definitions:
         type: string
         format: uint64
       proofStatus:
+        type: string
+        format: uint64
+  fiamma.zkproof.MsgSubmitGnarkGroth16:
+    type: object
+    properties:
+      creator:
+        type: string
+      proof:
+        type: string
+      publicInputs:
+        type: string
+      verifyingKey:
+        type: string
+      metaData:
+        type: string
+  fiamma.zkproof.MsgSubmitGnarkGroth16Response:
+    type: object
+    properties:
+      proofStaus:
         type: string
         format: uint64
   fiamma.zkproof.MsgSubmitGnarkPlonk:

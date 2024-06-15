@@ -67,6 +67,12 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					Short:          "Send a submit-sp1 tx",
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "proof"}, {ProtoField: "elf"}, {ProtoField: "metaData"}},
 				},
+				{
+					RpcMethod:      "SubmitGnarkGroth16",
+					Use:            "submit-gnark-groth-16 [proof] [public-inputs] [verifying-key] [meta-data]",
+					Short:          "Send a submit-gnark-groth16 tx",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "proof"}, {ProtoField: "publicInputs"}, {ProtoField: "verifyingKey"}, {ProtoField: "metaData"}},
+				},
 				// this line is used by ignite scaffolding # autocli/tx
 			},
 		},
