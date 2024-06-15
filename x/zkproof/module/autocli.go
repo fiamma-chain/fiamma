@@ -53,7 +53,7 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					RpcMethod:      "SubmitGnarkPlonk",
 					Use:            "submit-gnark-plonk [proof-id] [proof] [public-inputs] [verifying-key] [meta-data]",
 					Short:          "Send a submit-gnark-plonk tx",
-					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "proofId"}, {ProtoField: "proof"}, {ProtoField: "publicInputs"}, {ProtoField: "verifyingKey"}, {ProtoField: "metaData"}},
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "proof"}, {ProtoField: "publicInputs"}, {ProtoField: "verifyingKey"}, {ProtoField: "metaData"}},
 				},
 				{
 					RpcMethod:      "VerifyProof",
@@ -65,7 +65,7 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					RpcMethod:      "SubmitSp1",
 					Use:            "submit-sp-1 [proof-id] [proof] [elf] [meta-data]",
 					Short:          "Send a submit-sp1 tx",
-					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "proofId"}, {ProtoField: "proof"}, {ProtoField: "elf"}, {ProtoField: "metaData"}},
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "proof"}, {ProtoField: "elf"}, {ProtoField: "metaData"}},
 				},
 				// this line is used by ignite scaffolding # autocli/tx
 			},
