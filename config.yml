@@ -23,3 +23,7 @@ faucet:
 validators:
 - name: alice
   bonded: 100000000fiamma
+build:
+  main: cmd/fimmad
+ldflags:
+  - "-r verifiers/sp1/lib"

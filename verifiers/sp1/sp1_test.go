@@ -1,26 +1,37 @@
 package sp1_test
 
 import (
-	"alignedlayer/verifiers/sp1"
-	"fmt"
+	"fiamma/verifiers/sp1"
 	"os"
 	"testing"
 )
 
-func TestFibonacciSp1ProofVerifies(t *testing.T) {
-	fmt.Println(os.Getwd())
-	f, err := os.Open("../../prover_examples/sp1/example/fibonacci.proof")
-	if err != nil {
-		t.Errorf("could not open proof file")
-	}
+const MaxProofSize = 2 * 1024 * 1024
+const MaxElfSize = 2 * 1024 * 1024
 
-	proofBytes := make([]byte, sp1.MAX_PROOF_SIZE)
-	nReadBytes, err := f.Read(proofBytes)
+func TestFibonacciSp1ProofVerifies(t *testing.T) {
+	proofFile, err := os.Open("../../prover_examples/sp1/sp1_fibonacci.proof")
+	if err != nil {
+		t.Errorf("could not open proof file: %s", err)
+	}
+	proofBytes := make([]byte, MaxProofSize)
+	nReadProofBytes, err := proofFile.Read(proofBytes)
 	if err != nil {
 		t.Errorf("could not read bytes from file")
 	}
 
-	if !sp1.VerifySp1Proof(([sp1.MAX_PROOF_SIZE]byte)(proofBytes), uint(nReadBytes)) {
+	elfFile, err := os.Open("../../prover_examples/sp1/riscv32im-succinct-zkvm-elf")
+	if err != nil {
+		t.Errorf("could not open proof file: %s", err)
+	}
+
+	elfBytes := make([]byte, MaxElfSize)
+	nReadElfBytes, err := elfFile.Read(elfBytes)
+	if err != nil {
+		t.Errorf("could not read bytes from file")
+	}
+
+	if !sp1.VerifySp1Proof(proofBytes, uint32(nReadProofBytes), elfBytes, uint32(nReadElfBytes)) {
 		t.Errorf("proof did not verify")
 	}
 }
