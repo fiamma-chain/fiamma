@@ -63,13 +63,13 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 				},
 				{
 					RpcMethod:      "SubmitSp1",
-					Use:            "submit-sp-1 [proof-id] [proof] [elf] [meta-data]",
+					Use:            "submit-sp1 [proof-id] [proof] [elf] [meta-data]",
 					Short:          "Send a submit-sp1 tx",
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "proof"}, {ProtoField: "elf"}, {ProtoField: "metaData"}},
 				},
 				{
 					RpcMethod:      "SubmitGnarkGroth16",
-					Use:            "submit-gnark-groth-16 [proof] [public-inputs] [verifying-key] [meta-data]",
+					Use:            "submit-gnark-groth16 [proof] [public-inputs] [verifying-key] [meta-data]",
 					Short:          "Send a submit-gnark-groth16 tx",
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "proof"}, {ProtoField: "publicInputs"}, {ProtoField: "verifyingKey"}, {ProtoField: "metaData"}},
 				},
