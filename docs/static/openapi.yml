@@ -8435,6 +8435,204 @@ paths:
               Since: cosmos-sdk 0.47
       tags:
         - Msg
+  /fiamma.zkproof.Msg/SubmitGnarkPlonk:
+    post:
+      operationId: FiammaZkproofMsg_SubmitGnarkPlonk
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              proofStaus:
+                type: string
+                format: uint64
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              creator:
+                type: string
+              proofId:
+                type: string
+              proof:
+                type: string
+              publicInputs:
+                type: string
+              verifyingKey:
+                type: string
+              metaData:
+                type: string
+      tags:
+        - Msg
+  /fiamma.zkproof.Msg/SubmitSp1:
+    post:
+      operationId: FiammaZkproofMsg_SubmitSp1
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              proofStaus:
+                type: string
+                format: uint64
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              creator:
+                type: string
+              proofId:
+                type: string
+              proof:
+                type: string
+              elf:
+                type: string
+              metaData:
+                type: string
+      tags:
+        - Msg
+  /fiamma.zkproof.Msg/UpdateParams:
+    post:
+      summary: |-
+        UpdateParams defines a (governance) operation for updating the module
+        parameters. The authority defaults to the x/gov module account.
+      operationId: FiammaZkproofMsg_UpdateParams
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            description: >-
+              MsgUpdateParamsResponse defines the response structure for
+              executing a
+
+              MsgUpdateParams message.
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: body
+          description: MsgUpdateParams is the Msg/UpdateParams request type.
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              authority:
+                type: string
+                description: >-
+                  authority is the address that controls the module (defaults to
+                  x/gov unless overwritten).
+              params:
+                description: 'NOTE: All parameters must be supplied.'
+                type: object
+            description: MsgUpdateParams is the Msg/UpdateParams request type.
+      tags:
+        - Msg
+  /fiamma.zkproof.Msg/VerifyProof:
+    post:
+      operationId: FiammaZkproofMsg_VerifyProof
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              proofStaus:
+                type: string
+                format: uint64
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              creator:
+                type: string
+              proofId:
+                type: string
+              result:
+                type: string
+      tags:
+        - Msg
   /fiamma/zkproof/all_proof_types:
     get:
       summary: Queries a list of AllProofTypes items.
@@ -8762,155 +8960,6 @@ paths:
           type: boolean
       tags:
         - Query
-  /fiamma.zkproof.Msg/SubmitGnarkPlonk:
-    post:
-      operationId: FiammaZkproofMsg_SubmitGnarkPlonk
-      responses:
-        '200':
-          description: A successful response.
-          schema:
-            type: object
-            properties:
-              proofStaus:
-                type: string
-                format: uint64
-        default:
-          description: An unexpected error response.
-          schema:
-            type: object
-            properties:
-              code:
-                type: integer
-                format: int32
-              message:
-                type: string
-              details:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    '@type':
-                      type: string
-                  additionalProperties: {}
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            type: object
-            properties:
-              creator:
-                type: string
-              proofId:
-                type: string
-              proof:
-                type: string
-              publicInputs:
-                type: string
-              verifyingKey:
-                type: string
-              metaData:
-                type: string
-      tags:
-        - Msg
-  /fiamma.zkproof.Msg/UpdateParams:
-    post:
-      summary: |-
-        UpdateParams defines a (governance) operation for updating the module
-        parameters. The authority defaults to the x/gov module account.
-      operationId: FiammaZkproofMsg_UpdateParams
-      responses:
-        '200':
-          description: A successful response.
-          schema:
-            type: object
-            description: >-
-              MsgUpdateParamsResponse defines the response structure for
-              executing a
-
-              MsgUpdateParams message.
-        default:
-          description: An unexpected error response.
-          schema:
-            type: object
-            properties:
-              code:
-                type: integer
-                format: int32
-              message:
-                type: string
-              details:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    '@type':
-                      type: string
-                  additionalProperties: {}
-      parameters:
-        - name: body
-          description: MsgUpdateParams is the Msg/UpdateParams request type.
-          in: body
-          required: true
-          schema:
-            type: object
-            properties:
-              authority:
-                type: string
-                description: >-
-                  authority is the address that controls the module (defaults to
-                  x/gov unless overwritten).
-              params:
-                description: 'NOTE: All parameters must be supplied.'
-                type: object
-            description: MsgUpdateParams is the Msg/UpdateParams request type.
-      tags:
-        - Msg
-  /fiamma.zkproof.Msg/VerifyProof:
-    post:
-      operationId: FiammaZkproofMsg_VerifyProof
-      responses:
-        '200':
-          description: A successful response.
-          schema:
-            type: object
-            properties:
-              proofStaus:
-                type: string
-                format: uint64
-        default:
-          description: An unexpected error response.
-          schema:
-            type: object
-            properties:
-              code:
-                type: integer
-                format: int32
-              message:
-                type: string
-              details:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    '@type':
-                      type: string
-                  additionalProperties: {}
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            type: object
-            properties:
-              creator:
-                type: string
-              proofId:
-                type: string
-              result:
-                type: string
-      tags:
-        - Msg
   /ibc.applications.fee.v1.Msg/PayPacketFee:
     post:
       summary: >-
@@ -19548,6 +19597,81 @@ definitions:
           min_commission_rate is the chain-wide minimum commission rate that a
           validator can charge their delegators
     description: Params defines the parameters for the x/staking module.
+  fiamma.zkproof.MsgSubmitGnarkPlonk:
+    type: object
+    properties:
+      creator:
+        type: string
+      proofId:
+        type: string
+      proof:
+        type: string
+      publicInputs:
+        type: string
+      verifyingKey:
+        type: string
+      metaData:
+        type: string
+  fiamma.zkproof.MsgSubmitGnarkPlonkResponse:
+    type: object
+    properties:
+      proofStaus:
+        type: string
+        format: uint64
+  fiamma.zkproof.MsgSubmitSp1:
+    type: object
+    properties:
+      creator:
+        type: string
+      proofId:
+        type: string
+      proof:
+        type: string
+      elf:
+        type: string
+      metaData:
+        type: string
+  fiamma.zkproof.MsgSubmitSp1Response:
+    type: object
+    properties:
+      proofStaus:
+        type: string
+        format: uint64
+  fiamma.zkproof.MsgUpdateParams:
+    type: object
+    properties:
+      authority:
+        type: string
+        description: >-
+          authority is the address that controls the module (defaults to x/gov
+          unless overwritten).
+      params:
+        description: 'NOTE: All parameters must be supplied.'
+        type: object
+    description: MsgUpdateParams is the Msg/UpdateParams request type.
+  fiamma.zkproof.MsgUpdateParamsResponse:
+    type: object
+    description: |-
+      MsgUpdateParamsResponse defines the response structure for executing a
+      MsgUpdateParams message.
+  fiamma.zkproof.MsgVerifyProof:
+    type: object
+    properties:
+      creator:
+        type: string
+      proofId:
+        type: string
+      result:
+        type: string
+  fiamma.zkproof.MsgVerifyProofResponse:
+    type: object
+    properties:
+      proofStaus:
+        type: string
+        format: uint64
+  fiamma.zkproof.Params:
+    type: object
+    description: Params defines the parameters for the module.
   cosmos.base.query.v1beta1.PageRequest:
     type: object
     properties:
@@ -19625,9 +19749,6 @@ definitions:
                repeated Bar results = 1;
                PageResponse page = 2;
        }
-  fiamma.zkproof.Params:
-    type: object
-    description: Params defines the parameters for the module.
   fiamma.zkproof.QueryAllProofTypesResponse:
     type: object
     properties:
@@ -19738,59 +19859,6 @@ definitions:
         type: string
         format: uint64
       proofStatus:
-        type: string
-        format: uint64
-  fiamma.zkproof.MsgSubmitGnarkPlonk:
-    type: object
-    properties:
-      creator:
-        type: string
-      proofId:
-        type: string
-      proof:
-        type: string
-      publicInputs:
-        type: string
-      verifyingKey:
-        type: string
-      metaData:
-        type: string
-  fiamma.zkproof.MsgSubmitGnarkPlonkResponse:
-    type: object
-    properties:
-      proofStaus:
-        type: string
-        format: uint64
-  fiamma.zkproof.MsgUpdateParams:
-    type: object
-    properties:
-      authority:
-        type: string
-        description: >-
-          authority is the address that controls the module (defaults to x/gov
-          unless overwritten).
-      params:
-        description: 'NOTE: All parameters must be supplied.'
-        type: object
-    description: MsgUpdateParams is the Msg/UpdateParams request type.
-  fiamma.zkproof.MsgUpdateParamsResponse:
-    type: object
-    description: |-
-      MsgUpdateParamsResponse defines the response structure for executing a
-      MsgUpdateParams message.
-  fiamma.zkproof.MsgVerifyProof:
-    type: object
-    properties:
-      creator:
-        type: string
-      proofId:
-        type: string
-      result:
-        type: string
-  fiamma.zkproof.MsgVerifyProofResponse:
-    type: object
-    properties:
-      proofStaus:
         type: string
         format: uint64
   ibc.applications.fee.v1.Fee:
