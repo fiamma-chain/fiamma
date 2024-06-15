@@ -8,6 +8,7 @@ package zkproof
 
 import (
 	context "context"
+
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -22,6 +23,7 @@ const (
 	Msg_UpdateParams_FullMethodName     = "/fiamma.zkproof.Msg/UpdateParams"
 	Msg_SubmitGnarkPlonk_FullMethodName = "/fiamma.zkproof.Msg/SubmitGnarkPlonk"
 	Msg_VerifyProof_FullMethodName      = "/fiamma.zkproof.Msg/VerifyProof"
+	Msg_SubmitSp1_FullMethodName        = "/fiamma.zkproof.Msg/SubmitSp1"
 )
 
 // MsgClient is the client API for Msg service.
@@ -33,6 +35,7 @@ type MsgClient interface {
 	UpdateParams(ctx context.Context, in *MsgUpdateParams, opts ...grpc.CallOption) (*MsgUpdateParamsResponse, error)
 	SubmitGnarkPlonk(ctx context.Context, in *MsgSubmitGnarkPlonk, opts ...grpc.CallOption) (*MsgSubmitGnarkPlonkResponse, error)
 	VerifyProof(ctx context.Context, in *MsgVerifyProof, opts ...grpc.CallOption) (*MsgVerifyProofResponse, error)
+	SubmitSp1(ctx context.Context, in *MsgSubmitSp1, opts ...grpc.CallOption) (*MsgSubmitSp1Response, error)
 }
 
 type msgClient struct {
@@ -70,6 +73,15 @@ func (c *msgClient) VerifyProof(ctx context.Context, in *MsgVerifyProof, opts ..
 	return out, nil
 }
 
+func (c *msgClient) SubmitSp1(ctx context.Context, in *MsgSubmitSp1, opts ...grpc.CallOption) (*MsgSubmitSp1Response, error) {
+	out := new(MsgSubmitSp1Response)
+	err := c.cc.Invoke(ctx, Msg_SubmitSp1_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // MsgServer is the server API for Msg service.
 // All implementations must embed UnimplementedMsgServer
 // for forward compatibility
@@ -79,6 +91,7 @@ type MsgServer interface {
 	UpdateParams(context.Context, *MsgUpdateParams) (*MsgUpdateParamsResponse, error)
 	SubmitGnarkPlonk(context.Context, *MsgSubmitGnarkPlonk) (*MsgSubmitGnarkPlonkResponse, error)
 	VerifyProof(context.Context, *MsgVerifyProof) (*MsgVerifyProofResponse, error)
+	SubmitSp1(context.Context, *MsgSubmitSp1) (*MsgSubmitSp1Response, error)
 	mustEmbedUnimplementedMsgServer()
 }
 
@@ -94,6 +107,9 @@ func (UnimplementedMsgServer) SubmitGnarkPlonk(context.Context, *MsgSubmitGnarkP
 }
 func (UnimplementedMsgServer) VerifyProof(context.Context, *MsgVerifyProof) (*MsgVerifyProofResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method VerifyProof not implemented")
+}
+func (UnimplementedMsgServer) SubmitSp1(context.Context, *MsgSubmitSp1) (*MsgSubmitSp1Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SubmitSp1 not implemented")
 }
 func (UnimplementedMsgServer) mustEmbedUnimplementedMsgServer() {}
 
@@ -162,6 +178,24 @@ func _Msg_VerifyProof_Handler(srv interface{}, ctx context.Context, dec func(int
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Msg_SubmitSp1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgSubmitSp1)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MsgServer).SubmitSp1(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Msg_SubmitSp1_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MsgServer).SubmitSp1(ctx, req.(*MsgSubmitSp1))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Msg_ServiceDesc is the grpc.ServiceDesc for Msg service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -180,6 +214,10 @@ var Msg_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "VerifyProof",
 			Handler:    _Msg_VerifyProof_Handler,
+		},
+		{
+			MethodName: "SubmitSp1",
+			Handler:    _Msg_SubmitSp1_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
