@@ -11,7 +11,6 @@ var _ sdk.Msg = &MsgSubmitGnarkPlonk{}
 func NewMsgSubmitGnarkPlonk(creator string, proofId string, proof string, publicInputs string, verifyingKey string, metaData string) *MsgSubmitGnarkPlonk {
 	return &MsgSubmitGnarkPlonk{
 		Creator:      creator,
-		ProofId:      proofId,
 		Proof:        proof,
 		PublicInputs: publicInputs,
 		VerifyingKey: verifyingKey,
