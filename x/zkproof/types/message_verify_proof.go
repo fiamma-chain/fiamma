@@ -8,7 +8,7 @@ import (
 
 var _ sdk.Msg = &MsgVerifyProof{}
 
-func NewMsgVerifyProof(creator string, proofId string, result string) *MsgVerifyProof {
+func NewMsgVerifyProof(creator string, proofId string, result bool) *MsgVerifyProof {
 	return &MsgVerifyProof{
 		Creator: creator,
 		ProofId: proofId,

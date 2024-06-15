@@ -2,19 +2,18 @@
 package zkproof
 
 import (
-	fmt "fmt"
-	io "io"
-	reflect "reflect"
-	sync "sync"
-
 	_ "cosmossdk.io/api/amino"
 	_ "cosmossdk.io/api/cosmos/msg/v1"
+	fmt "fmt"
 	_ "github.com/cosmos/cosmos-proto"
 	runtime "github.com/cosmos/cosmos-proto/runtime"
 	_ "github.com/cosmos/gogoproto/gogoproto"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoiface "google.golang.org/protobuf/runtime/protoiface"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	io "io"
+	reflect "reflect"
+	sync "sync"
 )
 
 var (
@@ -2044,8 +2043,8 @@ func (x *fastReflection_MsgVerifyProof) Range(f func(protoreflect.FieldDescripto
 			return
 		}
 	}
-	if x.Result != "" {
-		value := protoreflect.ValueOfString(x.Result)
+	if x.Result != false {
+		value := protoreflect.ValueOfBool(x.Result)
 		if !f(fd_MsgVerifyProof_result, value) {
 			return
 		}
@@ -2070,7 +2069,7 @@ func (x *fastReflection_MsgVerifyProof) Has(fd protoreflect.FieldDescriptor) boo
 	case "fiamma.zkproof.MsgVerifyProof.proofId":
 		return x.ProofId != ""
 	case "fiamma.zkproof.MsgVerifyProof.result":
-		return x.Result != ""
+		return x.Result != false
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.zkproof.MsgVerifyProof"))
@@ -2092,7 +2091,7 @@ func (x *fastReflection_MsgVerifyProof) Clear(fd protoreflect.FieldDescriptor) {
 	case "fiamma.zkproof.MsgVerifyProof.proofId":
 		x.ProofId = ""
 	case "fiamma.zkproof.MsgVerifyProof.result":
-		x.Result = ""
+		x.Result = false
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.zkproof.MsgVerifyProof"))
@@ -2117,7 +2116,7 @@ func (x *fastReflection_MsgVerifyProof) Get(descriptor protoreflect.FieldDescrip
 		return protoreflect.ValueOfString(value)
 	case "fiamma.zkproof.MsgVerifyProof.result":
 		value := x.Result
-		return protoreflect.ValueOfString(value)
+		return protoreflect.ValueOfBool(value)
 	default:
 		if descriptor.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.zkproof.MsgVerifyProof"))
@@ -2143,7 +2142,7 @@ func (x *fastReflection_MsgVerifyProof) Set(fd protoreflect.FieldDescriptor, val
 	case "fiamma.zkproof.MsgVerifyProof.proofId":
 		x.ProofId = value.Interface().(string)
 	case "fiamma.zkproof.MsgVerifyProof.result":
-		x.Result = value.Interface().(string)
+		x.Result = value.Bool()
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.zkproof.MsgVerifyProof"))
@@ -2188,7 +2187,7 @@ func (x *fastReflection_MsgVerifyProof) NewField(fd protoreflect.FieldDescriptor
 	case "fiamma.zkproof.MsgVerifyProof.proofId":
 		return protoreflect.ValueOfString("")
 	case "fiamma.zkproof.MsgVerifyProof.result":
-		return protoreflect.ValueOfString("")
+		return protoreflect.ValueOfBool(false)
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.zkproof.MsgVerifyProof"))
@@ -2266,9 +2265,8 @@ func (x *fastReflection_MsgVerifyProof) ProtoMethods() *protoiface.Methods {
 		if l > 0 {
 			n += 1 + l + runtime.Sov(uint64(l))
 		}
-		l = len(x.Result)
-		if l > 0 {
-			n += 1 + l + runtime.Sov(uint64(l))
+		if x.Result {
+			n += 2
 		}
 		if x.unknownFields != nil {
 			n += len(x.unknownFields)
@@ -2299,12 +2297,15 @@ func (x *fastReflection_MsgVerifyProof) ProtoMethods() *protoiface.Methods {
 			i -= len(x.unknownFields)
 			copy(dAtA[i:], x.unknownFields)
 		}
-		if len(x.Result) > 0 {
-			i -= len(x.Result)
-			copy(dAtA[i:], x.Result)
-			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.Result)))
+		if x.Result {
 			i--
-			dAtA[i] = 0x1a
+			if x.Result {
+				dAtA[i] = 1
+			} else {
+				dAtA[i] = 0
+			}
+			i--
+			dAtA[i] = 0x18
 		}
 		if len(x.ProofId) > 0 {
 			i -= len(x.ProofId)
@@ -2434,10 +2435,10 @@ func (x *fastReflection_MsgVerifyProof) ProtoMethods() *protoiface.Methods {
 				x.ProofId = string(dAtA[iNdEx:postIndex])
 				iNdEx = postIndex
 			case 3:
-				if wireType != 2 {
+				if wireType != 0 {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Result", wireType)
 				}
-				var stringLen uint64
+				var v int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
 						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
@@ -2447,24 +2448,12 @@ func (x *fastReflection_MsgVerifyProof) ProtoMethods() *protoiface.Methods {
 					}
 					b := dAtA[iNdEx]
 					iNdEx++
-					stringLen |= uint64(b&0x7F) << shift
+					v |= int(b&0x7F) << shift
 					if b < 0x80 {
 						break
 					}
 				}
-				intStringLen := int(stringLen)
-				if intStringLen < 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
-				}
-				postIndex := iNdEx + intStringLen
-				if postIndex < 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
-				}
-				if postIndex > l {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
-				}
-				x.Result = string(dAtA[iNdEx:postIndex])
-				iNdEx = postIndex
+				x.Result = bool(v != 0)
 			default:
 				iNdEx = preIndex
 				skippy, err := runtime.Skip(dAtA[iNdEx:])
@@ -5196,7 +5185,7 @@ type MsgVerifyProof struct {
 
 	Creator string `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
 	ProofId string `protobuf:"bytes,2,opt,name=proofId,proto3" json:"proofId,omitempty"`
-	Result  string `protobuf:"bytes,3,opt,name=result,proto3" json:"result,omitempty"`
+	Result  bool   `protobuf:"varint,3,opt,name=result,proto3" json:"result,omitempty"`
 }
 
 func (x *MsgVerifyProof) Reset() {
@@ -5233,11 +5222,11 @@ func (x *MsgVerifyProof) GetProofId() string {
 	return ""
 }
 
-func (x *MsgVerifyProof) GetResult() string {
+func (x *MsgVerifyProof) GetResult() bool {
 	if x != nil {
 		return x.Result
 	}
-	return ""
+	return false
 }
 
 type MsgVerifyProofResponse struct {
@@ -5518,7 +5507,7 @@ var file_fiamma_zkproof_tx_proto_rawDesc = []byte{
 	0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x63, 0x72, 0x65, 0x61, 0x74, 0x6f, 0x72, 0x12,
 	0x18, 0x0a, 0x07, 0x70, 0x72, 0x6f, 0x6f, 0x66, 0x49, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09,
 	0x52, 0x07, 0x70, 0x72, 0x6f, 0x6f, 0x66, 0x49, 0x64, 0x12, 0x16, 0x0a, 0x06, 0x72, 0x65, 0x73,
-	0x75, 0x6c, 0x74, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x72, 0x65, 0x73, 0x75, 0x6c,
+	0x75, 0x6c, 0x74, 0x18, 0x03, 0x20, 0x01, 0x28, 0x08, 0x52, 0x06, 0x72, 0x65, 0x73, 0x75, 0x6c,
 	0x74, 0x3a, 0x0c, 0x82, 0xe7, 0xb0, 0x2a, 0x07, 0x63, 0x72, 0x65, 0x61, 0x74, 0x6f, 0x72, 0x22,
 	0x38, 0x0a, 0x16, 0x4d, 0x73, 0x67, 0x56, 0x65, 0x72, 0x69, 0x66, 0x79, 0x50, 0x72, 0x6f, 0x6f,
 	0x66, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x1e, 0x0a, 0x0a, 0x70, 0x72, 0x6f,

@@ -57,7 +57,7 @@ message MsgVerifyProof {
   option (cosmos.msg.v1.signer) = "creator";
   string creator = 1;
   string proofId = 2;
-  string result  = 3;
+  bool result  = 3;
 }
 
 message MsgVerifyProofResponse {

@@ -9002,7 +9002,7 @@ paths:
               proofId:
                 type: string
               result:
-                type: string
+                type: boolean
       tags:
         - Msg
   /ibc.applications.fee.v1.Msg/PayPacketFee:
@@ -19914,7 +19914,7 @@ definitions:
       proofId:
         type: string
       result:
-        type: string
+        type: boolean
   fiamma.zkproof.MsgVerifyProofResponse:
     type: object
     properties:
