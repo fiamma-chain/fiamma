@@ -7,10 +7,8 @@ import (
 	"os"
 
 	"github.com/consensys/gnark-crypto/ecc"
-	"github.com/consensys/gnark/backend/plonk"
-	cs "github.com/consensys/gnark/constraint/bn254"
-	"github.com/consensys/gnark/frontend/cs/scs"
-	"github.com/consensys/gnark/test/unsafekzg"
+	"github.com/consensys/gnark/backend/groth16"
+	"github.com/consensys/gnark/frontend/cs/r1cs"
 
 	"github.com/consensys/gnark/frontend"
 )
@@ -51,26 +49,22 @@ func solution() Circuit {
 func main() {
 	outputDir := "example/"
 	var myCircuit Circuit
-	ccs, _ := frontend.Compile(ecc.BN254.ScalarField(), scs.NewBuilder, &myCircuit)
+	ccs, err := frontend.Compile(ecc.BN254.ScalarField(), r1cs.NewBuilder, &myCircuit)
 
-	r1cs := ccs.(*cs.SparseR1CS)
-	srs, srsLagrangeInterpolation, err := unsafekzg.NewSRS(r1cs)
 	if err != nil {
-		panic("KZG setup error")
+		panic("circuit compilation error")
 	}
-	// add srsLagrangeInterpolation to the Setup function
-	pk, vk, _ := plonk.Setup(ccs, srs, srsLagrangeInterpolation)
+	pk, vk, _ := groth16.Setup(ccs)
 
 	circuit := solution()
 	fullWitness, _ := frontend.NewWitness(&circuit, ecc.BN254.ScalarField())
 	publicWitness, _ := fullWitness.Public()
 
-	proof, _ := plonk.Prove(ccs, pk, fullWitness)
+	proof, _ := groth16.Prove(ccs, pk, fullWitness)
 
-	// The proof is verified before writing it into a file to make sure it is valid.
-	err = plonk.Verify(proof, vk, publicWitness)
+	err = groth16.Verify(proof, vk, publicWitness)
 	if err != nil {
-		panic("PLONK proof not verified")
+		panic("GROTH16 proof not verified")
 	}
 
 	serialize(proof, outputDir+"proof.base64")
