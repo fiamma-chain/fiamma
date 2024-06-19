@@ -69,6 +69,6 @@ message QueryPendingProofByTypeResponse {
 message QueryAllProofTypesRequest {}
 
 message QueryAllProofTypesResponse {
-  repeated uint64 proofType = 1;
+  repeated string proofType = 1;
 }
 

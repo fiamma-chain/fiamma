@@ -46,7 +46,6 @@ message MsgSubmitGnarkPlonk {
   string proof        = 3;
   string publicInputs = 4;
   string verifyingKey = 5;
-  string metaData     = 6;
 }
 
 message MsgSubmitGnarkPlonkResponse {
@@ -69,7 +68,6 @@ message MsgSubmitSp1 {
   string creator  = 1;
   string proof    = 3;
   string elf      = 4;
-  string metaData = 5;
 }
 
 message MsgSubmitSp1Response {
@@ -82,7 +80,6 @@ message MsgSubmitGnarkGroth16 {
   string proof        = 2;
   string publicInputs = 3;
   string verifyingKey = 4;
-  string metaData     = 5;
 }
 
 message MsgSubmitGnarkGroth16Response {

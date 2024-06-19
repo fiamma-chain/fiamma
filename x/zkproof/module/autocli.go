@@ -51,9 +51,9 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 				},
 				{
 					RpcMethod:      "SubmitGnarkPlonk",
-					Use:            "submit-gnark-plonk [proof-id] [proof] [public-inputs] [verifying-key] [meta-data]",
+					Use:            "submit-gnark-plonk [proof-id] [proof] [public-inputs] [verifying-key]",
 					Short:          "Send a submit-gnark-plonk tx",
-					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "proof"}, {ProtoField: "publicInputs"}, {ProtoField: "verifyingKey"}, {ProtoField: "metaData"}},
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "proof"}, {ProtoField: "publicInputs"}, {ProtoField: "verifyingKey"}},
 				},
 				{
 					RpcMethod:      "VerifyProof",
@@ -63,15 +63,15 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 				},
 				{
 					RpcMethod:      "SubmitSp1",
-					Use:            "submit-sp1 [proof-id] [proof] [elf] [meta-data]",
+					Use:            "submit-sp1 [proof-id] [proof] [elf]",
 					Short:          "Send a submit-sp1 tx",
-					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "proof"}, {ProtoField: "elf"}, {ProtoField: "metaData"}},
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "proof"}, {ProtoField: "elf"}},
 				},
 				{
 					RpcMethod:      "SubmitGnarkGroth16",
-					Use:            "submit-gnark-groth16 [proof] [public-inputs] [verifying-key] [meta-data]",
+					Use:            "submit-gnark-groth16 [proof] [public-inputs] [verifying-key]",
 					Short:          "Send a submit-gnark-groth16 tx",
-					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "proof"}, {ProtoField: "publicInputs"}, {ProtoField: "verifyingKey"}, {ProtoField: "metaData"}},
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "proof"}, {ProtoField: "publicInputs"}, {ProtoField: "verifyingKey"}},
 				},
 				// this line is used by ignite scaffolding # autocli/tx
 			},

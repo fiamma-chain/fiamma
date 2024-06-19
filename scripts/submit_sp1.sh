@@ -2,15 +2,14 @@
 
 set -e
 
-if [ $# -ne 4 ]; then
-  echo "Usage: $0 <account-name> <proof-file> <elf-file> <meta-data>" 
-  echo "accepts 4 arg, received $#"
+if [ $# -ne 3 ]; then
+  echo "Usage: $0 <account-name> <proof-file> <elf-file> " 
+  echo "accepts 3 arg, received $#"
   exit 1
 else
   ACCOUNT=$1
   PROOF_FILE=$2
   ELF_FILE=$3
-  META_DATA=$4
 fi
 
 : ${CHAIN_ID:="fiamma-testnet-1"}
@@ -25,7 +24,7 @@ NEW_ELF_FILE=$(mktemp)
 base64 -i $ELF_FILE | tr -d '\n' > $NEW_ELF_FILE
 
 TRANSACTION=$(mktemp)
-fiammad tx zkproof submit-sp1 "PLACEHOLDER" "PLACEHOLDER" $META_DATA \
+fiammad tx zkproof submit-sp1 "PLACEHOLDER" "PLACEHOLDER" \
   --from $ACCOUNT --chain-id $CHAIN_ID --generate-only \
   --gas $GAS --fees $FEES \
   | jq '.body.messages[0].proof=$proof' --rawfile proof $NEW_PROOF_FILE \

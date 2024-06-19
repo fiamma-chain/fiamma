@@ -106,8 +106,8 @@ func (x *fastReflection_Zkproof) Range(f func(protoreflect.FieldDescriptor, prot
 			return
 		}
 	}
-	if x.ProofType != uint64(0) {
-		value := protoreflect.ValueOfUint64(x.ProofType)
+	if x.ProofType != "" {
+		value := protoreflect.ValueOfString(x.ProofType)
 		if !f(fd_Zkproof_proofType, value) {
 			return
 		}
@@ -138,7 +138,7 @@ func (x *fastReflection_Zkproof) Has(fd protoreflect.FieldDescriptor) bool {
 	case "fiamma.zkproof.Zkproof.proofId":
 		return x.ProofId != ""
 	case "fiamma.zkproof.Zkproof.proofType":
-		return x.ProofType != uint64(0)
+		return x.ProofType != ""
 	case "fiamma.zkproof.Zkproof.proofStatus":
 		return x.ProofStatus != uint64(0)
 	default:
@@ -162,7 +162,7 @@ func (x *fastReflection_Zkproof) Clear(fd protoreflect.FieldDescriptor) {
 	case "fiamma.zkproof.Zkproof.proofId":
 		x.ProofId = ""
 	case "fiamma.zkproof.Zkproof.proofType":
-		x.ProofType = uint64(0)
+		x.ProofType = ""
 	case "fiamma.zkproof.Zkproof.proofStatus":
 		x.ProofStatus = uint64(0)
 	default:
@@ -189,7 +189,7 @@ func (x *fastReflection_Zkproof) Get(descriptor protoreflect.FieldDescriptor) pr
 		return protoreflect.ValueOfString(value)
 	case "fiamma.zkproof.Zkproof.proofType":
 		value := x.ProofType
-		return protoreflect.ValueOfUint64(value)
+		return protoreflect.ValueOfString(value)
 	case "fiamma.zkproof.Zkproof.proofStatus":
 		value := x.ProofStatus
 		return protoreflect.ValueOfUint64(value)
@@ -218,7 +218,7 @@ func (x *fastReflection_Zkproof) Set(fd protoreflect.FieldDescriptor, value prot
 	case "fiamma.zkproof.Zkproof.proofId":
 		x.ProofId = value.Interface().(string)
 	case "fiamma.zkproof.Zkproof.proofType":
-		x.ProofType = value.Uint()
+		x.ProofType = value.Interface().(string)
 	case "fiamma.zkproof.Zkproof.proofStatus":
 		x.ProofStatus = value.Uint()
 	default:
@@ -267,7 +267,7 @@ func (x *fastReflection_Zkproof) NewField(fd protoreflect.FieldDescriptor) proto
 	case "fiamma.zkproof.Zkproof.proofId":
 		return protoreflect.ValueOfString("")
 	case "fiamma.zkproof.Zkproof.proofType":
-		return protoreflect.ValueOfUint64(uint64(0))
+		return protoreflect.ValueOfString("")
 	case "fiamma.zkproof.Zkproof.proofStatus":
 		return protoreflect.ValueOfUint64(uint64(0))
 	default:
@@ -347,8 +347,9 @@ func (x *fastReflection_Zkproof) ProtoMethods() *protoiface.Methods {
 		if l > 0 {
 			n += 1 + l + runtime.Sov(uint64(l))
 		}
-		if x.ProofType != 0 {
-			n += 1 + runtime.Sov(uint64(x.ProofType))
+		l = len(x.ProofType)
+		if l > 0 {
+			n += 1 + l + runtime.Sov(uint64(l))
 		}
 		if x.ProofStatus != 0 {
 			n += 1 + runtime.Sov(uint64(x.ProofStatus))
@@ -387,10 +388,12 @@ func (x *fastReflection_Zkproof) ProtoMethods() *protoiface.Methods {
 			i--
 			dAtA[i] = 0x20
 		}
-		if x.ProofType != 0 {
-			i = runtime.EncodeVarint(dAtA, i, uint64(x.ProofType))
+		if len(x.ProofType) > 0 {
+			i -= len(x.ProofType)
+			copy(dAtA[i:], x.ProofType)
+			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.ProofType)))
 			i--
-			dAtA[i] = 0x18
+			dAtA[i] = 0x1a
 		}
 		if len(x.ProofId) > 0 {
 			i -= len(x.ProofId)
@@ -520,10 +523,10 @@ func (x *fastReflection_Zkproof) ProtoMethods() *protoiface.Methods {
 				x.ProofId = string(dAtA[iNdEx:postIndex])
 				iNdEx = postIndex
 			case 3:
-				if wireType != 0 {
+				if wireType != 2 {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field ProofType", wireType)
 				}
-				x.ProofType = 0
+				var stringLen uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
 						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
@@ -533,11 +536,24 @@ func (x *fastReflection_Zkproof) ProtoMethods() *protoiface.Methods {
 					}
 					b := dAtA[iNdEx]
 					iNdEx++
-					x.ProofType |= uint64(b&0x7F) << shift
+					stringLen |= uint64(b&0x7F) << shift
 					if b < 0x80 {
 						break
 					}
 				}
+				intStringLen := int(stringLen)
+				if intStringLen < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				postIndex := iNdEx + intStringLen
+				if postIndex < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if postIndex > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				x.ProofType = string(dAtA[iNdEx:postIndex])
+				iNdEx = postIndex
 			case 4:
 				if wireType != 0 {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field ProofStatus", wireType)
@@ -612,7 +628,7 @@ type Zkproof struct {
 
 	Creator     string `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
 	ProofId     string `protobuf:"bytes,2,opt,name=proofId,proto3" json:"proofId,omitempty"`
-	ProofType   uint64 `protobuf:"varint,3,opt,name=proofType,proto3" json:"proofType,omitempty"`
+	ProofType   string `protobuf:"bytes,3,opt,name=proofType,proto3" json:"proofType,omitempty"`
 	ProofStatus uint64 `protobuf:"varint,4,opt,name=proofStatus,proto3" json:"proofStatus,omitempty"`
 }
 
@@ -650,11 +666,11 @@ func (x *Zkproof) GetProofId() string {
 	return ""
 }
 
-func (x *Zkproof) GetProofType() uint64 {
+func (x *Zkproof) GetProofType() string {
 	if x != nil {
 		return x.ProofType
 	}
-	return 0
+	return ""
 }
 
 func (x *Zkproof) GetProofStatus() uint64 {
@@ -674,7 +690,7 @@ var file_fiamma_zkproof_zkproof_proto_rawDesc = []byte{
 	0x61, 0x74, 0x6f, 0x72, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x63, 0x72, 0x65, 0x61,
 	0x74, 0x6f, 0x72, 0x12, 0x18, 0x0a, 0x07, 0x70, 0x72, 0x6f, 0x6f, 0x66, 0x49, 0x64, 0x18, 0x02,
 	0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x70, 0x72, 0x6f, 0x6f, 0x66, 0x49, 0x64, 0x12, 0x1c, 0x0a,
-	0x09, 0x70, 0x72, 0x6f, 0x6f, 0x66, 0x54, 0x79, 0x70, 0x65, 0x18, 0x03, 0x20, 0x01, 0x28, 0x04,
+	0x09, 0x70, 0x72, 0x6f, 0x6f, 0x66, 0x54, 0x79, 0x70, 0x65, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09,
 	0x52, 0x09, 0x70, 0x72, 0x6f, 0x6f, 0x66, 0x54, 0x79, 0x70, 0x65, 0x12, 0x20, 0x0a, 0x0b, 0x70,
 	0x72, 0x6f, 0x6f, 0x66, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x18, 0x04, 0x20, 0x01, 0x28, 0x04,
 	0x52, 0x0b, 0x70, 0x72, 0x6f, 0x6f, 0x66, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x42, 0x9c, 0x01,

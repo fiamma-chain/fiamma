@@ -3064,7 +3064,7 @@ func (x *fastReflection_QueryAllProofTypesRequest) ProtoMethods() *protoiface.Me
 var _ protoreflect.List = (*_QueryAllProofTypesResponse_1_list)(nil)
 
 type _QueryAllProofTypesResponse_1_list struct {
-	list *[]uint64
+	list *[]string
 }
 
 func (x *_QueryAllProofTypesResponse_1_list) Len() int {
@@ -3075,17 +3075,17 @@ func (x *_QueryAllProofTypesResponse_1_list) Len() int {
 }
 
 func (x *_QueryAllProofTypesResponse_1_list) Get(i int) protoreflect.Value {
-	return protoreflect.ValueOfUint64((*x.list)[i])
+	return protoreflect.ValueOfString((*x.list)[i])
 }
 
 func (x *_QueryAllProofTypesResponse_1_list) Set(i int, value protoreflect.Value) {
-	valueUnwrapped := value.Uint()
+	valueUnwrapped := value.String()
 	concreteValue := valueUnwrapped
 	(*x.list)[i] = concreteValue
 }
 
 func (x *_QueryAllProofTypesResponse_1_list) Append(value protoreflect.Value) {
-	valueUnwrapped := value.Uint()
+	valueUnwrapped := value.String()
 	concreteValue := valueUnwrapped
 	*x.list = append(*x.list, concreteValue)
 }
@@ -3099,8 +3099,8 @@ func (x *_QueryAllProofTypesResponse_1_list) Truncate(n int) {
 }
 
 func (x *_QueryAllProofTypesResponse_1_list) NewElement() protoreflect.Value {
-	v := uint64(0)
-	return protoreflect.ValueOfUint64(v)
+	v := ""
+	return protoreflect.ValueOfString(v)
 }
 
 func (x *_QueryAllProofTypesResponse_1_list) IsValid() bool {
@@ -3292,7 +3292,7 @@ func (x *fastReflection_QueryAllProofTypesResponse) Mutable(fd protoreflect.Fiel
 	switch fd.FullName() {
 	case "fiamma.zkproof.QueryAllProofTypesResponse.proofType":
 		if x.ProofType == nil {
-			x.ProofType = []uint64{}
+			x.ProofType = []string{}
 		}
 		value := &_QueryAllProofTypesResponse_1_list{list: &x.ProofType}
 		return protoreflect.ValueOfList(value)
@@ -3310,7 +3310,7 @@ func (x *fastReflection_QueryAllProofTypesResponse) Mutable(fd protoreflect.Fiel
 func (x *fastReflection_QueryAllProofTypesResponse) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
 	case "fiamma.zkproof.QueryAllProofTypesResponse.proofType":
-		list := []uint64{}
+		list := []string{}
 		return protoreflect.ValueOfList(&_QueryAllProofTypesResponse_1_list{list: &list})
 	default:
 		if fd.IsExtension() {
@@ -3382,11 +3382,10 @@ func (x *fastReflection_QueryAllProofTypesResponse) ProtoMethods() *protoiface.M
 		var l int
 		_ = l
 		if len(x.ProofType) > 0 {
-			l = 0
-			for _, e := range x.ProofType {
-				l += runtime.Sov(uint64(e))
+			for _, s := range x.ProofType {
+				l = len(s)
+				n += 1 + l + runtime.Sov(uint64(l))
 			}
-			n += 1 + runtime.Sov(uint64(l)) + l
 		}
 		if x.unknownFields != nil {
 			n += len(x.unknownFields)
@@ -3418,24 +3417,13 @@ func (x *fastReflection_QueryAllProofTypesResponse) ProtoMethods() *protoiface.M
 			copy(dAtA[i:], x.unknownFields)
 		}
 		if len(x.ProofType) > 0 {
-			var pksize2 int
-			for _, num := range x.ProofType {
-				pksize2 += runtime.Sov(uint64(num))
+			for iNdEx := len(x.ProofType) - 1; iNdEx >= 0; iNdEx-- {
+				i -= len(x.ProofType[iNdEx])
+				copy(dAtA[i:], x.ProofType[iNdEx])
+				i = runtime.EncodeVarint(dAtA, i, uint64(len(x.ProofType[iNdEx])))
+				i--
+				dAtA[i] = 0xa
 			}
-			i -= pksize2
-			j1 := i
-			for _, num := range x.ProofType {
-				for num >= 1<<7 {
-					dAtA[j1] = uint8(uint64(num)&0x7f | 0x80)
-					num >>= 7
-					j1++
-				}
-				dAtA[j1] = uint8(num)
-				j1++
-			}
-			i = runtime.EncodeVarint(dAtA, i, uint64(pksize2))
-			i--
-			dAtA[i] = 0xa
 		}
 		if input.Buf != nil {
 			input.Buf = append(input.Buf, dAtA...)
@@ -3487,81 +3475,37 @@ func (x *fastReflection_QueryAllProofTypesResponse) ProtoMethods() *protoiface.M
 			}
 			switch fieldNum {
 			case 1:
-				if wireType == 0 {
-					var v uint64
-					for shift := uint(0); ; shift += 7 {
-						if shift >= 64 {
-							return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
-						}
-						if iNdEx >= l {
-							return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
-						}
-						b := dAtA[iNdEx]
-						iNdEx++
-						v |= uint64(b&0x7F) << shift
-						if b < 0x80 {
-							break
-						}
-					}
-					x.ProofType = append(x.ProofType, v)
-				} else if wireType == 2 {
-					var packedLen int
-					for shift := uint(0); ; shift += 7 {
-						if shift >= 64 {
-							return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
-						}
-						if iNdEx >= l {
-							return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
-						}
-						b := dAtA[iNdEx]
-						iNdEx++
-						packedLen |= int(b&0x7F) << shift
-						if b < 0x80 {
-							break
-						}
-					}
-					if packedLen < 0 {
-						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
-					}
-					postIndex := iNdEx + packedLen
-					if postIndex < 0 {
-						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
-					}
-					if postIndex > l {
-						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
-					}
-					var elementCount int
-					var count int
-					for _, integer := range dAtA[iNdEx:postIndex] {
-						if integer < 128 {
-							count++
-						}
-					}
-					elementCount = count
-					if elementCount != 0 && len(x.ProofType) == 0 {
-						x.ProofType = make([]uint64, 0, elementCount)
-					}
-					for iNdEx < postIndex {
-						var v uint64
-						for shift := uint(0); ; shift += 7 {
-							if shift >= 64 {
-								return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
-							}
-							if iNdEx >= l {
-								return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
-							}
-							b := dAtA[iNdEx]
-							iNdEx++
-							v |= uint64(b&0x7F) << shift
-							if b < 0x80 {
-								break
-							}
-						}
-						x.ProofType = append(x.ProofType, v)
-					}
-				} else {
+				if wireType != 2 {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field ProofType", wireType)
 				}
+				var stringLen uint64
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					stringLen |= uint64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				intStringLen := int(stringLen)
+				if intStringLen < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				postIndex := iNdEx + intStringLen
+				if postIndex < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if postIndex > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				x.ProofType = append(x.ProofType, string(dAtA[iNdEx:postIndex]))
+				iNdEx = postIndex
 			default:
 				iNdEx = preIndex
 				skippy, err := runtime.Skip(dAtA[iNdEx:])
@@ -3861,7 +3805,7 @@ type QueryAllProofTypesResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	ProofType []uint64 `protobuf:"varint,1,rep,packed,name=proofType,proto3" json:"proofType,omitempty"`
+	ProofType []string `protobuf:"bytes,1,rep,name=proofType,proto3" json:"proofType,omitempty"`
 }
 
 func (x *QueryAllProofTypesResponse) Reset() {
@@ -3884,7 +3828,7 @@ func (*QueryAllProofTypesResponse) Descriptor() ([]byte, []int) {
 	return file_fiamma_zkproof_query_proto_rawDescGZIP(), []int{7}
 }
 
-func (x *QueryAllProofTypesResponse) GetProofType() []uint64 {
+func (x *QueryAllProofTypesResponse) GetProofType() []string {
 	if x != nil {
 		return x.ProofType
 	}
@@ -3951,7 +3895,7 @@ var file_fiamma_zkproof_query_proto_rawDesc = []byte{
 	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x22, 0x3a, 0x0a, 0x1a, 0x51, 0x75, 0x65, 0x72, 0x79,
 	0x41, 0x6c, 0x6c, 0x50, 0x72, 0x6f, 0x6f, 0x66, 0x54, 0x79, 0x70, 0x65, 0x73, 0x52, 0x65, 0x73,
 	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x1c, 0x0a, 0x09, 0x70, 0x72, 0x6f, 0x6f, 0x66, 0x54, 0x79,
-	0x70, 0x65, 0x18, 0x01, 0x20, 0x03, 0x28, 0x04, 0x52, 0x09, 0x70, 0x72, 0x6f, 0x6f, 0x66, 0x54,
+	0x70, 0x65, 0x18, 0x01, 0x20, 0x03, 0x28, 0x09, 0x52, 0x09, 0x70, 0x72, 0x6f, 0x6f, 0x66, 0x54,
 	0x79, 0x70, 0x65, 0x32, 0xc0, 0x04, 0x0a, 0x05, 0x51, 0x75, 0x65, 0x72, 0x79, 0x12, 0x71, 0x0a,
 	0x06, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x12, 0x22, 0x2e, 0x66, 0x69, 0x61, 0x6d, 0x6d, 0x61,
 	0x2e, 0x7a, 0x6b, 0x70, 0x72, 0x6f, 0x6f, 0x66, 0x2e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x50, 0x61,

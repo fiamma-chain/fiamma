@@ -10,10 +10,9 @@ var _ sdk.Msg = &MsgSubmitSp1{}
 
 func NewMsgSubmitSp1(creator string, proofId string, proof string, elf string, metaData string) *MsgSubmitSp1 {
 	return &MsgSubmitSp1{
-		Creator:  creator,
-		Proof:    proof,
-		Elf:      elf,
-		MetaData: metaData,
+		Creator: creator,
+		Proof:   proof,
+		Elf:     elf,
 	}
 }
 
