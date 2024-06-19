@@ -14,7 +14,6 @@ func NewMsgSubmitGnarkPlonk(creator string, proofId string, proof string, public
 		Proof:        proof,
 		PublicInputs: publicInputs,
 		VerifyingKey: verifyingKey,
-		MetaData:     metaData,
 	}
 }
 

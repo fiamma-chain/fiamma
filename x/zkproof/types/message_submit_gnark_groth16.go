@@ -14,7 +14,6 @@ func NewMsgSubmitGnarkGroth16(creator string, proof string, publicInputs string,
 		Proof:        proof,
 		PublicInputs: publicInputs,
 		VerifyingKey: verifyingKey,
-		MetaData:     metaData,
 	}
 }
 

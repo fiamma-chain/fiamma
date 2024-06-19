@@ -8449,7 +8449,6 @@ paths:
                 type: array
                 items:
                   type: string
-                  format: uint64
         default:
           description: An unexpected error response.
           schema:
@@ -8525,7 +8524,6 @@ paths:
                     type: string
                   proofType:
                     type: string
-                    format: uint64
                   proofStatus:
                     type: string
                     format: uint64
@@ -8653,7 +8651,6 @@ paths:
                     type: string
                   proofType:
                     type: string
-                    format: uint64
                   proofStatus:
                     type: string
                     format: uint64
@@ -8807,8 +8804,6 @@ paths:
                 type: string
               verifyingKey:
                 type: string
-              metaData:
-                type: string
       tags:
         - Msg
   /fiamma.zkproof.Msg/SubmitGnarkPlonk:
@@ -8856,8 +8851,6 @@ paths:
                 type: string
               verifyingKey:
                 type: string
-              metaData:
-                type: string
       tags:
         - Msg
   /fiamma.zkproof.Msg/SubmitSp1:
@@ -8902,8 +8895,6 @@ paths:
               proof:
                 type: string
               elf:
-                type: string
-              metaData:
                 type: string
       tags:
         - Msg
@@ -19729,7 +19720,6 @@ definitions:
         type: array
         items:
           type: string
-          format: uint64
   fiamma.zkproof.QueryParamsResponse:
     type: object
     properties:
@@ -19749,7 +19739,6 @@ definitions:
             type: string
           proofType:
             type: string
-            format: uint64
           proofStatus:
             type: string
             format: uint64
@@ -19791,7 +19780,6 @@ definitions:
             type: string
           proofType:
             type: string
-            format: uint64
           proofStatus:
             type: string
             format: uint64
@@ -19830,7 +19818,6 @@ definitions:
         type: string
       proofType:
         type: string
-        format: uint64
       proofStatus:
         type: string
         format: uint64
@@ -19844,8 +19831,6 @@ definitions:
       publicInputs:
         type: string
       verifyingKey:
-        type: string
-      metaData:
         type: string
   fiamma.zkproof.MsgSubmitGnarkGroth16Response:
     type: object
@@ -19864,8 +19849,6 @@ definitions:
         type: string
       verifyingKey:
         type: string
-      metaData:
-        type: string
   fiamma.zkproof.MsgSubmitGnarkPlonkResponse:
     type: object
     properties:
@@ -19880,8 +19863,6 @@ definitions:
       proof:
         type: string
       elf:
-        type: string
-      metaData:
         type: string
   fiamma.zkproof.MsgSubmitSp1Response:
     type: object
