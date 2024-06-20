@@ -4,7 +4,8 @@ import (
 	"bytes"
 	"context"
 	"encoding/base64"
-	"io"
+	"encoding/hex"
+	"strconv"
 
 	"fiamma/x/zkproof/types"
 
@@ -16,36 +17,88 @@ import (
 
 func (k msgServer) SubmitGnarkPlonk(goCtx context.Context, msg *types.MsgSubmitGnarkPlonk) (*types.MsgSubmitGnarkPlonkResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
+	proofBytes, err := base64.StdEncoding.DecodeString(msg.Proof)
+	if err != nil {
+		return nil, types.ErrInvalidVerifyData
+	}
+	publicInputBytes, err := base64.StdEncoding.DecodeString(msg.PublicInputs)
 
-	_ = verifyGnarkPlonk(msg)
-	// TODO: Store the proof to DA
-	_ = ctx
+	if err != nil {
+		return nil, types.ErrInvalidVerifyData
+	}
+
+	verificationKeyBytes, err := base64.StdEncoding.DecodeString(msg.VerifyingKey)
+
+	if err != nil {
+		return nil, types.ErrInvalidVerifyData
+
+	}
+	verfiyData := types.VerificationData{
+		ProvingTypeId:   types.GnarkPlonk,
+		Proof:           proofBytes,
+		PubInput:        publicInputBytes,
+		VerificationKey: verificationKeyBytes,
+	}
+	// submit proof data to DA
+	proofCommitment, proofDAIds, err := k.SubmitVerifyDataToDA(ctx, verfiyData)
+	if err != nil {
+		k.Logger().Info("Error submitting proof to DA: %v", err)
+		return nil, types.ErrSubmitProof
+	}
+
+	// The chain first verifies the correctness of the proofs submitted by the user, and saves the results.
+	// The observer may challenge the result at a later stage.
+	result := k.verifyGnarkPlonk(proofBytes, publicInputBytes, verificationKeyBytes)
+
+	k.logger.Info("Proof verification result: %v", result)
+
+	// store verify data in the store
+	verifyData := types.Zkproof{
+		Creator:     msg.Creator,
+		ProofId:     hex.EncodeToString(proofDAIds[0]),
+		ProofType:   "PLONK",
+		ProofStatus: 1,
+	}
+
+	k.SetVerifyData(ctx, hex.EncodeToString(proofCommitment[:]), verifyData)
+
+	event := sdk.NewEvent("verification_finished",
+		sdk.NewAttribute("verify_result", strconv.FormatBool(result)),
+		sdk.NewAttribute("prover_type", "PLONK"))
+	ctx.EventManager().EmitEvent(event)
 
 	return &types.MsgSubmitGnarkPlonkResponse{}, nil
 }
 
-func verifyGnarkPlonk(msg *types.MsgSubmitGnarkPlonk) bool {
+func (k msgServer) verifyGnarkPlonk(proofBytes []byte, publicInputBytes []byte, verifyKeyBytes []byte) bool {
+	proofReader := bytes.NewReader(proofBytes)
 	proof := plonk.NewProof(ecc.BN254)
-	deserialize(proof, msg.Proof)
 
-	public_input, _ := witness.New(ecc.BN254.ScalarField())
-	deserialize(public_input, msg.PublicInputs)
+	if _, err := proof.ReadFrom(proofReader); err != nil {
+		k.Logger().Info("Could not deserialize proof: %v", err)
+		return false
+	}
 
-	verifying_key := plonk.NewVerifyingKey(ecc.BN254)
-	deserialize(verifying_key, msg.VerifyingKey)
+	publicInputsReader := bytes.NewReader(publicInputBytes)
+	publicInput, err := witness.New(ecc.BN254.ScalarField())
+	if err != nil {
+		k.Logger().Info("Error instantiating witness: %v", err)
+		return false
+	}
 
-	err := plonk.Verify(proof, verifying_key, public_input)
+	if _, err = publicInput.ReadFrom(publicInputsReader); err != nil {
+		k.Logger().Info("Could not read PLONK public input: %v", err)
+		return false
+	}
+
+	verificationKeyReader := bytes.NewReader(verifyKeyBytes)
+	verifyingkey := plonk.NewVerifyingKey(ecc.BN254)
+	if _, err := verifyingkey.ReadFrom(verificationKeyReader); err != nil {
+		k.Logger().Info("Could not read plonk verifying key from bytes: %v", err)
+		return false
+	}
+
+	err = plonk.Verify(proof, verifyingkey, publicInput)
 
 	return err == nil
-}
-
-func deserialize[r io.ReaderFrom](dst r, encoded string) error {
-	bytes_buffer, err := base64.StdEncoding.DecodeString(encoded)
-	if err != nil {
-		return err
-	}
-	reader := bytes.NewReader(bytes_buffer)
-	_, err = dst.ReadFrom(reader)
-
-	return err
 }
