@@ -12,7 +12,9 @@ const (
 )
 
 var (
-	ParamsKey = []byte("p_zkproof")
+	ParamsKey     = []byte{0x01} // key prefix for the parameters
+	VerifyDataKey = []byte{0x02} // key prefix for the verify data
+
 )
 
 func KeyPrefix(p string) []byte {
