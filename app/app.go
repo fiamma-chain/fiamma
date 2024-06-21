@@ -75,7 +75,7 @@ import (
 	ibctransferkeeper "github.com/cosmos/ibc-go/v8/modules/apps/transfer/keeper"
 	ibckeeper "github.com/cosmos/ibc-go/v8/modules/core/keeper"
 
-	zkproofmodulekeeper "fiamma/x/zkproof/keeper"
+	zkpverifymodulekeeper "fiamma/x/zkpverify/keeper"
 
 	wasmkeeper "github.com/CosmWasm/wasmd/x/wasm/keeper"
 	tmproto "github.com/cometbft/cometbft/proto/tendermint/types"
@@ -144,7 +144,7 @@ type App struct {
 	ScopedICAControllerKeeper capabilitykeeper.ScopedKeeper
 	ScopedICAHostKeeper       capabilitykeeper.ScopedKeeper
 
-	ZkproofKeeper zkproofmodulekeeper.Keeper
+	ZkpVerifyKeeper zkpverifymodulekeeper.Keeper
 
 	// CosmWasm
 	WasmKeeper       wasmkeeper.Keeper
@@ -288,7 +288,7 @@ func New(
 		&app.NFTKeeper,
 		&app.GroupKeeper,
 		&app.CircuitBreakerKeeper,
-		&app.ZkproofKeeper,
+		&app.ZkpVerifyKeeper,
 		// this line is used by starport scaffolding # stargate/app/keeperDefinition
 	); err != nil {
 		panic(err)

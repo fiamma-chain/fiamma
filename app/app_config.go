@@ -3,9 +3,9 @@ package app
 import (
 	"time"
 
-	zkproofmodulev1 "fiamma/api/fiamma/zkproof/module"
-	_ "fiamma/x/zkproof/module" // import for side-effects
-	zkproofmoduletypes "fiamma/x/zkproof/types"
+	zkpverifymodulev1 "fiamma/api/fiamma/zkpverify/module"
+	_ "fiamma/x/zkpverify/module" // import for side-effects
+	zkpverifymoduletypes "fiamma/x/zkpverify/types"
 
 	runtimev1alpha1 "cosmossdk.io/api/cosmos/app/runtime/v1alpha1"
 	appv1alpha1 "cosmossdk.io/api/cosmos/app/v1alpha1"
@@ -94,7 +94,7 @@ var (
 		consensustypes.ModuleName,
 		circuittypes.ModuleName,
 		// chain modules
-		zkproofmoduletypes.ModuleName,
+		zkpverifymoduletypes.ModuleName,
 		wasmtypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/initGenesis
 	}
@@ -120,7 +120,7 @@ var (
 		icatypes.ModuleName,
 		ibcfeetypes.ModuleName,
 		// chain modules
-		zkproofmoduletypes.ModuleName,
+		zkpverifymoduletypes.ModuleName,
 		wasmtypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/beginBlockers
 	}
@@ -140,7 +140,7 @@ var (
 		icatypes.ModuleName,
 		ibcfeetypes.ModuleName,
 		// chain modules
-		zkproofmoduletypes.ModuleName,
+		zkpverifymoduletypes.ModuleName,
 		wasmtypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/endBlockers
 	}
@@ -299,8 +299,8 @@ var (
 				Config: appconfig.WrapAny(&circuitmodulev1.Module{}),
 			},
 			{
-				Name:   zkproofmoduletypes.ModuleName,
-				Config: appconfig.WrapAny(&zkproofmodulev1.Module{}),
+				Name:   zkpverifymoduletypes.ModuleName,
+				Config: appconfig.WrapAny(&zkpverifymodulev1.Module{}),
 			},
 			// this line is used by starport scaffolding # stargate/app/moduleConfig
 		},

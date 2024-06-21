@@ -1,0 +1,12 @@
+syntax = "proto3";
+package fiamma.zkpverify;
+
+option go_package = "fiamma/x/zkpverify/types";
+
+message ZkpVerify {
+  
+  string creator = 1; 
+  string proofId = 2; 
+  string proofType = 3; 
+  uint64 proofStatus = 4; 
+}
