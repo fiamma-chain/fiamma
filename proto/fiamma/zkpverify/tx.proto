@@ -1,0 +1,88 @@
+syntax = "proto3";
+
+package fiamma.zkpverify;
+
+import "amino/amino.proto";
+import "cosmos/msg/v1/msg.proto";
+import "cosmos_proto/cosmos.proto";
+import "gogoproto/gogo.proto";
+import "fiamma/zkpverify/params.proto";
+
+option go_package = "fiamma/x/zkpverify/types";
+
+// Msg defines the Msg service.
+service Msg {
+  option (cosmos.msg.v1.service) = true;
+  
+  // UpdateParams defines a (governance) operation for updating the module
+  // parameters. The authority defaults to the x/gov module account.
+  rpc UpdateParams       (MsgUpdateParams      ) returns (MsgUpdateParamsResponse      );
+  rpc SubmitGnarkPlonk   (MsgSubmitGnarkPlonk  ) returns (MsgSubmitGnarkPlonkResponse  );
+  rpc VerifyProof        (MsgVerifyProof       ) returns (MsgVerifyProofResponse       );
+  rpc SubmitSp1          (MsgSubmitSp1         ) returns (MsgSubmitSp1Response         );
+  rpc SubmitGnarkGroth16 (MsgSubmitGnarkGroth16) returns (MsgSubmitGnarkGroth16Response);
+}
+// MsgUpdateParams is the Msg/UpdateParams request type.
+message MsgUpdateParams {
+  option (cosmos.msg.v1.signer) =                        "authority";
+  option           (amino.name) = "fiamma/x/zkpverify/MsgUpdateParams";
+  
+  // authority is the address that controls the module (defaults to x/gov unless overwritten).
+  string authority = 1 [(cosmos_proto.scalar) = "cosmos.AddressString"];
+
+  // params defines the module parameters to update.
+  
+  // NOTE: All parameters must be supplied.
+  Params params = 2 [(gogoproto.nullable) = false, (amino.dont_omitempty) = true];
+}
+
+// MsgUpdateParamsResponse defines the response structure for executing a
+// MsgUpdateParams message.
+message MsgUpdateParamsResponse {}
+
+message MsgSubmitGnarkPlonk {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator      = 1;
+  string proof        = 3;
+  string publicInputs = 4;
+  string verifyingKey = 5;
+}
+
+message MsgSubmitGnarkPlonkResponse {
+  uint64 proofStaus = 1;
+}
+
+message MsgVerifyProof {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator = 1;
+  string proofId = 2;
+  bool result  = 3;
+}
+
+message MsgVerifyProofResponse {
+  uint64 proofStaus = 1;
+}
+
+message MsgSubmitSp1 {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator  = 1;
+  string proof    = 3;
+  string elf      = 4;
+}
+
+message MsgSubmitSp1Response {
+  uint64 proofStaus = 1;
+}
+
+message MsgSubmitGnarkGroth16 {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator      = 1;
+  string proof        = 2;
+  string publicInputs = 3;
+  string verifyingKey = 4;
+}
+
+message MsgSubmitGnarkGroth16Response {
+  uint64 proofStaus = 1;
+}
+

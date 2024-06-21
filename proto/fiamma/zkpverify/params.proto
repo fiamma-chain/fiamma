@@ -1,0 +1,15 @@
+syntax = "proto3";
+package fiamma.zkpverify;
+
+import "amino/amino.proto";
+import "gogoproto/gogo.proto";
+
+option go_package = "fiamma/x/zkpverify/types";
+
+// Params defines the parameters for the module.
+message Params {
+  option (amino.name) = "fiamma/x/zkpverify/Params";
+  option (gogoproto.equal) = true;
+
+  
+}

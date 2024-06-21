@@ -19,7 +19,7 @@ fi
 : ${GAS:=20000000}
 
 TRANSACTION=$(mktemp)
-fiammad tx zkproof verify-proof $PROOF_ID, $RESULT \
+fiammad tx zkpverify verify-proof $PROOF_ID, $RESULT \
   --from $ACCOUNT --chain-id $CHAIN_ID \
   --gas $GAS 
 

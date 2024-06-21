@@ -24,7 +24,7 @@ NEW_ELF_FILE=$(mktemp)
 base64 -i $ELF_FILE | tr -d '\n' > $NEW_ELF_FILE
 
 TRANSACTION=$(mktemp)
-fiammad tx zkproof submit-sp1 "PLACEHOLDER" "PLACEHOLDER" \
+fiammad tx zkpverify submit-sp1 "PLACEHOLDER" "PLACEHOLDER" \
   --from $ACCOUNT --chain-id $CHAIN_ID --generate-only \
   --gas $GAS --fees $FEES \
   | jq '.body.messages[0].proof=$proof' --rawfile proof $NEW_PROOF_FILE \
