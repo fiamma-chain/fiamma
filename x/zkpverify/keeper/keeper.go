@@ -61,22 +61,22 @@ func (k Keeper) Logger() log.Logger {
 }
 
 // SetProofInfo stores proof information
-func (k Keeper) SetVerifyData(ctx sdk.Context, proofID string, proofInfo types.ZkpVerify) {
+func (k Keeper) SetVerifyData(ctx sdk.Context, verifyId []byte, verifyData types.VerifyResult) {
 	store := k.verifyDataStore(ctx)
-	bz := k.cdc.MustMarshal(&proofInfo)
-	store.Set([]byte(proofID), bz)
+	bz := k.cdc.MustMarshal(&verifyData)
+	store.Set(verifyId, bz)
 }
 
 // GetProofInfo retrieves proof information
-func (k Keeper) GetProofInfo(ctx sdk.Context, proofID string) (types.ZkpVerify, bool) {
+func (k Keeper) GetProofInfo(ctx sdk.Context, proofID string) (types.VerifyResult, bool) {
 	store := k.verifyDataStore(ctx)
 	bz := store.Get([]byte(proofID))
 	if bz == nil {
-		return types.ZkpVerify{}, false
+		return types.VerifyResult{}, false
 	}
-	var proofInfo types.ZkpVerify
-	k.cdc.MustUnmarshal(bz, &proofInfo)
-	return proofInfo, true
+	var verifyResult types.VerifyResult
+	k.cdc.MustUnmarshal(bz, &verifyResult)
+	return verifyResult, true
 }
 
 func (k Keeper) verifyDataStore(ctx context.Context) prefix.Store {

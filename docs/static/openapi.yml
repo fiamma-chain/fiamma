@@ -8435,6 +8435,109 @@ paths:
               Since: cosmos-sdk 0.47
       tags:
         - Msg
+  /fiamma.zkpverify.Msg/SendTask:
+    post:
+      operationId: FiammaZkpverifyMsg_SendTask
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              creator:
+                type: string
+              proofSystem:
+                type: string
+              proof:
+                type: string
+                format: byte
+              publicInput:
+                type: string
+                format: byte
+              vk:
+                type: string
+                format: byte
+      tags:
+        - Msg
+  /fiamma.zkpverify.Msg/UpdateParams:
+    post:
+      summary: |-
+        UpdateParams defines a (governance) operation for updating the module
+        parameters. The authority defaults to the x/gov module account.
+      operationId: FiammaZkpverifyMsg_UpdateParams
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            description: >-
+              MsgUpdateParamsResponse defines the response structure for
+              executing a
+
+              MsgUpdateParams message.
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: body
+          description: MsgUpdateParams is the Msg/UpdateParams request type.
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              authority:
+                type: string
+                description: >-
+                  authority is the address that controls the module (defaults to
+                  x/gov unless
+
+                  overwritten).
+              params:
+                description: 'NOTE: All parameters must be supplied.'
+                type: object
+            description: MsgUpdateParams is the Msg/UpdateParams request type.
+      tags:
+        - Msg
   /fiamma/zkpverify/all_proof_types:
     get:
       summary: Queries a list of AllProofTypes items.
@@ -8515,18 +8618,8 @@ paths:
           schema:
             type: object
             properties:
-              ZkpVerify:
-                type: object
-                properties:
-                  creator:
-                    type: string
-                  proofId:
-                    type: string
-                  proofType:
-                    type: string
-                  proofStatus:
-                    type: string
-                    format: uint64
+              proofId:
+                type: string
               pagination:
                 type: object
                 properties:
@@ -8642,18 +8735,8 @@ paths:
           schema:
             type: object
             properties:
-              ZkpVerify:
-                type: object
-                properties:
-                  creator:
-                    type: string
-                  proofId:
-                    type: string
-                  proofType:
-                    type: string
-                  proofStatus:
-                    type: string
-                    format: uint64
+              proofId:
+                type: string
               pagination:
                 type: object
                 properties:
@@ -8759,114 +8842,6 @@ paths:
           type: boolean
       tags:
         - Query
-  /fiamma.zkpverify.Msg/SendTask:
-    post:
-      operationId: FiammaZkpverifyMsg_SendTask
-      responses:
-        '200':
-          description: A successful response.
-          schema:
-            type: object
-            properties:
-              proofCommitment:
-                type: string
-                format: byte
-              verifyResult:
-                type: string
-                format: uint64
-        default:
-          description: An unexpected error response.
-          schema:
-            type: object
-            properties:
-              code:
-                type: integer
-                format: int32
-              message:
-                type: string
-              details:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    '@type':
-                      type: string
-                  additionalProperties: {}
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            type: object
-            properties:
-              creator:
-                type: string
-              proofSystem:
-                type: string
-              proof:
-                type: string
-                format: byte
-              publicInput:
-                type: string
-                format: byte
-              vk:
-                type: string
-                format: byte
-      tags:
-        - Msg
-  /fiamma.zkpverify.Msg/UpdateParams:
-    post:
-      summary: |-
-        UpdateParams defines a (governance) operation for updating the module
-        parameters. The authority defaults to the x/gov module account.
-      operationId: FiammaZkpverifyMsg_UpdateParams
-      responses:
-        '200':
-          description: A successful response.
-          schema:
-            type: object
-            description: >-
-              MsgUpdateParamsResponse defines the response structure for
-              executing a
-
-              MsgUpdateParams message.
-        default:
-          description: An unexpected error response.
-          schema:
-            type: object
-            properties:
-              code:
-                type: integer
-                format: int32
-              message:
-                type: string
-              details:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    '@type':
-                      type: string
-                  additionalProperties: {}
-      parameters:
-        - name: body
-          description: MsgUpdateParams is the Msg/UpdateParams request type.
-          in: body
-          required: true
-          schema:
-            type: object
-            properties:
-              authority:
-                type: string
-                description: >-
-                  authority is the address that controls the module (defaults to
-                  x/gov unless overwritten).
-              params:
-                description: 'NOTE: All parameters must be supplied.'
-                type: object
-            description: MsgUpdateParams is the Msg/UpdateParams request type.
-      tags:
-        - Msg
   /ibc.applications.fee.v1.Msg/PayPacketFee:
     post:
       summary: >-
@@ -19504,6 +19479,46 @@ definitions:
           min_commission_rate is the chain-wide minimum commission rate that a
           validator can charge their delegators
     description: Params defines the parameters for the x/staking module.
+  fiamma.zkpverify.MsgSendTask:
+    type: object
+    properties:
+      creator:
+        type: string
+      proofSystem:
+        type: string
+      proof:
+        type: string
+        format: byte
+      publicInput:
+        type: string
+        format: byte
+      vk:
+        type: string
+        format: byte
+  fiamma.zkpverify.MsgSendTaskResponse:
+    type: object
+  fiamma.zkpverify.MsgUpdateParams:
+    type: object
+    properties:
+      authority:
+        type: string
+        description: >-
+          authority is the address that controls the module (defaults to x/gov
+          unless
+
+          overwritten).
+      params:
+        description: 'NOTE: All parameters must be supplied.'
+        type: object
+    description: MsgUpdateParams is the Msg/UpdateParams request type.
+  fiamma.zkpverify.MsgUpdateParamsResponse:
+    type: object
+    description: |-
+      MsgUpdateParamsResponse defines the response structure for executing a
+      MsgUpdateParams message.
+  fiamma.zkpverify.Params:
+    type: object
+    description: Params defines the parameters for the module.
   cosmos.base.query.v1beta1.PageRequest:
     type: object
     properties:
@@ -19581,9 +19596,6 @@ definitions:
                repeated Bar results = 1;
                PageResponse page = 2;
        }
-  fiamma.zkpverify.Params:
-    type: object
-    description: Params defines the parameters for the module.
   fiamma.zkpverify.QueryAllProofTypesResponse:
     type: object
     properties:
@@ -19601,18 +19613,8 @@ definitions:
   fiamma.zkpverify.QueryPendingProofByTypeResponse:
     type: object
     properties:
-      ZkpVerify:
-        type: object
-        properties:
-          creator:
-            type: string
-          proofId:
-            type: string
-          proofType:
-            type: string
-          proofStatus:
-            type: string
-            format: uint64
+      proofId:
+        type: string
       pagination:
         type: object
         properties:
@@ -19642,18 +19644,8 @@ definitions:
   fiamma.zkpverify.QueryPendingProofResponse:
     type: object
     properties:
-      ZkpVerify:
-        type: object
-        properties:
-          creator:
-            type: string
-          proofId:
-            type: string
-          proofType:
-            type: string
-          proofStatus:
-            type: string
-            format: uint64
+      proofId:
+        type: string
       pagination:
         type: object
         properties:
@@ -19680,60 +19672,6 @@ definitions:
                    repeated Bar results = 1;
                    PageResponse page = 2;
            }
-  fiamma.zkpverify.ZkpVerify:
-    type: object
-    properties:
-      creator:
-        type: string
-      proofId:
-        type: string
-      proofType:
-        type: string
-      proofStatus:
-        type: string
-        format: uint64
-  fiamma.zkpverify.MsgSendTask:
-    type: object
-    properties:
-      creator:
-        type: string
-      proofSystem:
-        type: string
-      proof:
-        type: string
-        format: byte
-      publicInput:
-        type: string
-        format: byte
-      vk:
-        type: string
-        format: byte
-  fiamma.zkpverify.MsgSendTaskResponse:
-    type: object
-    properties:
-      proofCommitment:
-        type: string
-        format: byte
-      verifyResult:
-        type: string
-        format: uint64
-  fiamma.zkpverify.MsgUpdateParams:
-    type: object
-    properties:
-      authority:
-        type: string
-        description: >-
-          authority is the address that controls the module (defaults to x/gov
-          unless overwritten).
-      params:
-        description: 'NOTE: All parameters must be supplied.'
-        type: object
-    description: MsgUpdateParams is the Msg/UpdateParams request type.
-  fiamma.zkpverify.MsgUpdateParamsResponse:
-    type: object
-    description: |-
-      MsgUpdateParamsResponse defines the response structure for executing a
-      MsgUpdateParams message.
   ibc.applications.fee.v1.Fee:
     type: object
     properties:

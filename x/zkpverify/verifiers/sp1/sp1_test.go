@@ -1,7 +1,7 @@
 package sp1_test
 
 import (
-	"fiamma/verifiers/sp1"
+	"fiamma/x/zkpverify/verifiers/sp1"
 	"os"
 	"testing"
 )
