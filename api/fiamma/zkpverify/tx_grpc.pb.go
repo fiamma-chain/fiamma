@@ -19,11 +19,8 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	Msg_UpdateParams_FullMethodName       = "/fiamma.zkpverify.Msg/UpdateParams"
-	Msg_SubmitGnarkPlonk_FullMethodName   = "/fiamma.zkpverify.Msg/SubmitGnarkPlonk"
-	Msg_VerifyProof_FullMethodName        = "/fiamma.zkpverify.Msg/VerifyProof"
-	Msg_SubmitSp1_FullMethodName          = "/fiamma.zkpverify.Msg/SubmitSp1"
-	Msg_SubmitGnarkGroth16_FullMethodName = "/fiamma.zkpverify.Msg/SubmitGnarkGroth16"
+	Msg_UpdateParams_FullMethodName = "/fiamma.zkpverify.Msg/UpdateParams"
+	Msg_SendTask_FullMethodName     = "/fiamma.zkpverify.Msg/SendTask"
 )
 
 // MsgClient is the client API for Msg service.
@@ -33,10 +30,7 @@ type MsgClient interface {
 	// UpdateParams defines a (governance) operation for updating the module
 	// parameters. The authority defaults to the x/gov module account.
 	UpdateParams(ctx context.Context, in *MsgUpdateParams, opts ...grpc.CallOption) (*MsgUpdateParamsResponse, error)
-	SubmitGnarkPlonk(ctx context.Context, in *MsgSubmitGnarkPlonk, opts ...grpc.CallOption) (*MsgSubmitGnarkPlonkResponse, error)
-	VerifyProof(ctx context.Context, in *MsgVerifyProof, opts ...grpc.CallOption) (*MsgVerifyProofResponse, error)
-	SubmitSp1(ctx context.Context, in *MsgSubmitSp1, opts ...grpc.CallOption) (*MsgSubmitSp1Response, error)
-	SubmitGnarkGroth16(ctx context.Context, in *MsgSubmitGnarkGroth16, opts ...grpc.CallOption) (*MsgSubmitGnarkGroth16Response, error)
+	SendTask(ctx context.Context, in *MsgSendTask, opts ...grpc.CallOption) (*MsgSendTaskResponse, error)
 }
 
 type msgClient struct {
@@ -56,36 +50,9 @@ func (c *msgClient) UpdateParams(ctx context.Context, in *MsgUpdateParams, opts 
 	return out, nil
 }
 
-func (c *msgClient) SubmitGnarkPlonk(ctx context.Context, in *MsgSubmitGnarkPlonk, opts ...grpc.CallOption) (*MsgSubmitGnarkPlonkResponse, error) {
-	out := new(MsgSubmitGnarkPlonkResponse)
-	err := c.cc.Invoke(ctx, Msg_SubmitGnarkPlonk_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *msgClient) VerifyProof(ctx context.Context, in *MsgVerifyProof, opts ...grpc.CallOption) (*MsgVerifyProofResponse, error) {
-	out := new(MsgVerifyProofResponse)
-	err := c.cc.Invoke(ctx, Msg_VerifyProof_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *msgClient) SubmitSp1(ctx context.Context, in *MsgSubmitSp1, opts ...grpc.CallOption) (*MsgSubmitSp1Response, error) {
-	out := new(MsgSubmitSp1Response)
-	err := c.cc.Invoke(ctx, Msg_SubmitSp1_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *msgClient) SubmitGnarkGroth16(ctx context.Context, in *MsgSubmitGnarkGroth16, opts ...grpc.CallOption) (*MsgSubmitGnarkGroth16Response, error) {
-	out := new(MsgSubmitGnarkGroth16Response)
-	err := c.cc.Invoke(ctx, Msg_SubmitGnarkGroth16_FullMethodName, in, out, opts...)
+func (c *msgClient) SendTask(ctx context.Context, in *MsgSendTask, opts ...grpc.CallOption) (*MsgSendTaskResponse, error) {
+	out := new(MsgSendTaskResponse)
+	err := c.cc.Invoke(ctx, Msg_SendTask_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -99,10 +66,7 @@ type MsgServer interface {
 	// UpdateParams defines a (governance) operation for updating the module
 	// parameters. The authority defaults to the x/gov module account.
 	UpdateParams(context.Context, *MsgUpdateParams) (*MsgUpdateParamsResponse, error)
-	SubmitGnarkPlonk(context.Context, *MsgSubmitGnarkPlonk) (*MsgSubmitGnarkPlonkResponse, error)
-	VerifyProof(context.Context, *MsgVerifyProof) (*MsgVerifyProofResponse, error)
-	SubmitSp1(context.Context, *MsgSubmitSp1) (*MsgSubmitSp1Response, error)
-	SubmitGnarkGroth16(context.Context, *MsgSubmitGnarkGroth16) (*MsgSubmitGnarkGroth16Response, error)
+	SendTask(context.Context, *MsgSendTask) (*MsgSendTaskResponse, error)
 	mustEmbedUnimplementedMsgServer()
 }
 
@@ -113,17 +77,8 @@ type UnimplementedMsgServer struct {
 func (UnimplementedMsgServer) UpdateParams(context.Context, *MsgUpdateParams) (*MsgUpdateParamsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateParams not implemented")
 }
-func (UnimplementedMsgServer) SubmitGnarkPlonk(context.Context, *MsgSubmitGnarkPlonk) (*MsgSubmitGnarkPlonkResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SubmitGnarkPlonk not implemented")
-}
-func (UnimplementedMsgServer) VerifyProof(context.Context, *MsgVerifyProof) (*MsgVerifyProofResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method VerifyProof not implemented")
-}
-func (UnimplementedMsgServer) SubmitSp1(context.Context, *MsgSubmitSp1) (*MsgSubmitSp1Response, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SubmitSp1 not implemented")
-}
-func (UnimplementedMsgServer) SubmitGnarkGroth16(context.Context, *MsgSubmitGnarkGroth16) (*MsgSubmitGnarkGroth16Response, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SubmitGnarkGroth16 not implemented")
+func (UnimplementedMsgServer) SendTask(context.Context, *MsgSendTask) (*MsgSendTaskResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SendTask not implemented")
 }
 func (UnimplementedMsgServer) mustEmbedUnimplementedMsgServer() {}
 
@@ -156,74 +111,20 @@ func _Msg_UpdateParams_Handler(srv interface{}, ctx context.Context, dec func(in
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Msg_SubmitGnarkPlonk_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(MsgSubmitGnarkPlonk)
+func _Msg_SendTask_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgSendTask)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(MsgServer).SubmitGnarkPlonk(ctx, in)
+		return srv.(MsgServer).SendTask(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Msg_SubmitGnarkPlonk_FullMethodName,
+		FullMethod: Msg_SendTask_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MsgServer).SubmitGnarkPlonk(ctx, req.(*MsgSubmitGnarkPlonk))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Msg_VerifyProof_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(MsgVerifyProof)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(MsgServer).VerifyProof(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Msg_VerifyProof_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MsgServer).VerifyProof(ctx, req.(*MsgVerifyProof))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Msg_SubmitSp1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(MsgSubmitSp1)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(MsgServer).SubmitSp1(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Msg_SubmitSp1_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MsgServer).SubmitSp1(ctx, req.(*MsgSubmitSp1))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Msg_SubmitGnarkGroth16_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(MsgSubmitGnarkGroth16)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(MsgServer).SubmitGnarkGroth16(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Msg_SubmitGnarkGroth16_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MsgServer).SubmitGnarkGroth16(ctx, req.(*MsgSubmitGnarkGroth16))
+		return srv.(MsgServer).SendTask(ctx, req.(*MsgSendTask))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -240,20 +141,8 @@ var Msg_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Msg_UpdateParams_Handler,
 		},
 		{
-			MethodName: "SubmitGnarkPlonk",
-			Handler:    _Msg_SubmitGnarkPlonk_Handler,
-		},
-		{
-			MethodName: "VerifyProof",
-			Handler:    _Msg_VerifyProof_Handler,
-		},
-		{
-			MethodName: "SubmitSp1",
-			Handler:    _Msg_SubmitSp1_Handler,
-		},
-		{
-			MethodName: "SubmitGnarkGroth16",
-			Handler:    _Msg_SubmitGnarkGroth16_Handler,
+			MethodName: "SendTask",
+			Handler:    _Msg_SendTask_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

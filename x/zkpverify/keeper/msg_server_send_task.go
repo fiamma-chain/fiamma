@@ -8,11 +8,11 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
-func (k msgServer) VerifyProof(goCtx context.Context, msg *types.MsgVerifyProof) (*types.MsgVerifyProofResponse, error) {
+func (k msgServer) SendTask(goCtx context.Context, msg *types.MsgSendTask) (*types.MsgSendTaskResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
 	// TODO: Handling the message
 	_ = ctx
 
-	return &types.MsgVerifyProofResponse{}, nil
+	return &types.MsgSendTaskResponse{}, nil
 }

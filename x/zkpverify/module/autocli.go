@@ -50,28 +50,10 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					Skip:      true, // skipped because authority gated
 				},
 				{
-					RpcMethod:      "SubmitGnarkPlonk",
-					Use:            "submit-gnark-plonk [proof-id] [proof] [public-inputs] [verifying-key]",
-					Short:          "Send a submit-gnark-plonk tx",
-					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "proof"}, {ProtoField: "publicInputs"}, {ProtoField: "verifyingKey"}},
-				},
-				{
-					RpcMethod:      "VerifyProof",
-					Use:            "verify-proof [proof-id] [result]",
-					Short:          "Send a verify-proof tx",
-					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "proofId"}, {ProtoField: "result"}},
-				},
-				{
-					RpcMethod:      "SubmitSp1",
-					Use:            "submit-sp1 [proof-id] [proof] [elf]",
-					Short:          "Send a submit-sp1 tx",
-					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "proof"}, {ProtoField: "elf"}},
-				},
-				{
-					RpcMethod:      "SubmitGnarkGroth16",
-					Use:            "submit-gnark-groth16 [proof] [public-inputs] [verifying-key]",
-					Short:          "Send a submit-gnark-groth16 tx",
-					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "proof"}, {ProtoField: "publicInputs"}, {ProtoField: "verifyingKey"}},
+					RpcMethod:      "SendTask",
+					Use:            "send-task [proof-system] [proof] [public-input] [vk]",
+					Short:          "Send a send-task tx",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "proofSystem"}, {ProtoField: "proof"}, {ProtoField: "publicInput"}, {ProtoField: "vk"}},
 				},
 				// this line is used by ignite scaffolding # autocli/tx
 			},
