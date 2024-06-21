@@ -2,6 +2,7 @@ package nubit
 
 import (
 	"context"
+	"encoding/hex"
 
 	"cosmossdk.io/log"
 	"github.com/rollkit/go-da"
@@ -14,10 +15,10 @@ type NubitDA struct {
 	logger log.Logger
 }
 
-func NewNubitDA(logger log.Logger) (*NubitDA, error) {
-
+func NewNubitDA() (*NubitDA, error) {
+	logger := log.NewNopLogger()
 	var config Config
-	err := config.GetConfig("../../nubit_config.json", logger)
+	err := config.GetConfig("./nubit_config.json", logger)
 	if err != nil {
 		logger.Error("⚙️     Nubit cannot get config:%w", err)
 		return nil, err
@@ -28,10 +29,13 @@ func NewNubitDA(logger log.Logger) (*NubitDA, error) {
 		logger.Error("⚙️     Nubit cannot create client:%w", err)
 		return nil, err
 	}
-
-	logger.Info("⚙️     Nubit Namespace : %s ", config.Namespace)
+	namespace, err := hex.DecodeString("00000000000000000000000000000000000000000000006669616d6d61")
+	if err != nil {
+		logger.Error("⚙️     Nubit cannot decode namespace:%w", err)
+		return nil, err
+	}
 	return &NubitDA{
-		ns:     []byte(config.Namespace),
+		ns:     namespace,
 		client: cn,
 		logger: logger,
 	}, nil

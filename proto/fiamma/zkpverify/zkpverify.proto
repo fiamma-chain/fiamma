@@ -3,10 +3,16 @@ package fiamma.zkpverify;
 
 option go_package = "fiamma/x/zkpverify/types";
 
-message ZkpVerify {
-  
-  string creator = 1; 
-  string proofId = 2; 
-  string proofType = 3; 
-  uint64 proofStatus = 4; 
+message VerifyData {
+
+  uint64 proofSystem = 1;
+  bytes proof = 2;
+  bytes publicInput = 3;
+  bytes vk = 4;
+}
+
+message VerifyResult {
+  string VerifyId = 1;
+  string dataCommitment = 2;
+  bool result = 3;
 }

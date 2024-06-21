@@ -9,11 +9,11 @@ import (
 	"fiamma/x/zkpverify/types"
 )
 
-func (k Keeper) SubmitVerifyDataToDA(ctx context.Context, verifyData types.VerificationData) ([32]byte, [][]byte, error) {
+func (k Keeper) SubmitVerifyDataToDA(ctx context.Context, verifyData types.VerifyData) ([32]byte, [][]byte, error) {
 	// Create a new NubitDA instance
 	// This instance will be used to submit the proof data to the Nubit chain
 	// The NubitDA instance is created with the logger instance
-	nubitDA, err := nubit.NewNubitDA(k.logger)
+	nubitDA, err := nubit.NewNubitDA()
 	if err != nil {
 		return [32]byte{}, nil, err
 	}
@@ -27,18 +27,18 @@ func (k Keeper) SubmitVerifyDataToDA(ctx context.Context, verifyData types.Verif
 	if err != nil {
 		return [32]byte{}, nil, err
 	}
-	verifyDataCommitment := sha256.Sum256(byteArray)
+	verifyId := sha256.Sum256(byteArray)
 	// Append the proof data to the proof data array
 	// This will add the proof data to the proof data array
 	verifySubmitData = append(verifySubmitData, byteArray)
 
 	// Submit the proof data to the Nubit chain
-	proof_id, err := nubitDA.SubmitBlobs(ctx, verifySubmitData)
+	dataCommitments, err := nubitDA.SubmitBlobs(ctx, verifySubmitData)
 	if err != nil {
 		return [32]byte{}, nil, err
 	}
 
-	// Return the proof id
+	// Return the proof id and data commitment
 	// This will return the proof id that is generated when the proof data is submitted to the Nubit chain
-	return verifyDataCommitment, proof_id, nil
+	return verifyId, dataCommitments, nil
 }
