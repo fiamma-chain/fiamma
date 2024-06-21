@@ -11,7 +11,7 @@ import (
 	simtypes "github.com/cosmos/cosmos-sdk/types/simulation"
 )
 
-func SimulateMsgSubmitGnarkGroth16(
+func SimulateMsgSendTask(
 	ak types.AccountKeeper,
 	bk types.BankKeeper,
 	k keeper.Keeper,
@@ -19,12 +19,12 @@ func SimulateMsgSubmitGnarkGroth16(
 	return func(r *rand.Rand, app *baseapp.BaseApp, ctx sdk.Context, accs []simtypes.Account, chainID string,
 	) (simtypes.OperationMsg, []simtypes.FutureOperation, error) {
 		simAccount, _ := simtypes.RandomAcc(r, accs)
-		msg := &types.MsgSubmitGnarkGroth16{
+		msg := &types.MsgSendTask{
 			Creator: simAccount.Address.String(),
 		}
 
-		// TODO: Handling the SubmitGnarkGroth16 simulation
+		// TODO: Handling the SendTask simulation
 
-		return simtypes.NoOpMsg(types.ModuleName, sdk.MsgTypeURL(msg), "SubmitGnarkGroth16 simulation not implemented"), nil, nil
+		return simtypes.NoOpMsg(types.ModuleName, sdk.MsgTypeURL(msg), "SendTask simulation not implemented"), nil, nil
 	}
 }
