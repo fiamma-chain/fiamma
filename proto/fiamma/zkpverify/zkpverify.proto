@@ -12,7 +12,7 @@ message VerifyData {
 }
 
 message VerifyResult {
-  string VerifyId = 1;
+  string verifyId = 1;
   string dataCommitment = 2;
   bool result = 3;
 }
