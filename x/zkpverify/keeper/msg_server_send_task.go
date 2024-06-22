@@ -47,7 +47,7 @@ func (k msgServer) SendTask(goCtx context.Context, msg *types.MsgSendTask) (*typ
 		Result:         result,
 	}
 
-	k.SetVerifyData(ctx, verifyId[:], verifyResult)
+	k.SetVerifyResult(ctx, verifyId[:], verifyResult)
 
 	event := sdk.NewEvent("verifyFinished",
 		sdk.NewAttribute("verifyId", verifyIdStr),

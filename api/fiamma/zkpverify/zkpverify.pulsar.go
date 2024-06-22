@@ -616,7 +616,7 @@ func (x *fastReflection_VerifyData) ProtoMethods() *protoiface.Methods {
 
 var (
 	md_VerifyResult                protoreflect.MessageDescriptor
-	fd_VerifyResult_VerifyId       protoreflect.FieldDescriptor
+	fd_VerifyResult_verifyId       protoreflect.FieldDescriptor
 	fd_VerifyResult_dataCommitment protoreflect.FieldDescriptor
 	fd_VerifyResult_result         protoreflect.FieldDescriptor
 )
@@ -624,7 +624,7 @@ var (
 func init() {
 	file_fiamma_zkpverify_zkpverify_proto_init()
 	md_VerifyResult = File_fiamma_zkpverify_zkpverify_proto.Messages().ByName("VerifyResult")
-	fd_VerifyResult_VerifyId = md_VerifyResult.Fields().ByName("VerifyId")
+	fd_VerifyResult_verifyId = md_VerifyResult.Fields().ByName("verifyId")
 	fd_VerifyResult_dataCommitment = md_VerifyResult.Fields().ByName("dataCommitment")
 	fd_VerifyResult_result = md_VerifyResult.Fields().ByName("result")
 }
@@ -696,7 +696,7 @@ func (x *fastReflection_VerifyResult) Interface() protoreflect.ProtoMessage {
 func (x *fastReflection_VerifyResult) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
 	if x.VerifyId != "" {
 		value := protoreflect.ValueOfString(x.VerifyId)
-		if !f(fd_VerifyResult_VerifyId, value) {
+		if !f(fd_VerifyResult_verifyId, value) {
 			return
 		}
 	}
@@ -727,7 +727,7 @@ func (x *fastReflection_VerifyResult) Range(f func(protoreflect.FieldDescriptor,
 // a repeated field is populated if it is non-empty.
 func (x *fastReflection_VerifyResult) Has(fd protoreflect.FieldDescriptor) bool {
 	switch fd.FullName() {
-	case "fiamma.zkpverify.VerifyResult.VerifyId":
+	case "fiamma.zkpverify.VerifyResult.verifyId":
 		return x.VerifyId != ""
 	case "fiamma.zkpverify.VerifyResult.dataCommitment":
 		return x.DataCommitment != ""
@@ -749,7 +749,7 @@ func (x *fastReflection_VerifyResult) Has(fd protoreflect.FieldDescriptor) bool 
 // Clear is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_VerifyResult) Clear(fd protoreflect.FieldDescriptor) {
 	switch fd.FullName() {
-	case "fiamma.zkpverify.VerifyResult.VerifyId":
+	case "fiamma.zkpverify.VerifyResult.verifyId":
 		x.VerifyId = ""
 	case "fiamma.zkpverify.VerifyResult.dataCommitment":
 		x.DataCommitment = ""
@@ -771,7 +771,7 @@ func (x *fastReflection_VerifyResult) Clear(fd protoreflect.FieldDescriptor) {
 // of the value; to obtain a mutable reference, use Mutable.
 func (x *fastReflection_VerifyResult) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
 	switch descriptor.FullName() {
-	case "fiamma.zkpverify.VerifyResult.VerifyId":
+	case "fiamma.zkpverify.VerifyResult.verifyId":
 		value := x.VerifyId
 		return protoreflect.ValueOfString(value)
 	case "fiamma.zkpverify.VerifyResult.dataCommitment":
@@ -800,7 +800,7 @@ func (x *fastReflection_VerifyResult) Get(descriptor protoreflect.FieldDescripto
 // Set is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_VerifyResult) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
 	switch fd.FullName() {
-	case "fiamma.zkpverify.VerifyResult.VerifyId":
+	case "fiamma.zkpverify.VerifyResult.verifyId":
 		x.VerifyId = value.Interface().(string)
 	case "fiamma.zkpverify.VerifyResult.dataCommitment":
 		x.DataCommitment = value.Interface().(string)
@@ -826,8 +826,8 @@ func (x *fastReflection_VerifyResult) Set(fd protoreflect.FieldDescriptor, value
 // Mutable is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_VerifyResult) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "fiamma.zkpverify.VerifyResult.VerifyId":
-		panic(fmt.Errorf("field VerifyId of message fiamma.zkpverify.VerifyResult is not mutable"))
+	case "fiamma.zkpverify.VerifyResult.verifyId":
+		panic(fmt.Errorf("field verifyId of message fiamma.zkpverify.VerifyResult is not mutable"))
 	case "fiamma.zkpverify.VerifyResult.dataCommitment":
 		panic(fmt.Errorf("field dataCommitment of message fiamma.zkpverify.VerifyResult is not mutable"))
 	case "fiamma.zkpverify.VerifyResult.result":
@@ -845,7 +845,7 @@ func (x *fastReflection_VerifyResult) Mutable(fd protoreflect.FieldDescriptor) p
 // For lists, maps, and messages, this returns a new, empty, mutable value.
 func (x *fastReflection_VerifyResult) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "fiamma.zkpverify.VerifyResult.VerifyId":
+	case "fiamma.zkpverify.VerifyResult.verifyId":
 		return protoreflect.ValueOfString("")
 	case "fiamma.zkpverify.VerifyResult.dataCommitment":
 		return protoreflect.ValueOfString("")
@@ -1229,7 +1229,7 @@ type VerifyResult struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	VerifyId       string `protobuf:"bytes,1,opt,name=VerifyId,proto3" json:"VerifyId,omitempty"`
+	VerifyId       string `protobuf:"bytes,1,opt,name=verifyId,proto3" json:"verifyId,omitempty"`
 	DataCommitment string `protobuf:"bytes,2,opt,name=dataCommitment,proto3" json:"dataCommitment,omitempty"`
 	Result         bool   `protobuf:"varint,3,opt,name=result,proto3" json:"result,omitempty"`
 }
@@ -1290,8 +1290,8 @@ var file_fiamma_zkpverify_zkpverify_proto_rawDesc = []byte{
 	0x0b, 0x70, 0x75, 0x62, 0x6c, 0x69, 0x63, 0x49, 0x6e, 0x70, 0x75, 0x74, 0x12, 0x0e, 0x0a, 0x02,
 	0x76, 0x6b, 0x18, 0x04, 0x20, 0x01, 0x28, 0x0c, 0x52, 0x02, 0x76, 0x6b, 0x22, 0x6a, 0x0a, 0x0c,
 	0x56, 0x65, 0x72, 0x69, 0x66, 0x79, 0x52, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x12, 0x1a, 0x0a, 0x08,
-	0x56, 0x65, 0x72, 0x69, 0x66, 0x79, 0x49, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08,
-	0x56, 0x65, 0x72, 0x69, 0x66, 0x79, 0x49, 0x64, 0x12, 0x26, 0x0a, 0x0e, 0x64, 0x61, 0x74, 0x61,
+	0x76, 0x65, 0x72, 0x69, 0x66, 0x79, 0x49, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08,
+	0x76, 0x65, 0x72, 0x69, 0x66, 0x79, 0x49, 0x64, 0x12, 0x26, 0x0a, 0x0e, 0x64, 0x61, 0x74, 0x61,
 	0x43, 0x6f, 0x6d, 0x6d, 0x69, 0x74, 0x6d, 0x65, 0x6e, 0x74, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09,
 	0x52, 0x0e, 0x64, 0x61, 0x74, 0x61, 0x43, 0x6f, 0x6d, 0x6d, 0x69, 0x74, 0x6d, 0x65, 0x6e, 0x74,
 	0x12, 0x16, 0x0a, 0x06, 0x72, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x18, 0x03, 0x20, 0x01, 0x28, 0x08,
