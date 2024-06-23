@@ -30,6 +30,7 @@ type MsgClient interface {
 	// UpdateParams defines a (governance) operation for updating the module
 	// parameters. The authority defaults to the x/gov module account.
 	UpdateParams(ctx context.Context, in *MsgUpdateParams, opts ...grpc.CallOption) (*MsgUpdateParamsResponse, error)
+	// SendTask defines a (zkpverify) operation for verifying a proof.
 	SendTask(ctx context.Context, in *MsgSendTask, opts ...grpc.CallOption) (*MsgSendTaskResponse, error)
 }
 
@@ -66,6 +67,7 @@ type MsgServer interface {
 	// UpdateParams defines a (governance) operation for updating the module
 	// parameters. The authority defaults to the x/gov module account.
 	UpdateParams(context.Context, *MsgUpdateParams) (*MsgUpdateParamsResponse, error)
+	// SendTask defines a (zkpverify) operation for verifying a proof.
 	SendTask(context.Context, *MsgSendTask) (*MsgSendTaskResponse, error)
 	mustEmbedUnimplementedMsgServer()
 }

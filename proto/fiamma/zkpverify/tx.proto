@@ -7,7 +7,6 @@ import "cosmos/msg/v1/msg.proto";
 import "cosmos_proto/cosmos.proto";
 import "gogoproto/gogo.proto";
 import "fiamma/zkpverify/params.proto";
-import "fiamma/zkpverify/zkpverify.proto";
 
 option go_package = "fiamma/x/zkpverify/types";
 
@@ -18,6 +17,8 @@ service Msg {
   // UpdateParams defines a (governance) operation for updating the module
   // parameters. The authority defaults to the x/gov module account.
   rpc UpdateParams(MsgUpdateParams) returns (MsgUpdateParamsResponse);
+
+  // SendTask defines a (zkpverify) operation for verifying a proof.
   rpc SendTask(MsgSendTask) returns (MsgSendTaskResponse);
 }
 // MsgUpdateParams is the Msg/UpdateParams request type.
@@ -40,13 +41,15 @@ message MsgUpdateParams {
 // MsgUpdateParams message.
 message MsgUpdateParamsResponse {}
 
+// MsgSendTask is the proof verify verification request type.
 message MsgSendTask {
   option (cosmos.msg.v1.signer) = "creator";
   string creator = 1;
-  string proofSystem = 2;
+  string proof_system = 2;
   bytes proof = 3;
-  bytes publicInput = 4;
+  bytes public_input = 4;
   bytes vk = 5;
 }
 
+// MsgSendTaskResponse defines the response structure for executing MsgSendTask
 message MsgSendTaskResponse {}

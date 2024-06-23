@@ -7,7 +7,6 @@ import "gogoproto/gogo.proto";
 import "google/api/annotations.proto";
 import "cosmos/base/query/v1beta1/pagination.proto";
 import "fiamma/zkpverify/params.proto";
-import "fiamma/zkpverify/zkpverify.proto";
 
 option go_package = "fiamma/x/zkpverify/types";
 
@@ -48,24 +47,36 @@ message QueryParamsResponse {
       [ (gogoproto.nullable) = false, (amino.dont_omitempty) = true ];
 }
 
+// QueryPendingProofRequest is request type for the Query/PendingProof RPC
+// method.
 message QueryPendingProofRequest {
   cosmos.base.query.v1beta1.PageRequest pagination = 1;
 }
 
+// QueryPendingProofResponse is response type for the Query/PendingProof RPC
+// method.
 message QueryPendingProofResponse {
-  string proofId = 1;
+  string proof_id = 1;
   cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }
 
+// QueryPendingProofByTypeRequest is request type for the
+// Query/PendingProofByType RPC method.
 message QueryPendingProofByTypeRequest {
   cosmos.base.query.v1beta1.PageRequest pagination = 1;
 }
 
+// QueryPendingProofByTypeResponse is response type for the
+// Query/PendingProofByType RPC method.
 message QueryPendingProofByTypeResponse {
-  string proofId = 1;
+  string proof_id = 1;
   cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }
 
+// QueryAllProofTypesRequest is request type for the Query/AllProofTypes RPC
+// method.
 message QueryAllProofTypesRequest {}
 
-message QueryAllProofTypesResponse { repeated string proofType = 1; }
+// QueryAllProofTypesResponse is response type for the Query/AllProofTypes RPC
+// method.
+message QueryAllProofTypesResponse { repeated string proof_system = 1; }
