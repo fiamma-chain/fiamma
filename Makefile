@@ -56,12 +56,41 @@ format: install-misspell
 
 BUILD_TARGETS := build install
 
-build: BUILD_ARGS=-o $(BUILDDIR)/
-build-linux:
+build-sp1-ffi-macos:
+	@cd ./x/zkpverify/verifiers/sp1/lib \
+		&& cargo build --release \
+		&& cp target/release/libsp1_verifier_ffi.dylib ./libsp1_verifier.dylib \
+		&& cp target/release/libsp1_verifier_ffi.a ./libsp1_verifier.a
+
+build-sp1-ffi-linux:
+	@cd ./x/zkpverify/verifiers/sp1/lib \
+		&& cargo build --release \
+		&& cp target/release/libsp1_verifier_ffi.so ./libsp1_verifier.so \
+		&& cp target/release/libsp1_verifier_ffi.a ./libsp1_verifier.a
+
+ifeq ($(shell uname), Darwin)
+    build-sp1-ffi: build-sp1-ffi-macos
+else
+    build-sp1-ffi: build-sp1-ffi-linux
+endif
+
+build: build-sp1-ffi go-build
+
+install: build-sp1-ffi go-install
+
+go-build: $(BUILDDIR)/ go.sum
+	go build -mod=readonly -o $(BUILDDIR)/ ./cmd/fiammad
+
+go-install: $(BUILDDIR)/ go.sum
+	go install -mod=readonly ./cmd/fiammad
+
+build-linux: build-sp1-ffi-linux go-build-linux
+
+go-build-linux: build-sp1-ffi-linux go-build-linux
 	GOOS=linux GOARCH=$(if $(findstring aarch64,$(shell uname -m)) || $(findstring arm64,$(shell uname -m)),arm64,amd64) LEDGER_ENABLED=false $(MAKE) build
 
-$(BUILD_TARGETS): go.sum $(BUILDDIR)/
-	go $@ -mod=readonly $(BUILD_FLAGS) $(BUILD_ARGS) ./cmd/fiammad
+# $(BUILD_TARGETS): go.sum $(BUILDDIR)/
+# 	go $@ -mod=readonly $(BUILD_FLAGS) $(BUILD_ARGS) ./cmd/fiammad
 
 $(BUILDDIR)/:
 	mkdir -p $(BUILDDIR)/
@@ -108,3 +137,8 @@ test:
 ###############################################################################
 ###                                Docker                                   ###
 ###############################################################################
+
+build-docker:
+	$(MAKE) -C contrib/images fiammad
+
+.PHONY: build-docker
