@@ -3,16 +3,17 @@ package fiamma.zkpverify;
 
 option go_package = "fiamma/x/zkpverify/types";
 
+// VerifyData is the data structure for the proof verification request
 message VerifyData {
-
-  uint64 proofSystem = 1;
+  uint64 proof_system = 1;
   bytes proof = 2;
-  bytes publicInput = 3;
+  bytes public_input = 3;
   bytes vk = 4;
 }
 
+// VerifyResult is the data structure for the proof verification result
 message VerifyResult {
-  string verifyId = 1;
-  string dataCommitment = 2;
+  string verify_id = 1;
+  string data_commitment = 2;
   bool result = 3;
 }
