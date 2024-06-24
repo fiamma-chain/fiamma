@@ -2,6 +2,7 @@ package keeper
 
 import (
 	"bytes"
+
 	"fiamma/x/zkpverify/types"
 	"fiamma/x/zkpverify/verifiers/sp1"
 

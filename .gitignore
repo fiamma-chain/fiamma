@@ -8,3 +8,26 @@ release/
 *.log
 *.ign
 nubit_config.json
+
+
+build
+**/*/node_modules
+
+
+# User-specific stuff
+.idea/**/
+
+
+### macOS ###
+# General
+.DS_Store
+.AppleDouble
+.LSOverride
+
+### vscode ###
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
