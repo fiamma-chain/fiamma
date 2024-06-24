@@ -1,9 +1,10 @@
 package sp1_test
 
 import (
-	"fiamma/x/zkpverify/verifiers/sp1"
 	"os"
 	"testing"
+
+	"fiamma/x/zkpverify/verifiers/sp1"
 )
 
 const MaxProofSize = 2 * 1024 * 1024

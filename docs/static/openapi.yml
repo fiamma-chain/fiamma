@@ -8445,10 +8445,15 @@ paths:
           schema:
             type: object
             properties:
-              proofType:
+              proof_system:
                 type: array
                 items:
                   type: string
+            description: >-
+              QueryAllProofTypesResponse is response type for the
+              Query/AllProofTypes RPC
+
+              method.
         default:
           description: An unexpected error response.
           schema:
@@ -8515,7 +8520,7 @@ paths:
           schema:
             type: object
             properties:
-              proofId:
+              proof_id:
                 type: string
               pagination:
                 type: object
@@ -8545,6 +8550,11 @@ paths:
                            repeated Bar results = 1;
                            PageResponse page = 2;
                    }
+            description: >-
+              QueryPendingProofResponse is response type for the
+              Query/PendingProof RPC
+
+              method.
         default:
           description: An unexpected error response.
           schema:
@@ -8632,7 +8642,7 @@ paths:
           schema:
             type: object
             properties:
-              proofId:
+              proof_id:
                 type: string
               pagination:
                 type: object
@@ -8662,6 +8672,9 @@ paths:
                            repeated Bar results = 1;
                            PageResponse page = 2;
                    }
+            description: |-
+              QueryPendingProofByTypeResponse is response type for the
+              Query/PendingProofByType RPC method.
         default:
           description: An unexpected error response.
           schema:
@@ -8741,12 +8754,16 @@ paths:
         - Query
   /fiamma.zkpverify.Msg/SendTask:
     post:
+      summary: SendTask defines a (zkpverify) operation for verifying a proof.
       operationId: FiammaZkpverifyMsg_SendTask
       responses:
         '200':
           description: A successful response.
           schema:
             type: object
+            title: >-
+              MsgSendTaskResponse defines the response structure for executing
+              MsgSendTask
         default:
           description: An unexpected error response.
           schema:
@@ -8767,6 +8784,7 @@ paths:
                   additionalProperties: {}
       parameters:
         - name: body
+          description: MsgSendTask is the proof verify verification request type.
           in: body
           required: true
           schema:
@@ -8774,17 +8792,18 @@ paths:
             properties:
               creator:
                 type: string
-              proofSystem:
+              proof_system:
                 type: string
               proof:
                 type: string
                 format: byte
-              publicInput:
+              public_input:
                 type: string
                 format: byte
               vk:
                 type: string
                 format: byte
+            description: MsgSendTask is the proof verify verification request type.
       tags:
         - Msg
   /fiamma.zkpverify.Msg/UpdateParams:
@@ -19562,10 +19581,15 @@ definitions:
   fiamma.zkpverify.QueryAllProofTypesResponse:
     type: object
     properties:
-      proofType:
+      proof_system:
         type: array
         items:
           type: string
+    description: >-
+      QueryAllProofTypesResponse is response type for the Query/AllProofTypes
+      RPC
+
+      method.
   fiamma.zkpverify.QueryParamsResponse:
     type: object
     properties:
@@ -19576,7 +19600,7 @@ definitions:
   fiamma.zkpverify.QueryPendingProofByTypeResponse:
     type: object
     properties:
-      proofId:
+      proof_id:
         type: string
       pagination:
         type: object
@@ -19604,10 +19628,13 @@ definitions:
                    repeated Bar results = 1;
                    PageResponse page = 2;
            }
+    description: |-
+      QueryPendingProofByTypeResponse is response type for the
+      Query/PendingProofByType RPC method.
   fiamma.zkpverify.QueryPendingProofResponse:
     type: object
     properties:
-      proofId:
+      proof_id:
         type: string
       pagination:
         type: object
@@ -19635,24 +19662,31 @@ definitions:
                    repeated Bar results = 1;
                    PageResponse page = 2;
            }
+    description: |-
+      QueryPendingProofResponse is response type for the Query/PendingProof RPC
+      method.
   fiamma.zkpverify.MsgSendTask:
     type: object
     properties:
       creator:
         type: string
-      proofSystem:
+      proof_system:
         type: string
       proof:
         type: string
         format: byte
-      publicInput:
+      public_input:
         type: string
         format: byte
       vk:
         type: string
         format: byte
+    description: MsgSendTask is the proof verify verification request type.
   fiamma.zkpverify.MsgSendTaskResponse:
     type: object
+    title: >-
+      MsgSendTaskResponse defines the response structure for executing
+      MsgSendTask
   fiamma.zkpverify.MsgUpdateParams:
     type: object
     properties:

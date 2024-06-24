@@ -1,8 +1,9 @@
 package keeper_test
 
 import (
-	keepertest "fiamma/testutil/keeper"
 	"testing"
+
+	keepertest "fiamma/testutil/keeper"
 
 	"github.com/stretchr/testify/require"
 
