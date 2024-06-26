@@ -7,7 +7,6 @@ release/
 *.dot
 *.log
 *.ign
-nubit_config.json
 
 
 build

@@ -26,3 +26,5 @@ validators:
 build:
   main: cmd/fiammad
 
+ldflags:
+  - "-r x/zkpverify/verifiers/sp1/lib"

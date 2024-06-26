@@ -59,14 +59,12 @@ BUILD_TARGETS := build install
 build-sp1-ffi-macos:
 	@cd ./x/zkpverify/verifiers/sp1/lib \
 		&& cargo build --release \
-		&& cp target/release/libsp1_verifier_ffi.dylib ./libsp1_verifier.dylib \
-		&& cp target/release/libsp1_verifier_ffi.a ./libsp1_verifier.a
+		&& cp target/release/libsp1_verifier_ffi.dylib ./libsp1_verifier.dylib 
 
 build-sp1-ffi-linux:
 	@cd ./x/zkpverify/verifiers/sp1/lib \
 		&& cargo build --release \
-		&& cp target/release/libsp1_verifier_ffi.so ./libsp1_verifier.so \
-		&& cp target/release/libsp1_verifier_ffi.a ./libsp1_verifier.a
+		&& cp target/release/libsp1_verifier_ffi.so ./libsp1_verifier.so 
 
 ifeq ($(shell uname), Darwin)
     build-sp1-ffi: build-sp1-ffi-macos

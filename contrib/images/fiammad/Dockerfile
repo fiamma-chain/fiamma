@@ -12,20 +12,23 @@ ARG LEDGER_ENABLED="false"
 ARG COSMOS_BUILD_OPTIONS=""
 
 # Install cli tools for building and final image
-RUN apt-get update && apt-get install -y make git bash gcc curl jq pkg-config libssl-dev 
+RUN apt-get update && apt-get install -y make git bash gcc curl jq pkg-config openssl libssl-dev 
 
 # Install Rust
 RUN curl https://sh.rustup.rs -sSf | bash -s -- -y 
     
 ENV PATH="/root/.cargo/bin:${PATH}"
 
+USER root
+
 # Build
-WORKDIR /go/src/github.com/fiamma-network/fiamma
+WORKDIR /root/fiamma
+
 # First cache dependencies
-COPY go.mod go.sum /go/src/github.com/fiamma-network/fiamma/
+COPY go.mod go.sum .
 RUN go mod download
 # Then copy everything else
-COPY ./ /go/src/github.com/fiamma-network/fiamma/
+COPY . .
 # If version is set, then checkout this version
 RUN if [ -n "${VERSION}" ]; then \
         git checkout -f ${VERSION}; \
@@ -38,17 +41,27 @@ RUN LEDGER_ENABLED=$LEDGER_ENABLED \
     make build
 
 FROM debian:bookworm-slim AS run
-# Create a user
-RUN addgroup --gid 1137 --system fiamma && adduser --uid 1137 --gid 1137 --system --home /home/fiamma fiamma
-RUN apt-get update && apt-get install -y bash curl jq wget pkg-config libssl-dev
+
+RUN apt-get update && apt-get install -y bash curl jq wget pkg-config openssl libssl-dev
 
 # Label should match your github repo
 LABEL org.opencontainers.image.source="https://github.com/fiamma-network/fiammad:${VERSION}"
 
-COPY --from=build-env /go/src/github.com/fiamma-network/fiamma/build/fiammad /bin/fiammad
+# Install libraries
+# Cosmwasm - Download correct libwasmvm version
+COPY --from=build-env /root/fiamma/go.mod /tmp
+RUN WASMVM_VERSION=$(grep github.com/CosmWasm/wasmvm /tmp/go.mod | cut -d' ' -f2) && \
+    wget https://github.com/CosmWasm/wasmvm/releases/download/$WASMVM_VERSION/libwasmvm.$(uname -m).so \
+        -O /lib/libwasmvm.$(uname -m).so && \
+    # verify checksum
+    wget https://github.com/CosmWasm/wasmvm/releases/download/$WASMVM_VERSION/checksums.txt -O /tmp/checksums.txt && \
+    sha256sum /lib/libwasmvm.$(uname -m).so | grep $(cat /tmp/checksums.txt | grep libwasmvm.$(uname -m) | cut -d ' ' -f 1)
+RUN rm -f /tmp/go.mod
 
-# Set home directory and user
-WORKDIR /home/fiamma
-RUN chown -R fiamma /home/fiamma
-RUN chmod g+s /home/fiamma
-USER fiamma
+COPY --from=build-env /root/fiamma/build/fiammad /bin/fiammad
+
+COPY --from=build-env /root/fiamma/x/zkpverify/verifiers/sp1/lib/libsp1_verifier.so \
+    /root/fiamma/x/zkpverify/verifiers/sp1/lib/libsp1_verifier.so
+
+ENTRYPOINT [ "fiammad" ]
+
