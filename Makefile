@@ -86,7 +86,7 @@ go-install: $(BUILDDIR)/ go.sum
 
 build-linux: build-sp1-ffi-linux go-build-linux
 
-go-build-linux: build-sp1-ffi-linux go-build-linux
+go-build-linux: 
 	GOOS=linux GOARCH=$(if $(findstring aarch64,$(shell uname -m)) || $(findstring arm64,$(shell uname -m)),arm64,amd64) LEDGER_ENABLED=false $(MAKE) build
 
 # $(BUILD_TARGETS): go.sum $(BUILDDIR)/
