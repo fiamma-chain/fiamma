@@ -24,7 +24,7 @@ node_ids=()
 
 for node in "$@"; do
     echo "Initializing $node..."
-    docker run --rm -v $(pwd)/testnet-nodes/$node:/root/.fiamma -it fiammachain/fiammad init fiamma_$node --chain-id $CHAIN_ID
+    docker run --rm -v $(pwd)/testnet-nodes/$node:/root/.fiamma -it fiammachain/fiammad init fiamma_$node --chain-id $CHAIN_ID  > /dev/null
     
     docker run --rm -it -v $(pwd)/testnet-nodes/$node:/root/.fiamma --entrypoint sed fiammachain/fiammad -i 's/"stake"/"'$token'"/g' /root/.fiamma/config/genesis.json 
     docker run --rm -v $(pwd)/testnet-nodes/$node:/root/.fiamma -it fiammachain/fiammad config set app minimum-gas-prices "$minimum_gas_price$token"
@@ -40,11 +40,11 @@ done
 
 for (( i=1; i <= "$#"; i++ )); do
     echo "Creating key for ${!i} user..."
-    printf "$PASSWORD\n$PASSWORD\n" | docker run --rm -i -v $(pwd)/testnet-nodes/${!i}:/root/.fiamma fiammachain/fiammad keys --keyring-backend file --keyring-dir /root/.fiamma/keys add val_${!i} > /dev/null 2> ./testnet-nodes/${!i}/mnemonic.txt
+    printf "$PASSWORD\n$PASSWORD\n" | docker run --rm -i -v $(pwd)/testnet-nodes/${!i}:/root/.fiamma fiammachain/fiammad keys --keyring-backend file --keyring-dir /root/.fiamma/keys add val_${!i} > /dev/null 2> $(pwd)/testnet-nodes/${!i}/mnemonic.txt
 
     val_address=$(echo $PASSWORD | docker run --rm -i -v $(pwd)/testnet-nodes/${!i}:/root/.fiamma fiammachain/fiammad keys --keyring-backend file --keyring-dir /root/.fiamma/keys show val_${!i} --address)
     echo "val_${!i} address: $val_address"
-    echo "val_${!i} mnemonic: $(cat ./testnet-nodes/${!i}/mnemonic.txt)"
+    echo "val_${!i} mnemonic: $(cat $(pwd)/testnet-nodes/${!i}/mnemonic.txt)"
 
     echo "Giving val_${!i} some tokens..."
     if [ $i -eq 1 ]; then
@@ -56,9 +56,9 @@ for (( i=1; i <= "$#"; i++ )); do
 
     if [ $((i+1)) -le "$#" ]; then
         j=$((i+1))
-        cp testnet-nodes/${!i}/config/genesis.json testnet-nodes/${!j}/config/genesis.json
+        cp $(pwd)/testnet-nodes/${!i}/config/genesis.json $(pwd)/testnet-nodes/${!j}/config/genesis.json
     elif [ $# != 1 ] && [ $((i+1)) -gt $# ]; then
-        cp testnet-nodes/${!i}/config/genesis.json testnet-nodes/$1/config/genesis.json
+        cp $(pwd)/testnet-nodes/${!i}/config/genesis.json $(pwd)/testnet-nodes/$1/config/genesis.json
     fi
 done
 
@@ -69,14 +69,14 @@ for (( i=1; i <= "$#"; i++ )); do
     echo $PASSWORD | docker run --rm -i -v $(pwd)/testnet-nodes/${!i}:/root/.fiamma fiammachain/fiammad genesis gentx val_${!i} $initial_stake$token --keyring-backend file --keyring-dir /root/.fiamma/keys --account-number 0 --sequence 0 --chain-id $CHAIN_ID --gas 1000000 --gas-prices $minimum_gas_price$token
 
     if [ $i -gt 1 ]; then
-        cp testnet-nodes/${!i}/config/gentx/* testnet-nodes/$1/config/gentx/
+        cp $(pwd)/testnet-nodes/${!i}/config/gentx/* $(pwd)/testnet-nodes/$1/config/gentx/
     fi
 
     if [ $((i+1)) -le "$#" ]; then
         j=$((i+1))
-        cp testnet-nodes/${!i}/config/genesis.json testnet-nodes/${!j}/config/genesis.json
+        cp $(pwd)/testnet-nodes/${!i}/config/genesis.json $(pwd)/testnet-nodes/${!j}/config/genesis.json
     elif [ $# != 1 ] && [ $((i+1)) -gt $# ]; then
-        cp testnet-nodes/${!i}/config/genesis.json testnet-nodes/$1/config/genesis.json
+        cp $(pwd)/testnet-nodes/${!i}/config/genesis.json $(pwd)/testnet-nodes/$1/config/genesis.json
     fi
 done
 
@@ -90,7 +90,7 @@ fi
 
 echo "Copying genesis file to other nodes..."
 for node in "${@:2}"; do
-    cp testnet-nodes/$1/config/genesis.json testnet-nodes/$node/config/genesis.json
+    cp $(pwd)/testnet-nodes/$1/config/genesis.json $(pwd)/testnet-nodes/$node/config/genesis.json
 done
 
 echo "Setting node addresses in config..."
@@ -115,12 +115,12 @@ done
 
 
 echo "Setting up docker compose..."
-rm -f ./testnet-nodes/docker-compose.yml
-printf "version: '3.7'\nnetworks:\n  net-public:\nservices:\n" > ./testnet-nodes/docker-compose.yml
+rm -f $(pwd)/testnet-nodes/docker-compose.yml
+printf "version: '3.7'\nnetworks:\n  net-public:\nservices:\n" > $(pwd)/testnet-nodes/docker-compose.yml
 for node in "$@"; do
-    printf "  fiammad-$node:\n    command: start\n    image: fiammachain/fiammad\n    container_name: $node\n    volumes:\n      - ./$node:/root/.fiamma\n    networks:\n      - net-public\n" >> ./testnet-nodes/docker-compose.yml
+    printf "  fiammad-$node:\n    command: start\n    image: fiammachain/fiammad\n    container_name: $node\n    volumes:\n      - ./$node:/root/.fiamma\n    networks:\n      - net-public\n" >> $(pwd)/testnet-nodes/docker-compose.yml
     if [ $node == "$1" ]; then
-        printf "    ports:\n      - 0.0.0.0:26657:26657\n" >> ./testnet-nodes/docker-compose.yml
+        printf "    ports:\n      - 0.0.0.0:26657:26657\n" >> $(pwd)/testnet-nodes/docker-compose.yml
     fi
-    printf "\n" >> ./testnet-nodes/docker-compose.yml
+    printf "\n" >> $(pwd)/testnet-nodes/docker-compose.yml
 done
