@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 : "${CHAIN_ID:=fiamma-testnet-1}"
 : "${PASSWORD:=password}"
 token="fiamma"
