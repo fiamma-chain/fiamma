@@ -1,0 +1,23 @@
+version: "3.2"
+
+services:
+  node-setup:
+    image: fiammachain/fiammad
+    build:
+      context: ../../
+      dockerfile: ../../contrib/images/fiammad/Dockerfile
+    volumes:
+      - ../testnet-nodes/${NODE_NAME}:/root/.fiamma
+      - ../setup_node.sh:/entrypoint.sh
+    entrypoint: /entrypoint.sh ${NODE_NAME}
+
+  node-runner:
+    image: fiammachain/fiammad
+    build:
+      dockerfile: ../../contrib/images/fiammad/Dockerfile
+    volumes:
+      - ../testnet-nodes/${NODE_NAME}:/root/.fiamma
+    command: start
+    depends_on:
+      node-setup:
+        condition: service_completed_successfully
