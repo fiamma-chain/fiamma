@@ -45,7 +45,7 @@ FROM debian:bookworm-slim AS run
 RUN apt-get update && apt-get install -y bash curl jq wget pkg-config openssl libssl-dev
 
 # Label should match your github repo
-LABEL org.opencontainers.image.source="https://github.com/fiamma-network/fiammad:${VERSION}"
+LABEL org.opencontainers.image.source="https://github.com/fiamma-chain/fiammad:${VERSION}"
 
 # Install libraries
 # Cosmwasm - Download correct libwasmvm version
