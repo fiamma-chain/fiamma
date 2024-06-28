@@ -2,7 +2,7 @@ package main
 
 import (
 	"bytes"
-	"encoding/base64"
+	"encoding/hex"
 	"io"
 	"os"
 
@@ -67,9 +67,9 @@ func main() {
 		panic("GROTH16 proof not verified")
 	}
 
-	serialize(proof, outputDir+"proof.base64")
-	serialize(publicWitness, outputDir+"public_inputs.base64")
-	serialize(vk, outputDir+"verifying_key.base64")
+	serialize(proof, outputDir+"proof")
+	serialize(publicWitness, outputDir+"public_input")
+	serialize(vk, outputDir+"vk")
 
 }
 
@@ -79,8 +79,8 @@ func serialize[w io.WriterTo](src w, name string) {
 
 	inner := buffer.Bytes()
 
-	encoded := make([]byte, base64.StdEncoding.EncodedLen(len(inner)))
-	base64.StdEncoding.Encode(encoded, inner)
+	encoded := make([]byte, hex.EncodedLen(len(inner)))
+	hex.Encode(encoded, inner)
 
 	os.WriteFile(name, encoded, 0644)
 }

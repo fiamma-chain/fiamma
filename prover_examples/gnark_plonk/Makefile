@@ -5,7 +5,6 @@ CHAIN_ID ?= fiamma-testnet-1
 MODULE ?= zkpverify
 MESSAGE ?= send-task
 PROOF_SYSTEM ?= PlonkBn254
-PROVER ?= gnark_plonk.go
 DIR = ./example/
 
 PROOF_FILE ?= $(DIR)/proof
