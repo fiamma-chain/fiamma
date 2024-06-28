@@ -2,7 +2,7 @@
 
 set -e
 
-SERVERS=("13.112.47.16" "13.113.190.239")
+SERVERS=("18.182.20.173")
 
 SSH_USER="ubuntu"
 

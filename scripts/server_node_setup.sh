@@ -8,18 +8,18 @@ if [ $# -lt 2 ]; then
 fi
 
 if [ "$1" = "prod" ]; then
-    nodes=("node0" "node1")
-    nodes_ips=("13.112.47.16" "13.113.190.239")
-    servers=("ubuntu@13.112.47.16" "ubuntu@13.113.190.239")
+    nodes=("node0")
+    nodes_ips=("18.182.20.173")
+    servers=("ubuntu@18.182.20.173")
 
     read -p "Are you sure you want to deploy in production? (y/n): " answer
     if [ "$answer" != "y" ]; then
         exit 0
     fi
 elif [ "$1" = "test" ]; then
-    nodes=("node0" "node1")
-    nodes_ips=("13.112.47.16" "13.113.190.239")
-    servers=("ubuntu@13.112.47.16" "ubuntu@13.113.190.239")
+    nodes=("node0")
+    nodes_ips=("18.182.20.173" )
+    servers=("ubuntu@18.182.20.173")
 else
     echo "Usage: $0 [prod|test] binary_release_tag"
     exit 1
@@ -57,6 +57,12 @@ echo "Sending directories to servers..."
 for i in "${!servers[@]}"; do  
     ssh ${servers[$i]} "rm -rf /home/ubuntu/.fiamma"
     scp -r "testnet-nodes/${nodes[$i]}" "${servers[$i]}:/home/ubuntu/.fiamma"
+
+    ## Config Cosmovisor for chain upgrade
+    ssh ${servers[$i]} "mkdir -p ~/.fiamma/cosmovisor"
+    ssh ${servers[$i]} "mkdir -p ~/.fiamma/cosmovisor/genesis/bin"
+    ssh ${servers[$i]} "mkdir -p ~/.fiamma/cosmovisor/upgrades"
+    ssh ${servers[$i]} "cp /home/ubuntu/go/bin/fiammad /home/ubuntu/.fiamma/cosmovisor/genesis/bin/fiammad"
 done
 
 
