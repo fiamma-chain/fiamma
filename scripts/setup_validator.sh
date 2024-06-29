@@ -13,7 +13,7 @@ NODE_HOME=$HOME/.fiamma
 CHAIN_BINARY=fiammad
 : ${CHAIN_ID:="fiamma-testnet-1"}
 
-: ${PEER_ADDR:="13.112.47.16"}
+: ${PEER_ADDR:="18.182.20.173"}
 
 VALIDATOR_KEY=$($CHAIN_BINARY tendermint show-validator)
 MONIKER=$($CHAIN_BINARY config get config moniker)
@@ -33,4 +33,5 @@ EOF
 # You should ensure that the fiammad binary files have been correctly installed.
 $CHAIN_BINARY tx staking create-validator $NODE_HOME/config/validator.json \
 	--from $VALIDATOR --chain-id $CHAIN_ID \
+	--fees 2000fiamma \
 	--node tcp://$(echo $PEER_ADDR | cut -d, -f1):26657 

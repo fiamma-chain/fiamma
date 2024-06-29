@@ -1,2 +1,2 @@
-lib/libsp1_verifier.a
-lib/libsp1_verifier.dylib
+libsp1_verifier.*
+target/
