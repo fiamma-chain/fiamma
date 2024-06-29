@@ -11,8 +11,9 @@ fi
 NODE_HOME=$HOME/.fiamma
 CHAIN_BINARY=fiammad
 : ${CHAIN_ID:="fiamma-testnet-1"}
+: ${MINIMUM_GAS_PRICES="0.0001fiamma"}
 
-: ${PEER_ADDR="13.112.47.16,13.113.190.239"}
+: ${PEER_ADDR="35.73.202.182,18.182.20.173", "35.74.243.172", "18.179.17.155"}
 
 PEER_ARRAY=(${PEER_ADDR//,/ })
 
@@ -41,3 +42,5 @@ done
 CONFIG_STRING=$(IFS=,; echo "${PERSISTENT_PEERS[*]}")
 
 $CHAIN_BINARY config set config p2p.persistent_peers "$CONFIG_STRING" --skip-validate
+
+$CHAIN_BINARY config set app minimum-gas-prices "$MINIMUM_GAS_PRICES" --skip-validate
