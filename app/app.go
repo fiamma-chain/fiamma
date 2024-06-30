@@ -77,6 +77,8 @@ import (
 
 	zkpverifymodulekeeper "fiamma/x/zkpverify/keeper"
 
+	"fiamma/nubitda"
+
 	wasmkeeper "github.com/CosmWasm/wasmd/x/wasm/keeper"
 	tmproto "github.com/cometbft/cometbft/proto/tendermint/types"
 
@@ -204,9 +206,19 @@ func New(
 	appOpts servertypes.AppOptions,
 	baseAppOptions ...func(*baseapp.BaseApp),
 ) (*App, error) {
+
+	config := nubitda.ParseDAOptionsFromConfig(appOpts)
+	// Initialize the DA backend
+	nubitDA, err := nubitda.NewNubitDA(config)
+	if err != nil {
+		panic(err)
+	}
+
 	var (
 		app        = &App{}
 		appBuilder *runtime.AppBuilder
+
+		// Get the da configuration, and then initialize the DA backend
 
 		// merge the AppConfig and other configuration in one config
 		appConfig = depinject.Configs(
@@ -214,6 +226,9 @@ func New(
 			depinject.Supply(
 				// Supply the application options
 				appOpts,
+
+				// Supply the DA backend
+				nubitDA,
 				// Supply with IBC keeper getter for the IBC modules with App Wiring.
 				// The IBC Keeper cannot be passed because it has not been initiated yet.
 				// Passing the getter, the app IBC Keeper will always be accessible.

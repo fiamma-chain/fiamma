@@ -11,6 +11,7 @@ import (
 	"github.com/cosmos/cosmos-sdk/runtime"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
+	"fiamma/nubitda"
 	"fiamma/x/zkpverify/types"
 )
 
@@ -25,6 +26,9 @@ type (
 		authority string
 
 		stakingKeeper types.StakingKeeper
+
+		// Nubit Data Availability
+		nubitDA *nubitda.NubitDA
 	}
 )
 
@@ -35,17 +39,18 @@ func NewKeeper(
 	authority string,
 
 	stakingKeeper types.StakingKeeper,
+	nubitDA *nubitda.NubitDA,
 ) Keeper {
 	if _, err := sdk.AccAddressFromBech32(authority); err != nil {
 		panic(fmt.Sprintf("invalid authority address: %s", authority))
 	}
 
 	return Keeper{
-		cdc:          cdc,
-		storeService: storeService,
-		authority:    authority,
-		logger:       logger,
-
+		cdc:           cdc,
+		storeService:  storeService,
+		authority:     authority,
+		logger:        logger,
+		nubitDA:       nubitDA,
 		stakingKeeper: stakingKeeper,
 	}
 }

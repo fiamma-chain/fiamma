@@ -21,6 +21,7 @@ import (
 	// this line is used by starport scaffolding # 1
 
 	modulev1 "fiamma/api/fiamma/zkpverify/module"
+	"fiamma/nubitda"
 	"fiamma/x/zkpverify/keeper"
 	"fiamma/x/zkpverify/types"
 )
@@ -183,6 +184,7 @@ type ModuleInputs struct {
 	AccountKeeper types.AccountKeeper
 	BankKeeper    types.BankKeeper
 	StakingKeeper types.StakingKeeper
+	NubitDA       *nubitda.NubitDA
 }
 
 type ModuleOutputs struct {
@@ -204,6 +206,7 @@ func ProvideModule(in ModuleInputs) ModuleOutputs {
 		in.Logger,
 		authority.String(),
 		in.StakingKeeper,
+		in.NubitDA,
 	)
 	m := NewAppModule(
 		in.Cdc,
