@@ -1,4 +1,4 @@
-package nubit
+package nubitda
 
 import (
 	"context"
