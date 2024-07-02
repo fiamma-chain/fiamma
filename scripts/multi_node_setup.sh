@@ -4,11 +4,16 @@ set -e
 
 : "${CHAIN_ID:=fiamma-testnet-1}"
 : "${PASSWORD:=password}"
-token="fiamma"
-initial_balance=1000000000000
-initial_faucet_balance=1000000000
+token="ufia"
+initial_balance=10000000000000
+initial_faucet_balance=10000000000
 initial_stake=10000000
-minimum_gas_price=0.0001
+minimum_gas_price=0
+
+# nubit da rpc url and authkey
+
+rpc="http://172.31.46.84:26658"
+authkey="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBbGxvdyI6WyJwdWJsaWMiLCJyZWFkIiwid3JpdGUiLCJhZG1pbiJdfQ.z8uQPBAWnOTKS8C1BrT29O0it38o66sXSWHhyfGejKk"
 
 
 if [ $# -lt 1 ]; then
@@ -32,6 +37,8 @@ for node in "$@"; do
     docker run --rm -v $(pwd)/testnet-nodes/$node:/root/.fiamma -it fiammachain/fiammad config set app minimum-gas-prices "$minimum_gas_price$token"
     docker run --rm -v $(pwd)/testnet-nodes/$node:/root/.fiamma -it fiammachain/fiammad config set app pruning "nothing" 
 
+    docker run --rm -v $(pwd)/testnet-nodes/$node:/root/.fiamma -it fiammachain/fiammad config set app da-config.rpc "$rpc"
+    docker run --rm -v $(pwd)/testnet-nodes/$node:/root/.fiamma -it fiammachain/fiammad config set app da-config.authkey "$authkey"
 
     node_id=$(docker run --rm -i -v $(pwd)/testnet-nodes/$node:/root/.fiamma fiammachain/fiammad tendermint show-node-id)
     node_ids+=($node_id)

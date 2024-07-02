@@ -33,5 +33,5 @@ EOF
 # You should ensure that the fiammad binary files have been correctly installed.
 $CHAIN_BINARY tx staking create-validator $NODE_HOME/config/validator.json \
 	--from $VALIDATOR --chain-id $CHAIN_ID \
-	--fees 2000fiamma \
+	--fees 2000ufia \
 	--node tcp://$(echo $PEER_ADDR | cut -d, -f1):26657 
