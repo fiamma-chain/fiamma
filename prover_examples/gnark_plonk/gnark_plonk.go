@@ -81,12 +81,12 @@ func main() {
 
 func serialize[w io.WriterTo](src w, name string) {
 	var buffer bytes.Buffer
-	src.WriteTo(&buffer)
+	_, _ = src.WriteTo(&buffer)
 
 	inner := buffer.Bytes()
 
 	encoded := make([]byte, hex.EncodedLen(len(inner)))
 	hex.Encode(encoded, inner)
 
-	os.WriteFile(name, encoded, 0644)
+	_ = os.WriteFile(name, encoded, 0644)
 }

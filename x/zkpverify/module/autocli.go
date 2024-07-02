@@ -52,7 +52,7 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 				{
 					RpcMethod:      "SendTask",
 					Use:            "send-task [proof_system] [proof] [public_input] [vk]",
-					Short:          "Send a zkp proof verify tx" + "\n" + "Currently supported proof systems: " + "[PlonkBn254, PlonkBls12_381, Groth16Bn254, Groth16Bn254_BTC, SP1]",
+					Short:          "Send a zkp proof verify tx" + "\n" + "Currently supported proof systems: " + "[PlonkBn254, PlonkBls12_381, Groth16Bn254, Groth16Bn254_BitVM, SP1]",
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "proof_system"}, {ProtoField: "proof"}, {ProtoField: "public_input"}, {ProtoField: "vk"}},
 				},
 				// this line is used by ignite scaffolding # autocli/tx

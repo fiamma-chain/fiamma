@@ -57,7 +57,7 @@ func ParseDAOptionsFromConfig(opts servertypes.AppOptions) *DAConfig {
 	rpcInterface := opts.Get("da-config.rpc")
 
 	if rpcInterface == nil {
-		panic("Nubit Data avilable rpc config should be in options")
+		panic("Nubit Data available rpc config should be in options")
 	}
 
 	nubitRPC, err := cast.ToStringE(rpcInterface)
@@ -69,7 +69,7 @@ func ParseDAOptionsFromConfig(opts servertypes.AppOptions) *DAConfig {
 	authKeyInterface := opts.Get("da-config.authkey")
 
 	if authKeyInterface == nil {
-		panic("Nubit Data avilable authkey config should be in options")
+		panic("Nubit Data available authkey config should be in options")
 	}
 
 	nubitAuthKey, err := cast.ToStringE(authKeyInterface)

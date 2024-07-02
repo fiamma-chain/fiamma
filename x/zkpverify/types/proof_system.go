@@ -11,12 +11,12 @@ const (
 	PlonkBn254 ProofSystemId = iota
 	PlonkBls12_381
 	Groth16Bn254
-	Groth16Bn254_BTC
+	Groth16Bn254_BitVM
 	SP1
 )
 
 func (t *ProofSystemId) String() string {
-	return [...]string{"PlonkBn254", "PlonkBls12_381", "Groth16Bn254", "Groth16Bn254_BTC", "SP1"}[*t]
+	return [...]string{"PlonkBn254", "PlonkBls12_381", "Groth16Bn254", "Groth16Bn254_BitVM", "SP1"}[*t]
 }
 
 func ProofSystemIdFromString(proofSystem string) (ProofSystemId, error) {
@@ -27,8 +27,8 @@ func ProofSystemIdFromString(proofSystem string) (ProofSystemId, error) {
 		return PlonkBls12_381, nil
 	case "Groth16Bn254":
 		return Groth16Bn254, nil
-	case "Groth16Bn254_BTC":
-		return Groth16Bn254_BTC, nil
+	case "Groth16Bn254_BitVM":
+		return Groth16Bn254_BitVM, nil
 	case "SP1":
 		return SP1, nil
 	}
@@ -43,8 +43,8 @@ func ProofSystemIdToString(ProofSystemId ProofSystemId) (string, error) {
 		return "PlonkBls12_381", nil
 	case Groth16Bn254:
 		return "Groth16Bn254", nil
-	case Groth16Bn254_BTC:
-		return "Groth16Bn254_BTC", nil
+	case Groth16Bn254_BitVM:
+		return "Groth16Bn254_BitVM", nil
 	case SP1:
 		return "SP1", nil
 	}
