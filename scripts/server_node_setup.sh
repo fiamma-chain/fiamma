@@ -24,15 +24,21 @@ else
     exit 1
 fi
 
+echo "Stopping previous fiamma services..."
+for server in "${servers[@]}"; do
+    ssh $server "sudo systemctl stop fiamma"
+    echo "Stopped fiamma service on $server"
+done
+
 rm -rf server-setup
 
-echo "Downloading source code into servers..."
-for server in "${servers[@]}"; do
-    ssh $server "rm -rf /home/ubuntu/fiamma"
-    ssh $server "git clone https://github.com/fiamma-chain/fiamma.git /home/ubuntu/fiamma"
-    ssh $server "cd /home/ubuntu/fiamma && git checkout $2 && source /home/ubuntu/.profile && make install"
-    echo "Source code downloaded into $server successfully"
-done
+# echo "Downloading source code into servers..."
+# for server in "${servers[@]}"; do
+#     ssh $server "rm -rf /home/ubuntu/fiamma"
+#     ssh $server "git clone https://github.com/fiamma-chain/fiamma.git /home/ubuntu/fiamma"
+#     ssh $server "cd /home/ubuntu/fiamma && git checkout $2 && source /home/ubuntu/.profile && make install"
+#     echo "Source code downloaded into $server successfully"
+# done
 
 mkdir -p server-setup
 cd server-setup
@@ -67,3 +73,8 @@ done
 
 cd ..
 
+echo "Starting new fiamma services..."
+for server in "${servers[@]}"; do
+    ssh $server "sudo systemctl start fiamma"
+    echo "Started fiamma service on $server"
+done

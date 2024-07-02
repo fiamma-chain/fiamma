@@ -12,13 +12,14 @@ fi
 
 : ${CHAIN_ID:="fiamma-testnet-1"}
 : ${NODE:="https://testnet-rpc.fiammachain.io"}
-: ${FEES:=2000fiamma}
+: ${FEES:=2000ufia}
 : ${GAS:=20000000}
 
 fiammad tx zkpverify send-task \
   --from $ACCOUNT --chain-id $CHAIN_ID  \
   --gas $GAS --fees $FEES \
   --node $NODE \
+  --keyring-backend test \
   "Groth16Bn254" \
   $(cat ../prover_examples/gnark_groth16/example/proof) \
 	$(cat ../prover_examples/gnark_groth16/example/public_input) \
