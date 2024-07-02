@@ -60,8 +60,8 @@ RUN rm -f /tmp/go.mod
 
 COPY --from=build-env /root/fiamma/build/fiammad /bin/fiammad
 
-COPY --from=build-env /root/fiamma/x/zkpverify/verifiers/sp1/lib/libsp1_verifier.so \
-    /root/fiamma/x/zkpverify/verifiers/sp1/lib/libsp1_verifier.so
+# COPY --from=build-env /root/fiamma/x/zkpverify/verifiers/sp1/lib/libsp1_verifier.so \
+#     /root/fiamma/x/zkpverify/verifiers/sp1/lib/libsp1_verifier.so
 
 ENTRYPOINT [ "fiammad" ]
 

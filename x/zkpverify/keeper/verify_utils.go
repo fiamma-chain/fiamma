@@ -4,7 +4,7 @@ import (
 	"bytes"
 
 	"fiamma/x/zkpverify/types"
-	"fiamma/x/zkpverify/verifiers/sp1"
+	"fiamma/x/zkpverify/verifiers"
 
 	"github.com/consensys/gnark-crypto/ecc"
 	"github.com/consensys/gnark/backend/groth16"
@@ -30,14 +30,23 @@ func (k Keeper) verifyProof(verifyData *types.VerifyData) bool {
 		k.Logger().Info("GROTH16 BN254 proof verification:", "result", verifyResult)
 		return verifyResult
 
-	case uint64(types.Groth16Bn254_BTC):
-		panic("Not implemented")
+	case uint64(types.Groth16Bn254_BitVM):
+
+		vkLen := (uint32)(len(verifyData.Vk))
+		proofLen := (uint32)(len(verifyData.Proof))
+		pubInputLen := (uint32)(len(verifyData.PublicInput))
+
+		// TODO: The bitvm validation process returns an intermediate comment
+		//  which needs to be submitted to bitcoin at a later date.
+		verifyResult, _ := verifiers.VerifyBitvmProof(verifyData.Vk, vkLen, verifyData.Proof, proofLen, verifyData.PublicInput, pubInputLen)
+		k.Logger().Info("GROTH16 BN254 BitVM proof verification:", "result", verifyResult)
+		return verifyResult
 
 	case uint64(types.SP1):
 		proofLen := (uint32)(len(verifyData.Proof))
 		// For the verification of the SP1 proof system, we consider the ELF file as public input.
 		elfLen := (uint32)(len(verifyData.PublicInput))
-		verifyResult := sp1.VerifySp1Proof(verifyData.Proof, proofLen, verifyData.PublicInput, elfLen)
+		verifyResult := verifiers.VerifySp1Proof(verifyData.Proof, proofLen, verifyData.PublicInput, elfLen)
 		k.Logger().Info("SP1 proof verification:", "result", verifyResult)
 		return verifyResult
 

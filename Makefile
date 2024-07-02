@@ -6,7 +6,7 @@ GOPATH=$(shell go env GOPATH)
 BUILDDIR ?= $(CURDIR)/build
 GOLANGCI_LINT := $(shell which golangci-lint)
 MISSPELL := $(shell which misspell)
-DYLD_LIBRARY_PATH=./lib:$DYLD_LIBRARY_PATH
+
 
 ###############################################################################
 ###                          Formatting & Linting                           ###
@@ -53,47 +53,24 @@ format: install-misspell
 ###                                  Build                                  ###
 ###############################################################################
 
+# build-sp1-ffi:
+# 	@cd ./x/zkpverify/verifiers/sp1/lib \
+# 		&& cargo build --release \
+# 		&& cp target/release/libsp1_verifier_ffi.a ./libsp1_verifier.a 
 
 BUILD_TARGETS := build install
 
-build-sp1-ffi-macos:
-	@cd ./x/zkpverify/verifiers/sp1/lib \
-		&& cargo build --release \
-		&& cp target/release/libsp1_verifier_ffi.dylib ./libsp1_verifier.dylib 
-
-build-sp1-ffi-linux:
-	@cd ./x/zkpverify/verifiers/sp1/lib \
-		&& cargo build --release \
-		&& cp target/release/libsp1_verifier_ffi.so ./libsp1_verifier.so 
-
-ifeq ($(shell uname), Darwin)
-    build-sp1-ffi: build-sp1-ffi-macos
-else
-    build-sp1-ffi: build-sp1-ffi-linux
-endif
-
-build: go-build
-
-install:  go-install
-
-go-build: $(BUILDDIR)/ go.sum
-	go build -mod=readonly -o $(BUILDDIR)/ ./cmd/fiammad
-
-go-install: $(BUILDDIR)/ go.sum
-	go install -mod=readonly ./cmd/fiammad
-
-build-linux: build-sp1-ffi-linux go-build-linux
-
-go-build-linux: 
+build: BUILD_ARGS=-o $(BUILDDIR)/
+build-linux:
 	GOOS=linux GOARCH=$(if $(findstring aarch64,$(shell uname -m)) || $(findstring arm64,$(shell uname -m)),arm64,amd64) LEDGER_ENABLED=false $(MAKE) build
 
-# $(BUILD_TARGETS): go.sum $(BUILDDIR)/
-# 	go $@ -mod=readonly $(BUILD_FLAGS) $(BUILD_ARGS) ./cmd/fiammad
+$(BUILD_TARGETS): go.sum $(BUILDDIR)/
+	go $@ -mod=readonly $(BUILD_ARGS) ./cmd/fiammad
 
 $(BUILDDIR)/:
 	mkdir -p $(BUILDDIR)/
 
-.PHONY: build build-linux
+.PHONY: build build-linux 
 
 
 ###############################################################################
