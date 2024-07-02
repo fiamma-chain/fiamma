@@ -6,7 +6,7 @@ GOPATH=$(shell go env GOPATH)
 BUILDDIR ?= $(CURDIR)/build
 GOLANGCI_LINT := $(shell which golangci-lint)
 MISSPELL := $(shell which misspell)
-
+DYLD_LIBRARY_PATH=./lib:$DYLD_LIBRARY_PATH
 
 ###############################################################################
 ###                          Formatting & Linting                           ###
@@ -72,9 +72,9 @@ else
     build-sp1-ffi: build-sp1-ffi-linux
 endif
 
-build: build-sp1-ffi go-build
+build: go-build
 
-install: build-sp1-ffi go-install
+install:  go-install
 
 go-build: $(BUILDDIR)/ go.sum
 	go build -mod=readonly -o $(BUILDDIR)/ ./cmd/fiammad
