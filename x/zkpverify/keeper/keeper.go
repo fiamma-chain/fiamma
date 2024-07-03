@@ -65,16 +65,16 @@ func (k Keeper) Logger() log.Logger {
 	return k.logger.With("module", fmt.Sprintf("x/%s", types.ModuleName))
 }
 
-// SetProofInfo stores proof information
-func (k Keeper) SetVerifyResult(ctx sdk.Context, verifyId []byte, verifyData types.VerifyResult) {
-	store := k.verifyDataStore(ctx)
-	bz := k.cdc.MustMarshal(&verifyData)
+// SetVerifyResult stores proof information
+func (k Keeper) SetVerifyResult(ctx sdk.Context, verifyId []byte, verifyResult types.VerifyResult) {
+	store := k.verifyResultStore(ctx)
+	bz := k.cdc.MustMarshal(&verifyResult)
 	store.Set(verifyId, bz)
 }
 
-// GetProofInfo retrieves proof information
+// GetVerifyResult retrieves proof information
 func (k Keeper) GetVerifyResult(ctx sdk.Context, verifyId []byte) (types.VerifyResult, bool) {
-	store := k.verifyDataStore(ctx)
+	store := k.verifyResultStore(ctx)
 	bz := store.Get(verifyId)
 	if bz == nil {
 		return types.VerifyResult{}, false
@@ -84,7 +84,31 @@ func (k Keeper) GetVerifyResult(ctx sdk.Context, verifyId []byte) (types.VerifyR
 	return verifyResult, true
 }
 
+// SetVerifyData stores proof information
+func (k Keeper) SetVerifyData(ctx sdk.Context, verifyId []byte, verifyData types.VerifyData) {
+	store := k.verifyDataStore(ctx)
+	bz := k.cdc.MustMarshal(&verifyData)
+	store.Set(verifyId, bz)
+}
+
+// GetVerifyData retrieves proof information
+func (k Keeper) GetVerifyData(ctx sdk.Context, verifyId []byte) (types.VerifyData, bool) {
+	store := k.verifyDataStore(ctx)
+	bz := store.Get(verifyId)
+	if bz == nil {
+		return types.VerifyData{}, false
+	}
+	var verifyData types.VerifyData
+	k.cdc.MustUnmarshal(bz, &verifyData)
+	return verifyData, true
+}
+
 func (k Keeper) verifyDataStore(ctx context.Context) prefix.Store {
 	storeAdapter := runtime.KVStoreAdapter(k.storeService.OpenKVStore(ctx))
 	return prefix.NewStore(storeAdapter, types.VerifyDataKey)
+}
+
+func (k Keeper) verifyResultStore(ctx context.Context) prefix.Store {
+	storeAdapter := runtime.KVStoreAdapter(k.storeService.OpenKVStore(ctx))
+	return prefix.NewStore(storeAdapter, types.VerifyResultKey)
 }

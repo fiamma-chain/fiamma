@@ -80,3 +80,16 @@ message QueryAllProofTypesRequest {}
 // QueryAllProofTypesResponse is response type for the Query/AllProofTypes RPC
 // method.
 message QueryAllProofTypesResponse { repeated string proof_system = 1; }
+
+
+// QueryBitVMWitnessRequest is request type for the Query/BitVMWitness RPC 
+// method.
+message QueryBitVMWitnessRequest {
+  string proof_id = 1;
+}
+
+// QueryBitVMWitnessResponse is response type for the Query/BitVMWitness RPC
+// method.
+message QueryBitVMWitnessResponse {
+  string witness = 1;
+}
