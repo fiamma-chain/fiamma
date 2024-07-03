@@ -19,10 +19,10 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	Query_Params_FullMethodName             = "/fiamma.zkpverify.Query/Params"
-	Query_PendingProof_FullMethodName       = "/fiamma.zkpverify.Query/PendingProof"
-	Query_PendingProofByType_FullMethodName = "/fiamma.zkpverify.Query/PendingProofByType"
-	Query_AllProofTypes_FullMethodName      = "/fiamma.zkpverify.Query/AllProofTypes"
+	Query_Params_FullMethodName       = "/fiamma.zkpverify.Query/Params"
+	Query_PendingProof_FullMethodName = "/fiamma.zkpverify.Query/PendingProof"
+	Query_ProofData_FullMethodName    = "/fiamma.zkpverify.Query/ProofData"
+	Query_BitVMWitness_FullMethodName = "/fiamma.zkpverify.Query/BitVMWitness"
 )
 
 // QueryClient is the client API for Query service.
@@ -33,10 +33,10 @@ type QueryClient interface {
 	Params(ctx context.Context, in *QueryParamsRequest, opts ...grpc.CallOption) (*QueryParamsResponse, error)
 	// Queries a list of PendingProof items.
 	PendingProof(ctx context.Context, in *QueryPendingProofRequest, opts ...grpc.CallOption) (*QueryPendingProofResponse, error)
-	// Queries a list of PendingProofByType items.
-	PendingProofByType(ctx context.Context, in *QueryPendingProofByTypeRequest, opts ...grpc.CallOption) (*QueryPendingProofByTypeResponse, error)
-	// Queries a list of AllProofTypes items.
-	AllProofTypes(ctx context.Context, in *QueryAllProofTypesRequest, opts ...grpc.CallOption) (*QueryAllProofTypesResponse, error)
+	// Queries proof data by proof id
+	ProofData(ctx context.Context, in *QueryProofDataRequest, opts ...grpc.CallOption) (*QueryProofDataResponse, error)
+	// Queries bitvm witness by proof id
+	BitVMWitness(ctx context.Context, in *QueryBitVMWitnessRequest, opts ...grpc.CallOption) (*QueryBitVMWitnessResponse, error)
 }
 
 type queryClient struct {
@@ -65,18 +65,18 @@ func (c *queryClient) PendingProof(ctx context.Context, in *QueryPendingProofReq
 	return out, nil
 }
 
-func (c *queryClient) PendingProofByType(ctx context.Context, in *QueryPendingProofByTypeRequest, opts ...grpc.CallOption) (*QueryPendingProofByTypeResponse, error) {
-	out := new(QueryPendingProofByTypeResponse)
-	err := c.cc.Invoke(ctx, Query_PendingProofByType_FullMethodName, in, out, opts...)
+func (c *queryClient) ProofData(ctx context.Context, in *QueryProofDataRequest, opts ...grpc.CallOption) (*QueryProofDataResponse, error) {
+	out := new(QueryProofDataResponse)
+	err := c.cc.Invoke(ctx, Query_ProofData_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *queryClient) AllProofTypes(ctx context.Context, in *QueryAllProofTypesRequest, opts ...grpc.CallOption) (*QueryAllProofTypesResponse, error) {
-	out := new(QueryAllProofTypesResponse)
-	err := c.cc.Invoke(ctx, Query_AllProofTypes_FullMethodName, in, out, opts...)
+func (c *queryClient) BitVMWitness(ctx context.Context, in *QueryBitVMWitnessRequest, opts ...grpc.CallOption) (*QueryBitVMWitnessResponse, error) {
+	out := new(QueryBitVMWitnessResponse)
+	err := c.cc.Invoke(ctx, Query_BitVMWitness_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -91,10 +91,10 @@ type QueryServer interface {
 	Params(context.Context, *QueryParamsRequest) (*QueryParamsResponse, error)
 	// Queries a list of PendingProof items.
 	PendingProof(context.Context, *QueryPendingProofRequest) (*QueryPendingProofResponse, error)
-	// Queries a list of PendingProofByType items.
-	PendingProofByType(context.Context, *QueryPendingProofByTypeRequest) (*QueryPendingProofByTypeResponse, error)
-	// Queries a list of AllProofTypes items.
-	AllProofTypes(context.Context, *QueryAllProofTypesRequest) (*QueryAllProofTypesResponse, error)
+	// Queries proof data by proof id
+	ProofData(context.Context, *QueryProofDataRequest) (*QueryProofDataResponse, error)
+	// Queries bitvm witness by proof id
+	BitVMWitness(context.Context, *QueryBitVMWitnessRequest) (*QueryBitVMWitnessResponse, error)
 	mustEmbedUnimplementedQueryServer()
 }
 
@@ -108,11 +108,11 @@ func (UnimplementedQueryServer) Params(context.Context, *QueryParamsRequest) (*Q
 func (UnimplementedQueryServer) PendingProof(context.Context, *QueryPendingProofRequest) (*QueryPendingProofResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PendingProof not implemented")
 }
-func (UnimplementedQueryServer) PendingProofByType(context.Context, *QueryPendingProofByTypeRequest) (*QueryPendingProofByTypeResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method PendingProofByType not implemented")
+func (UnimplementedQueryServer) ProofData(context.Context, *QueryProofDataRequest) (*QueryProofDataResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ProofData not implemented")
 }
-func (UnimplementedQueryServer) AllProofTypes(context.Context, *QueryAllProofTypesRequest) (*QueryAllProofTypesResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method AllProofTypes not implemented")
+func (UnimplementedQueryServer) BitVMWitness(context.Context, *QueryBitVMWitnessRequest) (*QueryBitVMWitnessResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method BitVMWitness not implemented")
 }
 func (UnimplementedQueryServer) mustEmbedUnimplementedQueryServer() {}
 
@@ -163,38 +163,38 @@ func _Query_PendingProof_Handler(srv interface{}, ctx context.Context, dec func(
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Query_PendingProofByType_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(QueryPendingProofByTypeRequest)
+func _Query_ProofData_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryProofDataRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(QueryServer).PendingProofByType(ctx, in)
+		return srv.(QueryServer).ProofData(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Query_PendingProofByType_FullMethodName,
+		FullMethod: Query_ProofData_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(QueryServer).PendingProofByType(ctx, req.(*QueryPendingProofByTypeRequest))
+		return srv.(QueryServer).ProofData(ctx, req.(*QueryProofDataRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Query_AllProofTypes_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(QueryAllProofTypesRequest)
+func _Query_BitVMWitness_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryBitVMWitnessRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(QueryServer).AllProofTypes(ctx, in)
+		return srv.(QueryServer).BitVMWitness(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Query_AllProofTypes_FullMethodName,
+		FullMethod: Query_BitVMWitness_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(QueryServer).AllProofTypes(ctx, req.(*QueryAllProofTypesRequest))
+		return srv.(QueryServer).BitVMWitness(ctx, req.(*QueryBitVMWitnessRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -215,12 +215,12 @@ var Query_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Query_PendingProof_Handler,
 		},
 		{
-			MethodName: "PendingProofByType",
-			Handler:    _Query_PendingProofByType_Handler,
+			MethodName: "ProofData",
+			Handler:    _Query_ProofData_Handler,
 		},
 		{
-			MethodName: "AllProofTypes",
-			Handler:    _Query_AllProofTypes_Handler,
+			MethodName: "BitVMWitness",
+			Handler:    _Query_BitVMWitness_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

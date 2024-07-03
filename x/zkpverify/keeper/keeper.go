@@ -103,6 +103,22 @@ func (k Keeper) GetVerifyData(ctx sdk.Context, verifyId []byte) (types.VerifyDat
 	return verifyData, true
 }
 
+// SetBitVMWitness stores witness data
+func (k Keeper) SetBitVMWitness(ctx sdk.Context, verifyId []byte, witnessData []byte) {
+	store := k.bitVMWitnessStore(ctx)
+	store.Set(verifyId, witnessData)
+}
+
+// GetBitVMWitness retrieves witness data from the chain
+func (k Keeper) GetBitVMWitness(ctx sdk.Context, verifyId []byte) ([]byte, bool) {
+	store := k.bitVMWitnessStore(ctx)
+	bz := store.Get(verifyId)
+	if bz == nil {
+		return nil, false
+	}
+	return bz, true
+}
+
 func (k Keeper) verifyDataStore(ctx context.Context) prefix.Store {
 	storeAdapter := runtime.KVStoreAdapter(k.storeService.OpenKVStore(ctx))
 	return prefix.NewStore(storeAdapter, types.VerifyDataKey)
@@ -111,4 +127,9 @@ func (k Keeper) verifyDataStore(ctx context.Context) prefix.Store {
 func (k Keeper) verifyResultStore(ctx context.Context) prefix.Store {
 	storeAdapter := runtime.KVStoreAdapter(k.storeService.OpenKVStore(ctx))
 	return prefix.NewStore(storeAdapter, types.VerifyResultKey)
+}
+
+func (k Keeper) bitVMWitnessStore(ctx context.Context) prefix.Store {
+	storeAdapter := runtime.KVStoreAdapter(k.storeService.OpenKVStore(ctx))
+	return prefix.NewStore(storeAdapter, types.BitVMWitnessKey)
 }
