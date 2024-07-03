@@ -15,5 +15,6 @@ message VerifyData {
 message VerifyResult {
   string verify_id = 1;
   string data_commitment = 2;
-  bool result = 3;
+  uint64 data_location = 3;
+  bool result = 4;
 }

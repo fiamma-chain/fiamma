@@ -1,4 +1,4 @@
-FROM golang:1.21 AS build-env
+FROM golang:1.22 AS build-env
 
 # Customize to your build env
 
@@ -15,9 +15,9 @@ ARG COSMOS_BUILD_OPTIONS=""
 RUN apt-get update && apt-get install -y make git bash gcc curl jq pkg-config openssl libssl-dev 
 
 # Install Rust
-RUN curl https://sh.rustup.rs -sSf | bash -s -- -y 
+# RUN curl https://sh.rustup.rs -sSf | bash -s -- -y 
     
-ENV PATH="/root/.cargo/bin:${PATH}"
+# ENV PATH="/root/.cargo/bin:${PATH}"
 
 USER root
 

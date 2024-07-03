@@ -12,8 +12,9 @@ const (
 )
 
 var (
-	ParamsKey     = []byte{0x01} // key prefix for the parameters
-	VerifyDataKey = []byte{0x02} // key prefix for the verify data
+	ParamsKey       = []byte{0x01} // key prefix for the parameters
+	VerifyDataKey   = []byte{0x02} // key prefix for the verify data
+	VerifyResultKey = []byte{0x03} // key prefix for the verify result
 
 )
 

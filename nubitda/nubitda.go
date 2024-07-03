@@ -57,3 +57,13 @@ func (a *NubitDA) GetBlobs(ctx context.Context, id [][]byte) ([][]byte, error) {
 	}
 	return blob, nil
 }
+
+// GetBlobProof gets the data proofs from the Nubit chain
+
+func (a *NubitDA) GetBlobProofs(ctx context.Context, id [][]byte) ([][]byte, error) {
+	blob, err := a.client.GetProofs(context.TODO(), id, a.ns)
+	if err != nil {
+		return nil, err
+	}
+	return blob, nil
+}

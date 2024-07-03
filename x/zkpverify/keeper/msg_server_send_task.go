@@ -25,7 +25,7 @@ func (k msgServer) SendTask(goCtx context.Context, msg *types.MsgSendTask) (*typ
 		Vk:          msg.Vk,
 	}
 	// submit proof data to DA
-	verifyId, dataCommitments, err := k.SubmitVerifyDataToDA(ctx, verfiyData)
+	verifyId, dataCommitments, dataLocationId, err := k.SubmitVerifyData(ctx, verfiyData)
 	if err != nil {
 		k.Logger().Info("Error submitting proof to DA:", "error", err)
 		return nil, types.ErrSubmitProof
@@ -44,6 +44,7 @@ func (k msgServer) SendTask(goCtx context.Context, msg *types.MsgSendTask) (*typ
 	verifyResult := types.VerifyResult{
 		VerifyId:       verifyIdStr,
 		DataCommitment: dataCommitmentStr,
+		DataLocation:   uint64(dataLocationId),
 		Result:         result,
 	}
 
@@ -52,6 +53,7 @@ func (k msgServer) SendTask(goCtx context.Context, msg *types.MsgSendTask) (*typ
 	event := sdk.NewEvent("verifyFinished",
 		sdk.NewAttribute("verifyId", verifyIdStr),
 		sdk.NewAttribute("dataCommitment", dataCommitmentStr),
+		sdk.NewAttribute("dataLocation", dataLocationId.String()),
 		sdk.NewAttribute("verifyResult", strconv.FormatBool(result)),
 		sdk.NewAttribute("proofSystem", msg.ProofSystem))
 	ctx.EventManager().EmitEvent(event)

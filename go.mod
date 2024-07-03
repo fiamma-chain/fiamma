@@ -1,6 +1,6 @@
 module fiamma
 
-go 1.22.4
+go 1.22.3
 
 replace (
 	// fix upstream GHSA-h395-qcrw-5vmq vulnerability.
