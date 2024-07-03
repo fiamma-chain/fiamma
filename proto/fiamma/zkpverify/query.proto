@@ -7,6 +7,7 @@ import "gogoproto/gogo.proto";
 import "google/api/annotations.proto";
 import "cosmos/base/query/v1beta1/pagination.proto";
 import "fiamma/zkpverify/params.proto";
+import "fiamma/zkpverify/zkpverify.proto";
 
 option go_package = "fiamma/x/zkpverify/types";
 
@@ -24,16 +25,16 @@ service Query {
     option (google.api.http).get = "/fiamma/zkpverify/pending_proof";
   }
 
-  // Queries a list of PendingProofByType items.
-  rpc PendingProofByType(QueryPendingProofByTypeRequest)
-      returns (QueryPendingProofByTypeResponse) {
-    option (google.api.http).get = "/fiamma/zkpverify/pending_proof_by_type";
+  // Queries proof data by proof id
+  rpc ProofData(QueryProofDataRequest)
+      returns (QueryProofDataResponse) {
+    option (google.api.http).get = "/fiamma/zkpverify/get_proof_data";
   }
 
-  // Queries a list of AllProofTypes items.
-  rpc AllProofTypes(QueryAllProofTypesRequest)
-      returns (QueryAllProofTypesResponse) {
-    option (google.api.http).get = "/fiamma/zkpverify/all_proof_types";
+  // Queries bitvm witness by proof id
+  rpc BitVMWitness(QueryBitVMWitnessRequest)
+      returns (QueryBitVMWitnessResponse) {
+    option (google.api.http).get = "/fiamma/zkpverify/get_bitvm_witness";
   }
 }
 // QueryParamsRequest is request type for the Query/Params RPC method.
@@ -60,12 +61,6 @@ message QueryPendingProofResponse {
   cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }
 
-// QueryPendingProofByTypeRequest is request type for the
-// Query/PendingProofByType RPC method.
-message QueryPendingProofByTypeRequest {
-  cosmos.base.query.v1beta1.PageRequest pagination = 1;
-}
-
 // QueryPendingProofByTypeResponse is response type for the
 // Query/PendingProofByType RPC method.
 message QueryPendingProofByTypeResponse {
@@ -73,13 +68,17 @@ message QueryPendingProofByTypeResponse {
   cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }
 
-// QueryAllProofTypesRequest is request type for the Query/AllProofTypes RPC
+// QueryProofDataRequest is request type for the Query/ProofData RPC
 // method.
-message QueryAllProofTypesRequest {}
+message QueryProofDataRequest {
+  string proof_id = 1;
+}
 
-// QueryAllProofTypesResponse is response type for the Query/AllProofTypes RPC
+// QueryProofDataResponse is response type for the Query/ProofData RPC
 // method.
-message QueryAllProofTypesResponse { repeated string proof_system = 1; }
+message QueryProofDataResponse { 
+  fiamma.zkpverify.VerifyData proof_data = 1;
+}
 
 
 // QueryBitVMWitnessRequest is request type for the Query/BitVMWitness RPC 

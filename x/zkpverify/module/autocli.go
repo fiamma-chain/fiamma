@@ -25,16 +25,16 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 				},
 
 				{
-					RpcMethod:      "PendingProofByType",
-					Use:            "pending-proof-by-type",
-					Short:          "Query pending-proof-by-type",
+					RpcMethod:      "ProofData",
+					Use:            "get-proof-data [proof_id]",
+					Short:          "Query Proof data stored in the fiamma by proof_id",
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{},
 				},
 
 				{
-					RpcMethod:      "AllProofTypes",
-					Use:            "all-proof-types",
-					Short:          "Query all-proof-types",
+					RpcMethod:      "BitVMWitness",
+					Use:            "get-bitvm-witness [proof_id]",
+					Short:          "Query bitvm witness stored in the fiamma by proof_id",
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{},
 				},
 

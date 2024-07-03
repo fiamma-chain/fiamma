@@ -12,23 +12,23 @@ import (
 	"github.com/consensys/gnark/backend/witness"
 )
 
-func (k Keeper) verifyProof(verifyData *types.VerifyData) bool {
+func (k Keeper) verifyProof(verifyData *types.VerifyData) (bool, []byte) {
 	switch verifyData.ProofSystem {
 	case uint64(types.PlonkBls12_381):
 		verifyResult := k.verifyPlonkProofBLS12_381(verifyData.Proof, verifyData.PublicInput, verifyData.Vk)
 
 		k.Logger().Info("PLONK BLS12-381 proof verification:", "result", verifyResult)
-		return verifyResult
+		return verifyResult, nil
 	case uint64(types.PlonkBn254):
 		verifyResult := k.verifyPlonkProofBN254(verifyData.Proof, verifyData.PublicInput, verifyData.Vk)
 
 		k.Logger().Info("PLONK BN254 proof verification:", "result", verifyResult)
-		return verifyResult
+		return verifyResult, nil
 	case uint64(types.Groth16Bn254):
 		verifyResult := k.verifyGroth16ProofBN254(verifyData.Proof, verifyData.PublicInput, verifyData.Vk)
 
 		k.Logger().Info("GROTH16 BN254 proof verification:", "result", verifyResult)
-		return verifyResult
+		return verifyResult, nil
 
 	case uint64(types.Groth16Bn254_BitVM):
 
@@ -38,9 +38,9 @@ func (k Keeper) verifyProof(verifyData *types.VerifyData) bool {
 
 		// TODO: The bitvm validation process returns an intermediate comment
 		//  which needs to be submitted to bitcoin at a later date.
-		verifyResult, _ := verifiers.VerifyBitvmProof(verifyData.Vk, vkLen, verifyData.Proof, proofLen, verifyData.PublicInput, pubInputLen)
+		verifyResult, witness := verifiers.VerifyBitvmProof(verifyData.Vk, vkLen, verifyData.Proof, proofLen, verifyData.PublicInput, pubInputLen)
 		k.Logger().Info("GROTH16 BN254 BitVM proof verification:", "result", verifyResult)
-		return verifyResult
+		return verifyResult, witness
 
 	case uint64(types.SP1):
 		proofLen := (uint32)(len(verifyData.Proof))
@@ -48,11 +48,11 @@ func (k Keeper) verifyProof(verifyData *types.VerifyData) bool {
 		elfLen := (uint32)(len(verifyData.PublicInput))
 		verifyResult := verifiers.VerifySp1Proof(verifyData.Proof, proofLen, verifyData.PublicInput, elfLen)
 		k.Logger().Info("SP1 proof verification:", "result", verifyResult)
-		return verifyResult
+		return verifyResult, nil
 
 	default:
 		k.Logger().Error("Unrecognized proof system ID")
-		return false
+		return false, nil
 	}
 }
 

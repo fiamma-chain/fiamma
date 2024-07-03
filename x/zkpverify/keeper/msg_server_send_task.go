@@ -36,7 +36,12 @@ func (k msgServer) SendTask(goCtx context.Context, msg *types.MsgSendTask) (*typ
 
 	// The chain first verifies the correctness of the proofs submitted by the user, and saves the results.
 	// The observer may challenge the result at a later stage.
-	result := k.verifyProof(&verfiyData)
+	result, witness := k.verifyProof(&verfiyData)
+
+	// store witness if the proof system is BitVM
+	if verfiyData.ProofSystem == uint64(types.Groth16Bn254_BitVM) {
+		k.SetBitVMWitness(ctx, verifyId[:], witness)
+	}
 
 	k.Logger().Info("Proof verification:", "result", result)
 
