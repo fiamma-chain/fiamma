@@ -3,28 +3,25 @@ validation: sovereign
 accounts: 
 - name: alice
   coins:
-  - 200000000fiamma
+  - 200000000fia
 - name: bob
   coins:
-  - 100000000fiamma
+  - 100000000fia
 genesis:
   chain_id: fiamma-testnet-1
   app_state:
     staking:
       params:
-        bond_denom: fiamma
+        bond_denom: fia
 client:
   openapi:
     path: docs/static/openapi.yml
 faucet:
   name: bob
   coins:
-  - 5fiamma
+  - 5fia
 validators:
 - name: alice
-  bonded: 100000000fiamma
+  bonded: 100000000fia
 build:
   main: cmd/fiammad
-
-ldflags:
-  - "-r x/zkpverify/verifiers/sp1/lib"
