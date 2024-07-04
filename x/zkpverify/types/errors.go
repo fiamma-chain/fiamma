@@ -14,4 +14,5 @@ var (
 	ErrInvalidProofSystem   = sdkerrors.Register(ModuleName, 1103, "invalid proof system")
 	ErrProofDataNotFound    = sdkerrors.Register(ModuleName, 1104, "proof data not found")
 	ErrBitVMWitnessNotFound = sdkerrors.Register(ModuleName, 1105, "bitvm witness not found")
+	ErrGetVerifyId          = sdkerrors.Register(ModuleName, 1106, "error getting verifyId")
 )

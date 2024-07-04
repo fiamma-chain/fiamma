@@ -2,6 +2,8 @@ package keeper
 
 import (
 	"bytes"
+	"crypto/sha256"
+	"encoding/json"
 
 	"fiamma/x/zkpverify/types"
 	"fiamma/x/zkpverify/verifiers"
@@ -11,6 +13,15 @@ import (
 	"github.com/consensys/gnark/backend/plonk"
 	"github.com/consensys/gnark/backend/witness"
 )
+
+// GetVerifyId returns the verifyId
+func (k Keeper) GetVerifyId(verifyData types.VerifyData) ([32]byte, error) {
+	byteArray, err := json.Marshal(verifyData)
+	if err != nil {
+		return [32]byte{}, err
+	}
+	return sha256.Sum256(byteArray), nil
+}
 
 func (k Keeper) verifyProof(verifyData *types.VerifyData) (bool, []byte) {
 	switch verifyData.ProofSystem {
