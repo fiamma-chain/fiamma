@@ -11,7 +11,7 @@ else
 fi
 
 : ${CHAIN_ID:="fiamma-testnet-1"}
-: ${NODE:="https://testnet-rpc.fiammachain.io"}
+: ${NODE:="http://127.0.0.1:26657"}
 : ${FEES:=2000ufia}
 : ${GAS:=20000000}
 
@@ -21,6 +21,6 @@ fiammad tx zkpverify send-task \
   --node $NODE \
   --keyring-backend test \
   "Groth16Bn254" \
-  $(cat ../prover_examples/gnark_groth16/example/proof) \
-	$(cat ../prover_examples/gnark_groth16/example/public_input) \
-	$(cat ../prover_examples/gnark_groth16/example/vk)
+  $(cat ../../prover_examples/gnark_groth16/example/proof) \
+	$(cat ../../prover_examples/gnark_groth16/example/public_input) \
+	$(cat ../../prover_examples/gnark_groth16/example/vk)

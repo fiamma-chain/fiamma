@@ -24,15 +24,22 @@ func (k msgServer) SendTask(goCtx context.Context, msg *types.MsgSendTask) (*typ
 		PublicInput: msg.PublicInput,
 		Vk:          msg.Vk,
 	}
+
+	verifyId, err := k.GetVerifyId(verfiyData)
+	if err != nil {
+		k.Logger().Info("Error getting verifyId:", "error", err)
+		return nil, types.ErrGetVerifyId
+
+	}
+
 	// submit proof data to DA
-	verifyId, dataCommitments, dataLocationId, err := k.SubmitVerifyData(ctx, verfiyData)
+	dataCommitmentStr, dataLocationId, err := k.SubmitVerifyData(ctx, verifyId[:], verfiyData)
 	if err != nil {
 		k.Logger().Info("Error submitting proof to DA:", "error", err)
 		return nil, types.ErrSubmitProof
 	}
 
 	verifyIdStr := hex.EncodeToString(verifyId[:])
-	dataCommitmentStr := hex.EncodeToString(dataCommitments[0])
 
 	// The chain first verifies the correctness of the proofs submitted by the user, and saves the results.
 	// The observer may challenge the result at a later stage.
