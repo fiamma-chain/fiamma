@@ -15,7 +15,7 @@ fi
 : ${FEES:=2000ufia}
 : ${GAS:=20000000}
 
-fiammad tx zkpverify send-task \
+fiammad tx zkpverify submit-proof \
   --from $ACCOUNT --chain-id $CHAIN_ID  \
   --gas $GAS --fees $FEES \
   --node $NODE \

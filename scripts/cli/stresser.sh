@@ -40,7 +40,7 @@ echo "Sequence: $SEQUENCE"
 
 for (( i=0; i<10000; i++ ))
 do
-   fiammad tx zkpverify send-task \
+   fiammad tx zkpverify submit-proof \
     --keyring-backend test --from $ACCOUNT \
     --chain-id $CHAIN_ID \
     --fees 20ufia \

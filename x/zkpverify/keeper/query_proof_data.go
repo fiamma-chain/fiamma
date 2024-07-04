@@ -2,6 +2,7 @@ package keeper
 
 import (
 	"context"
+	"encoding/hex"
 
 	"fiamma/x/zkpverify/types"
 
@@ -17,7 +18,12 @@ func (k Keeper) ProofData(goCtx context.Context, req *types.QueryProofDataReques
 
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
-	proofData, found := k.GetVerifyData(ctx, []byte(req.ProofId))
+	proofId, err := hex.DecodeString(req.ProofId)
+	if err != nil {
+		return nil, types.ErrInvalidProofId
+	}
+
+	proofData, found := k.GetProofData(ctx, proofId)
 	if !found {
 		return nil, types.ErrProofDataNotFound
 	}

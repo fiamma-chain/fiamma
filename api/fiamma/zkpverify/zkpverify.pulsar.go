@@ -3,41 +3,42 @@ package zkpverify
 
 import (
 	fmt "fmt"
+	io "io"
+	reflect "reflect"
+	sync "sync"
+
 	runtime "github.com/cosmos/cosmos-proto/runtime"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoiface "google.golang.org/protobuf/runtime/protoiface"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
-	io "io"
-	reflect "reflect"
-	sync "sync"
 )
 
 var (
-	md_VerifyData              protoreflect.MessageDescriptor
-	fd_VerifyData_proof_system protoreflect.FieldDescriptor
-	fd_VerifyData_proof        protoreflect.FieldDescriptor
-	fd_VerifyData_public_input protoreflect.FieldDescriptor
-	fd_VerifyData_vk           protoreflect.FieldDescriptor
+	md_ProofData              protoreflect.MessageDescriptor
+	fd_ProofData_proof_system protoreflect.FieldDescriptor
+	fd_ProofData_proof        protoreflect.FieldDescriptor
+	fd_ProofData_public_input protoreflect.FieldDescriptor
+	fd_ProofData_vk           protoreflect.FieldDescriptor
 )
 
 func init() {
 	file_fiamma_zkpverify_zkpverify_proto_init()
-	md_VerifyData = File_fiamma_zkpverify_zkpverify_proto.Messages().ByName("VerifyData")
-	fd_VerifyData_proof_system = md_VerifyData.Fields().ByName("proof_system")
-	fd_VerifyData_proof = md_VerifyData.Fields().ByName("proof")
-	fd_VerifyData_public_input = md_VerifyData.Fields().ByName("public_input")
-	fd_VerifyData_vk = md_VerifyData.Fields().ByName("vk")
+	md_ProofData = File_fiamma_zkpverify_zkpverify_proto.Messages().ByName("ProofData")
+	fd_ProofData_proof_system = md_ProofData.Fields().ByName("proof_system")
+	fd_ProofData_proof = md_ProofData.Fields().ByName("proof")
+	fd_ProofData_public_input = md_ProofData.Fields().ByName("public_input")
+	fd_ProofData_vk = md_ProofData.Fields().ByName("vk")
 }
 
-var _ protoreflect.Message = (*fastReflection_VerifyData)(nil)
+var _ protoreflect.Message = (*fastReflection_ProofData)(nil)
 
-type fastReflection_VerifyData VerifyData
+type fastReflection_ProofData ProofData
 
-func (x *VerifyData) ProtoReflect() protoreflect.Message {
-	return (*fastReflection_VerifyData)(x)
+func (x *ProofData) ProtoReflect() protoreflect.Message {
+	return (*fastReflection_ProofData)(x)
 }
 
-func (x *VerifyData) slowProtoReflect() protoreflect.Message {
+func (x *ProofData) slowProtoReflect() protoreflect.Message {
 	mi := &file_fiamma_zkpverify_zkpverify_proto_msgTypes[0]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -49,43 +50,43 @@ func (x *VerifyData) slowProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-var _fastReflection_VerifyData_messageType fastReflection_VerifyData_messageType
-var _ protoreflect.MessageType = fastReflection_VerifyData_messageType{}
+var _fastReflection_ProofData_messageType fastReflection_ProofData_messageType
+var _ protoreflect.MessageType = fastReflection_ProofData_messageType{}
 
-type fastReflection_VerifyData_messageType struct{}
+type fastReflection_ProofData_messageType struct{}
 
-func (x fastReflection_VerifyData_messageType) Zero() protoreflect.Message {
-	return (*fastReflection_VerifyData)(nil)
+func (x fastReflection_ProofData_messageType) Zero() protoreflect.Message {
+	return (*fastReflection_ProofData)(nil)
 }
-func (x fastReflection_VerifyData_messageType) New() protoreflect.Message {
-	return new(fastReflection_VerifyData)
+func (x fastReflection_ProofData_messageType) New() protoreflect.Message {
+	return new(fastReflection_ProofData)
 }
-func (x fastReflection_VerifyData_messageType) Descriptor() protoreflect.MessageDescriptor {
-	return md_VerifyData
+func (x fastReflection_ProofData_messageType) Descriptor() protoreflect.MessageDescriptor {
+	return md_ProofData
 }
 
 // Descriptor returns message descriptor, which contains only the protobuf
 // type information for the message.
-func (x *fastReflection_VerifyData) Descriptor() protoreflect.MessageDescriptor {
-	return md_VerifyData
+func (x *fastReflection_ProofData) Descriptor() protoreflect.MessageDescriptor {
+	return md_ProofData
 }
 
 // Type returns the message type, which encapsulates both Go and protobuf
 // type information. If the Go type information is not needed,
 // it is recommended that the message descriptor be used instead.
-func (x *fastReflection_VerifyData) Type() protoreflect.MessageType {
-	return _fastReflection_VerifyData_messageType
+func (x *fastReflection_ProofData) Type() protoreflect.MessageType {
+	return _fastReflection_ProofData_messageType
 }
 
 // New returns a newly allocated and mutable empty message.
-func (x *fastReflection_VerifyData) New() protoreflect.Message {
-	return new(fastReflection_VerifyData)
+func (x *fastReflection_ProofData) New() protoreflect.Message {
+	return new(fastReflection_ProofData)
 }
 
 // Interface unwraps the message reflection interface and
 // returns the underlying ProtoMessage interface.
-func (x *fastReflection_VerifyData) Interface() protoreflect.ProtoMessage {
-	return (*VerifyData)(x)
+func (x *fastReflection_ProofData) Interface() protoreflect.ProtoMessage {
+	return (*ProofData)(x)
 }
 
 // Range iterates over every populated field in an undefined order,
@@ -93,28 +94,28 @@ func (x *fastReflection_VerifyData) Interface() protoreflect.ProtoMessage {
 // Range returns immediately if f returns false.
 // While iterating, mutating operations may only be performed
 // on the current field descriptor.
-func (x *fastReflection_VerifyData) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
+func (x *fastReflection_ProofData) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
 	if x.ProofSystem != uint64(0) {
 		value := protoreflect.ValueOfUint64(x.ProofSystem)
-		if !f(fd_VerifyData_proof_system, value) {
+		if !f(fd_ProofData_proof_system, value) {
 			return
 		}
 	}
 	if len(x.Proof) != 0 {
 		value := protoreflect.ValueOfBytes(x.Proof)
-		if !f(fd_VerifyData_proof, value) {
+		if !f(fd_ProofData_proof, value) {
 			return
 		}
 	}
 	if len(x.PublicInput) != 0 {
 		value := protoreflect.ValueOfBytes(x.PublicInput)
-		if !f(fd_VerifyData_public_input, value) {
+		if !f(fd_ProofData_public_input, value) {
 			return
 		}
 	}
 	if len(x.Vk) != 0 {
 		value := protoreflect.ValueOfBytes(x.Vk)
-		if !f(fd_VerifyData_vk, value) {
+		if !f(fd_ProofData_vk, value) {
 			return
 		}
 	}
@@ -131,21 +132,21 @@ func (x *fastReflection_VerifyData) Range(f func(protoreflect.FieldDescriptor, p
 // In other cases (aside from the nullable cases above),
 // a proto3 scalar field is populated if it contains a non-zero value, and
 // a repeated field is populated if it is non-empty.
-func (x *fastReflection_VerifyData) Has(fd protoreflect.FieldDescriptor) bool {
+func (x *fastReflection_ProofData) Has(fd protoreflect.FieldDescriptor) bool {
 	switch fd.FullName() {
-	case "fiamma.zkpverify.VerifyData.proof_system":
+	case "fiamma.zkpverify.ProofData.proof_system":
 		return x.ProofSystem != uint64(0)
-	case "fiamma.zkpverify.VerifyData.proof":
+	case "fiamma.zkpverify.ProofData.proof":
 		return len(x.Proof) != 0
-	case "fiamma.zkpverify.VerifyData.public_input":
+	case "fiamma.zkpverify.ProofData.public_input":
 		return len(x.PublicInput) != 0
-	case "fiamma.zkpverify.VerifyData.vk":
+	case "fiamma.zkpverify.ProofData.vk":
 		return len(x.Vk) != 0
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.zkpverify.VerifyData"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.zkpverify.ProofData"))
 		}
-		panic(fmt.Errorf("message fiamma.zkpverify.VerifyData does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message fiamma.zkpverify.ProofData does not contain field %s", fd.FullName()))
 	}
 }
 
@@ -155,21 +156,21 @@ func (x *fastReflection_VerifyData) Has(fd protoreflect.FieldDescriptor) bool {
 // associated with the given field number.
 //
 // Clear is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_VerifyData) Clear(fd protoreflect.FieldDescriptor) {
+func (x *fastReflection_ProofData) Clear(fd protoreflect.FieldDescriptor) {
 	switch fd.FullName() {
-	case "fiamma.zkpverify.VerifyData.proof_system":
+	case "fiamma.zkpverify.ProofData.proof_system":
 		x.ProofSystem = uint64(0)
-	case "fiamma.zkpverify.VerifyData.proof":
+	case "fiamma.zkpverify.ProofData.proof":
 		x.Proof = nil
-	case "fiamma.zkpverify.VerifyData.public_input":
+	case "fiamma.zkpverify.ProofData.public_input":
 		x.PublicInput = nil
-	case "fiamma.zkpverify.VerifyData.vk":
+	case "fiamma.zkpverify.ProofData.vk":
 		x.Vk = nil
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.zkpverify.VerifyData"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.zkpverify.ProofData"))
 		}
-		panic(fmt.Errorf("message fiamma.zkpverify.VerifyData does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message fiamma.zkpverify.ProofData does not contain field %s", fd.FullName()))
 	}
 }
 
@@ -179,25 +180,25 @@ func (x *fastReflection_VerifyData) Clear(fd protoreflect.FieldDescriptor) {
 // the default value of a bytes scalar is guaranteed to be a copy.
 // For unpopulated composite types, it returns an empty, read-only view
 // of the value; to obtain a mutable reference, use Mutable.
-func (x *fastReflection_VerifyData) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
+func (x *fastReflection_ProofData) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
 	switch descriptor.FullName() {
-	case "fiamma.zkpverify.VerifyData.proof_system":
+	case "fiamma.zkpverify.ProofData.proof_system":
 		value := x.ProofSystem
 		return protoreflect.ValueOfUint64(value)
-	case "fiamma.zkpverify.VerifyData.proof":
+	case "fiamma.zkpverify.ProofData.proof":
 		value := x.Proof
 		return protoreflect.ValueOfBytes(value)
-	case "fiamma.zkpverify.VerifyData.public_input":
+	case "fiamma.zkpverify.ProofData.public_input":
 		value := x.PublicInput
 		return protoreflect.ValueOfBytes(value)
-	case "fiamma.zkpverify.VerifyData.vk":
+	case "fiamma.zkpverify.ProofData.vk":
 		value := x.Vk
 		return protoreflect.ValueOfBytes(value)
 	default:
 		if descriptor.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.zkpverify.VerifyData"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.zkpverify.ProofData"))
 		}
-		panic(fmt.Errorf("message fiamma.zkpverify.VerifyData does not contain field %s", descriptor.FullName()))
+		panic(fmt.Errorf("message fiamma.zkpverify.ProofData does not contain field %s", descriptor.FullName()))
 	}
 }
 
@@ -211,21 +212,21 @@ func (x *fastReflection_VerifyData) Get(descriptor protoreflect.FieldDescriptor)
 // empty, read-only value, then it panics.
 //
 // Set is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_VerifyData) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
+func (x *fastReflection_ProofData) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
 	switch fd.FullName() {
-	case "fiamma.zkpverify.VerifyData.proof_system":
+	case "fiamma.zkpverify.ProofData.proof_system":
 		x.ProofSystem = value.Uint()
-	case "fiamma.zkpverify.VerifyData.proof":
+	case "fiamma.zkpverify.ProofData.proof":
 		x.Proof = value.Bytes()
-	case "fiamma.zkpverify.VerifyData.public_input":
+	case "fiamma.zkpverify.ProofData.public_input":
 		x.PublicInput = value.Bytes()
-	case "fiamma.zkpverify.VerifyData.vk":
+	case "fiamma.zkpverify.ProofData.vk":
 		x.Vk = value.Bytes()
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.zkpverify.VerifyData"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.zkpverify.ProofData"))
 		}
-		panic(fmt.Errorf("message fiamma.zkpverify.VerifyData does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message fiamma.zkpverify.ProofData does not contain field %s", fd.FullName()))
 	}
 }
 
@@ -239,52 +240,52 @@ func (x *fastReflection_VerifyData) Set(fd protoreflect.FieldDescriptor, value p
 // It panics if the field does not contain a composite type.
 //
 // Mutable is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_VerifyData) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
+func (x *fastReflection_ProofData) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "fiamma.zkpverify.VerifyData.proof_system":
-		panic(fmt.Errorf("field proof_system of message fiamma.zkpverify.VerifyData is not mutable"))
-	case "fiamma.zkpverify.VerifyData.proof":
-		panic(fmt.Errorf("field proof of message fiamma.zkpverify.VerifyData is not mutable"))
-	case "fiamma.zkpverify.VerifyData.public_input":
-		panic(fmt.Errorf("field public_input of message fiamma.zkpverify.VerifyData is not mutable"))
-	case "fiamma.zkpverify.VerifyData.vk":
-		panic(fmt.Errorf("field vk of message fiamma.zkpverify.VerifyData is not mutable"))
+	case "fiamma.zkpverify.ProofData.proof_system":
+		panic(fmt.Errorf("field proof_system of message fiamma.zkpverify.ProofData is not mutable"))
+	case "fiamma.zkpverify.ProofData.proof":
+		panic(fmt.Errorf("field proof of message fiamma.zkpverify.ProofData is not mutable"))
+	case "fiamma.zkpverify.ProofData.public_input":
+		panic(fmt.Errorf("field public_input of message fiamma.zkpverify.ProofData is not mutable"))
+	case "fiamma.zkpverify.ProofData.vk":
+		panic(fmt.Errorf("field vk of message fiamma.zkpverify.ProofData is not mutable"))
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.zkpverify.VerifyData"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.zkpverify.ProofData"))
 		}
-		panic(fmt.Errorf("message fiamma.zkpverify.VerifyData does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message fiamma.zkpverify.ProofData does not contain field %s", fd.FullName()))
 	}
 }
 
 // NewField returns a new value that is assignable to the field
 // for the given descriptor. For scalars, this returns the default value.
 // For lists, maps, and messages, this returns a new, empty, mutable value.
-func (x *fastReflection_VerifyData) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
+func (x *fastReflection_ProofData) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "fiamma.zkpverify.VerifyData.proof_system":
+	case "fiamma.zkpverify.ProofData.proof_system":
 		return protoreflect.ValueOfUint64(uint64(0))
-	case "fiamma.zkpverify.VerifyData.proof":
+	case "fiamma.zkpverify.ProofData.proof":
 		return protoreflect.ValueOfBytes(nil)
-	case "fiamma.zkpverify.VerifyData.public_input":
+	case "fiamma.zkpverify.ProofData.public_input":
 		return protoreflect.ValueOfBytes(nil)
-	case "fiamma.zkpverify.VerifyData.vk":
+	case "fiamma.zkpverify.ProofData.vk":
 		return protoreflect.ValueOfBytes(nil)
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.zkpverify.VerifyData"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.zkpverify.ProofData"))
 		}
-		panic(fmt.Errorf("message fiamma.zkpverify.VerifyData does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message fiamma.zkpverify.ProofData does not contain field %s", fd.FullName()))
 	}
 }
 
 // WhichOneof reports which field within the oneof is populated,
 // returning nil if none are populated.
 // It panics if the oneof descriptor does not belong to this message.
-func (x *fastReflection_VerifyData) WhichOneof(d protoreflect.OneofDescriptor) protoreflect.FieldDescriptor {
+func (x *fastReflection_ProofData) WhichOneof(d protoreflect.OneofDescriptor) protoreflect.FieldDescriptor {
 	switch d.FullName() {
 	default:
-		panic(fmt.Errorf("%s is not a oneof field in fiamma.zkpverify.VerifyData", d.FullName()))
+		panic(fmt.Errorf("%s is not a oneof field in fiamma.zkpverify.ProofData", d.FullName()))
 	}
 	panic("unreachable")
 }
@@ -292,7 +293,7 @@ func (x *fastReflection_VerifyData) WhichOneof(d protoreflect.OneofDescriptor) p
 // GetUnknown retrieves the entire list of unknown fields.
 // The caller may only mutate the contents of the RawFields
 // if the mutated bytes are stored back into the message with SetUnknown.
-func (x *fastReflection_VerifyData) GetUnknown() protoreflect.RawFields {
+func (x *fastReflection_ProofData) GetUnknown() protoreflect.RawFields {
 	return x.unknownFields
 }
 
@@ -303,7 +304,7 @@ func (x *fastReflection_VerifyData) GetUnknown() protoreflect.RawFields {
 // An empty RawFields may be passed to clear the fields.
 //
 // SetUnknown is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_VerifyData) SetUnknown(fields protoreflect.RawFields) {
+func (x *fastReflection_ProofData) SetUnknown(fields protoreflect.RawFields) {
 	x.unknownFields = fields
 }
 
@@ -315,7 +316,7 @@ func (x *fastReflection_VerifyData) SetUnknown(fields protoreflect.RawFields) {
 // message type, but the details are implementation dependent.
 // Validity is not part of the protobuf data model, and may not
 // be preserved in marshaling or other operations.
-func (x *fastReflection_VerifyData) IsValid() bool {
+func (x *fastReflection_ProofData) IsValid() bool {
 	return x != nil
 }
 
@@ -325,9 +326,9 @@ func (x *fastReflection_VerifyData) IsValid() bool {
 // The returned methods type is identical to
 // "google.golang.org/protobuf/runtime/protoiface".Methods.
 // Consult the protoiface package documentation for details.
-func (x *fastReflection_VerifyData) ProtoMethods() *protoiface.Methods {
+func (x *fastReflection_ProofData) ProtoMethods() *protoiface.Methods {
 	size := func(input protoiface.SizeInput) protoiface.SizeOutput {
-		x := input.Message.Interface().(*VerifyData)
+		x := input.Message.Interface().(*ProofData)
 		if x == nil {
 			return protoiface.SizeOutput{
 				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
@@ -364,7 +365,7 @@ func (x *fastReflection_VerifyData) ProtoMethods() *protoiface.Methods {
 	}
 
 	marshal := func(input protoiface.MarshalInput) (protoiface.MarshalOutput, error) {
-		x := input.Message.Interface().(*VerifyData)
+		x := input.Message.Interface().(*ProofData)
 		if x == nil {
 			return protoiface.MarshalOutput{
 				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
@@ -420,7 +421,7 @@ func (x *fastReflection_VerifyData) ProtoMethods() *protoiface.Methods {
 		}, nil
 	}
 	unmarshal := func(input protoiface.UnmarshalInput) (protoiface.UnmarshalOutput, error) {
-		x := input.Message.Interface().(*VerifyData)
+		x := input.Message.Interface().(*ProofData)
 		if x == nil {
 			return protoiface.UnmarshalOutput{
 				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
@@ -452,10 +453,10 @@ func (x *fastReflection_VerifyData) ProtoMethods() *protoiface.Methods {
 			fieldNum := int32(wire >> 3)
 			wireType := int(wire & 0x7)
 			if wireType == 4 {
-				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: VerifyData: wiretype end group for non-group")
+				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: ProofData: wiretype end group for non-group")
 			}
 			if fieldNum <= 0 {
-				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: VerifyData: illegal tag %d (wire type %d)", fieldNum, wire)
+				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: ProofData: illegal tag %d (wire type %d)", fieldNum, wire)
 			}
 			switch fieldNum {
 			case 1:
@@ -616,7 +617,7 @@ func (x *fastReflection_VerifyData) ProtoMethods() *protoiface.Methods {
 
 var (
 	md_VerifyResult                 protoreflect.MessageDescriptor
-	fd_VerifyResult_verify_id       protoreflect.FieldDescriptor
+	fd_VerifyResult_proof_id        protoreflect.FieldDescriptor
 	fd_VerifyResult_data_commitment protoreflect.FieldDescriptor
 	fd_VerifyResult_data_location   protoreflect.FieldDescriptor
 	fd_VerifyResult_result          protoreflect.FieldDescriptor
@@ -625,7 +626,7 @@ var (
 func init() {
 	file_fiamma_zkpverify_zkpverify_proto_init()
 	md_VerifyResult = File_fiamma_zkpverify_zkpverify_proto.Messages().ByName("VerifyResult")
-	fd_VerifyResult_verify_id = md_VerifyResult.Fields().ByName("verify_id")
+	fd_VerifyResult_proof_id = md_VerifyResult.Fields().ByName("proof_id")
 	fd_VerifyResult_data_commitment = md_VerifyResult.Fields().ByName("data_commitment")
 	fd_VerifyResult_data_location = md_VerifyResult.Fields().ByName("data_location")
 	fd_VerifyResult_result = md_VerifyResult.Fields().ByName("result")
@@ -696,9 +697,9 @@ func (x *fastReflection_VerifyResult) Interface() protoreflect.ProtoMessage {
 // While iterating, mutating operations may only be performed
 // on the current field descriptor.
 func (x *fastReflection_VerifyResult) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
-	if x.VerifyId != "" {
-		value := protoreflect.ValueOfString(x.VerifyId)
-		if !f(fd_VerifyResult_verify_id, value) {
+	if x.ProofId != "" {
+		value := protoreflect.ValueOfString(x.ProofId)
+		if !f(fd_VerifyResult_proof_id, value) {
 			return
 		}
 	}
@@ -735,8 +736,8 @@ func (x *fastReflection_VerifyResult) Range(f func(protoreflect.FieldDescriptor,
 // a repeated field is populated if it is non-empty.
 func (x *fastReflection_VerifyResult) Has(fd protoreflect.FieldDescriptor) bool {
 	switch fd.FullName() {
-	case "fiamma.zkpverify.VerifyResult.verify_id":
-		return x.VerifyId != ""
+	case "fiamma.zkpverify.VerifyResult.proof_id":
+		return x.ProofId != ""
 	case "fiamma.zkpverify.VerifyResult.data_commitment":
 		return x.DataCommitment != ""
 	case "fiamma.zkpverify.VerifyResult.data_location":
@@ -759,8 +760,8 @@ func (x *fastReflection_VerifyResult) Has(fd protoreflect.FieldDescriptor) bool 
 // Clear is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_VerifyResult) Clear(fd protoreflect.FieldDescriptor) {
 	switch fd.FullName() {
-	case "fiamma.zkpverify.VerifyResult.verify_id":
-		x.VerifyId = ""
+	case "fiamma.zkpverify.VerifyResult.proof_id":
+		x.ProofId = ""
 	case "fiamma.zkpverify.VerifyResult.data_commitment":
 		x.DataCommitment = ""
 	case "fiamma.zkpverify.VerifyResult.data_location":
@@ -783,8 +784,8 @@ func (x *fastReflection_VerifyResult) Clear(fd protoreflect.FieldDescriptor) {
 // of the value; to obtain a mutable reference, use Mutable.
 func (x *fastReflection_VerifyResult) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
 	switch descriptor.FullName() {
-	case "fiamma.zkpverify.VerifyResult.verify_id":
-		value := x.VerifyId
+	case "fiamma.zkpverify.VerifyResult.proof_id":
+		value := x.ProofId
 		return protoreflect.ValueOfString(value)
 	case "fiamma.zkpverify.VerifyResult.data_commitment":
 		value := x.DataCommitment
@@ -815,8 +816,8 @@ func (x *fastReflection_VerifyResult) Get(descriptor protoreflect.FieldDescripto
 // Set is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_VerifyResult) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
 	switch fd.FullName() {
-	case "fiamma.zkpverify.VerifyResult.verify_id":
-		x.VerifyId = value.Interface().(string)
+	case "fiamma.zkpverify.VerifyResult.proof_id":
+		x.ProofId = value.Interface().(string)
 	case "fiamma.zkpverify.VerifyResult.data_commitment":
 		x.DataCommitment = value.Interface().(string)
 	case "fiamma.zkpverify.VerifyResult.data_location":
@@ -843,8 +844,8 @@ func (x *fastReflection_VerifyResult) Set(fd protoreflect.FieldDescriptor, value
 // Mutable is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_VerifyResult) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "fiamma.zkpverify.VerifyResult.verify_id":
-		panic(fmt.Errorf("field verify_id of message fiamma.zkpverify.VerifyResult is not mutable"))
+	case "fiamma.zkpverify.VerifyResult.proof_id":
+		panic(fmt.Errorf("field proof_id of message fiamma.zkpverify.VerifyResult is not mutable"))
 	case "fiamma.zkpverify.VerifyResult.data_commitment":
 		panic(fmt.Errorf("field data_commitment of message fiamma.zkpverify.VerifyResult is not mutable"))
 	case "fiamma.zkpverify.VerifyResult.data_location":
@@ -864,7 +865,7 @@ func (x *fastReflection_VerifyResult) Mutable(fd protoreflect.FieldDescriptor) p
 // For lists, maps, and messages, this returns a new, empty, mutable value.
 func (x *fastReflection_VerifyResult) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "fiamma.zkpverify.VerifyResult.verify_id":
+	case "fiamma.zkpverify.VerifyResult.proof_id":
 		return protoreflect.ValueOfString("")
 	case "fiamma.zkpverify.VerifyResult.data_commitment":
 		return protoreflect.ValueOfString("")
@@ -941,7 +942,7 @@ func (x *fastReflection_VerifyResult) ProtoMethods() *protoiface.Methods {
 		var n int
 		var l int
 		_ = l
-		l = len(x.VerifyId)
+		l = len(x.ProofId)
 		if l > 0 {
 			n += 1 + l + runtime.Sov(uint64(l))
 		}
@@ -1006,10 +1007,10 @@ func (x *fastReflection_VerifyResult) ProtoMethods() *protoiface.Methods {
 			i--
 			dAtA[i] = 0x12
 		}
-		if len(x.VerifyId) > 0 {
-			i -= len(x.VerifyId)
-			copy(dAtA[i:], x.VerifyId)
-			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.VerifyId)))
+		if len(x.ProofId) > 0 {
+			i -= len(x.ProofId)
+			copy(dAtA[i:], x.ProofId)
+			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.ProofId)))
 			i--
 			dAtA[i] = 0xa
 		}
@@ -1064,7 +1065,7 @@ func (x *fastReflection_VerifyResult) ProtoMethods() *protoiface.Methods {
 			switch fieldNum {
 			case 1:
 				if wireType != 2 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field VerifyId", wireType)
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field ProofId", wireType)
 				}
 				var stringLen uint64
 				for shift := uint(0); ; shift += 7 {
@@ -1092,7 +1093,7 @@ func (x *fastReflection_VerifyResult) ProtoMethods() *protoiface.Methods {
 				if postIndex > l {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
 				}
-				x.VerifyId = string(dAtA[iNdEx:postIndex])
+				x.ProofId = string(dAtA[iNdEx:postIndex])
 				iNdEx = postIndex
 			case 2:
 				if wireType != 2 {
@@ -1213,8 +1214,8 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// VerifyData is the data structure for the proof verification request
-type VerifyData struct {
+// ProofData is the data structure for the proof verification request
+type ProofData struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -1225,8 +1226,8 @@ type VerifyData struct {
 	Vk          []byte `protobuf:"bytes,4,opt,name=vk,proto3" json:"vk,omitempty"`
 }
 
-func (x *VerifyData) Reset() {
-	*x = VerifyData{}
+func (x *ProofData) Reset() {
+	*x = ProofData{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_fiamma_zkpverify_zkpverify_proto_msgTypes[0]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1234,39 +1235,39 @@ func (x *VerifyData) Reset() {
 	}
 }
 
-func (x *VerifyData) String() string {
+func (x *ProofData) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*VerifyData) ProtoMessage() {}
+func (*ProofData) ProtoMessage() {}
 
-// Deprecated: Use VerifyData.ProtoReflect.Descriptor instead.
-func (*VerifyData) Descriptor() ([]byte, []int) {
+// Deprecated: Use ProofData.ProtoReflect.Descriptor instead.
+func (*ProofData) Descriptor() ([]byte, []int) {
 	return file_fiamma_zkpverify_zkpverify_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *VerifyData) GetProofSystem() uint64 {
+func (x *ProofData) GetProofSystem() uint64 {
 	if x != nil {
 		return x.ProofSystem
 	}
 	return 0
 }
 
-func (x *VerifyData) GetProof() []byte {
+func (x *ProofData) GetProof() []byte {
 	if x != nil {
 		return x.Proof
 	}
 	return nil
 }
 
-func (x *VerifyData) GetPublicInput() []byte {
+func (x *ProofData) GetPublicInput() []byte {
 	if x != nil {
 		return x.PublicInput
 	}
 	return nil
 }
 
-func (x *VerifyData) GetVk() []byte {
+func (x *ProofData) GetVk() []byte {
 	if x != nil {
 		return x.Vk
 	}
@@ -1279,7 +1280,7 @@ type VerifyResult struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	VerifyId       string `protobuf:"bytes,1,opt,name=verify_id,json=verifyId,proto3" json:"verify_id,omitempty"`
+	ProofId        string `protobuf:"bytes,1,opt,name=proof_id,json=proofId,proto3" json:"proof_id,omitempty"`
 	DataCommitment string `protobuf:"bytes,2,opt,name=data_commitment,json=dataCommitment,proto3" json:"data_commitment,omitempty"`
 	DataLocation   uint64 `protobuf:"varint,3,opt,name=data_location,json=dataLocation,proto3" json:"data_location,omitempty"`
 	Result         bool   `protobuf:"varint,4,opt,name=result,proto3" json:"result,omitempty"`
@@ -1305,9 +1306,9 @@ func (*VerifyResult) Descriptor() ([]byte, []int) {
 	return file_fiamma_zkpverify_zkpverify_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *VerifyResult) GetVerifyId() string {
+func (x *VerifyResult) GetProofId() string {
 	if x != nil {
-		return x.VerifyId
+		return x.ProofId
 	}
 	return ""
 }
@@ -1339,35 +1340,35 @@ var file_fiamma_zkpverify_zkpverify_proto_rawDesc = []byte{
 	0x0a, 0x20, 0x66, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x2f, 0x7a, 0x6b, 0x70, 0x76, 0x65, 0x72, 0x69,
 	0x66, 0x79, 0x2f, 0x7a, 0x6b, 0x70, 0x76, 0x65, 0x72, 0x69, 0x66, 0x79, 0x2e, 0x70, 0x72, 0x6f,
 	0x74, 0x6f, 0x12, 0x10, 0x66, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x2e, 0x7a, 0x6b, 0x70, 0x76, 0x65,
-	0x72, 0x69, 0x66, 0x79, 0x22, 0x78, 0x0a, 0x0a, 0x56, 0x65, 0x72, 0x69, 0x66, 0x79, 0x44, 0x61,
-	0x74, 0x61, 0x12, 0x21, 0x0a, 0x0c, 0x70, 0x72, 0x6f, 0x6f, 0x66, 0x5f, 0x73, 0x79, 0x73, 0x74,
-	0x65, 0x6d, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x0b, 0x70, 0x72, 0x6f, 0x6f, 0x66, 0x53,
-	0x79, 0x73, 0x74, 0x65, 0x6d, 0x12, 0x14, 0x0a, 0x05, 0x70, 0x72, 0x6f, 0x6f, 0x66, 0x18, 0x02,
-	0x20, 0x01, 0x28, 0x0c, 0x52, 0x05, 0x70, 0x72, 0x6f, 0x6f, 0x66, 0x12, 0x21, 0x0a, 0x0c, 0x70,
-	0x75, 0x62, 0x6c, 0x69, 0x63, 0x5f, 0x69, 0x6e, 0x70, 0x75, 0x74, 0x18, 0x03, 0x20, 0x01, 0x28,
-	0x0c, 0x52, 0x0b, 0x70, 0x75, 0x62, 0x6c, 0x69, 0x63, 0x49, 0x6e, 0x70, 0x75, 0x74, 0x12, 0x0e,
-	0x0a, 0x02, 0x76, 0x6b, 0x18, 0x04, 0x20, 0x01, 0x28, 0x0c, 0x52, 0x02, 0x76, 0x6b, 0x22, 0x91,
-	0x01, 0x0a, 0x0c, 0x56, 0x65, 0x72, 0x69, 0x66, 0x79, 0x52, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x12,
-	0x1b, 0x0a, 0x09, 0x76, 0x65, 0x72, 0x69, 0x66, 0x79, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01,
-	0x28, 0x09, 0x52, 0x08, 0x76, 0x65, 0x72, 0x69, 0x66, 0x79, 0x49, 0x64, 0x12, 0x27, 0x0a, 0x0f,
-	0x64, 0x61, 0x74, 0x61, 0x5f, 0x63, 0x6f, 0x6d, 0x6d, 0x69, 0x74, 0x6d, 0x65, 0x6e, 0x74, 0x18,
-	0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0e, 0x64, 0x61, 0x74, 0x61, 0x43, 0x6f, 0x6d, 0x6d, 0x69,
-	0x74, 0x6d, 0x65, 0x6e, 0x74, 0x12, 0x23, 0x0a, 0x0d, 0x64, 0x61, 0x74, 0x61, 0x5f, 0x6c, 0x6f,
-	0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x03, 0x20, 0x01, 0x28, 0x04, 0x52, 0x0c, 0x64, 0x61,
-	0x74, 0x61, 0x4c, 0x6f, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x16, 0x0a, 0x06, 0x72, 0x65,
-	0x73, 0x75, 0x6c, 0x74, 0x18, 0x04, 0x20, 0x01, 0x28, 0x08, 0x52, 0x06, 0x72, 0x65, 0x73, 0x75,
-	0x6c, 0x74, 0x42, 0xaa, 0x01, 0x0a, 0x14, 0x63, 0x6f, 0x6d, 0x2e, 0x66, 0x69, 0x61, 0x6d, 0x6d,
-	0x61, 0x2e, 0x7a, 0x6b, 0x70, 0x76, 0x65, 0x72, 0x69, 0x66, 0x79, 0x42, 0x0e, 0x5a, 0x6b, 0x70,
-	0x76, 0x65, 0x72, 0x69, 0x66, 0x79, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x21, 0x63,
-	0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x73, 0x64, 0x6b, 0x2e, 0x69, 0x6f, 0x2f, 0x61, 0x70, 0x69, 0x2f,
-	0x66, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x2f, 0x7a, 0x6b, 0x70, 0x76, 0x65, 0x72, 0x69, 0x66, 0x79,
-	0xa2, 0x02, 0x03, 0x46, 0x5a, 0x58, 0xaa, 0x02, 0x10, 0x46, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x2e,
-	0x5a, 0x6b, 0x70, 0x76, 0x65, 0x72, 0x69, 0x66, 0x79, 0xca, 0x02, 0x10, 0x46, 0x69, 0x61, 0x6d,
-	0x6d, 0x61, 0x5c, 0x5a, 0x6b, 0x70, 0x76, 0x65, 0x72, 0x69, 0x66, 0x79, 0xe2, 0x02, 0x1c, 0x46,
-	0x69, 0x61, 0x6d, 0x6d, 0x61, 0x5c, 0x5a, 0x6b, 0x70, 0x76, 0x65, 0x72, 0x69, 0x66, 0x79, 0x5c,
-	0x47, 0x50, 0x42, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0xea, 0x02, 0x11, 0x46, 0x69,
-	0x61, 0x6d, 0x6d, 0x61, 0x3a, 0x3a, 0x5a, 0x6b, 0x70, 0x76, 0x65, 0x72, 0x69, 0x66, 0x79, 0x62,
-	0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x72, 0x69, 0x66, 0x79, 0x22, 0x77, 0x0a, 0x09, 0x50, 0x72, 0x6f, 0x6f, 0x66, 0x44, 0x61, 0x74,
+	0x61, 0x12, 0x21, 0x0a, 0x0c, 0x70, 0x72, 0x6f, 0x6f, 0x66, 0x5f, 0x73, 0x79, 0x73, 0x74, 0x65,
+	0x6d, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x0b, 0x70, 0x72, 0x6f, 0x6f, 0x66, 0x53, 0x79,
+	0x73, 0x74, 0x65, 0x6d, 0x12, 0x14, 0x0a, 0x05, 0x70, 0x72, 0x6f, 0x6f, 0x66, 0x18, 0x02, 0x20,
+	0x01, 0x28, 0x0c, 0x52, 0x05, 0x70, 0x72, 0x6f, 0x6f, 0x66, 0x12, 0x21, 0x0a, 0x0c, 0x70, 0x75,
+	0x62, 0x6c, 0x69, 0x63, 0x5f, 0x69, 0x6e, 0x70, 0x75, 0x74, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0c,
+	0x52, 0x0b, 0x70, 0x75, 0x62, 0x6c, 0x69, 0x63, 0x49, 0x6e, 0x70, 0x75, 0x74, 0x12, 0x0e, 0x0a,
+	0x02, 0x76, 0x6b, 0x18, 0x04, 0x20, 0x01, 0x28, 0x0c, 0x52, 0x02, 0x76, 0x6b, 0x22, 0x8f, 0x01,
+	0x0a, 0x0c, 0x56, 0x65, 0x72, 0x69, 0x66, 0x79, 0x52, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x12, 0x19,
+	0x0a, 0x08, 0x70, 0x72, 0x6f, 0x6f, 0x66, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09,
+	0x52, 0x07, 0x70, 0x72, 0x6f, 0x6f, 0x66, 0x49, 0x64, 0x12, 0x27, 0x0a, 0x0f, 0x64, 0x61, 0x74,
+	0x61, 0x5f, 0x63, 0x6f, 0x6d, 0x6d, 0x69, 0x74, 0x6d, 0x65, 0x6e, 0x74, 0x18, 0x02, 0x20, 0x01,
+	0x28, 0x09, 0x52, 0x0e, 0x64, 0x61, 0x74, 0x61, 0x43, 0x6f, 0x6d, 0x6d, 0x69, 0x74, 0x6d, 0x65,
+	0x6e, 0x74, 0x12, 0x23, 0x0a, 0x0d, 0x64, 0x61, 0x74, 0x61, 0x5f, 0x6c, 0x6f, 0x63, 0x61, 0x74,
+	0x69, 0x6f, 0x6e, 0x18, 0x03, 0x20, 0x01, 0x28, 0x04, 0x52, 0x0c, 0x64, 0x61, 0x74, 0x61, 0x4c,
+	0x6f, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x16, 0x0a, 0x06, 0x72, 0x65, 0x73, 0x75, 0x6c,
+	0x74, 0x18, 0x04, 0x20, 0x01, 0x28, 0x08, 0x52, 0x06, 0x72, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x42,
+	0xaa, 0x01, 0x0a, 0x14, 0x63, 0x6f, 0x6d, 0x2e, 0x66, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x2e, 0x7a,
+	0x6b, 0x70, 0x76, 0x65, 0x72, 0x69, 0x66, 0x79, 0x42, 0x0e, 0x5a, 0x6b, 0x70, 0x76, 0x65, 0x72,
+	0x69, 0x66, 0x79, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x21, 0x63, 0x6f, 0x73, 0x6d,
+	0x6f, 0x73, 0x73, 0x64, 0x6b, 0x2e, 0x69, 0x6f, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x66, 0x69, 0x61,
+	0x6d, 0x6d, 0x61, 0x2f, 0x7a, 0x6b, 0x70, 0x76, 0x65, 0x72, 0x69, 0x66, 0x79, 0xa2, 0x02, 0x03,
+	0x46, 0x5a, 0x58, 0xaa, 0x02, 0x10, 0x46, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x2e, 0x5a, 0x6b, 0x70,
+	0x76, 0x65, 0x72, 0x69, 0x66, 0x79, 0xca, 0x02, 0x10, 0x46, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x5c,
+	0x5a, 0x6b, 0x70, 0x76, 0x65, 0x72, 0x69, 0x66, 0x79, 0xe2, 0x02, 0x1c, 0x46, 0x69, 0x61, 0x6d,
+	0x6d, 0x61, 0x5c, 0x5a, 0x6b, 0x70, 0x76, 0x65, 0x72, 0x69, 0x66, 0x79, 0x5c, 0x47, 0x50, 0x42,
+	0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0xea, 0x02, 0x11, 0x46, 0x69, 0x61, 0x6d, 0x6d,
+	0x61, 0x3a, 0x3a, 0x5a, 0x6b, 0x70, 0x76, 0x65, 0x72, 0x69, 0x66, 0x79, 0x62, 0x06, 0x70, 0x72,
+	0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -1384,7 +1385,7 @@ func file_fiamma_zkpverify_zkpverify_proto_rawDescGZIP() []byte {
 
 var file_fiamma_zkpverify_zkpverify_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_fiamma_zkpverify_zkpverify_proto_goTypes = []interface{}{
-	(*VerifyData)(nil),   // 0: fiamma.zkpverify.VerifyData
+	(*ProofData)(nil),    // 0: fiamma.zkpverify.ProofData
 	(*VerifyResult)(nil), // 1: fiamma.zkpverify.VerifyResult
 }
 var file_fiamma_zkpverify_zkpverify_proto_depIdxs = []int32{
@@ -1402,7 +1403,7 @@ func file_fiamma_zkpverify_zkpverify_proto_init() {
 	}
 	if !protoimpl.UnsafeEnabled {
 		file_fiamma_zkpverify_zkpverify_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*VerifyData); i {
+			switch v := v.(*ProofData); i {
 			case 0:
 				return &v.state
 			case 1:

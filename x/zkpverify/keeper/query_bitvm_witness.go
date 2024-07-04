@@ -18,7 +18,12 @@ func (k Keeper) BitVMWitness(goCtx context.Context, req *types.QueryBitVMWitness
 
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
-	witness, found := k.GetBitVMWitness(ctx, []byte(req.ProofId))
+	proofId, err := hex.DecodeString(req.ProofId)
+	if err != nil {
+		return nil, types.ErrInvalidProofId
+	}
+
+	witness, found := k.GetBitVMWitness(ctx, proofId)
 	if !found {
 		return nil, types.ErrBitVMWitnessNotFound
 	}
