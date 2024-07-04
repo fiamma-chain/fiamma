@@ -18,8 +18,8 @@ service Msg {
   // parameters. The authority defaults to the x/gov module account.
   rpc UpdateParams(MsgUpdateParams) returns (MsgUpdateParamsResponse);
 
-  // SendTask defines a (zkpverify) operation for verifying a proof.
-  rpc SendTask(MsgSendTask) returns (MsgSendTaskResponse);
+  // SubmitProof defines a (zkpverify) operation for verifying a proof.
+  rpc SubmitProof(MsgSubmitProof) returns (MsgSubmitProofResponse);
 }
 // MsgUpdateParams is the Msg/UpdateParams request type.
 message MsgUpdateParams {
@@ -41,8 +41,8 @@ message MsgUpdateParams {
 // MsgUpdateParams message.
 message MsgUpdateParamsResponse {}
 
-// MsgSendTask is the proof verify verification request type.
-message MsgSendTask {
+// MsgSubmitProof is the proof verify verification request type.
+message MsgSubmitProof {
   option (cosmos.msg.v1.signer) = "creator";
   string creator = 1;
   string proof_system = 2;
@@ -51,5 +51,5 @@ message MsgSendTask {
   bytes vk = 5;
 }
 
-// MsgSendTaskResponse defines the response structure for executing MsgSendTask
-message MsgSendTaskResponse {}
+// MsgSubmitProofResponse defines the response structure for executing MsgSubmitProof
+message MsgSubmitProofResponse {}

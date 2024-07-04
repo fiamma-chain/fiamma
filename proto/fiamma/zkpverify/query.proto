@@ -77,7 +77,7 @@ message QueryProofDataRequest {
 // QueryProofDataResponse is response type for the Query/ProofData RPC
 // method.
 message QueryProofDataResponse { 
-  fiamma.zkpverify.VerifyData proof_data = 1;
+  fiamma.zkpverify.ProofData proof_data = 1;
 }
 
 

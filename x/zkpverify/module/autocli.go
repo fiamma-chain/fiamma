@@ -28,14 +28,14 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					RpcMethod:      "ProofData",
 					Use:            "get-proof-data [proof_id]",
 					Short:          "Query Proof data stored in the fiamma by proof_id",
-					PositionalArgs: []*autocliv1.PositionalArgDescriptor{},
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "proof_id"}},
 				},
 
 				{
 					RpcMethod:      "BitVMWitness",
 					Use:            "get-bitvm-witness [proof_id]",
 					Short:          "Query bitvm witness stored in the fiamma by proof_id",
-					PositionalArgs: []*autocliv1.PositionalArgDescriptor{},
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "proof_id"}},
 				},
 
 				// this line is used by ignite scaffolding # autocli/query
@@ -50,8 +50,8 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					Skip:      true, // skipped because authority gated
 				},
 				{
-					RpcMethod:      "SendTask",
-					Use:            "send-task [proof_system] [proof] [public_input] [vk]",
+					RpcMethod:      "SubmitProof",
+					Use:            "submit-proof [proof_system] [proof] [public_input] [vk]",
 					Short:          "Send a zkp proof verify tx" + "\n" + "Currently supported proof systems: " + "[PlonkBn254, PlonkBls12_381, Groth16Bn254, Groth16Bn254_BitVM, SP1]",
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "proof_system"}, {ProtoField: "proof"}, {ProtoField: "public_input"}, {ProtoField: "vk"}},
 				},

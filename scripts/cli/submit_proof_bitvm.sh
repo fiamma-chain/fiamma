@@ -17,24 +17,21 @@ fi
 : ${PROOF_FILE:=../../prover_examples/bitvm/proof.bitvm}
 : ${PUBLIC_INPUT_FILE:=../../prover_examples/bitvm/public_input.bitvm}
 : ${VK_FILE:=../../prover_examples/bitvm/vk.bitvm}
+: ${PROOF_SYSTEM:="Groth16Bn254_BitVM"}
+
+NEW_PROOF=$(xxd -p -c 256 $PROOF_FILE | tr -d '\n')
+
+NEW_PUBLIC_INPUT=$(xxd -p -c 256 $PUBLIC_INPUT_FILE | tr -d '\n')
+
+NEW_VK=$(xxd -p -c 256 $VK_FILE | tr -d '\n')
 
 
-NEW_PROOF_FILE=$(mktemp)
-xxd -p -c 256 $PROOF_FILE | tr -d '\n' > $NEW_PROOF_FILE
-
-NEW_PUBLIC_INPUT_FILE=$(mktemp)
-xxd -p -c 256 $PUBLIC_INPUT_FILE | tr -d '\n' > $NEW_PUBLIC_INPUT_FILE
-
-NEW_VK_FILE=$(mktemp)
-xxd -p -c 256 $VK_FILE | tr -d '\n' > $NEW_VK_FILE
-
-
-fiammad tx zkpverify send-task \
+fiammad tx zkpverify submit-proof \
   --from $ACCOUNT --chain-id $CHAIN_ID  \
   --gas $GAS --fees $FEES \
   --node $NODE \
   --keyring-backend test \
-  "Groth16Bn254_BitVM" \
-  $(cat $NEW_PROOF_FILE) \
-	$(cat $NEW_PUBLIC_INPUT_FILE) \
-	$(cat $NEW_VK_FILE)
+  $PROOF_SYSTEM \
+  $NEW_PROOF \
+	$NEW_PUBLIC_INPUT \
+	$NEW_VK

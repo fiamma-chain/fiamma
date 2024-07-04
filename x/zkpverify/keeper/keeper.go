@@ -65,17 +65,17 @@ func (k Keeper) Logger() log.Logger {
 	return k.logger.With("module", fmt.Sprintf("x/%s", types.ModuleName))
 }
 
-// SetVerifyResult stores proof information
-func (k Keeper) SetVerifyResult(ctx sdk.Context, verifyId []byte, verifyResult types.VerifyResult) {
+// SetVerifyResult stores proof verification information
+func (k Keeper) SetVerifyResult(ctx sdk.Context, proofId []byte, verifyResult types.VerifyResult) {
 	store := k.verifyResultStore(ctx)
 	bz := k.cdc.MustMarshal(&verifyResult)
-	store.Set(verifyId, bz)
+	store.Set(proofId, bz)
 }
 
-// GetVerifyResult retrieves proof information
-func (k Keeper) GetVerifyResult(ctx sdk.Context, verifyId []byte) (types.VerifyResult, bool) {
+// GetVerifyResult retrieves proof verification information
+func (k Keeper) GetVerifyResult(ctx sdk.Context, proofId []byte) (types.VerifyResult, bool) {
 	store := k.verifyResultStore(ctx)
-	bz := store.Get(verifyId)
+	bz := store.Get(proofId)
 	if bz == nil {
 		return types.VerifyResult{}, false
 	}
@@ -84,44 +84,44 @@ func (k Keeper) GetVerifyResult(ctx sdk.Context, verifyId []byte) (types.VerifyR
 	return verifyResult, true
 }
 
-// SetVerifyData stores proof information
-func (k Keeper) SetVerifyData(ctx sdk.Context, verifyId []byte, verifyData types.VerifyData) {
-	store := k.verifyDataStore(ctx)
-	bz := k.cdc.MustMarshal(&verifyData)
-	store.Set(verifyId, bz)
+// SetProofData stores proof information
+func (k Keeper) SetProofData(ctx sdk.Context, proofId []byte, proofData types.ProofData) {
+	store := k.proofDataStore(ctx)
+	bz := k.cdc.MustMarshal(&proofData)
+	store.Set(proofId, bz)
 }
 
-// GetVerifyData retrieves proof information
-func (k Keeper) GetVerifyData(ctx sdk.Context, verifyId []byte) (types.VerifyData, bool) {
-	store := k.verifyDataStore(ctx)
-	bz := store.Get(verifyId)
+// GetProofData retrieves proof information
+func (k Keeper) GetProofData(ctx sdk.Context, proofId []byte) (types.ProofData, bool) {
+	store := k.proofDataStore(ctx)
+	bz := store.Get(proofId)
 	if bz == nil {
-		return types.VerifyData{}, false
+		return types.ProofData{}, false
 	}
-	var verifyData types.VerifyData
-	k.cdc.MustUnmarshal(bz, &verifyData)
-	return verifyData, true
+	var proofData types.ProofData
+	k.cdc.MustUnmarshal(bz, &proofData)
+	return proofData, true
 }
 
 // SetBitVMWitness stores witness data
-func (k Keeper) SetBitVMWitness(ctx sdk.Context, verifyId []byte, witnessData []byte) {
+func (k Keeper) SetBitVMWitness(ctx sdk.Context, proofId []byte, witnessData []byte) {
 	store := k.bitVMWitnessStore(ctx)
-	store.Set(verifyId, witnessData)
+	store.Set(proofId, witnessData)
 }
 
 // GetBitVMWitness retrieves witness data from the chain
-func (k Keeper) GetBitVMWitness(ctx sdk.Context, verifyId []byte) ([]byte, bool) {
+func (k Keeper) GetBitVMWitness(ctx sdk.Context, proofId []byte) ([]byte, bool) {
 	store := k.bitVMWitnessStore(ctx)
-	bz := store.Get(verifyId)
+	bz := store.Get(proofId)
 	if bz == nil {
 		return nil, false
 	}
 	return bz, true
 }
 
-func (k Keeper) verifyDataStore(ctx context.Context) prefix.Store {
+func (k Keeper) proofDataStore(ctx context.Context) prefix.Store {
 	storeAdapter := runtime.KVStoreAdapter(k.storeService.OpenKVStore(ctx))
-	return prefix.NewStore(storeAdapter, types.VerifyDataKey)
+	return prefix.NewStore(storeAdapter, types.ProofDataKey)
 }
 
 func (k Keeper) verifyResultStore(ctx context.Context) prefix.Store {

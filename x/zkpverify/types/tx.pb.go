@@ -125,8 +125,8 @@ func (m *MsgUpdateParamsResponse) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_MsgUpdateParamsResponse proto.InternalMessageInfo
 
-// MsgSendTask is the proof verify verification request type.
-type MsgSendTask struct {
+// MsgSubmitProof is the proof verify verification request type.
+type MsgSubmitProof struct {
 	Creator     string `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
 	ProofSystem string `protobuf:"bytes,2,opt,name=proof_system,json=proofSystem,proto3" json:"proof_system,omitempty"`
 	Proof       []byte `protobuf:"bytes,3,opt,name=proof,proto3" json:"proof,omitempty"`
@@ -134,18 +134,18 @@ type MsgSendTask struct {
 	Vk          []byte `protobuf:"bytes,5,opt,name=vk,proto3" json:"vk,omitempty"`
 }
 
-func (m *MsgSendTask) Reset()         { *m = MsgSendTask{} }
-func (m *MsgSendTask) String() string { return proto.CompactTextString(m) }
-func (*MsgSendTask) ProtoMessage()    {}
-func (*MsgSendTask) Descriptor() ([]byte, []int) {
+func (m *MsgSubmitProof) Reset()         { *m = MsgSubmitProof{} }
+func (m *MsgSubmitProof) String() string { return proto.CompactTextString(m) }
+func (*MsgSubmitProof) ProtoMessage()    {}
+func (*MsgSubmitProof) Descriptor() ([]byte, []int) {
 	return fileDescriptor_50c44901a6219663, []int{2}
 }
-func (m *MsgSendTask) XXX_Unmarshal(b []byte) error {
+func (m *MsgSubmitProof) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *MsgSendTask) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *MsgSubmitProof) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_MsgSendTask.Marshal(b, m, deterministic)
+		return xxx_messageInfo_MsgSubmitProof.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -155,69 +155,69 @@ func (m *MsgSendTask) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) 
 		return b[:n], nil
 	}
 }
-func (m *MsgSendTask) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MsgSendTask.Merge(m, src)
+func (m *MsgSubmitProof) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgSubmitProof.Merge(m, src)
 }
-func (m *MsgSendTask) XXX_Size() int {
+func (m *MsgSubmitProof) XXX_Size() int {
 	return m.Size()
 }
-func (m *MsgSendTask) XXX_DiscardUnknown() {
-	xxx_messageInfo_MsgSendTask.DiscardUnknown(m)
+func (m *MsgSubmitProof) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgSubmitProof.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_MsgSendTask proto.InternalMessageInfo
+var xxx_messageInfo_MsgSubmitProof proto.InternalMessageInfo
 
-func (m *MsgSendTask) GetCreator() string {
+func (m *MsgSubmitProof) GetCreator() string {
 	if m != nil {
 		return m.Creator
 	}
 	return ""
 }
 
-func (m *MsgSendTask) GetProofSystem() string {
+func (m *MsgSubmitProof) GetProofSystem() string {
 	if m != nil {
 		return m.ProofSystem
 	}
 	return ""
 }
 
-func (m *MsgSendTask) GetProof() []byte {
+func (m *MsgSubmitProof) GetProof() []byte {
 	if m != nil {
 		return m.Proof
 	}
 	return nil
 }
 
-func (m *MsgSendTask) GetPublicInput() []byte {
+func (m *MsgSubmitProof) GetPublicInput() []byte {
 	if m != nil {
 		return m.PublicInput
 	}
 	return nil
 }
 
-func (m *MsgSendTask) GetVk() []byte {
+func (m *MsgSubmitProof) GetVk() []byte {
 	if m != nil {
 		return m.Vk
 	}
 	return nil
 }
 
-// MsgSendTaskResponse defines the response structure for executing MsgSendTask
-type MsgSendTaskResponse struct {
+// MsgSubmitProofResponse defines the response structure for executing MsgSubmitProof
+type MsgSubmitProofResponse struct {
 }
 
-func (m *MsgSendTaskResponse) Reset()         { *m = MsgSendTaskResponse{} }
-func (m *MsgSendTaskResponse) String() string { return proto.CompactTextString(m) }
-func (*MsgSendTaskResponse) ProtoMessage()    {}
-func (*MsgSendTaskResponse) Descriptor() ([]byte, []int) {
+func (m *MsgSubmitProofResponse) Reset()         { *m = MsgSubmitProofResponse{} }
+func (m *MsgSubmitProofResponse) String() string { return proto.CompactTextString(m) }
+func (*MsgSubmitProofResponse) ProtoMessage()    {}
+func (*MsgSubmitProofResponse) Descriptor() ([]byte, []int) {
 	return fileDescriptor_50c44901a6219663, []int{3}
 }
-func (m *MsgSendTaskResponse) XXX_Unmarshal(b []byte) error {
+func (m *MsgSubmitProofResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *MsgSendTaskResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *MsgSubmitProofResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_MsgSendTaskResponse.Marshal(b, m, deterministic)
+		return xxx_messageInfo_MsgSubmitProofResponse.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -227,58 +227,58 @@ func (m *MsgSendTaskResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte,
 		return b[:n], nil
 	}
 }
-func (m *MsgSendTaskResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MsgSendTaskResponse.Merge(m, src)
+func (m *MsgSubmitProofResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgSubmitProofResponse.Merge(m, src)
 }
-func (m *MsgSendTaskResponse) XXX_Size() int {
+func (m *MsgSubmitProofResponse) XXX_Size() int {
 	return m.Size()
 }
-func (m *MsgSendTaskResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_MsgSendTaskResponse.DiscardUnknown(m)
+func (m *MsgSubmitProofResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgSubmitProofResponse.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_MsgSendTaskResponse proto.InternalMessageInfo
+var xxx_messageInfo_MsgSubmitProofResponse proto.InternalMessageInfo
 
 func init() {
 	proto.RegisterType((*MsgUpdateParams)(nil), "fiamma.zkpverify.MsgUpdateParams")
 	proto.RegisterType((*MsgUpdateParamsResponse)(nil), "fiamma.zkpverify.MsgUpdateParamsResponse")
-	proto.RegisterType((*MsgSendTask)(nil), "fiamma.zkpverify.MsgSendTask")
-	proto.RegisterType((*MsgSendTaskResponse)(nil), "fiamma.zkpverify.MsgSendTaskResponse")
+	proto.RegisterType((*MsgSubmitProof)(nil), "fiamma.zkpverify.MsgSubmitProof")
+	proto.RegisterType((*MsgSubmitProofResponse)(nil), "fiamma.zkpverify.MsgSubmitProofResponse")
 }
 
 func init() { proto.RegisterFile("fiamma/zkpverify/tx.proto", fileDescriptor_50c44901a6219663) }
 
 var fileDescriptor_50c44901a6219663 = []byte{
 	// 466 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x92, 0x4c, 0xcb, 0x4c, 0xcc,
-	0xcd, 0x4d, 0xd4, 0xaf, 0xca, 0x2e, 0x28, 0x4b, 0x2d, 0xca, 0x4c, 0xab, 0xd4, 0x2f, 0xa9, 0xd0,
-	0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0x12, 0x80, 0x48, 0xe9, 0xc1, 0xa5, 0xa4, 0x04, 0x13, 0x73,
-	0x33, 0xf3, 0xf2, 0xf5, 0xc1, 0x24, 0x44, 0x91, 0x94, 0x78, 0x72, 0x7e, 0x71, 0x6e, 0x7e, 0xb1,
-	0x7e, 0x6e, 0x71, 0xba, 0x7e, 0x99, 0x21, 0x88, 0x82, 0x4a, 0x48, 0x42, 0x24, 0xe2, 0xc1, 0x3c,
-	0x7d, 0x08, 0x07, 0x2a, 0x25, 0x92, 0x9e, 0x9f, 0x9e, 0x0f, 0x11, 0x07, 0xb1, 0xa0, 0xa2, 0xb2,
-	0x18, 0x2e, 0x29, 0x48, 0x2c, 0x4a, 0xcc, 0x85, 0x6a, 0x52, 0xda, 0xcb, 0xc8, 0xc5, 0xef, 0x5b,
-	0x9c, 0x1e, 0x5a, 0x90, 0x92, 0x58, 0x92, 0x1a, 0x00, 0x96, 0x11, 0x32, 0xe3, 0xe2, 0x4c, 0x2c,
-	0x2d, 0xc9, 0xc8, 0x2f, 0xca, 0x2c, 0xa9, 0x94, 0x60, 0x54, 0x60, 0xd4, 0xe0, 0x74, 0x92, 0xb8,
-	0xb4, 0x45, 0x57, 0x04, 0x6a, 0x9b, 0x63, 0x4a, 0x4a, 0x51, 0x6a, 0x71, 0x71, 0x70, 0x49, 0x51,
-	0x66, 0x5e, 0x7a, 0x10, 0x42, 0xa9, 0x90, 0x35, 0x17, 0x1b, 0xc4, 0x6c, 0x09, 0x26, 0x05, 0x46,
-	0x0d, 0x6e, 0x23, 0x09, 0x3d, 0x74, 0xaf, 0xea, 0x41, 0x6c, 0x70, 0xe2, 0x3c, 0x71, 0x4f, 0x9e,
-	0x61, 0xc5, 0xf3, 0x0d, 0x5a, 0x8c, 0x41, 0x50, 0x2d, 0x56, 0xa6, 0x4d, 0xcf, 0x37, 0x68, 0x21,
-	0x0c, 0xeb, 0x7a, 0xbe, 0x41, 0x4b, 0x09, 0xea, 0xf4, 0x0a, 0x24, 0xc7, 0xa3, 0xb9, 0x55, 0x49,
-	0x92, 0x4b, 0x1c, 0x4d, 0x28, 0x28, 0xb5, 0xb8, 0x20, 0x3f, 0xaf, 0x38, 0x55, 0x69, 0x21, 0x23,
-	0x17, 0xb7, 0x6f, 0x71, 0x7a, 0x70, 0x6a, 0x5e, 0x4a, 0x48, 0x62, 0x71, 0xb6, 0x90, 0x04, 0x17,
-	0x7b, 0x72, 0x51, 0x6a, 0x62, 0x49, 0x7e, 0x11, 0xc4, 0x53, 0x41, 0x30, 0xae, 0x90, 0x22, 0x17,
-	0x4f, 0x41, 0x51, 0x7e, 0x7e, 0x5a, 0x7c, 0x71, 0x65, 0x71, 0x49, 0x6a, 0x2e, 0xd8, 0xf9, 0x9c,
-	0x41, 0xdc, 0x60, 0xb1, 0x60, 0xb0, 0x90, 0x90, 0x08, 0x17, 0x2b, 0x98, 0x2b, 0xc1, 0xac, 0xc0,
-	0xa8, 0xc1, 0x13, 0x04, 0xe1, 0x80, 0x35, 0x96, 0x26, 0xe5, 0x64, 0x26, 0xc7, 0x67, 0xe6, 0x15,
-	0x94, 0x96, 0x48, 0xb0, 0x80, 0x25, 0xb9, 0x21, 0x62, 0x9e, 0x20, 0x21, 0x21, 0x3e, 0x2e, 0xa6,
-	0xb2, 0x6c, 0x09, 0x56, 0xb0, 0x04, 0x53, 0x59, 0xb6, 0x15, 0x0f, 0xc8, 0x9f, 0x30, 0x9b, 0x95,
-	0x44, 0xb9, 0x84, 0x91, 0x9c, 0x08, 0x73, 0xba, 0xd1, 0x1e, 0x46, 0x2e, 0x66, 0xdf, 0xe2, 0x74,
-	0xa1, 0x18, 0x2e, 0x1e, 0x94, 0x98, 0x51, 0xc4, 0x0c, 0x51, 0x34, 0xdf, 0x4b, 0x69, 0x12, 0x54,
-	0x02, 0xb3, 0x45, 0x28, 0x80, 0x8b, 0x03, 0x1e, 0x38, 0xb2, 0x58, 0xb5, 0xc1, 0xa4, 0xa5, 0x54,
-	0xf1, 0x4a, 0xc3, 0x4c, 0x94, 0x62, 0x6d, 0x00, 0xc5, 0xa9, 0x93, 0xd1, 0x89, 0x47, 0x72, 0x8c,
-	0x17, 0x1e, 0xc9, 0x31, 0x3e, 0x78, 0x24, 0xc7, 0x38, 0xe1, 0xb1, 0x1c, 0xc3, 0x85, 0xc7, 0x72,
-	0x0c, 0x37, 0x1e, 0xcb, 0x31, 0x44, 0x49, 0x60, 0x89, 0xd2, 0x92, 0xca, 0x82, 0xd4, 0xe2, 0x24,
-	0x36, 0x70, 0x7a, 0x34, 0x06, 0x04, 0x00, 0x00, 0xff, 0xff, 0xab, 0x27, 0x2e, 0xa9, 0x3a, 0x03,
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x84, 0x52, 0xbf, 0x8f, 0x12, 0x41,
+	0x14, 0x66, 0x38, 0x39, 0xc3, 0x40, 0x4e, 0x9d, 0x10, 0x6f, 0xd8, 0xc4, 0x95, 0xdb, 0x0a, 0x49,
+	0x64, 0x23, 0x46, 0x8b, 0xb3, 0x92, 0xce, 0x82, 0xe4, 0xb2, 0xc4, 0x42, 0x63, 0x42, 0x06, 0x18,
+	0xd6, 0x09, 0x0e, 0x33, 0x99, 0x19, 0xc8, 0x61, 0x65, 0x2c, 0xad, 0xfc, 0x23, 0x2c, 0x2c, 0x29,
+	0x6c, 0x2d, 0x4d, 0xae, 0xbc, 0x58, 0x59, 0x19, 0x03, 0x05, 0xff, 0x86, 0xd9, 0x99, 0xdd, 0x3b,
+	0x8e, 0xbb, 0x84, 0x66, 0x77, 0xdf, 0xf7, 0x7d, 0xef, 0xc7, 0xf7, 0xde, 0xc2, 0xea, 0x88, 0x11,
+	0xce, 0x49, 0xf8, 0x71, 0x2c, 0x67, 0x54, 0xb1, 0xd1, 0x3c, 0x34, 0xa7, 0x4d, 0xa9, 0x84, 0x11,
+	0xe8, 0xae, 0xa3, 0x9a, 0x17, 0x94, 0x77, 0x8f, 0x70, 0x36, 0x11, 0xa1, 0x7d, 0x3a, 0x91, 0x77,
+	0x38, 0x10, 0x9a, 0x0b, 0x1d, 0x72, 0x1d, 0x87, 0xb3, 0x27, 0xc9, 0x2b, 0x25, 0xaa, 0x8e, 0xe8,
+	0xd9, 0x28, 0x74, 0x41, 0x4a, 0x55, 0x62, 0x11, 0x0b, 0x87, 0x27, 0x5f, 0x29, 0xfa, 0xe0, 0xda,
+	0x24, 0x92, 0x28, 0xc2, 0xd3, 0xa4, 0xe0, 0x27, 0x80, 0x77, 0x3a, 0x3a, 0x7e, 0x2d, 0x87, 0xc4,
+	0xd0, 0x13, 0xcb, 0xa0, 0xe7, 0xb0, 0x48, 0xa6, 0xe6, 0xbd, 0x50, 0xcc, 0xcc, 0x31, 0xa8, 0x81,
+	0x7a, 0xb1, 0x8d, 0x7f, 0xff, 0x78, 0x5c, 0x49, 0xbb, 0xbd, 0x1c, 0x0e, 0x15, 0xd5, 0xba, 0x6b,
+	0x14, 0x9b, 0xc4, 0xd1, 0xa5, 0x14, 0xbd, 0x80, 0xfb, 0xae, 0x36, 0xce, 0xd7, 0x40, 0xbd, 0xd4,
+	0xc2, 0xcd, 0x6d, 0xab, 0x4d, 0xd7, 0xa1, 0x5d, 0x3c, 0xfb, 0xfb, 0x30, 0xf7, 0x7d, 0xbd, 0x68,
+	0x80, 0x28, 0x4d, 0x39, 0x7e, 0xf6, 0x79, 0xbd, 0x68, 0x5c, 0x16, 0xfb, 0xb2, 0x5e, 0x34, 0x82,
+	0x74, 0xf4, 0xd3, 0x8d, 0xe1, 0xb7, 0x66, 0x0d, 0xaa, 0xf0, 0x70, 0x0b, 0x8a, 0xa8, 0x96, 0x62,
+	0xa2, 0x69, 0xf0, 0x0d, 0xc0, 0x83, 0x8e, 0x8e, 0xbb, 0xd3, 0x3e, 0x67, 0xe6, 0x44, 0x09, 0x31,
+	0x42, 0x18, 0xde, 0x1e, 0x28, 0x4a, 0x8c, 0x50, 0xce, 0x57, 0x94, 0x85, 0xe8, 0x08, 0x96, 0x65,
+	0x22, 0xe9, 0xe9, 0xb9, 0x36, 0x94, 0x5b, 0x07, 0xc5, 0xa8, 0x64, 0xb1, 0xae, 0x85, 0x50, 0x05,
+	0x16, 0x6c, 0x88, 0xf7, 0x6a, 0xa0, 0x5e, 0x8e, 0x5c, 0x60, 0x13, 0xa7, 0xfd, 0x0f, 0x6c, 0xd0,
+	0x63, 0x13, 0x39, 0x35, 0xf8, 0x96, 0x25, 0x4b, 0x0e, 0x7b, 0x95, 0x40, 0xe8, 0x00, 0xe6, 0x67,
+	0x63, 0x5c, 0xb0, 0x44, 0x7e, 0x36, 0x3e, 0x2e, 0x27, 0x56, 0xb3, 0xce, 0x01, 0x86, 0xf7, 0xaf,
+	0x4e, 0x99, 0x19, 0x68, 0xfd, 0x02, 0x70, 0xaf, 0xa3, 0x63, 0xf4, 0x0e, 0x96, 0xaf, 0xdc, 0xe7,
+	0xe8, 0xfa, 0x5e, 0xb7, 0x76, 0xe0, 0x3d, 0xda, 0x29, 0xc9, 0xba, 0xa0, 0x37, 0xb0, 0xb4, 0xb9,
+	0xa2, 0xda, 0x8d, 0x99, 0x1b, 0x0a, 0xaf, 0xbe, 0x4b, 0x91, 0x95, 0xf6, 0x0a, 0x9f, 0x92, 0x13,
+	0xb7, 0x5b, 0x67, 0x4b, 0x1f, 0x9c, 0x2f, 0x7d, 0xf0, 0x6f, 0xe9, 0x83, 0xaf, 0x2b, 0x3f, 0x77,
+	0xbe, 0xf2, 0x73, 0x7f, 0x56, 0x7e, 0xee, 0x2d, 0xbe, 0xe1, 0xc2, 0x66, 0x2e, 0xa9, 0xee, 0xef,
+	0xdb, 0xdf, 0xf3, 0xe9, 0xff, 0x00, 0x00, 0x00, 0xff, 0xff, 0x8a, 0xf1, 0x42, 0x47, 0x49, 0x03,
 	0x00, 0x00,
 }
 
@@ -297,8 +297,8 @@ type MsgClient interface {
 	// UpdateParams defines a (governance) operation for updating the module
 	// parameters. The authority defaults to the x/gov module account.
 	UpdateParams(ctx context.Context, in *MsgUpdateParams, opts ...grpc.CallOption) (*MsgUpdateParamsResponse, error)
-	// SendTask defines a (zkpverify) operation for verifying a proof.
-	SendTask(ctx context.Context, in *MsgSendTask, opts ...grpc.CallOption) (*MsgSendTaskResponse, error)
+	// SubmitProof defines a (zkpverify) operation for verifying a proof.
+	SubmitProof(ctx context.Context, in *MsgSubmitProof, opts ...grpc.CallOption) (*MsgSubmitProofResponse, error)
 }
 
 type msgClient struct {
@@ -318,9 +318,9 @@ func (c *msgClient) UpdateParams(ctx context.Context, in *MsgUpdateParams, opts 
 	return out, nil
 }
 
-func (c *msgClient) SendTask(ctx context.Context, in *MsgSendTask, opts ...grpc.CallOption) (*MsgSendTaskResponse, error) {
-	out := new(MsgSendTaskResponse)
-	err := c.cc.Invoke(ctx, "/fiamma.zkpverify.Msg/SendTask", in, out, opts...)
+func (c *msgClient) SubmitProof(ctx context.Context, in *MsgSubmitProof, opts ...grpc.CallOption) (*MsgSubmitProofResponse, error) {
+	out := new(MsgSubmitProofResponse)
+	err := c.cc.Invoke(ctx, "/fiamma.zkpverify.Msg/SubmitProof", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -332,8 +332,8 @@ type MsgServer interface {
 	// UpdateParams defines a (governance) operation for updating the module
 	// parameters. The authority defaults to the x/gov module account.
 	UpdateParams(context.Context, *MsgUpdateParams) (*MsgUpdateParamsResponse, error)
-	// SendTask defines a (zkpverify) operation for verifying a proof.
-	SendTask(context.Context, *MsgSendTask) (*MsgSendTaskResponse, error)
+	// SubmitProof defines a (zkpverify) operation for verifying a proof.
+	SubmitProof(context.Context, *MsgSubmitProof) (*MsgSubmitProofResponse, error)
 }
 
 // UnimplementedMsgServer can be embedded to have forward compatible implementations.
@@ -343,8 +343,8 @@ type UnimplementedMsgServer struct {
 func (*UnimplementedMsgServer) UpdateParams(ctx context.Context, req *MsgUpdateParams) (*MsgUpdateParamsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateParams not implemented")
 }
-func (*UnimplementedMsgServer) SendTask(ctx context.Context, req *MsgSendTask) (*MsgSendTaskResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SendTask not implemented")
+func (*UnimplementedMsgServer) SubmitProof(ctx context.Context, req *MsgSubmitProof) (*MsgSubmitProofResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SubmitProof not implemented")
 }
 
 func RegisterMsgServer(s grpc1.Server, srv MsgServer) {
@@ -369,20 +369,20 @@ func _Msg_UpdateParams_Handler(srv interface{}, ctx context.Context, dec func(in
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Msg_SendTask_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(MsgSendTask)
+func _Msg_SubmitProof_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgSubmitProof)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(MsgServer).SendTask(ctx, in)
+		return srv.(MsgServer).SubmitProof(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/fiamma.zkpverify.Msg/SendTask",
+		FullMethod: "/fiamma.zkpverify.Msg/SubmitProof",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MsgServer).SendTask(ctx, req.(*MsgSendTask))
+		return srv.(MsgServer).SubmitProof(ctx, req.(*MsgSubmitProof))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -396,8 +396,8 @@ var _Msg_serviceDesc = grpc.ServiceDesc{
 			Handler:    _Msg_UpdateParams_Handler,
 		},
 		{
-			MethodName: "SendTask",
-			Handler:    _Msg_SendTask_Handler,
+			MethodName: "SubmitProof",
+			Handler:    _Msg_SubmitProof_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
@@ -467,7 +467,7 @@ func (m *MsgUpdateParamsResponse) MarshalToSizedBuffer(dAtA []byte) (int, error)
 	return len(dAtA) - i, nil
 }
 
-func (m *MsgSendTask) Marshal() (dAtA []byte, err error) {
+func (m *MsgSubmitProof) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -477,12 +477,12 @@ func (m *MsgSendTask) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *MsgSendTask) MarshalTo(dAtA []byte) (int, error) {
+func (m *MsgSubmitProof) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *MsgSendTask) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *MsgSubmitProof) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -525,7 +525,7 @@ func (m *MsgSendTask) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
-func (m *MsgSendTaskResponse) Marshal() (dAtA []byte, err error) {
+func (m *MsgSubmitProofResponse) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -535,12 +535,12 @@ func (m *MsgSendTaskResponse) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *MsgSendTaskResponse) MarshalTo(dAtA []byte) (int, error) {
+func (m *MsgSubmitProofResponse) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *MsgSendTaskResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *MsgSubmitProofResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -583,7 +583,7 @@ func (m *MsgUpdateParamsResponse) Size() (n int) {
 	return n
 }
 
-func (m *MsgSendTask) Size() (n int) {
+func (m *MsgSubmitProof) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -612,7 +612,7 @@ func (m *MsgSendTask) Size() (n int) {
 	return n
 }
 
-func (m *MsgSendTaskResponse) Size() (n int) {
+func (m *MsgSubmitProofResponse) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -792,7 +792,7 @@ func (m *MsgUpdateParamsResponse) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *MsgSendTask) Unmarshal(dAtA []byte) error {
+func (m *MsgSubmitProof) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -815,10 +815,10 @@ func (m *MsgSendTask) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: MsgSendTask: wiretype end group for non-group")
+			return fmt.Errorf("proto: MsgSubmitProof: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: MsgSendTask: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: MsgSubmitProof: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
@@ -1008,7 +1008,7 @@ func (m *MsgSendTask) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *MsgSendTaskResponse) Unmarshal(dAtA []byte) error {
+func (m *MsgSubmitProofResponse) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -1031,10 +1031,10 @@ func (m *MsgSendTaskResponse) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: MsgSendTaskResponse: wiretype end group for non-group")
+			return fmt.Errorf("proto: MsgSubmitProofResponse: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: MsgSendTaskResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: MsgSubmitProofResponse: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		default:

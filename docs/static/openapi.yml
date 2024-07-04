@@ -8503,7 +8503,7 @@ paths:
                     type: string
                     format: byte
                 title: >-
-                  VerifyData is the data structure for the proof verification
+                  ProofData is the data structure for the proof verification
                   request
             description: >-
               QueryProofDataResponse is response type for the Query/ProofData
@@ -8693,18 +8693,18 @@ paths:
           type: boolean
       tags:
         - Query
-  /fiamma.zkpverify.Msg/SendTask:
+  /fiamma.zkpverify.Msg/SubmitProof:
     post:
-      summary: SendTask defines a (zkpverify) operation for verifying a proof.
-      operationId: FiammaZkpverifyMsg_SendTask
+      summary: SubmitProof defines a (zkpverify) operation for verifying a proof.
+      operationId: FiammaZkpverifyMsg_SubmitProof
       responses:
         '200':
           description: A successful response.
           schema:
             type: object
             title: >-
-              MsgSendTaskResponse defines the response structure for executing
-              MsgSendTask
+              MsgSubmitProofResponse defines the response structure for
+              executing MsgSubmitProof
         default:
           description: An unexpected error response.
           schema:
@@ -8725,7 +8725,7 @@ paths:
                   additionalProperties: {}
       parameters:
         - name: body
-          description: MsgSendTask is the proof verify verification request type.
+          description: MsgSubmitProof is the proof verify verification request type.
           in: body
           required: true
           schema:
@@ -8744,7 +8744,7 @@ paths:
               vk:
                 type: string
                 format: byte
-            description: MsgSendTask is the proof verify verification request type.
+            description: MsgSubmitProof is the proof verify verification request type.
       tags:
         - Msg
   /fiamma.zkpverify.Msg/UpdateParams:
@@ -19519,6 +19519,22 @@ definitions:
   fiamma.zkpverify.Params:
     type: object
     description: Params defines the parameters for the module.
+  fiamma.zkpverify.ProofData:
+    type: object
+    properties:
+      proof_system:
+        type: string
+        format: uint64
+      proof:
+        type: string
+        format: byte
+      public_input:
+        type: string
+        format: byte
+      vk:
+        type: string
+        format: byte
+    title: ProofData is the data structure for the proof verification request
   fiamma.zkpverify.QueryBitVMWitnessResponse:
     type: object
     properties:
@@ -19586,27 +19602,11 @@ definitions:
           vk:
             type: string
             format: byte
-        title: VerifyData is the data structure for the proof verification request
+        title: ProofData is the data structure for the proof verification request
     description: |-
       QueryProofDataResponse is response type for the Query/ProofData RPC
       method.
-  fiamma.zkpverify.VerifyData:
-    type: object
-    properties:
-      proof_system:
-        type: string
-        format: uint64
-      proof:
-        type: string
-        format: byte
-      public_input:
-        type: string
-        format: byte
-      vk:
-        type: string
-        format: byte
-    title: VerifyData is the data structure for the proof verification request
-  fiamma.zkpverify.MsgSendTask:
+  fiamma.zkpverify.MsgSubmitProof:
     type: object
     properties:
       creator:
@@ -19622,12 +19622,12 @@ definitions:
       vk:
         type: string
         format: byte
-    description: MsgSendTask is the proof verify verification request type.
-  fiamma.zkpverify.MsgSendTaskResponse:
+    description: MsgSubmitProof is the proof verify verification request type.
+  fiamma.zkpverify.MsgSubmitProofResponse:
     type: object
     title: >-
-      MsgSendTaskResponse defines the response structure for executing
-      MsgSendTask
+      MsgSubmitProofResponse defines the response structure for executing
+      MsgSubmitProof
   fiamma.zkpverify.MsgUpdateParams:
     type: object
     properties:

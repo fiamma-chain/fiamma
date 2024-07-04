@@ -3,7 +3,6 @@ package keeper
 import (
 	"bytes"
 	"crypto/sha256"
-	"encoding/json"
 
 	"fiamma/x/zkpverify/types"
 	"fiamma/x/zkpverify/verifiers"
@@ -14,50 +13,58 @@ import (
 	"github.com/consensys/gnark/backend/witness"
 )
 
-// GetVerifyId returns the verifyId
-func (k Keeper) GetVerifyId(verifyData types.VerifyData) ([32]byte, error) {
-	byteArray, err := json.Marshal(verifyData)
+// GetProofId returns the proof id
+func (k Keeper) GetProofId(proofData types.ProofData) ([32]byte, error) {
+	var buf bytes.Buffer
+	proofSystem, err := types.ProofSystemIdToString(types.ProofSystemId(proofData.ProofSystem))
 	if err != nil {
 		return [32]byte{}, err
 	}
-	return sha256.Sum256(byteArray), nil
+
+	buf.Write([]byte(proofSystem))
+	buf.Write(proofData.Proof)
+	buf.Write(proofData.PublicInput)
+	buf.Write(proofData.Vk)
+
+	hash := sha256.Sum256(buf.Bytes())
+	return hash, nil
 }
 
-func (k Keeper) verifyProof(verifyData *types.VerifyData) (bool, []byte) {
-	switch verifyData.ProofSystem {
+func (k Keeper) verifyProof(proofData *types.ProofData) (bool, []byte) {
+	switch proofData.ProofSystem {
 	case uint64(types.PlonkBls12_381):
-		verifyResult := k.verifyPlonkProofBLS12_381(verifyData.Proof, verifyData.PublicInput, verifyData.Vk)
+		verifyResult := k.verifyPlonkProofBLS12_381(proofData.Proof, proofData.PublicInput, proofData.Vk)
 
 		k.Logger().Info("PLONK BLS12-381 proof verification:", "result", verifyResult)
 		return verifyResult, nil
 	case uint64(types.PlonkBn254):
-		verifyResult := k.verifyPlonkProofBN254(verifyData.Proof, verifyData.PublicInput, verifyData.Vk)
+		verifyResult := k.verifyPlonkProofBN254(proofData.Proof, proofData.PublicInput, proofData.Vk)
 
 		k.Logger().Info("PLONK BN254 proof verification:", "result", verifyResult)
 		return verifyResult, nil
 	case uint64(types.Groth16Bn254):
-		verifyResult := k.verifyGroth16ProofBN254(verifyData.Proof, verifyData.PublicInput, verifyData.Vk)
+		verifyResult := k.verifyGroth16ProofBN254(proofData.Proof, proofData.PublicInput, proofData.Vk)
 
 		k.Logger().Info("GROTH16 BN254 proof verification:", "result", verifyResult)
 		return verifyResult, nil
 
 	case uint64(types.Groth16Bn254_BitVM):
 
-		vkLen := (uint32)(len(verifyData.Vk))
-		proofLen := (uint32)(len(verifyData.Proof))
-		pubInputLen := (uint32)(len(verifyData.PublicInput))
+		vkLen := (uint32)(len(proofData.Vk))
+		proofLen := (uint32)(len(proofData.Proof))
+		pubInputLen := (uint32)(len(proofData.PublicInput))
 
 		// TODO: The bitvm validation process returns an intermediate comment
 		//  which needs to be submitted to bitcoin at a later date.
-		verifyResult, witness := verifiers.VerifyBitvmProof(verifyData.Vk, vkLen, verifyData.Proof, proofLen, verifyData.PublicInput, pubInputLen)
+		verifyResult, witness := verifiers.VerifyBitvmProof(proofData.Vk, vkLen, proofData.Proof, proofLen, proofData.PublicInput, pubInputLen)
 		k.Logger().Info("GROTH16 BN254 BitVM proof verification:", "result", verifyResult)
 		return verifyResult, witness
 
 	case uint64(types.SP1):
-		proofLen := (uint32)(len(verifyData.Proof))
+		proofLen := (uint32)(len(proofData.Proof))
 		// For the verification of the SP1 proof system, we consider the ELF file as public input.
-		elfLen := (uint32)(len(verifyData.PublicInput))
-		verifyResult := verifiers.VerifySp1Proof(verifyData.Proof, proofLen, verifyData.PublicInput, elfLen)
+		elfLen := (uint32)(len(proofData.PublicInput))
+		verifyResult := verifiers.VerifySp1Proof(proofData.Proof, proofLen, proofData.PublicInput, elfLen)
 		k.Logger().Info("SP1 proof verification:", "result", verifyResult)
 		return verifyResult, nil
 

@@ -24,7 +24,7 @@ will be used by the makefile in the next step.
 Send the proof to the local blockchain. 
 
 ```sh
-make send-proof
+make submit-proof
 ```
 
 This will output the transaction hash.

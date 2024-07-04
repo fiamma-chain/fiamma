@@ -2,18 +2,19 @@
 package zkpverify
 
 import (
+	fmt "fmt"
+	io "io"
+	reflect "reflect"
+	sync "sync"
+
 	_ "cosmossdk.io/api/amino"
 	_ "cosmossdk.io/api/cosmos/msg/v1"
-	fmt "fmt"
 	_ "github.com/cosmos/cosmos-proto"
 	runtime "github.com/cosmos/cosmos-proto/runtime"
 	_ "github.com/cosmos/gogoproto/gogoproto"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoiface "google.golang.org/protobuf/runtime/protoiface"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
-	io "io"
-	reflect "reflect"
-	sync "sync"
 )
 
 var (
@@ -872,33 +873,33 @@ func (x *fastReflection_MsgUpdateParamsResponse) ProtoMethods() *protoiface.Meth
 }
 
 var (
-	md_MsgSendTask              protoreflect.MessageDescriptor
-	fd_MsgSendTask_creator      protoreflect.FieldDescriptor
-	fd_MsgSendTask_proof_system protoreflect.FieldDescriptor
-	fd_MsgSendTask_proof        protoreflect.FieldDescriptor
-	fd_MsgSendTask_public_input protoreflect.FieldDescriptor
-	fd_MsgSendTask_vk           protoreflect.FieldDescriptor
+	md_MsgSubmitProof              protoreflect.MessageDescriptor
+	fd_MsgSubmitProof_creator      protoreflect.FieldDescriptor
+	fd_MsgSubmitProof_proof_system protoreflect.FieldDescriptor
+	fd_MsgSubmitProof_proof        protoreflect.FieldDescriptor
+	fd_MsgSubmitProof_public_input protoreflect.FieldDescriptor
+	fd_MsgSubmitProof_vk           protoreflect.FieldDescriptor
 )
 
 func init() {
 	file_fiamma_zkpverify_tx_proto_init()
-	md_MsgSendTask = File_fiamma_zkpverify_tx_proto.Messages().ByName("MsgSendTask")
-	fd_MsgSendTask_creator = md_MsgSendTask.Fields().ByName("creator")
-	fd_MsgSendTask_proof_system = md_MsgSendTask.Fields().ByName("proof_system")
-	fd_MsgSendTask_proof = md_MsgSendTask.Fields().ByName("proof")
-	fd_MsgSendTask_public_input = md_MsgSendTask.Fields().ByName("public_input")
-	fd_MsgSendTask_vk = md_MsgSendTask.Fields().ByName("vk")
+	md_MsgSubmitProof = File_fiamma_zkpverify_tx_proto.Messages().ByName("MsgSubmitProof")
+	fd_MsgSubmitProof_creator = md_MsgSubmitProof.Fields().ByName("creator")
+	fd_MsgSubmitProof_proof_system = md_MsgSubmitProof.Fields().ByName("proof_system")
+	fd_MsgSubmitProof_proof = md_MsgSubmitProof.Fields().ByName("proof")
+	fd_MsgSubmitProof_public_input = md_MsgSubmitProof.Fields().ByName("public_input")
+	fd_MsgSubmitProof_vk = md_MsgSubmitProof.Fields().ByName("vk")
 }
 
-var _ protoreflect.Message = (*fastReflection_MsgSendTask)(nil)
+var _ protoreflect.Message = (*fastReflection_MsgSubmitProof)(nil)
 
-type fastReflection_MsgSendTask MsgSendTask
+type fastReflection_MsgSubmitProof MsgSubmitProof
 
-func (x *MsgSendTask) ProtoReflect() protoreflect.Message {
-	return (*fastReflection_MsgSendTask)(x)
+func (x *MsgSubmitProof) ProtoReflect() protoreflect.Message {
+	return (*fastReflection_MsgSubmitProof)(x)
 }
 
-func (x *MsgSendTask) slowProtoReflect() protoreflect.Message {
+func (x *MsgSubmitProof) slowProtoReflect() protoreflect.Message {
 	mi := &file_fiamma_zkpverify_tx_proto_msgTypes[2]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -910,43 +911,43 @@ func (x *MsgSendTask) slowProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-var _fastReflection_MsgSendTask_messageType fastReflection_MsgSendTask_messageType
-var _ protoreflect.MessageType = fastReflection_MsgSendTask_messageType{}
+var _fastReflection_MsgSubmitProof_messageType fastReflection_MsgSubmitProof_messageType
+var _ protoreflect.MessageType = fastReflection_MsgSubmitProof_messageType{}
 
-type fastReflection_MsgSendTask_messageType struct{}
+type fastReflection_MsgSubmitProof_messageType struct{}
 
-func (x fastReflection_MsgSendTask_messageType) Zero() protoreflect.Message {
-	return (*fastReflection_MsgSendTask)(nil)
+func (x fastReflection_MsgSubmitProof_messageType) Zero() protoreflect.Message {
+	return (*fastReflection_MsgSubmitProof)(nil)
 }
-func (x fastReflection_MsgSendTask_messageType) New() protoreflect.Message {
-	return new(fastReflection_MsgSendTask)
+func (x fastReflection_MsgSubmitProof_messageType) New() protoreflect.Message {
+	return new(fastReflection_MsgSubmitProof)
 }
-func (x fastReflection_MsgSendTask_messageType) Descriptor() protoreflect.MessageDescriptor {
-	return md_MsgSendTask
+func (x fastReflection_MsgSubmitProof_messageType) Descriptor() protoreflect.MessageDescriptor {
+	return md_MsgSubmitProof
 }
 
 // Descriptor returns message descriptor, which contains only the protobuf
 // type information for the message.
-func (x *fastReflection_MsgSendTask) Descriptor() protoreflect.MessageDescriptor {
-	return md_MsgSendTask
+func (x *fastReflection_MsgSubmitProof) Descriptor() protoreflect.MessageDescriptor {
+	return md_MsgSubmitProof
 }
 
 // Type returns the message type, which encapsulates both Go and protobuf
 // type information. If the Go type information is not needed,
 // it is recommended that the message descriptor be used instead.
-func (x *fastReflection_MsgSendTask) Type() protoreflect.MessageType {
-	return _fastReflection_MsgSendTask_messageType
+func (x *fastReflection_MsgSubmitProof) Type() protoreflect.MessageType {
+	return _fastReflection_MsgSubmitProof_messageType
 }
 
 // New returns a newly allocated and mutable empty message.
-func (x *fastReflection_MsgSendTask) New() protoreflect.Message {
-	return new(fastReflection_MsgSendTask)
+func (x *fastReflection_MsgSubmitProof) New() protoreflect.Message {
+	return new(fastReflection_MsgSubmitProof)
 }
 
 // Interface unwraps the message reflection interface and
 // returns the underlying ProtoMessage interface.
-func (x *fastReflection_MsgSendTask) Interface() protoreflect.ProtoMessage {
-	return (*MsgSendTask)(x)
+func (x *fastReflection_MsgSubmitProof) Interface() protoreflect.ProtoMessage {
+	return (*MsgSubmitProof)(x)
 }
 
 // Range iterates over every populated field in an undefined order,
@@ -954,34 +955,34 @@ func (x *fastReflection_MsgSendTask) Interface() protoreflect.ProtoMessage {
 // Range returns immediately if f returns false.
 // While iterating, mutating operations may only be performed
 // on the current field descriptor.
-func (x *fastReflection_MsgSendTask) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
+func (x *fastReflection_MsgSubmitProof) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
 	if x.Creator != "" {
 		value := protoreflect.ValueOfString(x.Creator)
-		if !f(fd_MsgSendTask_creator, value) {
+		if !f(fd_MsgSubmitProof_creator, value) {
 			return
 		}
 	}
 	if x.ProofSystem != "" {
 		value := protoreflect.ValueOfString(x.ProofSystem)
-		if !f(fd_MsgSendTask_proof_system, value) {
+		if !f(fd_MsgSubmitProof_proof_system, value) {
 			return
 		}
 	}
 	if len(x.Proof) != 0 {
 		value := protoreflect.ValueOfBytes(x.Proof)
-		if !f(fd_MsgSendTask_proof, value) {
+		if !f(fd_MsgSubmitProof_proof, value) {
 			return
 		}
 	}
 	if len(x.PublicInput) != 0 {
 		value := protoreflect.ValueOfBytes(x.PublicInput)
-		if !f(fd_MsgSendTask_public_input, value) {
+		if !f(fd_MsgSubmitProof_public_input, value) {
 			return
 		}
 	}
 	if len(x.Vk) != 0 {
 		value := protoreflect.ValueOfBytes(x.Vk)
-		if !f(fd_MsgSendTask_vk, value) {
+		if !f(fd_MsgSubmitProof_vk, value) {
 			return
 		}
 	}
@@ -998,23 +999,23 @@ func (x *fastReflection_MsgSendTask) Range(f func(protoreflect.FieldDescriptor, 
 // In other cases (aside from the nullable cases above),
 // a proto3 scalar field is populated if it contains a non-zero value, and
 // a repeated field is populated if it is non-empty.
-func (x *fastReflection_MsgSendTask) Has(fd protoreflect.FieldDescriptor) bool {
+func (x *fastReflection_MsgSubmitProof) Has(fd protoreflect.FieldDescriptor) bool {
 	switch fd.FullName() {
-	case "fiamma.zkpverify.MsgSendTask.creator":
+	case "fiamma.zkpverify.MsgSubmitProof.creator":
 		return x.Creator != ""
-	case "fiamma.zkpverify.MsgSendTask.proof_system":
+	case "fiamma.zkpverify.MsgSubmitProof.proof_system":
 		return x.ProofSystem != ""
-	case "fiamma.zkpverify.MsgSendTask.proof":
+	case "fiamma.zkpverify.MsgSubmitProof.proof":
 		return len(x.Proof) != 0
-	case "fiamma.zkpverify.MsgSendTask.public_input":
+	case "fiamma.zkpverify.MsgSubmitProof.public_input":
 		return len(x.PublicInput) != 0
-	case "fiamma.zkpverify.MsgSendTask.vk":
+	case "fiamma.zkpverify.MsgSubmitProof.vk":
 		return len(x.Vk) != 0
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.zkpverify.MsgSendTask"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.zkpverify.MsgSubmitProof"))
 		}
-		panic(fmt.Errorf("message fiamma.zkpverify.MsgSendTask does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message fiamma.zkpverify.MsgSubmitProof does not contain field %s", fd.FullName()))
 	}
 }
 
@@ -1024,23 +1025,23 @@ func (x *fastReflection_MsgSendTask) Has(fd protoreflect.FieldDescriptor) bool {
 // associated with the given field number.
 //
 // Clear is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_MsgSendTask) Clear(fd protoreflect.FieldDescriptor) {
+func (x *fastReflection_MsgSubmitProof) Clear(fd protoreflect.FieldDescriptor) {
 	switch fd.FullName() {
-	case "fiamma.zkpverify.MsgSendTask.creator":
+	case "fiamma.zkpverify.MsgSubmitProof.creator":
 		x.Creator = ""
-	case "fiamma.zkpverify.MsgSendTask.proof_system":
+	case "fiamma.zkpverify.MsgSubmitProof.proof_system":
 		x.ProofSystem = ""
-	case "fiamma.zkpverify.MsgSendTask.proof":
+	case "fiamma.zkpverify.MsgSubmitProof.proof":
 		x.Proof = nil
-	case "fiamma.zkpverify.MsgSendTask.public_input":
+	case "fiamma.zkpverify.MsgSubmitProof.public_input":
 		x.PublicInput = nil
-	case "fiamma.zkpverify.MsgSendTask.vk":
+	case "fiamma.zkpverify.MsgSubmitProof.vk":
 		x.Vk = nil
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.zkpverify.MsgSendTask"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.zkpverify.MsgSubmitProof"))
 		}
-		panic(fmt.Errorf("message fiamma.zkpverify.MsgSendTask does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message fiamma.zkpverify.MsgSubmitProof does not contain field %s", fd.FullName()))
 	}
 }
 
@@ -1050,28 +1051,28 @@ func (x *fastReflection_MsgSendTask) Clear(fd protoreflect.FieldDescriptor) {
 // the default value of a bytes scalar is guaranteed to be a copy.
 // For unpopulated composite types, it returns an empty, read-only view
 // of the value; to obtain a mutable reference, use Mutable.
-func (x *fastReflection_MsgSendTask) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
+func (x *fastReflection_MsgSubmitProof) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
 	switch descriptor.FullName() {
-	case "fiamma.zkpverify.MsgSendTask.creator":
+	case "fiamma.zkpverify.MsgSubmitProof.creator":
 		value := x.Creator
 		return protoreflect.ValueOfString(value)
-	case "fiamma.zkpverify.MsgSendTask.proof_system":
+	case "fiamma.zkpverify.MsgSubmitProof.proof_system":
 		value := x.ProofSystem
 		return protoreflect.ValueOfString(value)
-	case "fiamma.zkpverify.MsgSendTask.proof":
+	case "fiamma.zkpverify.MsgSubmitProof.proof":
 		value := x.Proof
 		return protoreflect.ValueOfBytes(value)
-	case "fiamma.zkpverify.MsgSendTask.public_input":
+	case "fiamma.zkpverify.MsgSubmitProof.public_input":
 		value := x.PublicInput
 		return protoreflect.ValueOfBytes(value)
-	case "fiamma.zkpverify.MsgSendTask.vk":
+	case "fiamma.zkpverify.MsgSubmitProof.vk":
 		value := x.Vk
 		return protoreflect.ValueOfBytes(value)
 	default:
 		if descriptor.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.zkpverify.MsgSendTask"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.zkpverify.MsgSubmitProof"))
 		}
-		panic(fmt.Errorf("message fiamma.zkpverify.MsgSendTask does not contain field %s", descriptor.FullName()))
+		panic(fmt.Errorf("message fiamma.zkpverify.MsgSubmitProof does not contain field %s", descriptor.FullName()))
 	}
 }
 
@@ -1085,23 +1086,23 @@ func (x *fastReflection_MsgSendTask) Get(descriptor protoreflect.FieldDescriptor
 // empty, read-only value, then it panics.
 //
 // Set is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_MsgSendTask) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
+func (x *fastReflection_MsgSubmitProof) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
 	switch fd.FullName() {
-	case "fiamma.zkpverify.MsgSendTask.creator":
+	case "fiamma.zkpverify.MsgSubmitProof.creator":
 		x.Creator = value.Interface().(string)
-	case "fiamma.zkpverify.MsgSendTask.proof_system":
+	case "fiamma.zkpverify.MsgSubmitProof.proof_system":
 		x.ProofSystem = value.Interface().(string)
-	case "fiamma.zkpverify.MsgSendTask.proof":
+	case "fiamma.zkpverify.MsgSubmitProof.proof":
 		x.Proof = value.Bytes()
-	case "fiamma.zkpverify.MsgSendTask.public_input":
+	case "fiamma.zkpverify.MsgSubmitProof.public_input":
 		x.PublicInput = value.Bytes()
-	case "fiamma.zkpverify.MsgSendTask.vk":
+	case "fiamma.zkpverify.MsgSubmitProof.vk":
 		x.Vk = value.Bytes()
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.zkpverify.MsgSendTask"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.zkpverify.MsgSubmitProof"))
 		}
-		panic(fmt.Errorf("message fiamma.zkpverify.MsgSendTask does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message fiamma.zkpverify.MsgSubmitProof does not contain field %s", fd.FullName()))
 	}
 }
 
@@ -1115,56 +1116,56 @@ func (x *fastReflection_MsgSendTask) Set(fd protoreflect.FieldDescriptor, value 
 // It panics if the field does not contain a composite type.
 //
 // Mutable is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_MsgSendTask) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
+func (x *fastReflection_MsgSubmitProof) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "fiamma.zkpverify.MsgSendTask.creator":
-		panic(fmt.Errorf("field creator of message fiamma.zkpverify.MsgSendTask is not mutable"))
-	case "fiamma.zkpverify.MsgSendTask.proof_system":
-		panic(fmt.Errorf("field proof_system of message fiamma.zkpverify.MsgSendTask is not mutable"))
-	case "fiamma.zkpverify.MsgSendTask.proof":
-		panic(fmt.Errorf("field proof of message fiamma.zkpverify.MsgSendTask is not mutable"))
-	case "fiamma.zkpverify.MsgSendTask.public_input":
-		panic(fmt.Errorf("field public_input of message fiamma.zkpverify.MsgSendTask is not mutable"))
-	case "fiamma.zkpverify.MsgSendTask.vk":
-		panic(fmt.Errorf("field vk of message fiamma.zkpverify.MsgSendTask is not mutable"))
+	case "fiamma.zkpverify.MsgSubmitProof.creator":
+		panic(fmt.Errorf("field creator of message fiamma.zkpverify.MsgSubmitProof is not mutable"))
+	case "fiamma.zkpverify.MsgSubmitProof.proof_system":
+		panic(fmt.Errorf("field proof_system of message fiamma.zkpverify.MsgSubmitProof is not mutable"))
+	case "fiamma.zkpverify.MsgSubmitProof.proof":
+		panic(fmt.Errorf("field proof of message fiamma.zkpverify.MsgSubmitProof is not mutable"))
+	case "fiamma.zkpverify.MsgSubmitProof.public_input":
+		panic(fmt.Errorf("field public_input of message fiamma.zkpverify.MsgSubmitProof is not mutable"))
+	case "fiamma.zkpverify.MsgSubmitProof.vk":
+		panic(fmt.Errorf("field vk of message fiamma.zkpverify.MsgSubmitProof is not mutable"))
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.zkpverify.MsgSendTask"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.zkpverify.MsgSubmitProof"))
 		}
-		panic(fmt.Errorf("message fiamma.zkpverify.MsgSendTask does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message fiamma.zkpverify.MsgSubmitProof does not contain field %s", fd.FullName()))
 	}
 }
 
 // NewField returns a new value that is assignable to the field
 // for the given descriptor. For scalars, this returns the default value.
 // For lists, maps, and messages, this returns a new, empty, mutable value.
-func (x *fastReflection_MsgSendTask) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
+func (x *fastReflection_MsgSubmitProof) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "fiamma.zkpverify.MsgSendTask.creator":
+	case "fiamma.zkpverify.MsgSubmitProof.creator":
 		return protoreflect.ValueOfString("")
-	case "fiamma.zkpverify.MsgSendTask.proof_system":
+	case "fiamma.zkpverify.MsgSubmitProof.proof_system":
 		return protoreflect.ValueOfString("")
-	case "fiamma.zkpverify.MsgSendTask.proof":
+	case "fiamma.zkpverify.MsgSubmitProof.proof":
 		return protoreflect.ValueOfBytes(nil)
-	case "fiamma.zkpverify.MsgSendTask.public_input":
+	case "fiamma.zkpverify.MsgSubmitProof.public_input":
 		return protoreflect.ValueOfBytes(nil)
-	case "fiamma.zkpverify.MsgSendTask.vk":
+	case "fiamma.zkpverify.MsgSubmitProof.vk":
 		return protoreflect.ValueOfBytes(nil)
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.zkpverify.MsgSendTask"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.zkpverify.MsgSubmitProof"))
 		}
-		panic(fmt.Errorf("message fiamma.zkpverify.MsgSendTask does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message fiamma.zkpverify.MsgSubmitProof does not contain field %s", fd.FullName()))
 	}
 }
 
 // WhichOneof reports which field within the oneof is populated,
 // returning nil if none are populated.
 // It panics if the oneof descriptor does not belong to this message.
-func (x *fastReflection_MsgSendTask) WhichOneof(d protoreflect.OneofDescriptor) protoreflect.FieldDescriptor {
+func (x *fastReflection_MsgSubmitProof) WhichOneof(d protoreflect.OneofDescriptor) protoreflect.FieldDescriptor {
 	switch d.FullName() {
 	default:
-		panic(fmt.Errorf("%s is not a oneof field in fiamma.zkpverify.MsgSendTask", d.FullName()))
+		panic(fmt.Errorf("%s is not a oneof field in fiamma.zkpverify.MsgSubmitProof", d.FullName()))
 	}
 	panic("unreachable")
 }
@@ -1172,7 +1173,7 @@ func (x *fastReflection_MsgSendTask) WhichOneof(d protoreflect.OneofDescriptor) 
 // GetUnknown retrieves the entire list of unknown fields.
 // The caller may only mutate the contents of the RawFields
 // if the mutated bytes are stored back into the message with SetUnknown.
-func (x *fastReflection_MsgSendTask) GetUnknown() protoreflect.RawFields {
+func (x *fastReflection_MsgSubmitProof) GetUnknown() protoreflect.RawFields {
 	return x.unknownFields
 }
 
@@ -1183,7 +1184,7 @@ func (x *fastReflection_MsgSendTask) GetUnknown() protoreflect.RawFields {
 // An empty RawFields may be passed to clear the fields.
 //
 // SetUnknown is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_MsgSendTask) SetUnknown(fields protoreflect.RawFields) {
+func (x *fastReflection_MsgSubmitProof) SetUnknown(fields protoreflect.RawFields) {
 	x.unknownFields = fields
 }
 
@@ -1195,7 +1196,7 @@ func (x *fastReflection_MsgSendTask) SetUnknown(fields protoreflect.RawFields) {
 // message type, but the details are implementation dependent.
 // Validity is not part of the protobuf data model, and may not
 // be preserved in marshaling or other operations.
-func (x *fastReflection_MsgSendTask) IsValid() bool {
+func (x *fastReflection_MsgSubmitProof) IsValid() bool {
 	return x != nil
 }
 
@@ -1205,9 +1206,9 @@ func (x *fastReflection_MsgSendTask) IsValid() bool {
 // The returned methods type is identical to
 // "google.golang.org/protobuf/runtime/protoiface".Methods.
 // Consult the protoiface package documentation for details.
-func (x *fastReflection_MsgSendTask) ProtoMethods() *protoiface.Methods {
+func (x *fastReflection_MsgSubmitProof) ProtoMethods() *protoiface.Methods {
 	size := func(input protoiface.SizeInput) protoiface.SizeOutput {
-		x := input.Message.Interface().(*MsgSendTask)
+		x := input.Message.Interface().(*MsgSubmitProof)
 		if x == nil {
 			return protoiface.SizeOutput{
 				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
@@ -1249,7 +1250,7 @@ func (x *fastReflection_MsgSendTask) ProtoMethods() *protoiface.Methods {
 	}
 
 	marshal := func(input protoiface.MarshalInput) (protoiface.MarshalOutput, error) {
-		x := input.Message.Interface().(*MsgSendTask)
+		x := input.Message.Interface().(*MsgSubmitProof)
 		if x == nil {
 			return protoiface.MarshalOutput{
 				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
@@ -1314,7 +1315,7 @@ func (x *fastReflection_MsgSendTask) ProtoMethods() *protoiface.Methods {
 		}, nil
 	}
 	unmarshal := func(input protoiface.UnmarshalInput) (protoiface.UnmarshalOutput, error) {
-		x := input.Message.Interface().(*MsgSendTask)
+		x := input.Message.Interface().(*MsgSubmitProof)
 		if x == nil {
 			return protoiface.UnmarshalOutput{
 				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
@@ -1346,10 +1347,10 @@ func (x *fastReflection_MsgSendTask) ProtoMethods() *protoiface.Methods {
 			fieldNum := int32(wire >> 3)
 			wireType := int(wire & 0x7)
 			if wireType == 4 {
-				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: MsgSendTask: wiretype end group for non-group")
+				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: MsgSubmitProof: wiretype end group for non-group")
 			}
 			if fieldNum <= 0 {
-				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: MsgSendTask: illegal tag %d (wire type %d)", fieldNum, wire)
+				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: MsgSubmitProof: illegal tag %d (wire type %d)", fieldNum, wire)
 			}
 			switch fieldNum {
 			case 1:
@@ -1554,23 +1555,23 @@ func (x *fastReflection_MsgSendTask) ProtoMethods() *protoiface.Methods {
 }
 
 var (
-	md_MsgSendTaskResponse protoreflect.MessageDescriptor
+	md_MsgSubmitProofResponse protoreflect.MessageDescriptor
 )
 
 func init() {
 	file_fiamma_zkpverify_tx_proto_init()
-	md_MsgSendTaskResponse = File_fiamma_zkpverify_tx_proto.Messages().ByName("MsgSendTaskResponse")
+	md_MsgSubmitProofResponse = File_fiamma_zkpverify_tx_proto.Messages().ByName("MsgSubmitProofResponse")
 }
 
-var _ protoreflect.Message = (*fastReflection_MsgSendTaskResponse)(nil)
+var _ protoreflect.Message = (*fastReflection_MsgSubmitProofResponse)(nil)
 
-type fastReflection_MsgSendTaskResponse MsgSendTaskResponse
+type fastReflection_MsgSubmitProofResponse MsgSubmitProofResponse
 
-func (x *MsgSendTaskResponse) ProtoReflect() protoreflect.Message {
-	return (*fastReflection_MsgSendTaskResponse)(x)
+func (x *MsgSubmitProofResponse) ProtoReflect() protoreflect.Message {
+	return (*fastReflection_MsgSubmitProofResponse)(x)
 }
 
-func (x *MsgSendTaskResponse) slowProtoReflect() protoreflect.Message {
+func (x *MsgSubmitProofResponse) slowProtoReflect() protoreflect.Message {
 	mi := &file_fiamma_zkpverify_tx_proto_msgTypes[3]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1582,43 +1583,43 @@ func (x *MsgSendTaskResponse) slowProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-var _fastReflection_MsgSendTaskResponse_messageType fastReflection_MsgSendTaskResponse_messageType
-var _ protoreflect.MessageType = fastReflection_MsgSendTaskResponse_messageType{}
+var _fastReflection_MsgSubmitProofResponse_messageType fastReflection_MsgSubmitProofResponse_messageType
+var _ protoreflect.MessageType = fastReflection_MsgSubmitProofResponse_messageType{}
 
-type fastReflection_MsgSendTaskResponse_messageType struct{}
+type fastReflection_MsgSubmitProofResponse_messageType struct{}
 
-func (x fastReflection_MsgSendTaskResponse_messageType) Zero() protoreflect.Message {
-	return (*fastReflection_MsgSendTaskResponse)(nil)
+func (x fastReflection_MsgSubmitProofResponse_messageType) Zero() protoreflect.Message {
+	return (*fastReflection_MsgSubmitProofResponse)(nil)
 }
-func (x fastReflection_MsgSendTaskResponse_messageType) New() protoreflect.Message {
-	return new(fastReflection_MsgSendTaskResponse)
+func (x fastReflection_MsgSubmitProofResponse_messageType) New() protoreflect.Message {
+	return new(fastReflection_MsgSubmitProofResponse)
 }
-func (x fastReflection_MsgSendTaskResponse_messageType) Descriptor() protoreflect.MessageDescriptor {
-	return md_MsgSendTaskResponse
+func (x fastReflection_MsgSubmitProofResponse_messageType) Descriptor() protoreflect.MessageDescriptor {
+	return md_MsgSubmitProofResponse
 }
 
 // Descriptor returns message descriptor, which contains only the protobuf
 // type information for the message.
-func (x *fastReflection_MsgSendTaskResponse) Descriptor() protoreflect.MessageDescriptor {
-	return md_MsgSendTaskResponse
+func (x *fastReflection_MsgSubmitProofResponse) Descriptor() protoreflect.MessageDescriptor {
+	return md_MsgSubmitProofResponse
 }
 
 // Type returns the message type, which encapsulates both Go and protobuf
 // type information. If the Go type information is not needed,
 // it is recommended that the message descriptor be used instead.
-func (x *fastReflection_MsgSendTaskResponse) Type() protoreflect.MessageType {
-	return _fastReflection_MsgSendTaskResponse_messageType
+func (x *fastReflection_MsgSubmitProofResponse) Type() protoreflect.MessageType {
+	return _fastReflection_MsgSubmitProofResponse_messageType
 }
 
 // New returns a newly allocated and mutable empty message.
-func (x *fastReflection_MsgSendTaskResponse) New() protoreflect.Message {
-	return new(fastReflection_MsgSendTaskResponse)
+func (x *fastReflection_MsgSubmitProofResponse) New() protoreflect.Message {
+	return new(fastReflection_MsgSubmitProofResponse)
 }
 
 // Interface unwraps the message reflection interface and
 // returns the underlying ProtoMessage interface.
-func (x *fastReflection_MsgSendTaskResponse) Interface() protoreflect.ProtoMessage {
-	return (*MsgSendTaskResponse)(x)
+func (x *fastReflection_MsgSubmitProofResponse) Interface() protoreflect.ProtoMessage {
+	return (*MsgSubmitProofResponse)(x)
 }
 
 // Range iterates over every populated field in an undefined order,
@@ -1626,7 +1627,7 @@ func (x *fastReflection_MsgSendTaskResponse) Interface() protoreflect.ProtoMessa
 // Range returns immediately if f returns false.
 // While iterating, mutating operations may only be performed
 // on the current field descriptor.
-func (x *fastReflection_MsgSendTaskResponse) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
+func (x *fastReflection_MsgSubmitProofResponse) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
 }
 
 // Has reports whether a field is populated.
@@ -1640,13 +1641,13 @@ func (x *fastReflection_MsgSendTaskResponse) Range(f func(protoreflect.FieldDesc
 // In other cases (aside from the nullable cases above),
 // a proto3 scalar field is populated if it contains a non-zero value, and
 // a repeated field is populated if it is non-empty.
-func (x *fastReflection_MsgSendTaskResponse) Has(fd protoreflect.FieldDescriptor) bool {
+func (x *fastReflection_MsgSubmitProofResponse) Has(fd protoreflect.FieldDescriptor) bool {
 	switch fd.FullName() {
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.zkpverify.MsgSendTaskResponse"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.zkpverify.MsgSubmitProofResponse"))
 		}
-		panic(fmt.Errorf("message fiamma.zkpverify.MsgSendTaskResponse does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message fiamma.zkpverify.MsgSubmitProofResponse does not contain field %s", fd.FullName()))
 	}
 }
 
@@ -1656,13 +1657,13 @@ func (x *fastReflection_MsgSendTaskResponse) Has(fd protoreflect.FieldDescriptor
 // associated with the given field number.
 //
 // Clear is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_MsgSendTaskResponse) Clear(fd protoreflect.FieldDescriptor) {
+func (x *fastReflection_MsgSubmitProofResponse) Clear(fd protoreflect.FieldDescriptor) {
 	switch fd.FullName() {
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.zkpverify.MsgSendTaskResponse"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.zkpverify.MsgSubmitProofResponse"))
 		}
-		panic(fmt.Errorf("message fiamma.zkpverify.MsgSendTaskResponse does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message fiamma.zkpverify.MsgSubmitProofResponse does not contain field %s", fd.FullName()))
 	}
 }
 
@@ -1672,13 +1673,13 @@ func (x *fastReflection_MsgSendTaskResponse) Clear(fd protoreflect.FieldDescript
 // the default value of a bytes scalar is guaranteed to be a copy.
 // For unpopulated composite types, it returns an empty, read-only view
 // of the value; to obtain a mutable reference, use Mutable.
-func (x *fastReflection_MsgSendTaskResponse) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
+func (x *fastReflection_MsgSubmitProofResponse) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
 	switch descriptor.FullName() {
 	default:
 		if descriptor.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.zkpverify.MsgSendTaskResponse"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.zkpverify.MsgSubmitProofResponse"))
 		}
-		panic(fmt.Errorf("message fiamma.zkpverify.MsgSendTaskResponse does not contain field %s", descriptor.FullName()))
+		panic(fmt.Errorf("message fiamma.zkpverify.MsgSubmitProofResponse does not contain field %s", descriptor.FullName()))
 	}
 }
 
@@ -1692,13 +1693,13 @@ func (x *fastReflection_MsgSendTaskResponse) Get(descriptor protoreflect.FieldDe
 // empty, read-only value, then it panics.
 //
 // Set is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_MsgSendTaskResponse) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
+func (x *fastReflection_MsgSubmitProofResponse) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
 	switch fd.FullName() {
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.zkpverify.MsgSendTaskResponse"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.zkpverify.MsgSubmitProofResponse"))
 		}
-		panic(fmt.Errorf("message fiamma.zkpverify.MsgSendTaskResponse does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message fiamma.zkpverify.MsgSubmitProofResponse does not contain field %s", fd.FullName()))
 	}
 }
 
@@ -1712,36 +1713,36 @@ func (x *fastReflection_MsgSendTaskResponse) Set(fd protoreflect.FieldDescriptor
 // It panics if the field does not contain a composite type.
 //
 // Mutable is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_MsgSendTaskResponse) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
+func (x *fastReflection_MsgSubmitProofResponse) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.zkpverify.MsgSendTaskResponse"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.zkpverify.MsgSubmitProofResponse"))
 		}
-		panic(fmt.Errorf("message fiamma.zkpverify.MsgSendTaskResponse does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message fiamma.zkpverify.MsgSubmitProofResponse does not contain field %s", fd.FullName()))
 	}
 }
 
 // NewField returns a new value that is assignable to the field
 // for the given descriptor. For scalars, this returns the default value.
 // For lists, maps, and messages, this returns a new, empty, mutable value.
-func (x *fastReflection_MsgSendTaskResponse) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
+func (x *fastReflection_MsgSubmitProofResponse) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.zkpverify.MsgSendTaskResponse"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.zkpverify.MsgSubmitProofResponse"))
 		}
-		panic(fmt.Errorf("message fiamma.zkpverify.MsgSendTaskResponse does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message fiamma.zkpverify.MsgSubmitProofResponse does not contain field %s", fd.FullName()))
 	}
 }
 
 // WhichOneof reports which field within the oneof is populated,
 // returning nil if none are populated.
 // It panics if the oneof descriptor does not belong to this message.
-func (x *fastReflection_MsgSendTaskResponse) WhichOneof(d protoreflect.OneofDescriptor) protoreflect.FieldDescriptor {
+func (x *fastReflection_MsgSubmitProofResponse) WhichOneof(d protoreflect.OneofDescriptor) protoreflect.FieldDescriptor {
 	switch d.FullName() {
 	default:
-		panic(fmt.Errorf("%s is not a oneof field in fiamma.zkpverify.MsgSendTaskResponse", d.FullName()))
+		panic(fmt.Errorf("%s is not a oneof field in fiamma.zkpverify.MsgSubmitProofResponse", d.FullName()))
 	}
 	panic("unreachable")
 }
@@ -1749,7 +1750,7 @@ func (x *fastReflection_MsgSendTaskResponse) WhichOneof(d protoreflect.OneofDesc
 // GetUnknown retrieves the entire list of unknown fields.
 // The caller may only mutate the contents of the RawFields
 // if the mutated bytes are stored back into the message with SetUnknown.
-func (x *fastReflection_MsgSendTaskResponse) GetUnknown() protoreflect.RawFields {
+func (x *fastReflection_MsgSubmitProofResponse) GetUnknown() protoreflect.RawFields {
 	return x.unknownFields
 }
 
@@ -1760,7 +1761,7 @@ func (x *fastReflection_MsgSendTaskResponse) GetUnknown() protoreflect.RawFields
 // An empty RawFields may be passed to clear the fields.
 //
 // SetUnknown is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_MsgSendTaskResponse) SetUnknown(fields protoreflect.RawFields) {
+func (x *fastReflection_MsgSubmitProofResponse) SetUnknown(fields protoreflect.RawFields) {
 	x.unknownFields = fields
 }
 
@@ -1772,7 +1773,7 @@ func (x *fastReflection_MsgSendTaskResponse) SetUnknown(fields protoreflect.RawF
 // message type, but the details are implementation dependent.
 // Validity is not part of the protobuf data model, and may not
 // be preserved in marshaling or other operations.
-func (x *fastReflection_MsgSendTaskResponse) IsValid() bool {
+func (x *fastReflection_MsgSubmitProofResponse) IsValid() bool {
 	return x != nil
 }
 
@@ -1782,9 +1783,9 @@ func (x *fastReflection_MsgSendTaskResponse) IsValid() bool {
 // The returned methods type is identical to
 // "google.golang.org/protobuf/runtime/protoiface".Methods.
 // Consult the protoiface package documentation for details.
-func (x *fastReflection_MsgSendTaskResponse) ProtoMethods() *protoiface.Methods {
+func (x *fastReflection_MsgSubmitProofResponse) ProtoMethods() *protoiface.Methods {
 	size := func(input protoiface.SizeInput) protoiface.SizeOutput {
-		x := input.Message.Interface().(*MsgSendTaskResponse)
+		x := input.Message.Interface().(*MsgSubmitProofResponse)
 		if x == nil {
 			return protoiface.SizeOutput{
 				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
@@ -1806,7 +1807,7 @@ func (x *fastReflection_MsgSendTaskResponse) ProtoMethods() *protoiface.Methods 
 	}
 
 	marshal := func(input protoiface.MarshalInput) (protoiface.MarshalOutput, error) {
-		x := input.Message.Interface().(*MsgSendTaskResponse)
+		x := input.Message.Interface().(*MsgSubmitProofResponse)
 		if x == nil {
 			return protoiface.MarshalOutput{
 				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
@@ -1836,7 +1837,7 @@ func (x *fastReflection_MsgSendTaskResponse) ProtoMethods() *protoiface.Methods 
 		}, nil
 	}
 	unmarshal := func(input protoiface.UnmarshalInput) (protoiface.UnmarshalOutput, error) {
-		x := input.Message.Interface().(*MsgSendTaskResponse)
+		x := input.Message.Interface().(*MsgSubmitProofResponse)
 		if x == nil {
 			return protoiface.UnmarshalOutput{
 				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
@@ -1868,10 +1869,10 @@ func (x *fastReflection_MsgSendTaskResponse) ProtoMethods() *protoiface.Methods 
 			fieldNum := int32(wire >> 3)
 			wireType := int(wire & 0x7)
 			if wireType == 4 {
-				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: MsgSendTaskResponse: wiretype end group for non-group")
+				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: MsgSubmitProofResponse: wiretype end group for non-group")
 			}
 			if fieldNum <= 0 {
-				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: MsgSendTaskResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: MsgSubmitProofResponse: illegal tag %d (wire type %d)", fieldNum, wire)
 			}
 			switch fieldNum {
 			default:
@@ -1997,8 +1998,8 @@ func (*MsgUpdateParamsResponse) Descriptor() ([]byte, []int) {
 	return file_fiamma_zkpverify_tx_proto_rawDescGZIP(), []int{1}
 }
 
-// MsgSendTask is the proof verify verification request type.
-type MsgSendTask struct {
+// MsgSubmitProof is the proof verify verification request type.
+type MsgSubmitProof struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -2010,8 +2011,8 @@ type MsgSendTask struct {
 	Vk          []byte `protobuf:"bytes,5,opt,name=vk,proto3" json:"vk,omitempty"`
 }
 
-func (x *MsgSendTask) Reset() {
-	*x = MsgSendTask{}
+func (x *MsgSubmitProof) Reset() {
+	*x = MsgSubmitProof{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_fiamma_zkpverify_tx_proto_msgTypes[2]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -2019,61 +2020,61 @@ func (x *MsgSendTask) Reset() {
 	}
 }
 
-func (x *MsgSendTask) String() string {
+func (x *MsgSubmitProof) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*MsgSendTask) ProtoMessage() {}
+func (*MsgSubmitProof) ProtoMessage() {}
 
-// Deprecated: Use MsgSendTask.ProtoReflect.Descriptor instead.
-func (*MsgSendTask) Descriptor() ([]byte, []int) {
+// Deprecated: Use MsgSubmitProof.ProtoReflect.Descriptor instead.
+func (*MsgSubmitProof) Descriptor() ([]byte, []int) {
 	return file_fiamma_zkpverify_tx_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *MsgSendTask) GetCreator() string {
+func (x *MsgSubmitProof) GetCreator() string {
 	if x != nil {
 		return x.Creator
 	}
 	return ""
 }
 
-func (x *MsgSendTask) GetProofSystem() string {
+func (x *MsgSubmitProof) GetProofSystem() string {
 	if x != nil {
 		return x.ProofSystem
 	}
 	return ""
 }
 
-func (x *MsgSendTask) GetProof() []byte {
+func (x *MsgSubmitProof) GetProof() []byte {
 	if x != nil {
 		return x.Proof
 	}
 	return nil
 }
 
-func (x *MsgSendTask) GetPublicInput() []byte {
+func (x *MsgSubmitProof) GetPublicInput() []byte {
 	if x != nil {
 		return x.PublicInput
 	}
 	return nil
 }
 
-func (x *MsgSendTask) GetVk() []byte {
+func (x *MsgSubmitProof) GetVk() []byte {
 	if x != nil {
 		return x.Vk
 	}
 	return nil
 }
 
-// MsgSendTaskResponse defines the response structure for executing MsgSendTask
-type MsgSendTaskResponse struct {
+// MsgSubmitProofResponse defines the response structure for executing MsgSubmitProof
+type MsgSubmitProofResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 }
 
-func (x *MsgSendTaskResponse) Reset() {
-	*x = MsgSendTaskResponse{}
+func (x *MsgSubmitProofResponse) Reset() {
+	*x = MsgSubmitProofResponse{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_fiamma_zkpverify_tx_proto_msgTypes[3]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -2081,14 +2082,14 @@ func (x *MsgSendTaskResponse) Reset() {
 	}
 }
 
-func (x *MsgSendTaskResponse) String() string {
+func (x *MsgSubmitProofResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*MsgSendTaskResponse) ProtoMessage() {}
+func (*MsgSubmitProofResponse) ProtoMessage() {}
 
-// Deprecated: Use MsgSendTaskResponse.ProtoReflect.Descriptor instead.
-func (*MsgSendTaskResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use MsgSubmitProofResponse.ProtoReflect.Descriptor instead.
+func (*MsgSubmitProofResponse) Descriptor() ([]byte, []int) {
 	return file_fiamma_zkpverify_tx_proto_rawDescGZIP(), []int{3}
 }
 
@@ -2119,41 +2120,42 @@ var file_fiamma_zkpverify_tx_proto_rawDesc = []byte{
 	0x7a, 0x6b, 0x70, 0x76, 0x65, 0x72, 0x69, 0x66, 0x79, 0x2f, 0x4d, 0x73, 0x67, 0x55, 0x70, 0x64,
 	0x61, 0x74, 0x65, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x22, 0x19, 0x0a, 0x17, 0x4d, 0x73, 0x67,
 	0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x52, 0x65, 0x73, 0x70,
-	0x6f, 0x6e, 0x73, 0x65, 0x22, 0xa1, 0x01, 0x0a, 0x0b, 0x4d, 0x73, 0x67, 0x53, 0x65, 0x6e, 0x64,
-	0x54, 0x61, 0x73, 0x6b, 0x12, 0x18, 0x0a, 0x07, 0x63, 0x72, 0x65, 0x61, 0x74, 0x6f, 0x72, 0x18,
-	0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x63, 0x72, 0x65, 0x61, 0x74, 0x6f, 0x72, 0x12, 0x21,
-	0x0a, 0x0c, 0x70, 0x72, 0x6f, 0x6f, 0x66, 0x5f, 0x73, 0x79, 0x73, 0x74, 0x65, 0x6d, 0x18, 0x02,
-	0x20, 0x01, 0x28, 0x09, 0x52, 0x0b, 0x70, 0x72, 0x6f, 0x6f, 0x66, 0x53, 0x79, 0x73, 0x74, 0x65,
-	0x6d, 0x12, 0x14, 0x0a, 0x05, 0x70, 0x72, 0x6f, 0x6f, 0x66, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0c,
-	0x52, 0x05, 0x70, 0x72, 0x6f, 0x6f, 0x66, 0x12, 0x21, 0x0a, 0x0c, 0x70, 0x75, 0x62, 0x6c, 0x69,
-	0x63, 0x5f, 0x69, 0x6e, 0x70, 0x75, 0x74, 0x18, 0x04, 0x20, 0x01, 0x28, 0x0c, 0x52, 0x0b, 0x70,
-	0x75, 0x62, 0x6c, 0x69, 0x63, 0x49, 0x6e, 0x70, 0x75, 0x74, 0x12, 0x0e, 0x0a, 0x02, 0x76, 0x6b,
-	0x18, 0x05, 0x20, 0x01, 0x28, 0x0c, 0x52, 0x02, 0x76, 0x6b, 0x3a, 0x0c, 0x82, 0xe7, 0xb0, 0x2a,
-	0x07, 0x63, 0x72, 0x65, 0x61, 0x74, 0x6f, 0x72, 0x22, 0x15, 0x0a, 0x13, 0x4d, 0x73, 0x67, 0x53,
-	0x65, 0x6e, 0x64, 0x54, 0x61, 0x73, 0x6b, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x32,
-	0xbc, 0x01, 0x0a, 0x03, 0x4d, 0x73, 0x67, 0x12, 0x5c, 0x0a, 0x0c, 0x55, 0x70, 0x64, 0x61, 0x74,
-	0x65, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x12, 0x21, 0x2e, 0x66, 0x69, 0x61, 0x6d, 0x6d, 0x61,
-	0x2e, 0x7a, 0x6b, 0x70, 0x76, 0x65, 0x72, 0x69, 0x66, 0x79, 0x2e, 0x4d, 0x73, 0x67, 0x55, 0x70,
-	0x64, 0x61, 0x74, 0x65, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x1a, 0x29, 0x2e, 0x66, 0x69, 0x61,
+	0x6f, 0x6e, 0x73, 0x65, 0x22, 0xa4, 0x01, 0x0a, 0x0e, 0x4d, 0x73, 0x67, 0x53, 0x75, 0x62, 0x6d,
+	0x69, 0x74, 0x50, 0x72, 0x6f, 0x6f, 0x66, 0x12, 0x18, 0x0a, 0x07, 0x63, 0x72, 0x65, 0x61, 0x74,
+	0x6f, 0x72, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x63, 0x72, 0x65, 0x61, 0x74, 0x6f,
+	0x72, 0x12, 0x21, 0x0a, 0x0c, 0x70, 0x72, 0x6f, 0x6f, 0x66, 0x5f, 0x73, 0x79, 0x73, 0x74, 0x65,
+	0x6d, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b, 0x70, 0x72, 0x6f, 0x6f, 0x66, 0x53, 0x79,
+	0x73, 0x74, 0x65, 0x6d, 0x12, 0x14, 0x0a, 0x05, 0x70, 0x72, 0x6f, 0x6f, 0x66, 0x18, 0x03, 0x20,
+	0x01, 0x28, 0x0c, 0x52, 0x05, 0x70, 0x72, 0x6f, 0x6f, 0x66, 0x12, 0x21, 0x0a, 0x0c, 0x70, 0x75,
+	0x62, 0x6c, 0x69, 0x63, 0x5f, 0x69, 0x6e, 0x70, 0x75, 0x74, 0x18, 0x04, 0x20, 0x01, 0x28, 0x0c,
+	0x52, 0x0b, 0x70, 0x75, 0x62, 0x6c, 0x69, 0x63, 0x49, 0x6e, 0x70, 0x75, 0x74, 0x12, 0x0e, 0x0a,
+	0x02, 0x76, 0x6b, 0x18, 0x05, 0x20, 0x01, 0x28, 0x0c, 0x52, 0x02, 0x76, 0x6b, 0x3a, 0x0c, 0x82,
+	0xe7, 0xb0, 0x2a, 0x07, 0x63, 0x72, 0x65, 0x61, 0x74, 0x6f, 0x72, 0x22, 0x18, 0x0a, 0x16, 0x4d,
+	0x73, 0x67, 0x53, 0x75, 0x62, 0x6d, 0x69, 0x74, 0x50, 0x72, 0x6f, 0x6f, 0x66, 0x52, 0x65, 0x73,
+	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x32, 0xc5, 0x01, 0x0a, 0x03, 0x4d, 0x73, 0x67, 0x12, 0x5c, 0x0a,
+	0x0c, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x12, 0x21, 0x2e,
+	0x66, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x2e, 0x7a, 0x6b, 0x70, 0x76, 0x65, 0x72, 0x69, 0x66, 0x79,
+	0x2e, 0x4d, 0x73, 0x67, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73,
+	0x1a, 0x29, 0x2e, 0x66, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x2e, 0x7a, 0x6b, 0x70, 0x76, 0x65, 0x72,
+	0x69, 0x66, 0x79, 0x2e, 0x4d, 0x73, 0x67, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x50, 0x61, 0x72,
+	0x61, 0x6d, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x59, 0x0a, 0x0b, 0x53,
+	0x75, 0x62, 0x6d, 0x69, 0x74, 0x50, 0x72, 0x6f, 0x6f, 0x66, 0x12, 0x20, 0x2e, 0x66, 0x69, 0x61,
 	0x6d, 0x6d, 0x61, 0x2e, 0x7a, 0x6b, 0x70, 0x76, 0x65, 0x72, 0x69, 0x66, 0x79, 0x2e, 0x4d, 0x73,
-	0x67, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x52, 0x65, 0x73,
-	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x50, 0x0a, 0x08, 0x53, 0x65, 0x6e, 0x64, 0x54, 0x61, 0x73,
-	0x6b, 0x12, 0x1d, 0x2e, 0x66, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x2e, 0x7a, 0x6b, 0x70, 0x76, 0x65,
-	0x72, 0x69, 0x66, 0x79, 0x2e, 0x4d, 0x73, 0x67, 0x53, 0x65, 0x6e, 0x64, 0x54, 0x61, 0x73, 0x6b,
-	0x1a, 0x25, 0x2e, 0x66, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x2e, 0x7a, 0x6b, 0x70, 0x76, 0x65, 0x72,
-	0x69, 0x66, 0x79, 0x2e, 0x4d, 0x73, 0x67, 0x53, 0x65, 0x6e, 0x64, 0x54, 0x61, 0x73, 0x6b, 0x52,
-	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x1a, 0x05, 0x80, 0xe7, 0xb0, 0x2a, 0x01, 0x42, 0xa3,
-	0x01, 0x0a, 0x14, 0x63, 0x6f, 0x6d, 0x2e, 0x66, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x2e, 0x7a, 0x6b,
-	0x70, 0x76, 0x65, 0x72, 0x69, 0x66, 0x79, 0x42, 0x07, 0x54, 0x78, 0x50, 0x72, 0x6f, 0x74, 0x6f,
-	0x50, 0x01, 0x5a, 0x21, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x73, 0x64, 0x6b, 0x2e, 0x69, 0x6f,
-	0x2f, 0x61, 0x70, 0x69, 0x2f, 0x66, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x2f, 0x7a, 0x6b, 0x70, 0x76,
-	0x65, 0x72, 0x69, 0x66, 0x79, 0xa2, 0x02, 0x03, 0x46, 0x5a, 0x58, 0xaa, 0x02, 0x10, 0x46, 0x69,
-	0x61, 0x6d, 0x6d, 0x61, 0x2e, 0x5a, 0x6b, 0x70, 0x76, 0x65, 0x72, 0x69, 0x66, 0x79, 0xca, 0x02,
-	0x10, 0x46, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x5c, 0x5a, 0x6b, 0x70, 0x76, 0x65, 0x72, 0x69, 0x66,
-	0x79, 0xe2, 0x02, 0x1c, 0x46, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x5c, 0x5a, 0x6b, 0x70, 0x76, 0x65,
-	0x72, 0x69, 0x66, 0x79, 0x5c, 0x47, 0x50, 0x42, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61,
-	0xea, 0x02, 0x11, 0x46, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x3a, 0x3a, 0x5a, 0x6b, 0x70, 0x76, 0x65,
-	0x72, 0x69, 0x66, 0x79, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x67, 0x53, 0x75, 0x62, 0x6d, 0x69, 0x74, 0x50, 0x72, 0x6f, 0x6f, 0x66, 0x1a, 0x28, 0x2e, 0x66,
+	0x69, 0x61, 0x6d, 0x6d, 0x61, 0x2e, 0x7a, 0x6b, 0x70, 0x76, 0x65, 0x72, 0x69, 0x66, 0x79, 0x2e,
+	0x4d, 0x73, 0x67, 0x53, 0x75, 0x62, 0x6d, 0x69, 0x74, 0x50, 0x72, 0x6f, 0x6f, 0x66, 0x52, 0x65,
+	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x1a, 0x05, 0x80, 0xe7, 0xb0, 0x2a, 0x01, 0x42, 0xa3, 0x01,
+	0x0a, 0x14, 0x63, 0x6f, 0x6d, 0x2e, 0x66, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x2e, 0x7a, 0x6b, 0x70,
+	0x76, 0x65, 0x72, 0x69, 0x66, 0x79, 0x42, 0x07, 0x54, 0x78, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50,
+	0x01, 0x5a, 0x21, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x73, 0x64, 0x6b, 0x2e, 0x69, 0x6f, 0x2f,
+	0x61, 0x70, 0x69, 0x2f, 0x66, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x2f, 0x7a, 0x6b, 0x70, 0x76, 0x65,
+	0x72, 0x69, 0x66, 0x79, 0xa2, 0x02, 0x03, 0x46, 0x5a, 0x58, 0xaa, 0x02, 0x10, 0x46, 0x69, 0x61,
+	0x6d, 0x6d, 0x61, 0x2e, 0x5a, 0x6b, 0x70, 0x76, 0x65, 0x72, 0x69, 0x66, 0x79, 0xca, 0x02, 0x10,
+	0x46, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x5c, 0x5a, 0x6b, 0x70, 0x76, 0x65, 0x72, 0x69, 0x66, 0x79,
+	0xe2, 0x02, 0x1c, 0x46, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x5c, 0x5a, 0x6b, 0x70, 0x76, 0x65, 0x72,
+	0x69, 0x66, 0x79, 0x5c, 0x47, 0x50, 0x42, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0xea,
+	0x02, 0x11, 0x46, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x3a, 0x3a, 0x5a, 0x6b, 0x70, 0x76, 0x65, 0x72,
+	0x69, 0x66, 0x79, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -2172,16 +2174,16 @@ var file_fiamma_zkpverify_tx_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_fiamma_zkpverify_tx_proto_goTypes = []interface{}{
 	(*MsgUpdateParams)(nil),         // 0: fiamma.zkpverify.MsgUpdateParams
 	(*MsgUpdateParamsResponse)(nil), // 1: fiamma.zkpverify.MsgUpdateParamsResponse
-	(*MsgSendTask)(nil),             // 2: fiamma.zkpverify.MsgSendTask
-	(*MsgSendTaskResponse)(nil),     // 3: fiamma.zkpverify.MsgSendTaskResponse
+	(*MsgSubmitProof)(nil),          // 2: fiamma.zkpverify.MsgSubmitProof
+	(*MsgSubmitProofResponse)(nil),  // 3: fiamma.zkpverify.MsgSubmitProofResponse
 	(*Params)(nil),                  // 4: fiamma.zkpverify.Params
 }
 var file_fiamma_zkpverify_tx_proto_depIdxs = []int32{
 	4, // 0: fiamma.zkpverify.MsgUpdateParams.params:type_name -> fiamma.zkpverify.Params
 	0, // 1: fiamma.zkpverify.Msg.UpdateParams:input_type -> fiamma.zkpverify.MsgUpdateParams
-	2, // 2: fiamma.zkpverify.Msg.SendTask:input_type -> fiamma.zkpverify.MsgSendTask
+	2, // 2: fiamma.zkpverify.Msg.SubmitProof:input_type -> fiamma.zkpverify.MsgSubmitProof
 	1, // 3: fiamma.zkpverify.Msg.UpdateParams:output_type -> fiamma.zkpverify.MsgUpdateParamsResponse
-	3, // 4: fiamma.zkpverify.Msg.SendTask:output_type -> fiamma.zkpverify.MsgSendTaskResponse
+	3, // 4: fiamma.zkpverify.Msg.SubmitProof:output_type -> fiamma.zkpverify.MsgSubmitProofResponse
 	3, // [3:5] is the sub-list for method output_type
 	1, // [1:3] is the sub-list for method input_type
 	1, // [1:1] is the sub-list for extension type_name
@@ -2221,7 +2223,7 @@ func file_fiamma_zkpverify_tx_proto_init() {
 			}
 		}
 		file_fiamma_zkpverify_tx_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*MsgSendTask); i {
+			switch v := v.(*MsgSubmitProof); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2233,7 +2235,7 @@ func file_fiamma_zkpverify_tx_proto_init() {
 			}
 		}
 		file_fiamma_zkpverify_tx_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*MsgSendTaskResponse); i {
+			switch v := v.(*MsgSubmitProofResponse); i {
 			case 0:
 				return &v.state
 			case 1:

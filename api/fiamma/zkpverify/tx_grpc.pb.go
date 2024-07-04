@@ -20,7 +20,7 @@ const _ = grpc.SupportPackageIsVersion7
 
 const (
 	Msg_UpdateParams_FullMethodName = "/fiamma.zkpverify.Msg/UpdateParams"
-	Msg_SendTask_FullMethodName     = "/fiamma.zkpverify.Msg/SendTask"
+	Msg_SubmitProof_FullMethodName  = "/fiamma.zkpverify.Msg/SubmitProof"
 )
 
 // MsgClient is the client API for Msg service.
@@ -30,8 +30,8 @@ type MsgClient interface {
 	// UpdateParams defines a (governance) operation for updating the module
 	// parameters. The authority defaults to the x/gov module account.
 	UpdateParams(ctx context.Context, in *MsgUpdateParams, opts ...grpc.CallOption) (*MsgUpdateParamsResponse, error)
-	// SendTask defines a (zkpverify) operation for verifying a proof.
-	SendTask(ctx context.Context, in *MsgSendTask, opts ...grpc.CallOption) (*MsgSendTaskResponse, error)
+	// SubmitProof defines a (zkpverify) operation for verifying a proof.
+	SubmitProof(ctx context.Context, in *MsgSubmitProof, opts ...grpc.CallOption) (*MsgSubmitProofResponse, error)
 }
 
 type msgClient struct {
@@ -51,9 +51,9 @@ func (c *msgClient) UpdateParams(ctx context.Context, in *MsgUpdateParams, opts 
 	return out, nil
 }
 
-func (c *msgClient) SendTask(ctx context.Context, in *MsgSendTask, opts ...grpc.CallOption) (*MsgSendTaskResponse, error) {
-	out := new(MsgSendTaskResponse)
-	err := c.cc.Invoke(ctx, Msg_SendTask_FullMethodName, in, out, opts...)
+func (c *msgClient) SubmitProof(ctx context.Context, in *MsgSubmitProof, opts ...grpc.CallOption) (*MsgSubmitProofResponse, error) {
+	out := new(MsgSubmitProofResponse)
+	err := c.cc.Invoke(ctx, Msg_SubmitProof_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -67,8 +67,8 @@ type MsgServer interface {
 	// UpdateParams defines a (governance) operation for updating the module
 	// parameters. The authority defaults to the x/gov module account.
 	UpdateParams(context.Context, *MsgUpdateParams) (*MsgUpdateParamsResponse, error)
-	// SendTask defines a (zkpverify) operation for verifying a proof.
-	SendTask(context.Context, *MsgSendTask) (*MsgSendTaskResponse, error)
+	// SubmitProof defines a (zkpverify) operation for verifying a proof.
+	SubmitProof(context.Context, *MsgSubmitProof) (*MsgSubmitProofResponse, error)
 	mustEmbedUnimplementedMsgServer()
 }
 
@@ -79,8 +79,8 @@ type UnimplementedMsgServer struct {
 func (UnimplementedMsgServer) UpdateParams(context.Context, *MsgUpdateParams) (*MsgUpdateParamsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateParams not implemented")
 }
-func (UnimplementedMsgServer) SendTask(context.Context, *MsgSendTask) (*MsgSendTaskResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SendTask not implemented")
+func (UnimplementedMsgServer) SubmitProof(context.Context, *MsgSubmitProof) (*MsgSubmitProofResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SubmitProof not implemented")
 }
 func (UnimplementedMsgServer) mustEmbedUnimplementedMsgServer() {}
 
@@ -113,20 +113,20 @@ func _Msg_UpdateParams_Handler(srv interface{}, ctx context.Context, dec func(in
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Msg_SendTask_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(MsgSendTask)
+func _Msg_SubmitProof_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgSubmitProof)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(MsgServer).SendTask(ctx, in)
+		return srv.(MsgServer).SubmitProof(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Msg_SendTask_FullMethodName,
+		FullMethod: Msg_SubmitProof_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MsgServer).SendTask(ctx, req.(*MsgSendTask))
+		return srv.(MsgServer).SubmitProof(ctx, req.(*MsgSubmitProof))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -143,8 +143,8 @@ var Msg_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Msg_UpdateParams_Handler,
 		},
 		{
-			MethodName: "SendTask",
-			Handler:    _Msg_SendTask_Handler,
+			MethodName: "SubmitProof",
+			Handler:    _Msg_SubmitProof_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
