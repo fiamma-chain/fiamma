@@ -10,6 +10,7 @@ import (
 	"github.com/cosmos/cosmos-sdk/codec"
 	"github.com/cosmos/cosmos-sdk/runtime"
 	sdk "github.com/cosmos/cosmos-sdk/types"
+	"github.com/cosmos/cosmos-sdk/types/query"
 
 	"fiamma/nubitda"
 	"fiamma/x/zkpverify/types"
@@ -132,4 +133,25 @@ func (k Keeper) verifyResultStore(ctx context.Context) prefix.Store {
 func (k Keeper) bitVMWitnessStore(ctx context.Context) prefix.Store {
 	storeAdapter := runtime.KVStoreAdapter(k.storeService.OpenKVStore(ctx))
 	return prefix.NewStore(storeAdapter, types.BitVMWitnessKey)
+}
+
+func (k Keeper) GetPendingProofs(ctx context.Context, req *types.QueryPendingProofRequest) (*types.QueryPendingProofResponse, error) {
+	store := k.verifyResultStore(ctx)
+	var verifyResults []*types.VerifyResult
+	pageRes, err := query.Paginate(store, req.Pagination, func(key []byte, value []byte) error {
+		var verifyResult types.VerifyResult
+		if err := k.cdc.Unmarshal(value, &verifyResult); err != nil {
+			return err
+		}
+		if verifyResult.Status != types.VerificationStatus_DEFINITIVEVALIDATION {
+			verifyResults = append(verifyResults, &verifyResult)
+		}
+		return nil
+	})
+
+	if err != nil {
+		return nil, err
+	}
+
+	return &types.QueryPendingProofResponse{PendingProofs: verifyResults, Pagination: pageRes}, nil
 }

@@ -54,10 +54,12 @@ func (k msgServer) SubmitProof(goCtx context.Context, msg *types.MsgSubmitProof)
 
 	// store verify data in the store
 	verifyResult := types.VerifyResult{
-		ProofId:        proofIdStr,
-		DataCommitment: dataCommitmentStr,
-		DataLocation:   uint64(dataLocationId),
-		Result:         result,
+		ProofId:                    proofIdStr,
+		DataCommitment:             dataCommitmentStr,
+		DataLocation:               uint64(dataLocationId),
+		Result:                     result,
+		Status:                     types.VerificationStatus_INITIALVALIDATION,
+		CommunityVerificationCount: uint64(0),
 	}
 
 	k.SetVerifyResult(ctx, proofId[:], verifyResult)

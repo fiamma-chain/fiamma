@@ -19,8 +19,9 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	Msg_UpdateParams_FullMethodName = "/fiamma.zkpverify.Msg/UpdateParams"
-	Msg_SubmitProof_FullMethodName  = "/fiamma.zkpverify.Msg/SubmitProof"
+	Msg_UpdateParams_FullMethodName                = "/fiamma.zkpverify.Msg/UpdateParams"
+	Msg_SubmitProof_FullMethodName                 = "/fiamma.zkpverify.Msg/SubmitProof"
+	Msg_SubmitCommunityVerification_FullMethodName = "/fiamma.zkpverify.Msg/SubmitCommunityVerification"
 )
 
 // MsgClient is the client API for Msg service.
@@ -32,6 +33,8 @@ type MsgClient interface {
 	UpdateParams(ctx context.Context, in *MsgUpdateParams, opts ...grpc.CallOption) (*MsgUpdateParamsResponse, error)
 	// SubmitProof defines a (zkpverify) operation for verifying a proof.
 	SubmitProof(ctx context.Context, in *MsgSubmitProof, opts ...grpc.CallOption) (*MsgSubmitProofResponse, error)
+	// SubmitCommunityVerification defines a community (zkpverify) operation for verifying a proof.
+	SubmitCommunityVerification(ctx context.Context, in *MsgSubmitCommunityVerification, opts ...grpc.CallOption) (*MsgSubmitCommunityVerificationResponse, error)
 }
 
 type msgClient struct {
@@ -60,6 +63,15 @@ func (c *msgClient) SubmitProof(ctx context.Context, in *MsgSubmitProof, opts ..
 	return out, nil
 }
 
+func (c *msgClient) SubmitCommunityVerification(ctx context.Context, in *MsgSubmitCommunityVerification, opts ...grpc.CallOption) (*MsgSubmitCommunityVerificationResponse, error) {
+	out := new(MsgSubmitCommunityVerificationResponse)
+	err := c.cc.Invoke(ctx, Msg_SubmitCommunityVerification_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // MsgServer is the server API for Msg service.
 // All implementations must embed UnimplementedMsgServer
 // for forward compatibility
@@ -69,6 +81,8 @@ type MsgServer interface {
 	UpdateParams(context.Context, *MsgUpdateParams) (*MsgUpdateParamsResponse, error)
 	// SubmitProof defines a (zkpverify) operation for verifying a proof.
 	SubmitProof(context.Context, *MsgSubmitProof) (*MsgSubmitProofResponse, error)
+	// SubmitCommunityVerification defines a community (zkpverify) operation for verifying a proof.
+	SubmitCommunityVerification(context.Context, *MsgSubmitCommunityVerification) (*MsgSubmitCommunityVerificationResponse, error)
 	mustEmbedUnimplementedMsgServer()
 }
 
@@ -81,6 +95,9 @@ func (UnimplementedMsgServer) UpdateParams(context.Context, *MsgUpdateParams) (*
 }
 func (UnimplementedMsgServer) SubmitProof(context.Context, *MsgSubmitProof) (*MsgSubmitProofResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SubmitProof not implemented")
+}
+func (UnimplementedMsgServer) SubmitCommunityVerification(context.Context, *MsgSubmitCommunityVerification) (*MsgSubmitCommunityVerificationResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SubmitCommunityVerification not implemented")
 }
 func (UnimplementedMsgServer) mustEmbedUnimplementedMsgServer() {}
 
@@ -131,6 +148,24 @@ func _Msg_SubmitProof_Handler(srv interface{}, ctx context.Context, dec func(int
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Msg_SubmitCommunityVerification_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgSubmitCommunityVerification)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MsgServer).SubmitCommunityVerification(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Msg_SubmitCommunityVerification_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MsgServer).SubmitCommunityVerification(ctx, req.(*MsgSubmitCommunityVerification))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Msg_ServiceDesc is the grpc.ServiceDesc for Msg service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -145,6 +180,10 @@ var Msg_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SubmitProof",
 			Handler:    _Msg_SubmitProof_Handler,
+		},
+		{
+			MethodName: "SubmitCommunityVerification",
+			Handler:    _Msg_SubmitCommunityVerification_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
