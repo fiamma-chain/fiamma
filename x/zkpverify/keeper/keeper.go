@@ -10,6 +10,7 @@ import (
 	"github.com/cosmos/cosmos-sdk/codec"
 	"github.com/cosmos/cosmos-sdk/runtime"
 	sdk "github.com/cosmos/cosmos-sdk/types"
+	"github.com/cosmos/cosmos-sdk/types/query"
 
 	"fiamma/nubitda"
 	"fiamma/x/zkpverify/types"
@@ -134,24 +135,23 @@ func (k Keeper) bitVMWitnessStore(ctx context.Context) prefix.Store {
 	return prefix.NewStore(storeAdapter, types.BitVMWitnessKey)
 }
 
-func (k Keeper) GetPendingProofs(ctx sdk.Context) ([]*types.PendingProofs, error) {
-	var pendingProofs []*types.PendingProofs
-
+func (k Keeper) GetPendingProofs(ctx context.Context, req *types.QueryPendingProofRequest) (*types.QueryPendingProofResponse, error) {
 	store := k.verifyResultStore(ctx)
-	iter := store.Iterator([]byte{}, []byte{})
-	for ; iter.Valid(); iter.Next() {
-		proofId, result := iter.Key(), iter.Value()
+	var verifyResults []*types.VerifyResult
+	pageRes, err := query.Paginate(store, req.Pagination, func(key []byte, value []byte) error {
 		var verifyResult types.VerifyResult
-		k.cdc.MustUnmarshal(result, &verifyResult)
-		if verifyResult.Status != types.VerificationStatus_DEFINITIVEVALIDATION {
-			proofData, found := k.GetProofData(ctx, proofId)
-			if !found {
-				return nil, types.ErrProofDataNotFound
-			}
-			pendingProofs = append(pendingProofs, &types.PendingProofs{ProofId: verifyResult.ProofId, ProofData: &proofData})
+		if err := k.cdc.Unmarshal(value, &verifyResult); err != nil {
+			return err
 		}
+		if verifyResult.Status != types.VerificationStatus_DEFINITIVEVALIDATION {
+			verifyResults = append(verifyResults, &verifyResult)
+		}
+		return nil
+	})
 
+	if err != nil {
+		return nil, err
 	}
-	iter.Close()
-	return pendingProofs, nil
+
+	return &types.QueryPendingProofResponse{PendingProofs: verifyResults, Pagination: pageRes}, nil
 }

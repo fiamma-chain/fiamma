@@ -57,13 +57,8 @@ message QueryPendingProofRequest {
 // QueryPendingProofResponse is response type for the Query/PendingProof RPC
 // method.
 message QueryPendingProofResponse {
-  repeated PendingProofs pending_proofs = 1;
+  repeated  fiamma.zkpverify.VerifyResult pending_proofs = 1;
   cosmos.base.query.v1beta1.PageResponse pagination = 2;
-}
-
-message PendingProofs {
-  string proof_id = 1;
-  fiamma.zkpverify.ProofData proof_data = 2;
 }
 
 // QueryPendingProofByTypeResponse is response type for the

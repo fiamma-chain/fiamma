@@ -9510,24 +9510,29 @@ paths:
                   properties:
                     proof_id:
                       type: string
-                    proof_data:
-                      type: object
-                      properties:
-                        proof_system:
-                          type: string
-                          format: uint64
-                        proof:
-                          type: string
-                          format: byte
-                        public_input:
-                          type: string
-                          format: byte
-                        vk:
-                          type: string
-                          format: byte
+                    data_commitment:
+                      type: string
+                    data_location:
+                      type: string
+                      format: uint64
+                    result:
+                      type: boolean
+                    status:
+                      type: string
+                      enum:
+                        - INITIALVALIDATION
+                        - COMMUNITYVALIDATION
+                        - DEFINITIVEVALIDATION
+                      default: INITIALVALIDATION
                       title: >-
-                        ProofData is the data structure for the proof
-                        verification request
+                        VerificationStatus is the verification status for the
+                        proof verification
+                    community_verification_count:
+                      type: string
+                      format: uint64
+                  title: >-
+                    VerifyResult is the data structure for the proof
+                    verification result
               pagination:
                 type: object
                 properties:
@@ -20531,27 +20536,6 @@ definitions:
                repeated Bar results = 1;
                PageResponse page = 2;
        }
-  fiamma.zkpverify.PendingProofs:
-    type: object
-    properties:
-      proof_id:
-        type: string
-      proof_data:
-        type: object
-        properties:
-          proof_system:
-            type: string
-            format: uint64
-          proof:
-            type: string
-            format: byte
-          public_input:
-            type: string
-            format: byte
-          vk:
-            type: string
-            format: byte
-        title: ProofData is the data structure for the proof verification request
   fiamma.zkpverify.ProofData:
     type: object
     properties:
@@ -20593,24 +20577,27 @@ definitions:
           properties:
             proof_id:
               type: string
-            proof_data:
-              type: object
-              properties:
-                proof_system:
-                  type: string
-                  format: uint64
-                proof:
-                  type: string
-                  format: byte
-                public_input:
-                  type: string
-                  format: byte
-                vk:
-                  type: string
-                  format: byte
+            data_commitment:
+              type: string
+            data_location:
+              type: string
+              format: uint64
+            result:
+              type: boolean
+            status:
+              type: string
+              enum:
+                - INITIALVALIDATION
+                - COMMUNITYVALIDATION
+                - DEFINITIVEVALIDATION
+              default: INITIALVALIDATION
               title: >-
-                ProofData is the data structure for the proof verification
-                request
+                VerificationStatus is the verification status for the proof
+                verification
+            community_verification_count:
+              type: string
+              format: uint64
+          title: VerifyResult is the data structure for the proof verification result
       pagination:
         type: object
         properties:
@@ -20662,6 +20649,40 @@ definitions:
     description: |-
       QueryProofDataResponse is response type for the Query/ProofData RPC
       method.
+  fiamma.zkpverify.VerificationStatus:
+    type: string
+    enum:
+      - INITIALVALIDATION
+      - COMMUNITYVALIDATION
+      - DEFINITIVEVALIDATION
+    default: INITIALVALIDATION
+    title: VerificationStatus is the verification status for the proof verification
+  fiamma.zkpverify.VerifyResult:
+    type: object
+    properties:
+      proof_id:
+        type: string
+      data_commitment:
+        type: string
+      data_location:
+        type: string
+        format: uint64
+      result:
+        type: boolean
+      status:
+        type: string
+        enum:
+          - INITIALVALIDATION
+          - COMMUNITYVALIDATION
+          - DEFINITIVEVALIDATION
+        default: INITIALVALIDATION
+        title: >-
+          VerificationStatus is the verification status for the proof
+          verification
+      community_verification_count:
+        type: string
+        format: uint64
+    title: VerifyResult is the data structure for the proof verification result
   ibc.applications.fee.v1.Fee:
     type: object
     properties:
