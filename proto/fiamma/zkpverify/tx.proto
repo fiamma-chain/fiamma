@@ -64,10 +64,8 @@ message MsgSendTaskResponse {}
 message MsgSubmitCommunityVerification {
   option (cosmos.msg.v1.signer) = "creator";
   string creator = 1;
-  string proof_system = 2;
-  bytes proof = 3;
-  bytes public_input = 4;
-  bytes vk = 5;
+  string proof_id = 2;
+  bool verify_result = 3;
 }
 
 // MsgSubmitCommunityVerificationResponse defines the response structure for executing MsgSubmitCommunityVerification
