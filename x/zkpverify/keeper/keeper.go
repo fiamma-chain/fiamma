@@ -133,3 +133,25 @@ func (k Keeper) bitVMWitnessStore(ctx context.Context) prefix.Store {
 	storeAdapter := runtime.KVStoreAdapter(k.storeService.OpenKVStore(ctx))
 	return prefix.NewStore(storeAdapter, types.BitVMWitnessKey)
 }
+
+func (k Keeper) GetPendingProofs(ctx sdk.Context) ([]*types.PendingProofs, error) {
+	var pendingProofs []*types.PendingProofs
+
+	store := k.verifyResultStore(ctx)
+	iter := store.Iterator([]byte{}, []byte{})
+	for ; iter.Valid(); iter.Next() {
+		proofId, result := iter.Key(), iter.Value()
+		var verifyResult types.VerifyResult
+		k.cdc.MustUnmarshal(result, &verifyResult)
+		if verifyResult.Status != types.VerificationStatus_DEFINITIVEVALIDATION {
+			proofData, found := k.GetProofData(ctx, proofId)
+			if !found {
+				return nil, types.ErrProofDataNotFound
+			}
+			pendingProofs = append(pendingProofs, &types.PendingProofs{ProofId: verifyResult.ProofId, ProofData: &proofData})
+		}
+
+	}
+	iter.Close()
+	return pendingProofs, nil
+}
