@@ -1,6 +1,7 @@
 #!/usr/bin/make -f
 
 PACKAGES_NOSIMULATION=$(shell go list ./... | grep -v '/simulation')
+VERSION := $(shell echo $(shell git describe --tags) | sed 's/^v//')
 PACKAGES_SIMTEST=$(shell go list ./... | grep '/simulation')
 COMMIT := $(shell git log -1 --format='%H')
 LEDGER_ENABLED ?= true
@@ -9,6 +10,8 @@ PROJECT_NAME ?= fiamma
 BUILDDIR ?= $(CURDIR)/build
 DOCKER := $(shell which docker)
 SIMAPP = ./app
+GORELEASER_CROSS_VERSION = v1.21.9
+GORELEASER_VERSION = v1.21.0
 HTTPS_GIT := https://github.com/fiamma-chain/fiamma.git
 
 BRANCH := $(shell git rev-parse --abbrev-ref HEAD)
@@ -16,6 +19,13 @@ COMMIT := $(shell git log -1 --format='%H')
 
 GOLANGCI_LINT := $(shell which golangci-lint)
 MISSPELL := $(shell which misspell)
+
+LIBWASM_VERSION = $(shell go list -m -f '{{ .Version }}' github.com/CosmWasm/wasmvm)
+
+# Release environment variable
+RELEASE ?= false
+GORELEASER_SKIP_VALIDATE ?= false
+
 
 export GO111MODULE = on
 
@@ -126,11 +136,11 @@ ifndef GOLANGCI_LINT
 	go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
 endif
 
-lint: 
+lint: install-golangci-lint
 	golangci-lint run
 	find . -name '*.go' -type f -not -path "./vendor*" -not -path "*.git*" | xargs gofmt -d -s
 
-lint-fix:
+lint-fix: install-golangci-lint
 	golangci-lint run --fix --out-format=tab --issues-exit-code=0
 
 install-misspell:
@@ -139,7 +149,7 @@ ifndef MISSPELL
 	go install github.com/client9/misspell/cmd/misspell@latest
 endif
 
-format: 
+format: install-misspell
 	find . -name '*.go' -type f -not -path "./vendor*" -not -path "*.git*" -not -path "./client/docs/statik/statik.go" -not -path "./tests/mocks/*" -not -name '*.pb.go' | xargs gofmt -w -s
 	find . -name '*.go' -type f -not -path "./vendor*" -not -path "*.git*" -not -path "./client/docs/statik/statik.go" -not -path "./tests/mocks/*" -not -name '*.pb.go' | xargs misspell -w
 	find . -name '*.go' -type f -not -path "./vendor*" -not -path "*.git*" -not -path "./client/docs/statik/statik.go" -not -path "./tests/mocks/*" -not -name '*.pb.go' | xargs goimports -w -local fiamma
@@ -165,6 +175,7 @@ $(BUILDDIR)/:
 	mkdir -p $(BUILDDIR)/
 
 .PHONY: build install
+
 
 
 ###############################################################################
