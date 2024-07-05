@@ -16,51 +16,29 @@ const (
 
 func (k msgServer) SubmitCommunityVerification(goCtx context.Context, msg *types.MsgSubmitCommunityVerification) (*types.MsgSubmitCommunityVerificationResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
-	proofSystemId, err := types.ProofSystemIdFromString(msg.ProofSystem)
+	proofId, err := hex.DecodeString(msg.ProofId)
 	if err != nil {
-		k.Logger().Info("Error parsing proof system:", "error", err)
-		return nil, types.ErrInvalidProofSystem
-
-	}
-	proofData := types.ProofData{
-		ProofSystem: uint64(proofSystemId),
-		Proof:       msg.Proof,
-		PublicInput: msg.PublicInput,
-		Vk:          msg.Vk,
-	}
-
-	proofId, err := k.GetProofId(proofData)
-	if err != nil {
-		k.Logger().Info("Error getting proof id:", "error", err)
-		return nil, types.ErrGetProofId
+		k.Logger().Info("Error decoding proof id:", "error", err)
+		return nil, types.ErrInvalidProofId
 	}
 
 	verifyResult, found := k.GetVerifyResult(ctx, proofId[:])
 	if !found {
-		k.Logger().Info("Error finding proof id:", "error", hex.EncodeToString(proofId[:]))
-		return nil, types.ErrInvalidProofId
+		k.Logger().Info("Error finding proof id:", "error", msg.ProofId)
+		return nil, types.ErrGetProofId
+	}
+
+	if verifyResult.Result != msg.VerifyResult {
+		k.Logger().Info("Inconsistent with verification result:", "error", msg.ProofId)
+		return nil, types.ErrVerifyResult
 	}
 
 	if verifyResult.Status == types.VerificationStatus_DEFINITIVEVALIDATION {
-		k.Logger().Info("Error exceeding verification period:", "error", hex.EncodeToString(proofId[:]))
+		k.Logger().Info("Error exceeding verification period:", "error", msg.ProofId)
 		return nil, types.ErrVerifyPeriod
 	}
 
-	// The chain first verifies the correctness of the proofs submitted by the user, and saves the results.
-	// The observer may challenge the result at a later stage.
-	result, witness := k.verifyProof(&proofData)
-	if !result {
-		k.Logger().Info("Error verifying proof result:", "error", hex.EncodeToString(proofId[:]))
-		return nil, types.ErrVerifyResult
-	}
-	verifyResult.Result = result
-
-	// store witness if the proof system is BitVM
-	if proofData.ProofSystem == uint64(types.Groth16Bn254_BitVM) {
-		k.SetBitVMWitness(ctx, proofId[:], witness)
-	}
-
-	k.Logger().Info("Proof verification result for community:", "result", result)
+	k.Logger().Info("Proof verification result for community:", "result", msg.VerifyResult)
 
 	verifyResult.CommunityVerificationCount++
 	if verifyResult.CommunityVerificationCount < VerificationCountLimit {
@@ -73,9 +51,8 @@ func (k msgServer) SubmitCommunityVerification(goCtx context.Context, msg *types
 	k.SetVerifyResult(ctx, proofId[:], verifyResult)
 
 	event := sdk.NewEvent("verifyFinished",
-		sdk.NewAttribute("proofId", hex.EncodeToString(proofId[:])),
-		sdk.NewAttribute("verifyResult", strconv.FormatBool(result)),
-		sdk.NewAttribute("proofSystem", msg.ProofSystem),
+		sdk.NewAttribute("proofId", msg.ProofId),
+		sdk.NewAttribute("verifyResult", strconv.FormatBool(msg.VerifyResult)),
 		sdk.NewAttribute("status", strconv.Itoa(int(verifyResult.Status))),
 		sdk.NewAttribute("CommunityVerificationCount", strconv.Itoa(int(verifyResult.CommunityVerificationCount))))
 	ctx.EventManager().EmitEvent(event)

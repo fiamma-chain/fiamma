@@ -9195,6 +9195,168 @@ paths:
               Since: cosmos-sdk 0.47
       tags:
         - Msg
+  /fiamma.zkpverify.Msg/SubmitCommunityVerification:
+    post:
+      summary: >-
+        SubmitCommunityVerification defines a community (zkpverify) operation
+        for verifying a proof.
+      operationId: FiammaZkpverifyMsg_SubmitCommunityVerification
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            title: >-
+              MsgSubmitCommunityVerificationResponse defines the response
+              structure for executing MsgSubmitCommunityVerification
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: body
+          description: >-
+            MsgSubmitCommunityVerification is the proof verify community
+            verification request type.
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              creator:
+                type: string
+              proof_id:
+                type: string
+              verify_result:
+                type: boolean
+            description: >-
+              MsgSubmitCommunityVerification is the proof verify community
+              verification request type.
+      tags:
+        - Msg
+  /fiamma.zkpverify.Msg/SubmitProof:
+    post:
+      summary: SubmitProof defines a (zkpverify) operation for verifying a proof.
+      operationId: FiammaZkpverifyMsg_SubmitProof
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            title: >-
+              MsgSubmitProofResponse defines the response structure for
+              executing MsgSubmitProof
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: body
+          description: MsgSubmitProof is the proof verify verification request type.
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              creator:
+                type: string
+              proof_system:
+                type: string
+              proof:
+                type: string
+                format: byte
+              public_input:
+                type: string
+                format: byte
+              vk:
+                type: string
+                format: byte
+            description: MsgSubmitProof is the proof verify verification request type.
+      tags:
+        - Msg
+  /fiamma.zkpverify.Msg/UpdateParams:
+    post:
+      summary: |-
+        UpdateParams defines a (governance) operation for updating the module
+        parameters. The authority defaults to the x/gov module account.
+      operationId: FiammaZkpverifyMsg_UpdateParams
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            description: >-
+              MsgUpdateParamsResponse defines the response structure for
+              executing a
+
+              MsgUpdateParams message.
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: body
+          description: MsgUpdateParams is the Msg/UpdateParams request type.
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              authority:
+                type: string
+                description: >-
+                  authority is the address that controls the module (defaults to
+                  x/gov unless
+
+                  overwritten).
+              params:
+                description: 'NOTE: All parameters must be supplied.'
+                type: object
+            description: MsgUpdateParams is the Msg/UpdateParams request type.
+      tags:
+        - Msg
   /fiamma/zkpverify/get_bitvm_witness:
     get:
       summary: Queries bitvm witness by proof id
@@ -9476,175 +9638,6 @@ paths:
           type: boolean
       tags:
         - Query
-  /fiamma.zkpverify.Msg/SubmitCommunityVerification:
-    post:
-      summary: >-
-        SubmitCommunityVerification defines a community (zkpverify) operation
-        for verifying a proof.
-      operationId: FiammaZkpverifyMsg_SubmitCommunityVerification
-      responses:
-        '200':
-          description: A successful response.
-          schema:
-            type: object
-            title: >-
-              MsgSubmitCommunityVerificationResponse defines the response
-              structure for executing MsgSubmitCommunityVerification
-        default:
-          description: An unexpected error response.
-          schema:
-            type: object
-            properties:
-              code:
-                type: integer
-                format: int32
-              message:
-                type: string
-              details:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    '@type':
-                      type: string
-                  additionalProperties: {}
-      parameters:
-        - name: body
-          description: >-
-            MsgSubmitCommunityVerification is the proof verify community
-            verification request type.
-          in: body
-          required: true
-          schema:
-            type: object
-            properties:
-              creator:
-                type: string
-              proof_system:
-                type: string
-              proof:
-                type: string
-                format: byte
-              public_input:
-                type: string
-                format: byte
-              vk:
-                type: string
-                format: byte
-            description: >-
-              MsgSubmitCommunityVerification is the proof verify community
-              verification request type.
-      tags:
-        - Msg
-  /fiamma.zkpverify.Msg/SubmitProof:
-    post:
-      summary: SubmitProof defines a (zkpverify) operation for verifying a proof.
-      operationId: FiammaZkpverifyMsg_SubmitProof
-      responses:
-        '200':
-          description: A successful response.
-          schema:
-            type: object
-            title: >-
-              MsgSubmitProofResponse defines the response structure for
-              executing MsgSubmitProof
-        default:
-          description: An unexpected error response.
-          schema:
-            type: object
-            properties:
-              code:
-                type: integer
-                format: int32
-              message:
-                type: string
-              details:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    '@type':
-                      type: string
-                  additionalProperties: {}
-      parameters:
-        - name: body
-          description: MsgSubmitProof is the proof verify verification request type.
-          in: body
-          required: true
-          schema:
-            type: object
-            properties:
-              creator:
-                type: string
-              proof_system:
-                type: string
-              proof:
-                type: string
-                format: byte
-              public_input:
-                type: string
-                format: byte
-              vk:
-                type: string
-                format: byte
-            description: MsgSubmitProof is the proof verify verification request type.
-      tags:
-        - Msg
-  /fiamma.zkpverify.Msg/UpdateParams:
-    post:
-      summary: |-
-        UpdateParams defines a (governance) operation for updating the module
-        parameters. The authority defaults to the x/gov module account.
-      operationId: FiammaZkpverifyMsg_UpdateParams
-      responses:
-        '200':
-          description: A successful response.
-          schema:
-            type: object
-            description: >-
-              MsgUpdateParamsResponse defines the response structure for
-              executing a
-
-              MsgUpdateParams message.
-        default:
-          description: An unexpected error response.
-          schema:
-            type: object
-            properties:
-              code:
-                type: integer
-                format: int32
-              message:
-                type: string
-              details:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    '@type':
-                      type: string
-                  additionalProperties: {}
-      parameters:
-        - name: body
-          description: MsgUpdateParams is the Msg/UpdateParams request type.
-          in: body
-          required: true
-          schema:
-            type: object
-            properties:
-              authority:
-                type: string
-                description: >-
-                  authority is the address that controls the module (defaults to
-                  x/gov unless
-
-                  overwritten).
-              params:
-                description: 'NOTE: All parameters must be supplied.'
-                type: object
-            description: MsgUpdateParams is the Msg/UpdateParams request type.
-      tags:
-        - Msg
   /ibc.applications.fee.v1.Msg/PayPacketFee:
     post:
       summary: >-
@@ -20400,6 +20393,67 @@ definitions:
           min_commission_rate is the chain-wide minimum commission rate that a
           validator can charge their delegators
     description: Params defines the parameters for the x/staking module.
+  fiamma.zkpverify.MsgSubmitCommunityVerification:
+    type: object
+    properties:
+      creator:
+        type: string
+      proof_id:
+        type: string
+      verify_result:
+        type: boolean
+    description: >-
+      MsgSubmitCommunityVerification is the proof verify community verification
+      request type.
+  fiamma.zkpverify.MsgSubmitCommunityVerificationResponse:
+    type: object
+    title: >-
+      MsgSubmitCommunityVerificationResponse defines the response structure for
+      executing MsgSubmitCommunityVerification
+  fiamma.zkpverify.MsgSubmitProof:
+    type: object
+    properties:
+      creator:
+        type: string
+      proof_system:
+        type: string
+      proof:
+        type: string
+        format: byte
+      public_input:
+        type: string
+        format: byte
+      vk:
+        type: string
+        format: byte
+    description: MsgSubmitProof is the proof verify verification request type.
+  fiamma.zkpverify.MsgSubmitProofResponse:
+    type: object
+    title: >-
+      MsgSubmitProofResponse defines the response structure for executing
+      MsgSubmitProof
+  fiamma.zkpverify.MsgUpdateParams:
+    type: object
+    properties:
+      authority:
+        type: string
+        description: >-
+          authority is the address that controls the module (defaults to x/gov
+          unless
+
+          overwritten).
+      params:
+        description: 'NOTE: All parameters must be supplied.'
+        type: object
+    description: MsgUpdateParams is the Msg/UpdateParams request type.
+  fiamma.zkpverify.MsgUpdateParamsResponse:
+    type: object
+    description: |-
+      MsgUpdateParamsResponse defines the response structure for executing a
+      MsgUpdateParams message.
+  fiamma.zkpverify.Params:
+    type: object
+    description: Params defines the parameters for the module.
   cosmos.base.query.v1beta1.PageRequest:
     type: object
     properties:
@@ -20477,9 +20531,6 @@ definitions:
                repeated Bar results = 1;
                PageResponse page = 2;
        }
-  fiamma.zkpverify.Params:
-    type: object
-    description: Params defines the parameters for the module.
   fiamma.zkpverify.PendingProofs:
     type: object
     properties:
@@ -20611,71 +20662,6 @@ definitions:
     description: |-
       QueryProofDataResponse is response type for the Query/ProofData RPC
       method.
-  fiamma.zkpverify.MsgSubmitCommunityVerification:
-    type: object
-    properties:
-      creator:
-        type: string
-      proof_system:
-        type: string
-      proof:
-        type: string
-        format: byte
-      public_input:
-        type: string
-        format: byte
-      vk:
-        type: string
-        format: byte
-    description: >-
-      MsgSubmitCommunityVerification is the proof verify community verification
-      request type.
-  fiamma.zkpverify.MsgSubmitCommunityVerificationResponse:
-    type: object
-    title: >-
-      MsgSubmitCommunityVerificationResponse defines the response structure for
-      executing MsgSubmitCommunityVerification
-  fiamma.zkpverify.MsgSubmitProof:
-    type: object
-    properties:
-      creator:
-        type: string
-      proof_system:
-        type: string
-      proof:
-        type: string
-        format: byte
-      public_input:
-        type: string
-        format: byte
-      vk:
-        type: string
-        format: byte
-    description: MsgSubmitProof is the proof verify verification request type.
-  fiamma.zkpverify.MsgSubmitProofResponse:
-    type: object
-    title: >-
-      MsgSubmitProofResponse defines the response structure for executing
-      MsgSubmitProof
-  fiamma.zkpverify.MsgUpdateParams:
-    type: object
-    properties:
-      authority:
-        type: string
-        description: >-
-          authority is the address that controls the module (defaults to x/gov
-          unless
-
-          overwritten).
-      params:
-        description: 'NOTE: All parameters must be supplied.'
-        type: object
-    description: MsgUpdateParams is the Msg/UpdateParams request type.
-  fiamma.zkpverify.MsgUpdateParamsResponse:
-    type: object
-    description: |-
-      MsgUpdateParamsResponse defines the response structure for executing a
-      MsgUpdateParams message.
   ibc.applications.fee.v1.Fee:
     type: object
     properties:
