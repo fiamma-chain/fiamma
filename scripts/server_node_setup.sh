@@ -32,13 +32,13 @@ done
 
 rm -rf server-setup
 
-# echo "Downloading source code into servers..."
-# for server in "${servers[@]}"; do
-#     ssh $server "rm -rf /home/ubuntu/fiamma"
-#     ssh $server "git clone https://github.com/fiamma-chain/fiamma.git /home/ubuntu/fiamma"
-#     ssh $server "cd /home/ubuntu/fiamma && git checkout $2 && source /home/ubuntu/.profile && make install"
-#     echo "Source code downloaded into $server successfully"
-# done
+echo "Downloading source code into servers..."
+for server in "${servers[@]}"; do
+    ssh $server "rm -rf /home/ubuntu/fiamma"
+    ssh $server "git clone https://github.com/fiamma-chain/fiamma.git /home/ubuntu/fiamma"
+    ssh $server "cd /home/ubuntu/fiamma && git checkout $2 && source /home/ubuntu/.profile && make install"
+    echo "Source code downloaded into $server successfully"
+done
 
 mkdir -p server-setup
 cd server-setup
