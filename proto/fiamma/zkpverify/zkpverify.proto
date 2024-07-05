@@ -1,29 +1,49 @@
 syntax = "proto3";
 package fiamma.zkpverify;
 
+import "gogoproto/gogo.proto";
+
 option go_package = "fiamma/x/zkpverify/types";
+
+// VerificationStatus is the verification status for the proof verification
+enum VerificationStatus { 
+  INITIAL_VALIDATION = 0;
+  COMMUNITY_VALIDATION = 1;
+  DEFINITIVE_VALIDATION = 2;
+}
+
+// DataLocation is the proof data location for the proof verification
+enum DataLocation {
+  FIAMMA = 0; 
+  NUBITDA = 1;
+  AVAILDA = 2;
+}
+
+// ProofSystem is the proof system for the proof verification
+enum ProofSystem {
+  GROTH16_BN254_BITVM = 0; 
+  PLONK_BN254 = 1;
+  PLONK_BLS12_381 = 2; 
+  GROTH16_BN254 = 3; 
+  SP1 = 4; 
+}
+
 
 // ProofData is the data structure for the proof verification request
 message ProofData {
-  uint64 proof_system = 1;
+  ProofSystem proof_system = 1;
   bytes proof = 2;
   bytes public_input = 3;
   bytes vk = 4;
 }
 
-// VerificationStatus is the verification status for the proof verification
-enum VerificationStatus { 
-  INITIALVALIDATION = 0;
-  COMMUNITYVALIDATION = 1;
-  DEFINITIVEVALIDATION = 2;
-}
-
 // VerifyResult is the data structure for the proof verification result
 message VerifyResult {
   string proof_id = 1;
-  string data_commitment = 2;
-  uint64 data_location = 3;
-  bool result = 4;
-  VerificationStatus status = 5;
-  uint64 community_verification_count = 6;
+  ProofSystem proof_system = 2;
+  string data_commitment = 3;
+  DataLocation data_location = 4;
+  bool result = 5;
+  VerificationStatus status = 6;
+  uint64 community_verification_count = 7;
 }

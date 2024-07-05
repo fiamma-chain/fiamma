@@ -8,7 +8,7 @@ set -e
 : ${PROOF_FILE:=../../prover_examples/bitvm/proof.bitvm}
 : ${PUBLIC_INPUT_FILE:=../../prover_examples/bitvm/public_input.bitvm}
 : ${VK_FILE:=../../prover_examples/bitvm/vk.bitvm}
-: ${PROOF_SYSTEM:="Groth16Bn254_BitVM"}
+: ${PROOF_SYSTEM:="GROTH16_BN254_BITVM"}
 
 
 NEW_PROOF_SYSTEM=$(echo -n $PROOF_SYSTEM | xxd -p)

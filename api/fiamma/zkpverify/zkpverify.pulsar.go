@@ -4,6 +4,7 @@ package zkpverify
 import (
 	fmt "fmt"
 	runtime "github.com/cosmos/cosmos-proto/runtime"
+	_ "github.com/cosmos/gogoproto/gogoproto"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoiface "google.golang.org/protobuf/runtime/protoiface"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -94,8 +95,8 @@ func (x *fastReflection_ProofData) Interface() protoreflect.ProtoMessage {
 // While iterating, mutating operations may only be performed
 // on the current field descriptor.
 func (x *fastReflection_ProofData) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
-	if x.ProofSystem != uint64(0) {
-		value := protoreflect.ValueOfUint64(x.ProofSystem)
+	if x.ProofSystem != 0 {
+		value := protoreflect.ValueOfEnum((protoreflect.EnumNumber)(x.ProofSystem))
 		if !f(fd_ProofData_proof_system, value) {
 			return
 		}
@@ -134,7 +135,7 @@ func (x *fastReflection_ProofData) Range(f func(protoreflect.FieldDescriptor, pr
 func (x *fastReflection_ProofData) Has(fd protoreflect.FieldDescriptor) bool {
 	switch fd.FullName() {
 	case "fiamma.zkpverify.ProofData.proof_system":
-		return x.ProofSystem != uint64(0)
+		return x.ProofSystem != 0
 	case "fiamma.zkpverify.ProofData.proof":
 		return len(x.Proof) != 0
 	case "fiamma.zkpverify.ProofData.public_input":
@@ -158,7 +159,7 @@ func (x *fastReflection_ProofData) Has(fd protoreflect.FieldDescriptor) bool {
 func (x *fastReflection_ProofData) Clear(fd protoreflect.FieldDescriptor) {
 	switch fd.FullName() {
 	case "fiamma.zkpverify.ProofData.proof_system":
-		x.ProofSystem = uint64(0)
+		x.ProofSystem = 0
 	case "fiamma.zkpverify.ProofData.proof":
 		x.Proof = nil
 	case "fiamma.zkpverify.ProofData.public_input":
@@ -183,7 +184,7 @@ func (x *fastReflection_ProofData) Get(descriptor protoreflect.FieldDescriptor) 
 	switch descriptor.FullName() {
 	case "fiamma.zkpverify.ProofData.proof_system":
 		value := x.ProofSystem
-		return protoreflect.ValueOfUint64(value)
+		return protoreflect.ValueOfEnum((protoreflect.EnumNumber)(value))
 	case "fiamma.zkpverify.ProofData.proof":
 		value := x.Proof
 		return protoreflect.ValueOfBytes(value)
@@ -214,7 +215,7 @@ func (x *fastReflection_ProofData) Get(descriptor protoreflect.FieldDescriptor) 
 func (x *fastReflection_ProofData) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
 	switch fd.FullName() {
 	case "fiamma.zkpverify.ProofData.proof_system":
-		x.ProofSystem = value.Uint()
+		x.ProofSystem = (ProofSystem)(value.Enum())
 	case "fiamma.zkpverify.ProofData.proof":
 		x.Proof = value.Bytes()
 	case "fiamma.zkpverify.ProofData.public_input":
@@ -263,7 +264,7 @@ func (x *fastReflection_ProofData) Mutable(fd protoreflect.FieldDescriptor) prot
 func (x *fastReflection_ProofData) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
 	case "fiamma.zkpverify.ProofData.proof_system":
-		return protoreflect.ValueOfUint64(uint64(0))
+		return protoreflect.ValueOfEnum(0)
 	case "fiamma.zkpverify.ProofData.proof":
 		return protoreflect.ValueOfBytes(nil)
 	case "fiamma.zkpverify.ProofData.public_input":
@@ -472,7 +473,7 @@ func (x *fastReflection_ProofData) ProtoMethods() *protoiface.Methods {
 					}
 					b := dAtA[iNdEx]
 					iNdEx++
-					x.ProofSystem |= uint64(b&0x7F) << shift
+					x.ProofSystem |= ProofSystem(b&0x7F) << shift
 					if b < 0x80 {
 						break
 					}
@@ -617,6 +618,7 @@ func (x *fastReflection_ProofData) ProtoMethods() *protoiface.Methods {
 var (
 	md_VerifyResult                              protoreflect.MessageDescriptor
 	fd_VerifyResult_proof_id                     protoreflect.FieldDescriptor
+	fd_VerifyResult_proof_system                 protoreflect.FieldDescriptor
 	fd_VerifyResult_data_commitment              protoreflect.FieldDescriptor
 	fd_VerifyResult_data_location                protoreflect.FieldDescriptor
 	fd_VerifyResult_result                       protoreflect.FieldDescriptor
@@ -628,6 +630,7 @@ func init() {
 	file_fiamma_zkpverify_zkpverify_proto_init()
 	md_VerifyResult = File_fiamma_zkpverify_zkpverify_proto.Messages().ByName("VerifyResult")
 	fd_VerifyResult_proof_id = md_VerifyResult.Fields().ByName("proof_id")
+	fd_VerifyResult_proof_system = md_VerifyResult.Fields().ByName("proof_system")
 	fd_VerifyResult_data_commitment = md_VerifyResult.Fields().ByName("data_commitment")
 	fd_VerifyResult_data_location = md_VerifyResult.Fields().ByName("data_location")
 	fd_VerifyResult_result = md_VerifyResult.Fields().ByName("result")
@@ -706,14 +709,20 @@ func (x *fastReflection_VerifyResult) Range(f func(protoreflect.FieldDescriptor,
 			return
 		}
 	}
+	if x.ProofSystem != 0 {
+		value := protoreflect.ValueOfEnum((protoreflect.EnumNumber)(x.ProofSystem))
+		if !f(fd_VerifyResult_proof_system, value) {
+			return
+		}
+	}
 	if x.DataCommitment != "" {
 		value := protoreflect.ValueOfString(x.DataCommitment)
 		if !f(fd_VerifyResult_data_commitment, value) {
 			return
 		}
 	}
-	if x.DataLocation != uint64(0) {
-		value := protoreflect.ValueOfUint64(x.DataLocation)
+	if x.DataLocation != 0 {
+		value := protoreflect.ValueOfEnum((protoreflect.EnumNumber)(x.DataLocation))
 		if !f(fd_VerifyResult_data_location, value) {
 			return
 		}
@@ -753,10 +762,12 @@ func (x *fastReflection_VerifyResult) Has(fd protoreflect.FieldDescriptor) bool 
 	switch fd.FullName() {
 	case "fiamma.zkpverify.VerifyResult.proof_id":
 		return x.ProofId != ""
+	case "fiamma.zkpverify.VerifyResult.proof_system":
+		return x.ProofSystem != 0
 	case "fiamma.zkpverify.VerifyResult.data_commitment":
 		return x.DataCommitment != ""
 	case "fiamma.zkpverify.VerifyResult.data_location":
-		return x.DataLocation != uint64(0)
+		return x.DataLocation != 0
 	case "fiamma.zkpverify.VerifyResult.result":
 		return x.Result != false
 	case "fiamma.zkpverify.VerifyResult.status":
@@ -781,10 +792,12 @@ func (x *fastReflection_VerifyResult) Clear(fd protoreflect.FieldDescriptor) {
 	switch fd.FullName() {
 	case "fiamma.zkpverify.VerifyResult.proof_id":
 		x.ProofId = ""
+	case "fiamma.zkpverify.VerifyResult.proof_system":
+		x.ProofSystem = 0
 	case "fiamma.zkpverify.VerifyResult.data_commitment":
 		x.DataCommitment = ""
 	case "fiamma.zkpverify.VerifyResult.data_location":
-		x.DataLocation = uint64(0)
+		x.DataLocation = 0
 	case "fiamma.zkpverify.VerifyResult.result":
 		x.Result = false
 	case "fiamma.zkpverify.VerifyResult.status":
@@ -810,12 +823,15 @@ func (x *fastReflection_VerifyResult) Get(descriptor protoreflect.FieldDescripto
 	case "fiamma.zkpverify.VerifyResult.proof_id":
 		value := x.ProofId
 		return protoreflect.ValueOfString(value)
+	case "fiamma.zkpverify.VerifyResult.proof_system":
+		value := x.ProofSystem
+		return protoreflect.ValueOfEnum((protoreflect.EnumNumber)(value))
 	case "fiamma.zkpverify.VerifyResult.data_commitment":
 		value := x.DataCommitment
 		return protoreflect.ValueOfString(value)
 	case "fiamma.zkpverify.VerifyResult.data_location":
 		value := x.DataLocation
-		return protoreflect.ValueOfUint64(value)
+		return protoreflect.ValueOfEnum((protoreflect.EnumNumber)(value))
 	case "fiamma.zkpverify.VerifyResult.result":
 		value := x.Result
 		return protoreflect.ValueOfBool(value)
@@ -847,10 +863,12 @@ func (x *fastReflection_VerifyResult) Set(fd protoreflect.FieldDescriptor, value
 	switch fd.FullName() {
 	case "fiamma.zkpverify.VerifyResult.proof_id":
 		x.ProofId = value.Interface().(string)
+	case "fiamma.zkpverify.VerifyResult.proof_system":
+		x.ProofSystem = (ProofSystem)(value.Enum())
 	case "fiamma.zkpverify.VerifyResult.data_commitment":
 		x.DataCommitment = value.Interface().(string)
 	case "fiamma.zkpverify.VerifyResult.data_location":
-		x.DataLocation = value.Uint()
+		x.DataLocation = (DataLocation)(value.Enum())
 	case "fiamma.zkpverify.VerifyResult.result":
 		x.Result = value.Bool()
 	case "fiamma.zkpverify.VerifyResult.status":
@@ -879,6 +897,8 @@ func (x *fastReflection_VerifyResult) Mutable(fd protoreflect.FieldDescriptor) p
 	switch fd.FullName() {
 	case "fiamma.zkpverify.VerifyResult.proof_id":
 		panic(fmt.Errorf("field proof_id of message fiamma.zkpverify.VerifyResult is not mutable"))
+	case "fiamma.zkpverify.VerifyResult.proof_system":
+		panic(fmt.Errorf("field proof_system of message fiamma.zkpverify.VerifyResult is not mutable"))
 	case "fiamma.zkpverify.VerifyResult.data_commitment":
 		panic(fmt.Errorf("field data_commitment of message fiamma.zkpverify.VerifyResult is not mutable"))
 	case "fiamma.zkpverify.VerifyResult.data_location":
@@ -904,10 +924,12 @@ func (x *fastReflection_VerifyResult) NewField(fd protoreflect.FieldDescriptor) 
 	switch fd.FullName() {
 	case "fiamma.zkpverify.VerifyResult.proof_id":
 		return protoreflect.ValueOfString("")
+	case "fiamma.zkpverify.VerifyResult.proof_system":
+		return protoreflect.ValueOfEnum(0)
 	case "fiamma.zkpverify.VerifyResult.data_commitment":
 		return protoreflect.ValueOfString("")
 	case "fiamma.zkpverify.VerifyResult.data_location":
-		return protoreflect.ValueOfUint64(uint64(0))
+		return protoreflect.ValueOfEnum(0)
 	case "fiamma.zkpverify.VerifyResult.result":
 		return protoreflect.ValueOfBool(false)
 	case "fiamma.zkpverify.VerifyResult.status":
@@ -987,6 +1009,9 @@ func (x *fastReflection_VerifyResult) ProtoMethods() *protoiface.Methods {
 		if l > 0 {
 			n += 1 + l + runtime.Sov(uint64(l))
 		}
+		if x.ProofSystem != 0 {
+			n += 1 + runtime.Sov(uint64(x.ProofSystem))
+		}
 		l = len(x.DataCommitment)
 		if l > 0 {
 			n += 1 + l + runtime.Sov(uint64(l))
@@ -1035,12 +1060,12 @@ func (x *fastReflection_VerifyResult) ProtoMethods() *protoiface.Methods {
 		if x.CommunityVerificationCount != 0 {
 			i = runtime.EncodeVarint(dAtA, i, uint64(x.CommunityVerificationCount))
 			i--
-			dAtA[i] = 0x30
+			dAtA[i] = 0x38
 		}
 		if x.Status != 0 {
 			i = runtime.EncodeVarint(dAtA, i, uint64(x.Status))
 			i--
-			dAtA[i] = 0x28
+			dAtA[i] = 0x30
 		}
 		if x.Result {
 			i--
@@ -1050,19 +1075,24 @@ func (x *fastReflection_VerifyResult) ProtoMethods() *protoiface.Methods {
 				dAtA[i] = 0
 			}
 			i--
-			dAtA[i] = 0x20
+			dAtA[i] = 0x28
 		}
 		if x.DataLocation != 0 {
 			i = runtime.EncodeVarint(dAtA, i, uint64(x.DataLocation))
 			i--
-			dAtA[i] = 0x18
+			dAtA[i] = 0x20
 		}
 		if len(x.DataCommitment) > 0 {
 			i -= len(x.DataCommitment)
 			copy(dAtA[i:], x.DataCommitment)
 			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.DataCommitment)))
 			i--
-			dAtA[i] = 0x12
+			dAtA[i] = 0x1a
+		}
+		if x.ProofSystem != 0 {
+			i = runtime.EncodeVarint(dAtA, i, uint64(x.ProofSystem))
+			i--
+			dAtA[i] = 0x10
 		}
 		if len(x.ProofId) > 0 {
 			i -= len(x.ProofId)
@@ -1153,6 +1183,25 @@ func (x *fastReflection_VerifyResult) ProtoMethods() *protoiface.Methods {
 				x.ProofId = string(dAtA[iNdEx:postIndex])
 				iNdEx = postIndex
 			case 2:
+				if wireType != 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field ProofSystem", wireType)
+				}
+				x.ProofSystem = 0
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					x.ProofSystem |= ProofSystem(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+			case 3:
 				if wireType != 2 {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field DataCommitment", wireType)
 				}
@@ -1184,7 +1233,7 @@ func (x *fastReflection_VerifyResult) ProtoMethods() *protoiface.Methods {
 				}
 				x.DataCommitment = string(dAtA[iNdEx:postIndex])
 				iNdEx = postIndex
-			case 3:
+			case 4:
 				if wireType != 0 {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field DataLocation", wireType)
 				}
@@ -1198,12 +1247,12 @@ func (x *fastReflection_VerifyResult) ProtoMethods() *protoiface.Methods {
 					}
 					b := dAtA[iNdEx]
 					iNdEx++
-					x.DataLocation |= uint64(b&0x7F) << shift
+					x.DataLocation |= DataLocation(b&0x7F) << shift
 					if b < 0x80 {
 						break
 					}
 				}
-			case 4:
+			case 5:
 				if wireType != 0 {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Result", wireType)
 				}
@@ -1223,7 +1272,7 @@ func (x *fastReflection_VerifyResult) ProtoMethods() *protoiface.Methods {
 					}
 				}
 				x.Result = bool(v != 0)
-			case 5:
+			case 6:
 				if wireType != 0 {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Status", wireType)
 				}
@@ -1242,7 +1291,7 @@ func (x *fastReflection_VerifyResult) ProtoMethods() *protoiface.Methods {
 						break
 					}
 				}
-			case 6:
+			case 7:
 				if wireType != 0 {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field CommunityVerificationCount", wireType)
 				}
@@ -1313,22 +1362,22 @@ const (
 type VerificationStatus int32
 
 const (
-	VerificationStatus_INITIALVALIDATION    VerificationStatus = 0
-	VerificationStatus_COMMUNITYVALIDATION  VerificationStatus = 1
-	VerificationStatus_DEFINITIVEVALIDATION VerificationStatus = 2
+	VerificationStatus_INITIAL_VALIDATION    VerificationStatus = 0
+	VerificationStatus_COMMUNITY_VALIDATION  VerificationStatus = 1
+	VerificationStatus_DEFINITIVE_VALIDATION VerificationStatus = 2
 )
 
 // Enum value maps for VerificationStatus.
 var (
 	VerificationStatus_name = map[int32]string{
-		0: "INITIALVALIDATION",
-		1: "COMMUNITYVALIDATION",
-		2: "DEFINITIVEVALIDATION",
+		0: "INITIAL_VALIDATION",
+		1: "COMMUNITY_VALIDATION",
+		2: "DEFINITIVE_VALIDATION",
 	}
 	VerificationStatus_value = map[string]int32{
-		"INITIALVALIDATION":    0,
-		"COMMUNITYVALIDATION":  1,
-		"DEFINITIVEVALIDATION": 2,
+		"INITIAL_VALIDATION":    0,
+		"COMMUNITY_VALIDATION":  1,
+		"DEFINITIVE_VALIDATION": 2,
 	}
 )
 
@@ -1359,16 +1408,122 @@ func (VerificationStatus) EnumDescriptor() ([]byte, []int) {
 	return file_fiamma_zkpverify_zkpverify_proto_rawDescGZIP(), []int{0}
 }
 
+// DataLocation is the proof data location for the proof verification
+type DataLocation int32
+
+const (
+	DataLocation_FIAMMA  DataLocation = 0
+	DataLocation_NUBITDA DataLocation = 1
+	DataLocation_AVAILDA DataLocation = 2
+)
+
+// Enum value maps for DataLocation.
+var (
+	DataLocation_name = map[int32]string{
+		0: "FIAMMA",
+		1: "NUBITDA",
+		2: "AVAILDA",
+	}
+	DataLocation_value = map[string]int32{
+		"FIAMMA":  0,
+		"NUBITDA": 1,
+		"AVAILDA": 2,
+	}
+)
+
+func (x DataLocation) Enum() *DataLocation {
+	p := new(DataLocation)
+	*p = x
+	return p
+}
+
+func (x DataLocation) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (DataLocation) Descriptor() protoreflect.EnumDescriptor {
+	return file_fiamma_zkpverify_zkpverify_proto_enumTypes[1].Descriptor()
+}
+
+func (DataLocation) Type() protoreflect.EnumType {
+	return &file_fiamma_zkpverify_zkpverify_proto_enumTypes[1]
+}
+
+func (x DataLocation) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use DataLocation.Descriptor instead.
+func (DataLocation) EnumDescriptor() ([]byte, []int) {
+	return file_fiamma_zkpverify_zkpverify_proto_rawDescGZIP(), []int{1}
+}
+
+// ProofSystem is the proof system for the proof verification
+type ProofSystem int32
+
+const (
+	ProofSystem_GROTH16_BN254_BITVM ProofSystem = 0
+	ProofSystem_PLONK_BN254         ProofSystem = 1
+	ProofSystem_PLONK_BLS12_381     ProofSystem = 2
+	ProofSystem_GROTH16_BN254       ProofSystem = 3
+	ProofSystem_SP1                 ProofSystem = 4
+)
+
+// Enum value maps for ProofSystem.
+var (
+	ProofSystem_name = map[int32]string{
+		0: "GROTH16_BN254_BITVM",
+		1: "PLONK_BN254",
+		2: "PLONK_BLS12_381",
+		3: "GROTH16_BN254",
+		4: "SP1",
+	}
+	ProofSystem_value = map[string]int32{
+		"GROTH16_BN254_BITVM": 0,
+		"PLONK_BN254":         1,
+		"PLONK_BLS12_381":     2,
+		"GROTH16_BN254":       3,
+		"SP1":                 4,
+	}
+)
+
+func (x ProofSystem) Enum() *ProofSystem {
+	p := new(ProofSystem)
+	*p = x
+	return p
+}
+
+func (x ProofSystem) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (ProofSystem) Descriptor() protoreflect.EnumDescriptor {
+	return file_fiamma_zkpverify_zkpverify_proto_enumTypes[2].Descriptor()
+}
+
+func (ProofSystem) Type() protoreflect.EnumType {
+	return &file_fiamma_zkpverify_zkpverify_proto_enumTypes[2]
+}
+
+func (x ProofSystem) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use ProofSystem.Descriptor instead.
+func (ProofSystem) EnumDescriptor() ([]byte, []int) {
+	return file_fiamma_zkpverify_zkpverify_proto_rawDescGZIP(), []int{2}
+}
+
 // ProofData is the data structure for the proof verification request
 type ProofData struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	ProofSystem uint64 `protobuf:"varint,1,opt,name=proof_system,json=proofSystem,proto3" json:"proof_system,omitempty"`
-	Proof       []byte `protobuf:"bytes,2,opt,name=proof,proto3" json:"proof,omitempty"`
-	PublicInput []byte `protobuf:"bytes,3,opt,name=public_input,json=publicInput,proto3" json:"public_input,omitempty"`
-	Vk          []byte `protobuf:"bytes,4,opt,name=vk,proto3" json:"vk,omitempty"`
+	ProofSystem ProofSystem `protobuf:"varint,1,opt,name=proof_system,json=proofSystem,proto3,enum=fiamma.zkpverify.ProofSystem" json:"proof_system,omitempty"`
+	Proof       []byte      `protobuf:"bytes,2,opt,name=proof,proto3" json:"proof,omitempty"`
+	PublicInput []byte      `protobuf:"bytes,3,opt,name=public_input,json=publicInput,proto3" json:"public_input,omitempty"`
+	Vk          []byte      `protobuf:"bytes,4,opt,name=vk,proto3" json:"vk,omitempty"`
 }
 
 func (x *ProofData) Reset() {
@@ -1391,11 +1546,11 @@ func (*ProofData) Descriptor() ([]byte, []int) {
 	return file_fiamma_zkpverify_zkpverify_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *ProofData) GetProofSystem() uint64 {
+func (x *ProofData) GetProofSystem() ProofSystem {
 	if x != nil {
 		return x.ProofSystem
 	}
-	return 0
+	return ProofSystem_GROTH16_BN254_BITVM
 }
 
 func (x *ProofData) GetProof() []byte {
@@ -1426,11 +1581,12 @@ type VerifyResult struct {
 	unknownFields protoimpl.UnknownFields
 
 	ProofId                    string             `protobuf:"bytes,1,opt,name=proof_id,json=proofId,proto3" json:"proof_id,omitempty"`
-	DataCommitment             string             `protobuf:"bytes,2,opt,name=data_commitment,json=dataCommitment,proto3" json:"data_commitment,omitempty"`
-	DataLocation               uint64             `protobuf:"varint,3,opt,name=data_location,json=dataLocation,proto3" json:"data_location,omitempty"`
-	Result                     bool               `protobuf:"varint,4,opt,name=result,proto3" json:"result,omitempty"`
-	Status                     VerificationStatus `protobuf:"varint,5,opt,name=status,proto3,enum=fiamma.zkpverify.VerificationStatus" json:"status,omitempty"`
-	CommunityVerificationCount uint64             `protobuf:"varint,6,opt,name=community_verification_count,json=communityVerificationCount,proto3" json:"community_verification_count,omitempty"`
+	ProofSystem                ProofSystem        `protobuf:"varint,2,opt,name=proof_system,json=proofSystem,proto3,enum=fiamma.zkpverify.ProofSystem" json:"proof_system,omitempty"`
+	DataCommitment             string             `protobuf:"bytes,3,opt,name=data_commitment,json=dataCommitment,proto3" json:"data_commitment,omitempty"`
+	DataLocation               DataLocation       `protobuf:"varint,4,opt,name=data_location,json=dataLocation,proto3,enum=fiamma.zkpverify.DataLocation" json:"data_location,omitempty"`
+	Result                     bool               `protobuf:"varint,5,opt,name=result,proto3" json:"result,omitempty"`
+	Status                     VerificationStatus `protobuf:"varint,6,opt,name=status,proto3,enum=fiamma.zkpverify.VerificationStatus" json:"status,omitempty"`
+	CommunityVerificationCount uint64             `protobuf:"varint,7,opt,name=community_verification_count,json=communityVerificationCount,proto3" json:"community_verification_count,omitempty"`
 }
 
 func (x *VerifyResult) Reset() {
@@ -1460,6 +1616,13 @@ func (x *VerifyResult) GetProofId() string {
 	return ""
 }
 
+func (x *VerifyResult) GetProofSystem() ProofSystem {
+	if x != nil {
+		return x.ProofSystem
+	}
+	return ProofSystem_GROTH16_BN254_BITVM
+}
+
 func (x *VerifyResult) GetDataCommitment() string {
 	if x != nil {
 		return x.DataCommitment
@@ -1467,11 +1630,11 @@ func (x *VerifyResult) GetDataCommitment() string {
 	return ""
 }
 
-func (x *VerifyResult) GetDataLocation() uint64 {
+func (x *VerifyResult) GetDataLocation() DataLocation {
 	if x != nil {
 		return x.DataLocation
 	}
-	return 0
+	return DataLocation_FIAMMA
 }
 
 func (x *VerifyResult) GetResult() bool {
@@ -1485,7 +1648,7 @@ func (x *VerifyResult) GetStatus() VerificationStatus {
 	if x != nil {
 		return x.Status
 	}
-	return VerificationStatus_INITIALVALIDATION
+	return VerificationStatus_INITIAL_VALIDATION
 }
 
 func (x *VerifyResult) GetCommunityVerificationCount() uint64 {
@@ -1501,49 +1664,68 @@ var file_fiamma_zkpverify_zkpverify_proto_rawDesc = []byte{
 	0x0a, 0x20, 0x66, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x2f, 0x7a, 0x6b, 0x70, 0x76, 0x65, 0x72, 0x69,
 	0x66, 0x79, 0x2f, 0x7a, 0x6b, 0x70, 0x76, 0x65, 0x72, 0x69, 0x66, 0x79, 0x2e, 0x70, 0x72, 0x6f,
 	0x74, 0x6f, 0x12, 0x10, 0x66, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x2e, 0x7a, 0x6b, 0x70, 0x76, 0x65,
-	0x72, 0x69, 0x66, 0x79, 0x22, 0x77, 0x0a, 0x09, 0x50, 0x72, 0x6f, 0x6f, 0x66, 0x44, 0x61, 0x74,
-	0x61, 0x12, 0x21, 0x0a, 0x0c, 0x70, 0x72, 0x6f, 0x6f, 0x66, 0x5f, 0x73, 0x79, 0x73, 0x74, 0x65,
-	0x6d, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x0b, 0x70, 0x72, 0x6f, 0x6f, 0x66, 0x53, 0x79,
-	0x73, 0x74, 0x65, 0x6d, 0x12, 0x14, 0x0a, 0x05, 0x70, 0x72, 0x6f, 0x6f, 0x66, 0x18, 0x02, 0x20,
-	0x01, 0x28, 0x0c, 0x52, 0x05, 0x70, 0x72, 0x6f, 0x6f, 0x66, 0x12, 0x21, 0x0a, 0x0c, 0x70, 0x75,
-	0x62, 0x6c, 0x69, 0x63, 0x5f, 0x69, 0x6e, 0x70, 0x75, 0x74, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0c,
-	0x52, 0x0b, 0x70, 0x75, 0x62, 0x6c, 0x69, 0x63, 0x49, 0x6e, 0x70, 0x75, 0x74, 0x12, 0x0e, 0x0a,
-	0x02, 0x76, 0x6b, 0x18, 0x04, 0x20, 0x01, 0x28, 0x0c, 0x52, 0x02, 0x76, 0x6b, 0x22, 0x8f, 0x02,
-	0x0a, 0x0c, 0x56, 0x65, 0x72, 0x69, 0x66, 0x79, 0x52, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x12, 0x19,
-	0x0a, 0x08, 0x70, 0x72, 0x6f, 0x6f, 0x66, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09,
-	0x52, 0x07, 0x70, 0x72, 0x6f, 0x6f, 0x66, 0x49, 0x64, 0x12, 0x27, 0x0a, 0x0f, 0x64, 0x61, 0x74,
-	0x61, 0x5f, 0x63, 0x6f, 0x6d, 0x6d, 0x69, 0x74, 0x6d, 0x65, 0x6e, 0x74, 0x18, 0x02, 0x20, 0x01,
-	0x28, 0x09, 0x52, 0x0e, 0x64, 0x61, 0x74, 0x61, 0x43, 0x6f, 0x6d, 0x6d, 0x69, 0x74, 0x6d, 0x65,
-	0x6e, 0x74, 0x12, 0x23, 0x0a, 0x0d, 0x64, 0x61, 0x74, 0x61, 0x5f, 0x6c, 0x6f, 0x63, 0x61, 0x74,
-	0x69, 0x6f, 0x6e, 0x18, 0x03, 0x20, 0x01, 0x28, 0x04, 0x52, 0x0c, 0x64, 0x61, 0x74, 0x61, 0x4c,
-	0x6f, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x16, 0x0a, 0x06, 0x72, 0x65, 0x73, 0x75, 0x6c,
-	0x74, 0x18, 0x04, 0x20, 0x01, 0x28, 0x08, 0x52, 0x06, 0x72, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x12,
-	0x3c, 0x0a, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x18, 0x05, 0x20, 0x01, 0x28, 0x0e, 0x32,
-	0x24, 0x2e, 0x66, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x2e, 0x7a, 0x6b, 0x70, 0x76, 0x65, 0x72, 0x69,
-	0x66, 0x79, 0x2e, 0x56, 0x65, 0x72, 0x69, 0x66, 0x69, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x53,
-	0x74, 0x61, 0x74, 0x75, 0x73, 0x52, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x12, 0x40, 0x0a,
-	0x1c, 0x63, 0x6f, 0x6d, 0x6d, 0x75, 0x6e, 0x69, 0x74, 0x79, 0x5f, 0x76, 0x65, 0x72, 0x69, 0x66,
-	0x69, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x5f, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x06, 0x20,
-	0x01, 0x28, 0x04, 0x52, 0x1a, 0x63, 0x6f, 0x6d, 0x6d, 0x75, 0x6e, 0x69, 0x74, 0x79, 0x56, 0x65,
-	0x72, 0x69, 0x66, 0x69, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x2a,
-	0x5e, 0x0a, 0x12, 0x56, 0x65, 0x72, 0x69, 0x66, 0x69, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x53,
-	0x74, 0x61, 0x74, 0x75, 0x73, 0x12, 0x15, 0x0a, 0x11, 0x49, 0x4e, 0x49, 0x54, 0x49, 0x41, 0x4c,
-	0x56, 0x41, 0x4c, 0x49, 0x44, 0x41, 0x54, 0x49, 0x4f, 0x4e, 0x10, 0x00, 0x12, 0x17, 0x0a, 0x13,
-	0x43, 0x4f, 0x4d, 0x4d, 0x55, 0x4e, 0x49, 0x54, 0x59, 0x56, 0x41, 0x4c, 0x49, 0x44, 0x41, 0x54,
-	0x49, 0x4f, 0x4e, 0x10, 0x01, 0x12, 0x18, 0x0a, 0x14, 0x44, 0x45, 0x46, 0x49, 0x4e, 0x49, 0x54,
-	0x49, 0x56, 0x45, 0x56, 0x41, 0x4c, 0x49, 0x44, 0x41, 0x54, 0x49, 0x4f, 0x4e, 0x10, 0x02, 0x42,
-	0xaa, 0x01, 0x0a, 0x14, 0x63, 0x6f, 0x6d, 0x2e, 0x66, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x2e, 0x7a,
-	0x6b, 0x70, 0x76, 0x65, 0x72, 0x69, 0x66, 0x79, 0x42, 0x0e, 0x5a, 0x6b, 0x70, 0x76, 0x65, 0x72,
-	0x69, 0x66, 0x79, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x21, 0x63, 0x6f, 0x73, 0x6d,
-	0x6f, 0x73, 0x73, 0x64, 0x6b, 0x2e, 0x69, 0x6f, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x66, 0x69, 0x61,
-	0x6d, 0x6d, 0x61, 0x2f, 0x7a, 0x6b, 0x70, 0x76, 0x65, 0x72, 0x69, 0x66, 0x79, 0xa2, 0x02, 0x03,
-	0x46, 0x5a, 0x58, 0xaa, 0x02, 0x10, 0x46, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x2e, 0x5a, 0x6b, 0x70,
-	0x76, 0x65, 0x72, 0x69, 0x66, 0x79, 0xca, 0x02, 0x10, 0x46, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x5c,
-	0x5a, 0x6b, 0x70, 0x76, 0x65, 0x72, 0x69, 0x66, 0x79, 0xe2, 0x02, 0x1c, 0x46, 0x69, 0x61, 0x6d,
-	0x6d, 0x61, 0x5c, 0x5a, 0x6b, 0x70, 0x76, 0x65, 0x72, 0x69, 0x66, 0x79, 0x5c, 0x47, 0x50, 0x42,
-	0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0xea, 0x02, 0x11, 0x46, 0x69, 0x61, 0x6d, 0x6d,
-	0x61, 0x3a, 0x3a, 0x5a, 0x6b, 0x70, 0x76, 0x65, 0x72, 0x69, 0x66, 0x79, 0x62, 0x06, 0x70, 0x72,
-	0x6f, 0x74, 0x6f, 0x33,
+	0x72, 0x69, 0x66, 0x79, 0x1a, 0x14, 0x67, 0x6f, 0x67, 0x6f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2f,
+	0x67, 0x6f, 0x67, 0x6f, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0x96, 0x01, 0x0a, 0x09, 0x50,
+	0x72, 0x6f, 0x6f, 0x66, 0x44, 0x61, 0x74, 0x61, 0x12, 0x40, 0x0a, 0x0c, 0x70, 0x72, 0x6f, 0x6f,
+	0x66, 0x5f, 0x73, 0x79, 0x73, 0x74, 0x65, 0x6d, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x1d,
+	0x2e, 0x66, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x2e, 0x7a, 0x6b, 0x70, 0x76, 0x65, 0x72, 0x69, 0x66,
+	0x79, 0x2e, 0x50, 0x72, 0x6f, 0x6f, 0x66, 0x53, 0x79, 0x73, 0x74, 0x65, 0x6d, 0x52, 0x0b, 0x70,
+	0x72, 0x6f, 0x6f, 0x66, 0x53, 0x79, 0x73, 0x74, 0x65, 0x6d, 0x12, 0x14, 0x0a, 0x05, 0x70, 0x72,
+	0x6f, 0x6f, 0x66, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0c, 0x52, 0x05, 0x70, 0x72, 0x6f, 0x6f, 0x66,
+	0x12, 0x21, 0x0a, 0x0c, 0x70, 0x75, 0x62, 0x6c, 0x69, 0x63, 0x5f, 0x69, 0x6e, 0x70, 0x75, 0x74,
+	0x18, 0x03, 0x20, 0x01, 0x28, 0x0c, 0x52, 0x0b, 0x70, 0x75, 0x62, 0x6c, 0x69, 0x63, 0x49, 0x6e,
+	0x70, 0x75, 0x74, 0x12, 0x0e, 0x0a, 0x02, 0x76, 0x6b, 0x18, 0x04, 0x20, 0x01, 0x28, 0x0c, 0x52,
+	0x02, 0x76, 0x6b, 0x22, 0xf1, 0x02, 0x0a, 0x0c, 0x56, 0x65, 0x72, 0x69, 0x66, 0x79, 0x52, 0x65,
+	0x73, 0x75, 0x6c, 0x74, 0x12, 0x19, 0x0a, 0x08, 0x70, 0x72, 0x6f, 0x6f, 0x66, 0x5f, 0x69, 0x64,
+	0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x70, 0x72, 0x6f, 0x6f, 0x66, 0x49, 0x64, 0x12,
+	0x40, 0x0a, 0x0c, 0x70, 0x72, 0x6f, 0x6f, 0x66, 0x5f, 0x73, 0x79, 0x73, 0x74, 0x65, 0x6d, 0x18,
+	0x02, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x1d, 0x2e, 0x66, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x2e, 0x7a,
+	0x6b, 0x70, 0x76, 0x65, 0x72, 0x69, 0x66, 0x79, 0x2e, 0x50, 0x72, 0x6f, 0x6f, 0x66, 0x53, 0x79,
+	0x73, 0x74, 0x65, 0x6d, 0x52, 0x0b, 0x70, 0x72, 0x6f, 0x6f, 0x66, 0x53, 0x79, 0x73, 0x74, 0x65,
+	0x6d, 0x12, 0x27, 0x0a, 0x0f, 0x64, 0x61, 0x74, 0x61, 0x5f, 0x63, 0x6f, 0x6d, 0x6d, 0x69, 0x74,
+	0x6d, 0x65, 0x6e, 0x74, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0e, 0x64, 0x61, 0x74, 0x61,
+	0x43, 0x6f, 0x6d, 0x6d, 0x69, 0x74, 0x6d, 0x65, 0x6e, 0x74, 0x12, 0x43, 0x0a, 0x0d, 0x64, 0x61,
+	0x74, 0x61, 0x5f, 0x6c, 0x6f, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x04, 0x20, 0x01, 0x28,
+	0x0e, 0x32, 0x1e, 0x2e, 0x66, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x2e, 0x7a, 0x6b, 0x70, 0x76, 0x65,
+	0x72, 0x69, 0x66, 0x79, 0x2e, 0x44, 0x61, 0x74, 0x61, 0x4c, 0x6f, 0x63, 0x61, 0x74, 0x69, 0x6f,
+	0x6e, 0x52, 0x0c, 0x64, 0x61, 0x74, 0x61, 0x4c, 0x6f, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x12,
+	0x16, 0x0a, 0x06, 0x72, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x18, 0x05, 0x20, 0x01, 0x28, 0x08, 0x52,
+	0x06, 0x72, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x12, 0x3c, 0x0a, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75,
+	0x73, 0x18, 0x06, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x24, 0x2e, 0x66, 0x69, 0x61, 0x6d, 0x6d, 0x61,
+	0x2e, 0x7a, 0x6b, 0x70, 0x76, 0x65, 0x72, 0x69, 0x66, 0x79, 0x2e, 0x56, 0x65, 0x72, 0x69, 0x66,
+	0x69, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x52, 0x06, 0x73,
+	0x74, 0x61, 0x74, 0x75, 0x73, 0x12, 0x40, 0x0a, 0x1c, 0x63, 0x6f, 0x6d, 0x6d, 0x75, 0x6e, 0x69,
+	0x74, 0x79, 0x5f, 0x76, 0x65, 0x72, 0x69, 0x66, 0x69, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x5f,
+	0x63, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x07, 0x20, 0x01, 0x28, 0x04, 0x52, 0x1a, 0x63, 0x6f, 0x6d,
+	0x6d, 0x75, 0x6e, 0x69, 0x74, 0x79, 0x56, 0x65, 0x72, 0x69, 0x66, 0x69, 0x63, 0x61, 0x74, 0x69,
+	0x6f, 0x6e, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x2a, 0x61, 0x0a, 0x12, 0x56, 0x65, 0x72, 0x69, 0x66,
+	0x69, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x12, 0x16, 0x0a,
+	0x12, 0x49, 0x4e, 0x49, 0x54, 0x49, 0x41, 0x4c, 0x5f, 0x56, 0x41, 0x4c, 0x49, 0x44, 0x41, 0x54,
+	0x49, 0x4f, 0x4e, 0x10, 0x00, 0x12, 0x18, 0x0a, 0x14, 0x43, 0x4f, 0x4d, 0x4d, 0x55, 0x4e, 0x49,
+	0x54, 0x59, 0x5f, 0x56, 0x41, 0x4c, 0x49, 0x44, 0x41, 0x54, 0x49, 0x4f, 0x4e, 0x10, 0x01, 0x12,
+	0x19, 0x0a, 0x15, 0x44, 0x45, 0x46, 0x49, 0x4e, 0x49, 0x54, 0x49, 0x56, 0x45, 0x5f, 0x56, 0x41,
+	0x4c, 0x49, 0x44, 0x41, 0x54, 0x49, 0x4f, 0x4e, 0x10, 0x02, 0x2a, 0x34, 0x0a, 0x0c, 0x44, 0x61,
+	0x74, 0x61, 0x4c, 0x6f, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x0a, 0x0a, 0x06, 0x46, 0x49,
+	0x41, 0x4d, 0x4d, 0x41, 0x10, 0x00, 0x12, 0x0b, 0x0a, 0x07, 0x4e, 0x55, 0x42, 0x49, 0x54, 0x44,
+	0x41, 0x10, 0x01, 0x12, 0x0b, 0x0a, 0x07, 0x41, 0x56, 0x41, 0x49, 0x4c, 0x44, 0x41, 0x10, 0x02,
+	0x2a, 0x68, 0x0a, 0x0b, 0x50, 0x72, 0x6f, 0x6f, 0x66, 0x53, 0x79, 0x73, 0x74, 0x65, 0x6d, 0x12,
+	0x17, 0x0a, 0x13, 0x47, 0x52, 0x4f, 0x54, 0x48, 0x31, 0x36, 0x5f, 0x42, 0x4e, 0x32, 0x35, 0x34,
+	0x5f, 0x42, 0x49, 0x54, 0x56, 0x4d, 0x10, 0x00, 0x12, 0x0f, 0x0a, 0x0b, 0x50, 0x4c, 0x4f, 0x4e,
+	0x4b, 0x5f, 0x42, 0x4e, 0x32, 0x35, 0x34, 0x10, 0x01, 0x12, 0x13, 0x0a, 0x0f, 0x50, 0x4c, 0x4f,
+	0x4e, 0x4b, 0x5f, 0x42, 0x4c, 0x53, 0x31, 0x32, 0x5f, 0x33, 0x38, 0x31, 0x10, 0x02, 0x12, 0x11,
+	0x0a, 0x0d, 0x47, 0x52, 0x4f, 0x54, 0x48, 0x31, 0x36, 0x5f, 0x42, 0x4e, 0x32, 0x35, 0x34, 0x10,
+	0x03, 0x12, 0x07, 0x0a, 0x03, 0x53, 0x50, 0x31, 0x10, 0x04, 0x42, 0xaa, 0x01, 0x0a, 0x14, 0x63,
+	0x6f, 0x6d, 0x2e, 0x66, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x2e, 0x7a, 0x6b, 0x70, 0x76, 0x65, 0x72,
+	0x69, 0x66, 0x79, 0x42, 0x0e, 0x5a, 0x6b, 0x70, 0x76, 0x65, 0x72, 0x69, 0x66, 0x79, 0x50, 0x72,
+	0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x21, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x73, 0x64, 0x6b,
+	0x2e, 0x69, 0x6f, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x66, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x2f, 0x7a,
+	0x6b, 0x70, 0x76, 0x65, 0x72, 0x69, 0x66, 0x79, 0xa2, 0x02, 0x03, 0x46, 0x5a, 0x58, 0xaa, 0x02,
+	0x10, 0x46, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x2e, 0x5a, 0x6b, 0x70, 0x76, 0x65, 0x72, 0x69, 0x66,
+	0x79, 0xca, 0x02, 0x10, 0x46, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x5c, 0x5a, 0x6b, 0x70, 0x76, 0x65,
+	0x72, 0x69, 0x66, 0x79, 0xe2, 0x02, 0x1c, 0x46, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x5c, 0x5a, 0x6b,
+	0x70, 0x76, 0x65, 0x72, 0x69, 0x66, 0x79, 0x5c, 0x47, 0x50, 0x42, 0x4d, 0x65, 0x74, 0x61, 0x64,
+	0x61, 0x74, 0x61, 0xea, 0x02, 0x11, 0x46, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x3a, 0x3a, 0x5a, 0x6b,
+	0x70, 0x76, 0x65, 0x72, 0x69, 0x66, 0x79, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -1558,20 +1740,25 @@ func file_fiamma_zkpverify_zkpverify_proto_rawDescGZIP() []byte {
 	return file_fiamma_zkpverify_zkpverify_proto_rawDescData
 }
 
-var file_fiamma_zkpverify_zkpverify_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
+var file_fiamma_zkpverify_zkpverify_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
 var file_fiamma_zkpverify_zkpverify_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_fiamma_zkpverify_zkpverify_proto_goTypes = []interface{}{
 	(VerificationStatus)(0), // 0: fiamma.zkpverify.VerificationStatus
-	(*ProofData)(nil),       // 1: fiamma.zkpverify.ProofData
-	(*VerifyResult)(nil),    // 2: fiamma.zkpverify.VerifyResult
+	(DataLocation)(0),       // 1: fiamma.zkpverify.DataLocation
+	(ProofSystem)(0),        // 2: fiamma.zkpverify.ProofSystem
+	(*ProofData)(nil),       // 3: fiamma.zkpverify.ProofData
+	(*VerifyResult)(nil),    // 4: fiamma.zkpverify.VerifyResult
 }
 var file_fiamma_zkpverify_zkpverify_proto_depIdxs = []int32{
-	0, // 0: fiamma.zkpverify.VerifyResult.status:type_name -> fiamma.zkpverify.VerificationStatus
-	1, // [1:1] is the sub-list for method output_type
-	1, // [1:1] is the sub-list for method input_type
-	1, // [1:1] is the sub-list for extension type_name
-	1, // [1:1] is the sub-list for extension extendee
-	0, // [0:1] is the sub-list for field type_name
+	2, // 0: fiamma.zkpverify.ProofData.proof_system:type_name -> fiamma.zkpverify.ProofSystem
+	2, // 1: fiamma.zkpverify.VerifyResult.proof_system:type_name -> fiamma.zkpverify.ProofSystem
+	1, // 2: fiamma.zkpverify.VerifyResult.data_location:type_name -> fiamma.zkpverify.DataLocation
+	0, // 3: fiamma.zkpverify.VerifyResult.status:type_name -> fiamma.zkpverify.VerificationStatus
+	4, // [4:4] is the sub-list for method output_type
+	4, // [4:4] is the sub-list for method input_type
+	4, // [4:4] is the sub-list for extension type_name
+	4, // [4:4] is the sub-list for extension extendee
+	0, // [0:4] is the sub-list for field type_name
 }
 
 func init() { file_fiamma_zkpverify_zkpverify_proto_init() }
@@ -1610,7 +1797,7 @@ func file_fiamma_zkpverify_zkpverify_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_fiamma_zkpverify_zkpverify_proto_rawDesc,
-			NumEnums:      1,
+			NumEnums:      3,
 			NumMessages:   2,
 			NumExtensions: 0,
 			NumServices:   0,

@@ -10,19 +10,19 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
-func (k Keeper) SubmitProofData(ctx context.Context, proofId []byte, proofData types.ProofData) (string, types.DataLocationId, error) {
+func (k Keeper) SubmitProofData(ctx context.Context, proofId []byte, proofData types.ProofData) (string, types.DataLocation, error) {
 	// We submit data to DA, if submission fails, then we will store the data on our own chain
 	// Currently we only support NubitDA
 	dataCommitments, err := k.SubmitProofDataToDA(ctx, proofId, proofData)
 	if err == nil {
 		dataCommitmentStr := hex.EncodeToString(dataCommitments[0])
-		return dataCommitmentStr, types.NubitDA, nil
+		return dataCommitmentStr, types.DataLocation_NUBITDA, nil
 
 	}
 	sdkCtx := sdk.UnwrapSDKContext(ctx)
 	// If submission to DA fails, we store the data on our own chain
 	k.SetProofData(sdkCtx, proofId[:], proofData)
-	return "", types.Fiamma, nil
+	return "", types.DataLocation_FIAMMA, nil
 
 }
 

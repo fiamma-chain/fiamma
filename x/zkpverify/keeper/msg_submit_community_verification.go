@@ -33,7 +33,7 @@ func (k msgServer) SubmitCommunityVerification(goCtx context.Context, msg *types
 		return nil, types.ErrVerifyResult
 	}
 
-	if verifyResult.Status == types.VerificationStatus_DEFINITIVEVALIDATION {
+	if verifyResult.Status == types.VerificationStatus_DEFINITIVE_VALIDATION {
 		k.Logger().Info("Error exceeding verification period:", "error", msg.ProofId)
 		return nil, types.ErrVerifyPeriod
 	}
@@ -42,18 +42,18 @@ func (k msgServer) SubmitCommunityVerification(goCtx context.Context, msg *types
 
 	verifyResult.CommunityVerificationCount++
 	if verifyResult.CommunityVerificationCount < VerificationCountLimit {
-		verifyResult.Status = types.VerificationStatus_COMMUNITYVALIDATION
+		verifyResult.Status = types.VerificationStatus_COMMUNITY_VALIDATION
 	} else {
-		verifyResult.Status = types.VerificationStatus_DEFINITIVEVALIDATION
+		verifyResult.Status = types.VerificationStatus_DEFINITIVE_VALIDATION
 	}
 	k.Logger().Info("Proof verification status for community:", "status", verifyResult.Status)
 
 	k.SetVerifyResult(ctx, proofId[:], verifyResult)
 
-	event := sdk.NewEvent("verifyFinished",
+	event := sdk.NewEvent("SubmitCommunityVerification",
 		sdk.NewAttribute("proofId", msg.ProofId),
 		sdk.NewAttribute("verifyResult", strconv.FormatBool(msg.VerifyResult)),
-		sdk.NewAttribute("status", strconv.Itoa(int(verifyResult.Status))),
+		sdk.NewAttribute("status", verifyResult.Status.String()),
 		sdk.NewAttribute("CommunityVerificationCount", strconv.Itoa(int(verifyResult.CommunityVerificationCount))))
 	ctx.EventManager().EmitEvent(event)
 

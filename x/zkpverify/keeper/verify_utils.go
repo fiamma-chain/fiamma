@@ -16,12 +16,7 @@ import (
 // GetProofId returns the proof id
 func (k Keeper) GetProofId(proofData types.ProofData) ([32]byte, error) {
 	var buf bytes.Buffer
-	proofSystem, err := types.ProofSystemIdToString(types.ProofSystemId(proofData.ProofSystem))
-	if err != nil {
-		return [32]byte{}, err
-	}
-
-	buf.Write([]byte(proofSystem))
+	buf.Write([]byte(proofData.ProofSystem.String()))
 	buf.Write(proofData.Proof)
 	buf.Write(proofData.PublicInput)
 	buf.Write(proofData.Vk)
@@ -32,23 +27,23 @@ func (k Keeper) GetProofId(proofData types.ProofData) ([32]byte, error) {
 
 func (k Keeper) verifyProof(proofData *types.ProofData) (bool, []byte) {
 	switch proofData.ProofSystem {
-	case uint64(types.PlonkBls12_381):
+	case types.ProofSystem_PLONK_BLS12_381:
 		verifyResult := k.verifyPlonkProofBLS12_381(proofData.Proof, proofData.PublicInput, proofData.Vk)
 
 		k.Logger().Info("PLONK BLS12-381 proof verification:", "result", verifyResult)
 		return verifyResult, nil
-	case uint64(types.PlonkBn254):
+	case types.ProofSystem_PLONK_BN254:
 		verifyResult := k.verifyPlonkProofBN254(proofData.Proof, proofData.PublicInput, proofData.Vk)
 
 		k.Logger().Info("PLONK BN254 proof verification:", "result", verifyResult)
 		return verifyResult, nil
-	case uint64(types.Groth16Bn254):
+	case types.ProofSystem_GROTH16_BN254:
 		verifyResult := k.verifyGroth16ProofBN254(proofData.Proof, proofData.PublicInput, proofData.Vk)
 
 		k.Logger().Info("GROTH16 BN254 proof verification:", "result", verifyResult)
 		return verifyResult, nil
 
-	case uint64(types.Groth16Bn254_BitVM):
+	case types.ProofSystem_GROTH16_BN254_BITVM:
 
 		vkLen := (uint32)(len(proofData.Vk))
 		proofLen := (uint32)(len(proofData.Proof))
@@ -60,7 +55,7 @@ func (k Keeper) verifyProof(proofData *types.ProofData) (bool, []byte) {
 		k.Logger().Info("GROTH16 BN254 BitVM proof verification:", "result", verifyResult)
 		return verifyResult, witness
 
-	case uint64(types.SP1):
+	case types.ProofSystem_SP1:
 		proofLen := (uint32)(len(proofData.Proof))
 		// For the verification of the SP1 proof system, we consider the ELF file as public input.
 		elfLen := (uint32)(len(proofData.PublicInput))
