@@ -11,10 +11,19 @@ message ProofData {
   bytes vk = 4;
 }
 
+// VerificationStatus is the verification status for the proof verification
+enum VerificationStatus { 
+  INITIALVALIDATION = 0;
+  COMMUNITYVALIDATION = 1;
+  DEFINITIVEVALIDATION = 2;
+}
+
 // VerifyResult is the data structure for the proof verification result
 message VerifyResult {
   string proof_id = 1;
   string data_commitment = 2;
   uint64 data_location = 3;
   bool result = 4;
+  VerificationStatus status = 5;
+  uint64 community_verification_count = 6;
 }
