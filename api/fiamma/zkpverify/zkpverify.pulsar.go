@@ -3,14 +3,13 @@ package zkpverify
 
 import (
 	fmt "fmt"
-	io "io"
-	reflect "reflect"
-	sync "sync"
-
 	runtime "github.com/cosmos/cosmos-proto/runtime"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoiface "google.golang.org/protobuf/runtime/protoiface"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	io "io"
+	reflect "reflect"
+	sync "sync"
 )
 
 var (
@@ -616,11 +615,13 @@ func (x *fastReflection_ProofData) ProtoMethods() *protoiface.Methods {
 }
 
 var (
-	md_VerifyResult                 protoreflect.MessageDescriptor
-	fd_VerifyResult_proof_id        protoreflect.FieldDescriptor
-	fd_VerifyResult_data_commitment protoreflect.FieldDescriptor
-	fd_VerifyResult_data_location   protoreflect.FieldDescriptor
-	fd_VerifyResult_result          protoreflect.FieldDescriptor
+	md_VerifyResult                              protoreflect.MessageDescriptor
+	fd_VerifyResult_proof_id                     protoreflect.FieldDescriptor
+	fd_VerifyResult_data_commitment              protoreflect.FieldDescriptor
+	fd_VerifyResult_data_location                protoreflect.FieldDescriptor
+	fd_VerifyResult_result                       protoreflect.FieldDescriptor
+	fd_VerifyResult_status                       protoreflect.FieldDescriptor
+	fd_VerifyResult_community_verification_count protoreflect.FieldDescriptor
 )
 
 func init() {
@@ -630,6 +631,8 @@ func init() {
 	fd_VerifyResult_data_commitment = md_VerifyResult.Fields().ByName("data_commitment")
 	fd_VerifyResult_data_location = md_VerifyResult.Fields().ByName("data_location")
 	fd_VerifyResult_result = md_VerifyResult.Fields().ByName("result")
+	fd_VerifyResult_status = md_VerifyResult.Fields().ByName("status")
+	fd_VerifyResult_community_verification_count = md_VerifyResult.Fields().ByName("community_verification_count")
 }
 
 var _ protoreflect.Message = (*fastReflection_VerifyResult)(nil)
@@ -721,6 +724,18 @@ func (x *fastReflection_VerifyResult) Range(f func(protoreflect.FieldDescriptor,
 			return
 		}
 	}
+	if x.Status != 0 {
+		value := protoreflect.ValueOfEnum((protoreflect.EnumNumber)(x.Status))
+		if !f(fd_VerifyResult_status, value) {
+			return
+		}
+	}
+	if x.CommunityVerificationCount != uint64(0) {
+		value := protoreflect.ValueOfUint64(x.CommunityVerificationCount)
+		if !f(fd_VerifyResult_community_verification_count, value) {
+			return
+		}
+	}
 }
 
 // Has reports whether a field is populated.
@@ -744,6 +759,10 @@ func (x *fastReflection_VerifyResult) Has(fd protoreflect.FieldDescriptor) bool 
 		return x.DataLocation != uint64(0)
 	case "fiamma.zkpverify.VerifyResult.result":
 		return x.Result != false
+	case "fiamma.zkpverify.VerifyResult.status":
+		return x.Status != 0
+	case "fiamma.zkpverify.VerifyResult.community_verification_count":
+		return x.CommunityVerificationCount != uint64(0)
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.zkpverify.VerifyResult"))
@@ -768,6 +787,10 @@ func (x *fastReflection_VerifyResult) Clear(fd protoreflect.FieldDescriptor) {
 		x.DataLocation = uint64(0)
 	case "fiamma.zkpverify.VerifyResult.result":
 		x.Result = false
+	case "fiamma.zkpverify.VerifyResult.status":
+		x.Status = 0
+	case "fiamma.zkpverify.VerifyResult.community_verification_count":
+		x.CommunityVerificationCount = uint64(0)
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.zkpverify.VerifyResult"))
@@ -796,6 +819,12 @@ func (x *fastReflection_VerifyResult) Get(descriptor protoreflect.FieldDescripto
 	case "fiamma.zkpverify.VerifyResult.result":
 		value := x.Result
 		return protoreflect.ValueOfBool(value)
+	case "fiamma.zkpverify.VerifyResult.status":
+		value := x.Status
+		return protoreflect.ValueOfEnum((protoreflect.EnumNumber)(value))
+	case "fiamma.zkpverify.VerifyResult.community_verification_count":
+		value := x.CommunityVerificationCount
+		return protoreflect.ValueOfUint64(value)
 	default:
 		if descriptor.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.zkpverify.VerifyResult"))
@@ -824,6 +853,10 @@ func (x *fastReflection_VerifyResult) Set(fd protoreflect.FieldDescriptor, value
 		x.DataLocation = value.Uint()
 	case "fiamma.zkpverify.VerifyResult.result":
 		x.Result = value.Bool()
+	case "fiamma.zkpverify.VerifyResult.status":
+		x.Status = (VerificationStatus)(value.Enum())
+	case "fiamma.zkpverify.VerifyResult.community_verification_count":
+		x.CommunityVerificationCount = value.Uint()
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.zkpverify.VerifyResult"))
@@ -852,6 +885,10 @@ func (x *fastReflection_VerifyResult) Mutable(fd protoreflect.FieldDescriptor) p
 		panic(fmt.Errorf("field data_location of message fiamma.zkpverify.VerifyResult is not mutable"))
 	case "fiamma.zkpverify.VerifyResult.result":
 		panic(fmt.Errorf("field result of message fiamma.zkpverify.VerifyResult is not mutable"))
+	case "fiamma.zkpverify.VerifyResult.status":
+		panic(fmt.Errorf("field status of message fiamma.zkpverify.VerifyResult is not mutable"))
+	case "fiamma.zkpverify.VerifyResult.community_verification_count":
+		panic(fmt.Errorf("field community_verification_count of message fiamma.zkpverify.VerifyResult is not mutable"))
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.zkpverify.VerifyResult"))
@@ -873,6 +910,10 @@ func (x *fastReflection_VerifyResult) NewField(fd protoreflect.FieldDescriptor) 
 		return protoreflect.ValueOfUint64(uint64(0))
 	case "fiamma.zkpverify.VerifyResult.result":
 		return protoreflect.ValueOfBool(false)
+	case "fiamma.zkpverify.VerifyResult.status":
+		return protoreflect.ValueOfEnum(0)
+	case "fiamma.zkpverify.VerifyResult.community_verification_count":
+		return protoreflect.ValueOfUint64(uint64(0))
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.zkpverify.VerifyResult"))
@@ -956,6 +997,12 @@ func (x *fastReflection_VerifyResult) ProtoMethods() *protoiface.Methods {
 		if x.Result {
 			n += 2
 		}
+		if x.Status != 0 {
+			n += 1 + runtime.Sov(uint64(x.Status))
+		}
+		if x.CommunityVerificationCount != 0 {
+			n += 1 + runtime.Sov(uint64(x.CommunityVerificationCount))
+		}
 		if x.unknownFields != nil {
 			n += len(x.unknownFields)
 		}
@@ -984,6 +1031,16 @@ func (x *fastReflection_VerifyResult) ProtoMethods() *protoiface.Methods {
 		if x.unknownFields != nil {
 			i -= len(x.unknownFields)
 			copy(dAtA[i:], x.unknownFields)
+		}
+		if x.CommunityVerificationCount != 0 {
+			i = runtime.EncodeVarint(dAtA, i, uint64(x.CommunityVerificationCount))
+			i--
+			dAtA[i] = 0x30
+		}
+		if x.Status != 0 {
+			i = runtime.EncodeVarint(dAtA, i, uint64(x.Status))
+			i--
+			dAtA[i] = 0x28
 		}
 		if x.Result {
 			i--
@@ -1166,6 +1223,44 @@ func (x *fastReflection_VerifyResult) ProtoMethods() *protoiface.Methods {
 					}
 				}
 				x.Result = bool(v != 0)
+			case 5:
+				if wireType != 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Status", wireType)
+				}
+				x.Status = 0
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					x.Status |= VerificationStatus(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+			case 6:
+				if wireType != 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field CommunityVerificationCount", wireType)
+				}
+				x.CommunityVerificationCount = 0
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					x.CommunityVerificationCount |= uint64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
 			default:
 				iNdEx = preIndex
 				skippy, err := runtime.Skip(dAtA[iNdEx:])
@@ -1213,6 +1308,56 @@ const (
 	// Verify that runtime/protoimpl is sufficiently up-to-date.
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
+
+// VerificationStatus is the verification status for the proof verification
+type VerificationStatus int32
+
+const (
+	VerificationStatus_INITIALVALIDATION    VerificationStatus = 0
+	VerificationStatus_COMMUNITYVALIDATION  VerificationStatus = 1
+	VerificationStatus_DEFINITIVEVALIDATION VerificationStatus = 2
+)
+
+// Enum value maps for VerificationStatus.
+var (
+	VerificationStatus_name = map[int32]string{
+		0: "INITIALVALIDATION",
+		1: "COMMUNITYVALIDATION",
+		2: "DEFINITIVEVALIDATION",
+	}
+	VerificationStatus_value = map[string]int32{
+		"INITIALVALIDATION":    0,
+		"COMMUNITYVALIDATION":  1,
+		"DEFINITIVEVALIDATION": 2,
+	}
+)
+
+func (x VerificationStatus) Enum() *VerificationStatus {
+	p := new(VerificationStatus)
+	*p = x
+	return p
+}
+
+func (x VerificationStatus) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (VerificationStatus) Descriptor() protoreflect.EnumDescriptor {
+	return file_fiamma_zkpverify_zkpverify_proto_enumTypes[0].Descriptor()
+}
+
+func (VerificationStatus) Type() protoreflect.EnumType {
+	return &file_fiamma_zkpverify_zkpverify_proto_enumTypes[0]
+}
+
+func (x VerificationStatus) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use VerificationStatus.Descriptor instead.
+func (VerificationStatus) EnumDescriptor() ([]byte, []int) {
+	return file_fiamma_zkpverify_zkpverify_proto_rawDescGZIP(), []int{0}
+}
 
 // ProofData is the data structure for the proof verification request
 type ProofData struct {
@@ -1280,10 +1425,12 @@ type VerifyResult struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	ProofId        string `protobuf:"bytes,1,opt,name=proof_id,json=proofId,proto3" json:"proof_id,omitempty"`
-	DataCommitment string `protobuf:"bytes,2,opt,name=data_commitment,json=dataCommitment,proto3" json:"data_commitment,omitempty"`
-	DataLocation   uint64 `protobuf:"varint,3,opt,name=data_location,json=dataLocation,proto3" json:"data_location,omitempty"`
-	Result         bool   `protobuf:"varint,4,opt,name=result,proto3" json:"result,omitempty"`
+	ProofId                    string             `protobuf:"bytes,1,opt,name=proof_id,json=proofId,proto3" json:"proof_id,omitempty"`
+	DataCommitment             string             `protobuf:"bytes,2,opt,name=data_commitment,json=dataCommitment,proto3" json:"data_commitment,omitempty"`
+	DataLocation               uint64             `protobuf:"varint,3,opt,name=data_location,json=dataLocation,proto3" json:"data_location,omitempty"`
+	Result                     bool               `protobuf:"varint,4,opt,name=result,proto3" json:"result,omitempty"`
+	Status                     VerificationStatus `protobuf:"varint,5,opt,name=status,proto3,enum=fiamma.zkpverify.VerificationStatus" json:"status,omitempty"`
+	CommunityVerificationCount uint64             `protobuf:"varint,6,opt,name=community_verification_count,json=communityVerificationCount,proto3" json:"community_verification_count,omitempty"`
 }
 
 func (x *VerifyResult) Reset() {
@@ -1334,6 +1481,20 @@ func (x *VerifyResult) GetResult() bool {
 	return false
 }
 
+func (x *VerifyResult) GetStatus() VerificationStatus {
+	if x != nil {
+		return x.Status
+	}
+	return VerificationStatus_INITIALVALIDATION
+}
+
+func (x *VerifyResult) GetCommunityVerificationCount() uint64 {
+	if x != nil {
+		return x.CommunityVerificationCount
+	}
+	return 0
+}
+
 var File_fiamma_zkpverify_zkpverify_proto protoreflect.FileDescriptor
 
 var file_fiamma_zkpverify_zkpverify_proto_rawDesc = []byte{
@@ -1347,7 +1508,7 @@ var file_fiamma_zkpverify_zkpverify_proto_rawDesc = []byte{
 	0x01, 0x28, 0x0c, 0x52, 0x05, 0x70, 0x72, 0x6f, 0x6f, 0x66, 0x12, 0x21, 0x0a, 0x0c, 0x70, 0x75,
 	0x62, 0x6c, 0x69, 0x63, 0x5f, 0x69, 0x6e, 0x70, 0x75, 0x74, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0c,
 	0x52, 0x0b, 0x70, 0x75, 0x62, 0x6c, 0x69, 0x63, 0x49, 0x6e, 0x70, 0x75, 0x74, 0x12, 0x0e, 0x0a,
-	0x02, 0x76, 0x6b, 0x18, 0x04, 0x20, 0x01, 0x28, 0x0c, 0x52, 0x02, 0x76, 0x6b, 0x22, 0x8f, 0x01,
+	0x02, 0x76, 0x6b, 0x18, 0x04, 0x20, 0x01, 0x28, 0x0c, 0x52, 0x02, 0x76, 0x6b, 0x22, 0x8f, 0x02,
 	0x0a, 0x0c, 0x56, 0x65, 0x72, 0x69, 0x66, 0x79, 0x52, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x12, 0x19,
 	0x0a, 0x08, 0x70, 0x72, 0x6f, 0x6f, 0x66, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09,
 	0x52, 0x07, 0x70, 0x72, 0x6f, 0x6f, 0x66, 0x49, 0x64, 0x12, 0x27, 0x0a, 0x0f, 0x64, 0x61, 0x74,
@@ -1356,7 +1517,21 @@ var file_fiamma_zkpverify_zkpverify_proto_rawDesc = []byte{
 	0x6e, 0x74, 0x12, 0x23, 0x0a, 0x0d, 0x64, 0x61, 0x74, 0x61, 0x5f, 0x6c, 0x6f, 0x63, 0x61, 0x74,
 	0x69, 0x6f, 0x6e, 0x18, 0x03, 0x20, 0x01, 0x28, 0x04, 0x52, 0x0c, 0x64, 0x61, 0x74, 0x61, 0x4c,
 	0x6f, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x16, 0x0a, 0x06, 0x72, 0x65, 0x73, 0x75, 0x6c,
-	0x74, 0x18, 0x04, 0x20, 0x01, 0x28, 0x08, 0x52, 0x06, 0x72, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x42,
+	0x74, 0x18, 0x04, 0x20, 0x01, 0x28, 0x08, 0x52, 0x06, 0x72, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x12,
+	0x3c, 0x0a, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x18, 0x05, 0x20, 0x01, 0x28, 0x0e, 0x32,
+	0x24, 0x2e, 0x66, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x2e, 0x7a, 0x6b, 0x70, 0x76, 0x65, 0x72, 0x69,
+	0x66, 0x79, 0x2e, 0x56, 0x65, 0x72, 0x69, 0x66, 0x69, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x53,
+	0x74, 0x61, 0x74, 0x75, 0x73, 0x52, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x12, 0x40, 0x0a,
+	0x1c, 0x63, 0x6f, 0x6d, 0x6d, 0x75, 0x6e, 0x69, 0x74, 0x79, 0x5f, 0x76, 0x65, 0x72, 0x69, 0x66,
+	0x69, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x5f, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x06, 0x20,
+	0x01, 0x28, 0x04, 0x52, 0x1a, 0x63, 0x6f, 0x6d, 0x6d, 0x75, 0x6e, 0x69, 0x74, 0x79, 0x56, 0x65,
+	0x72, 0x69, 0x66, 0x69, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x2a,
+	0x5e, 0x0a, 0x12, 0x56, 0x65, 0x72, 0x69, 0x66, 0x69, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x53,
+	0x74, 0x61, 0x74, 0x75, 0x73, 0x12, 0x15, 0x0a, 0x11, 0x49, 0x4e, 0x49, 0x54, 0x49, 0x41, 0x4c,
+	0x56, 0x41, 0x4c, 0x49, 0x44, 0x41, 0x54, 0x49, 0x4f, 0x4e, 0x10, 0x00, 0x12, 0x17, 0x0a, 0x13,
+	0x43, 0x4f, 0x4d, 0x4d, 0x55, 0x4e, 0x49, 0x54, 0x59, 0x56, 0x41, 0x4c, 0x49, 0x44, 0x41, 0x54,
+	0x49, 0x4f, 0x4e, 0x10, 0x01, 0x12, 0x18, 0x0a, 0x14, 0x44, 0x45, 0x46, 0x49, 0x4e, 0x49, 0x54,
+	0x49, 0x56, 0x45, 0x56, 0x41, 0x4c, 0x49, 0x44, 0x41, 0x54, 0x49, 0x4f, 0x4e, 0x10, 0x02, 0x42,
 	0xaa, 0x01, 0x0a, 0x14, 0x63, 0x6f, 0x6d, 0x2e, 0x66, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x2e, 0x7a,
 	0x6b, 0x70, 0x76, 0x65, 0x72, 0x69, 0x66, 0x79, 0x42, 0x0e, 0x5a, 0x6b, 0x70, 0x76, 0x65, 0x72,
 	0x69, 0x66, 0x79, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x21, 0x63, 0x6f, 0x73, 0x6d,
@@ -1383,17 +1558,20 @@ func file_fiamma_zkpverify_zkpverify_proto_rawDescGZIP() []byte {
 	return file_fiamma_zkpverify_zkpverify_proto_rawDescData
 }
 
+var file_fiamma_zkpverify_zkpverify_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_fiamma_zkpverify_zkpverify_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_fiamma_zkpverify_zkpverify_proto_goTypes = []interface{}{
-	(*ProofData)(nil),    // 0: fiamma.zkpverify.ProofData
-	(*VerifyResult)(nil), // 1: fiamma.zkpverify.VerifyResult
+	(VerificationStatus)(0), // 0: fiamma.zkpverify.VerificationStatus
+	(*ProofData)(nil),       // 1: fiamma.zkpverify.ProofData
+	(*VerifyResult)(nil),    // 2: fiamma.zkpverify.VerifyResult
 }
 var file_fiamma_zkpverify_zkpverify_proto_depIdxs = []int32{
-	0, // [0:0] is the sub-list for method output_type
-	0, // [0:0] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	0, // 0: fiamma.zkpverify.VerifyResult.status:type_name -> fiamma.zkpverify.VerificationStatus
+	1, // [1:1] is the sub-list for method output_type
+	1, // [1:1] is the sub-list for method input_type
+	1, // [1:1] is the sub-list for extension type_name
+	1, // [1:1] is the sub-list for extension extendee
+	0, // [0:1] is the sub-list for field type_name
 }
 
 func init() { file_fiamma_zkpverify_zkpverify_proto_init() }
@@ -1432,13 +1610,14 @@ func file_fiamma_zkpverify_zkpverify_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_fiamma_zkpverify_zkpverify_proto_rawDesc,
-			NumEnums:      0,
+			NumEnums:      1,
 			NumMessages:   2,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
 		GoTypes:           file_fiamma_zkpverify_zkpverify_proto_goTypes,
 		DependencyIndexes: file_fiamma_zkpverify_zkpverify_proto_depIdxs,
+		EnumInfos:         file_fiamma_zkpverify_zkpverify_proto_enumTypes,
 		MessageInfos:      file_fiamma_zkpverify_zkpverify_proto_msgTypes,
 	}.Build()
 	File_fiamma_zkpverify_zkpverify_proto = out.File

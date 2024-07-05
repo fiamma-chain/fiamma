@@ -17,8 +17,10 @@ func (k Keeper) PendingProof(goCtx context.Context, req *types.QueryPendingProof
 
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
-	// TODO: Process the query
-	_ = ctx
+	pendingProofs, err := k.GetPendingProofs(ctx)
+	if err != nil {
+		return nil, types.ErrPendingProofs
+	}
 
-	return &types.QueryPendingProofResponse{}, nil
+	return &types.QueryPendingProofResponse{PendingProofs: pendingProofs}, nil
 }

@@ -20,6 +20,9 @@ service Msg {
 
   // SubmitProof defines a (zkpverify) operation for verifying a proof.
   rpc SubmitProof(MsgSubmitProof) returns (MsgSubmitProofResponse);
+
+  // SubmitCommunityVerification defines a community (zkpverify) operation for verifying a proof.
+  rpc SubmitCommunityVerification(MsgSubmitCommunityVerification) returns (MsgSubmitCommunityVerificationResponse);
 }
 // MsgUpdateParams is the Msg/UpdateParams request type.
 message MsgUpdateParams {
@@ -53,3 +56,19 @@ message MsgSubmitProof {
 
 // MsgSubmitProofResponse defines the response structure for executing MsgSubmitProof
 message MsgSubmitProofResponse {}
+
+// MsgSendTaskResponse defines the response structure for executing MsgSendTask
+message MsgSendTaskResponse {}
+
+// MsgSubmitCommunityVerification is the proof verify community verification request type.
+message MsgSubmitCommunityVerification {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator = 1;
+  string proof_system = 2;
+  bytes proof = 3;
+  bytes public_input = 4;
+  bytes vk = 5;
+}
+
+// MsgSubmitCommunityVerificationResponse defines the response structure for executing MsgSubmitCommunityVerification
+message MsgSubmitCommunityVerificationResponse {}
