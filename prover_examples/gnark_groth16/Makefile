@@ -4,7 +4,7 @@ BINARY ?= fiammad
 CHAIN_ID ?= fiamma-testnet-1
 MODULE ?= zkpverify
 MESSAGE ?= submit-proof
-PROOF_SYSTEM ?= Groth16Bn254
+PROOF_SYSTEM ?= GROTH16_BN254
 DIR = ./example/
 
 PROOF_FILE ?= $(DIR)/proof

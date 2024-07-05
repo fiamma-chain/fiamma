@@ -52,13 +52,13 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 				{
 					RpcMethod:      "SubmitProof",
 					Use:            "submit-proof [proof_system] [proof] [public_input] [vk]",
-					Short:          "Send a zkp proof verify tx" + "\n" + "Currently supported proof systems: " + "[PlonkBn254, PlonkBls12_381, Groth16Bn254, Groth16Bn254_BitVM, SP1]",
+					Short:          "Send a zkp proof verify tx" + "\n" + "Currently supported proof systems: " + "[PlonkBn254, PlonkBls12_381, GROTH16_BN254, GROTH16_BN254_BITVM, SP1]",
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "proof_system"}, {ProtoField: "proof"}, {ProtoField: "public_input"}, {ProtoField: "vk"}},
 				},
 				{
 					RpcMethod:      "SubmitCommunityVerification",
 					Use:            "submit-community-verification [proof_id] [verify_result]",
-					Short:          "submit a community zkp proof verify tx" + "\n" + "Currently supported proof systems: " + "[PlonkBn254, PlonkBls12_381, Groth16Bn254, Groth16Bn254_BitVM, SP1]",
+					Short:          "submit a community zkp proof verify tx" + "\n" + "Currently supported proof systems: " + "[PlonkBn254, PlonkBls12_381, GROTH16_BN254, GROTH16_BN254_BITVM, SP1]",
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "proof_id"}, {ProtoField: "verify_result"}},
 				},
 				// this line is used by ignite scaffolding # autocli/tx

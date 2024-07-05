@@ -2920,766 +2920,6 @@ paths:
               signing.
       tags:
         - Msg
-  /cosmos.feegrant.v1beta1.Msg/GrantAllowance:
-    post:
-      summary: |-
-        GrantAllowance grants fee allowance to the grantee on the granter's
-        account with the provided expiration time.
-      operationId: CosmosFeegrantV1Beta1Msg_GrantAllowance
-      responses:
-        '200':
-          description: A successful response.
-          schema:
-            type: object
-            description: >-
-              MsgGrantAllowanceResponse defines the Msg/GrantAllowanceResponse
-              response type.
-        default:
-          description: An unexpected error response.
-          schema:
-            type: object
-            properties:
-              code:
-                type: integer
-                format: int32
-              message:
-                type: string
-              details:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    '@type':
-                      type: string
-                      description: >-
-                        A URL/resource name that uniquely identifies the type of
-                        the serialized
-
-                        protocol buffer message. This string must contain at
-                        least
-
-                        one "/" character. The last segment of the URL's path
-                        must represent
-
-                        the fully qualified name of the type (as in
-
-                        `path/google.protobuf.Duration`). The name should be in
-                        a canonical form
-
-                        (e.g., leading "." is not accepted).
-
-
-                        In practice, teams usually precompile into the binary
-                        all types that they
-
-                        expect it to use in the context of Any. However, for
-                        URLs which use the
-
-                        scheme `http`, `https`, or no scheme, one can optionally
-                        set up a type
-
-                        server that maps type URLs to message definitions as
-                        follows:
-
-
-                        * If no scheme is provided, `https` is assumed.
-
-                        * An HTTP GET on the URL must yield a
-                        [google.protobuf.Type][]
-                          value in binary format, or produce an error.
-                        * Applications are allowed to cache lookup results based
-                        on the
-                          URL, or have them precompiled into a binary to avoid any
-                          lookup. Therefore, binary compatibility needs to be preserved
-                          on changes to types. (Use versioned type names to manage
-                          breaking changes.)
-
-                        Note: this functionality is not currently available in
-                        the official
-
-                        protobuf release, and it is not used for type URLs
-                        beginning with
-
-                        type.googleapis.com. As of May 2023, there are no widely
-                        used type server
-
-                        implementations and no plans to implement one.
-
-
-                        Schemes other than `http`, `https` (or the empty scheme)
-                        might be
-
-                        used with implementation specific semantics.
-                  additionalProperties: {}
-                  description: >-
-                    `Any` contains an arbitrary serialized protocol buffer
-                    message along with a
-
-                    URL that describes the type of the serialized message.
-
-
-                    Protobuf library provides support to pack/unpack Any values
-                    in the form
-
-                    of utility functions or additional generated methods of the
-                    Any type.
-
-
-                    Example 1: Pack and unpack a message in C++.
-
-                        Foo foo = ...;
-                        Any any;
-                        any.PackFrom(foo);
-                        ...
-                        if (any.UnpackTo(&foo)) {
-                          ...
-                        }
-
-                    Example 2: Pack and unpack a message in Java.
-
-                        Foo foo = ...;
-                        Any any = Any.pack(foo);
-                        ...
-                        if (any.is(Foo.class)) {
-                          foo = any.unpack(Foo.class);
-                        }
-                        // or ...
-                        if (any.isSameTypeAs(Foo.getDefaultInstance())) {
-                          foo = any.unpack(Foo.getDefaultInstance());
-                        }
-
-                     Example 3: Pack and unpack a message in Python.
-
-                        foo = Foo(...)
-                        any = Any()
-                        any.Pack(foo)
-                        ...
-                        if any.Is(Foo.DESCRIPTOR):
-                          any.Unpack(foo)
-                          ...
-
-                     Example 4: Pack and unpack a message in Go
-
-                         foo := &pb.Foo{...}
-                         any, err := anypb.New(foo)
-                         if err != nil {
-                           ...
-                         }
-                         ...
-                         foo := &pb.Foo{}
-                         if err := any.UnmarshalTo(foo); err != nil {
-                           ...
-                         }
-
-                    The pack methods provided by protobuf library will by
-                    default use
-
-                    'type.googleapis.com/full.type.name' as the type URL and the
-                    unpack
-
-                    methods only use the fully qualified type name after the
-                    last '/'
-
-                    in the type URL, for example "foo.bar.com/x/y.z" will yield
-                    type
-
-                    name "y.z".
-
-
-                    JSON
-
-                    ====
-
-                    The JSON representation of an `Any` value uses the regular
-
-                    representation of the deserialized, embedded message, with
-                    an
-
-                    additional field `@type` which contains the type URL.
-                    Example:
-
-                        package google.profile;
-                        message Person {
-                          string first_name = 1;
-                          string last_name = 2;
-                        }
-
-                        {
-                          "@type": "type.googleapis.com/google.profile.Person",
-                          "firstName": <string>,
-                          "lastName": <string>
-                        }
-
-                    If the embedded message type is well-known and has a custom
-                    JSON
-
-                    representation, that representation will be embedded adding
-                    a field
-
-                    `value` which holds the custom JSON in addition to the
-                    `@type`
-
-                    field. Example (for message [google.protobuf.Duration][]):
-
-                        {
-                          "@type": "type.googleapis.com/google.protobuf.Duration",
-                          "value": "1.212s"
-                        }
-      parameters:
-        - name: body
-          description: >-
-            MsgGrantAllowance adds permission for Grantee to spend up to
-            Allowance
-
-            of fees from the account of Granter.
-          in: body
-          required: true
-          schema:
-            type: object
-            properties:
-              granter:
-                type: string
-                description: >-
-                  granter is the address of the user granting an allowance of
-                  their funds.
-              grantee:
-                type: string
-                description: >-
-                  grantee is the address of the user being granted an allowance
-                  of another user's funds.
-              allowance:
-                description: >-
-                  allowance can be any of basic, periodic, allowed fee
-                  allowance.
-                type: object
-                properties:
-                  '@type':
-                    type: string
-                    description: >-
-                      A URL/resource name that uniquely identifies the type of
-                      the serialized
-
-                      protocol buffer message. This string must contain at least
-
-                      one "/" character. The last segment of the URL's path must
-                      represent
-
-                      the fully qualified name of the type (as in
-
-                      `path/google.protobuf.Duration`). The name should be in a
-                      canonical form
-
-                      (e.g., leading "." is not accepted).
-
-
-                      In practice, teams usually precompile into the binary all
-                      types that they
-
-                      expect it to use in the context of Any. However, for URLs
-                      which use the
-
-                      scheme `http`, `https`, or no scheme, one can optionally
-                      set up a type
-
-                      server that maps type URLs to message definitions as
-                      follows:
-
-
-                      * If no scheme is provided, `https` is assumed.
-
-                      * An HTTP GET on the URL must yield a
-                      [google.protobuf.Type][]
-                        value in binary format, or produce an error.
-                      * Applications are allowed to cache lookup results based
-                      on the
-                        URL, or have them precompiled into a binary to avoid any
-                        lookup. Therefore, binary compatibility needs to be preserved
-                        on changes to types. (Use versioned type names to manage
-                        breaking changes.)
-
-                      Note: this functionality is not currently available in the
-                      official
-
-                      protobuf release, and it is not used for type URLs
-                      beginning with
-
-                      type.googleapis.com. As of May 2023, there are no widely
-                      used type server
-
-                      implementations and no plans to implement one.
-
-
-                      Schemes other than `http`, `https` (or the empty scheme)
-                      might be
-
-                      used with implementation specific semantics.
-                additionalProperties: {}
-            description: >-
-              MsgGrantAllowance adds permission for Grantee to spend up to
-              Allowance
-
-              of fees from the account of Granter.
-      tags:
-        - Msg
-  /cosmos.feegrant.v1beta1.Msg/PruneAllowances:
-    post:
-      summary: >-
-        PruneAllowances prunes expired fee allowances, currently up to 75 at a
-        time.
-      description: Since cosmos-sdk 0.50
-      operationId: CosmosFeegrantV1Beta1Msg_PruneAllowances
-      responses:
-        '200':
-          description: A successful response.
-          schema:
-            type: object
-            description: >-
-              MsgPruneAllowancesResponse defines the Msg/PruneAllowancesResponse
-              response type.
-
-
-              Since cosmos-sdk 0.50
-        default:
-          description: An unexpected error response.
-          schema:
-            type: object
-            properties:
-              code:
-                type: integer
-                format: int32
-              message:
-                type: string
-              details:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    '@type':
-                      type: string
-                      description: >-
-                        A URL/resource name that uniquely identifies the type of
-                        the serialized
-
-                        protocol buffer message. This string must contain at
-                        least
-
-                        one "/" character. The last segment of the URL's path
-                        must represent
-
-                        the fully qualified name of the type (as in
-
-                        `path/google.protobuf.Duration`). The name should be in
-                        a canonical form
-
-                        (e.g., leading "." is not accepted).
-
-
-                        In practice, teams usually precompile into the binary
-                        all types that they
-
-                        expect it to use in the context of Any. However, for
-                        URLs which use the
-
-                        scheme `http`, `https`, or no scheme, one can optionally
-                        set up a type
-
-                        server that maps type URLs to message definitions as
-                        follows:
-
-
-                        * If no scheme is provided, `https` is assumed.
-
-                        * An HTTP GET on the URL must yield a
-                        [google.protobuf.Type][]
-                          value in binary format, or produce an error.
-                        * Applications are allowed to cache lookup results based
-                        on the
-                          URL, or have them precompiled into a binary to avoid any
-                          lookup. Therefore, binary compatibility needs to be preserved
-                          on changes to types. (Use versioned type names to manage
-                          breaking changes.)
-
-                        Note: this functionality is not currently available in
-                        the official
-
-                        protobuf release, and it is not used for type URLs
-                        beginning with
-
-                        type.googleapis.com. As of May 2023, there are no widely
-                        used type server
-
-                        implementations and no plans to implement one.
-
-
-                        Schemes other than `http`, `https` (or the empty scheme)
-                        might be
-
-                        used with implementation specific semantics.
-                  additionalProperties: {}
-                  description: >-
-                    `Any` contains an arbitrary serialized protocol buffer
-                    message along with a
-
-                    URL that describes the type of the serialized message.
-
-
-                    Protobuf library provides support to pack/unpack Any values
-                    in the form
-
-                    of utility functions or additional generated methods of the
-                    Any type.
-
-
-                    Example 1: Pack and unpack a message in C++.
-
-                        Foo foo = ...;
-                        Any any;
-                        any.PackFrom(foo);
-                        ...
-                        if (any.UnpackTo(&foo)) {
-                          ...
-                        }
-
-                    Example 2: Pack and unpack a message in Java.
-
-                        Foo foo = ...;
-                        Any any = Any.pack(foo);
-                        ...
-                        if (any.is(Foo.class)) {
-                          foo = any.unpack(Foo.class);
-                        }
-                        // or ...
-                        if (any.isSameTypeAs(Foo.getDefaultInstance())) {
-                          foo = any.unpack(Foo.getDefaultInstance());
-                        }
-
-                     Example 3: Pack and unpack a message in Python.
-
-                        foo = Foo(...)
-                        any = Any()
-                        any.Pack(foo)
-                        ...
-                        if any.Is(Foo.DESCRIPTOR):
-                          any.Unpack(foo)
-                          ...
-
-                     Example 4: Pack and unpack a message in Go
-
-                         foo := &pb.Foo{...}
-                         any, err := anypb.New(foo)
-                         if err != nil {
-                           ...
-                         }
-                         ...
-                         foo := &pb.Foo{}
-                         if err := any.UnmarshalTo(foo); err != nil {
-                           ...
-                         }
-
-                    The pack methods provided by protobuf library will by
-                    default use
-
-                    'type.googleapis.com/full.type.name' as the type URL and the
-                    unpack
-
-                    methods only use the fully qualified type name after the
-                    last '/'
-
-                    in the type URL, for example "foo.bar.com/x/y.z" will yield
-                    type
-
-                    name "y.z".
-
-
-                    JSON
-
-                    ====
-
-                    The JSON representation of an `Any` value uses the regular
-
-                    representation of the deserialized, embedded message, with
-                    an
-
-                    additional field `@type` which contains the type URL.
-                    Example:
-
-                        package google.profile;
-                        message Person {
-                          string first_name = 1;
-                          string last_name = 2;
-                        }
-
-                        {
-                          "@type": "type.googleapis.com/google.profile.Person",
-                          "firstName": <string>,
-                          "lastName": <string>
-                        }
-
-                    If the embedded message type is well-known and has a custom
-                    JSON
-
-                    representation, that representation will be embedded adding
-                    a field
-
-                    `value` which holds the custom JSON in addition to the
-                    `@type`
-
-                    field. Example (for message [google.protobuf.Duration][]):
-
-                        {
-                          "@type": "type.googleapis.com/google.protobuf.Duration",
-                          "value": "1.212s"
-                        }
-      parameters:
-        - name: body
-          description: |-
-            MsgPruneAllowances prunes expired fee allowances.
-
-            Since cosmos-sdk 0.50
-          in: body
-          required: true
-          schema:
-            type: object
-            properties:
-              pruner:
-                type: string
-                description: pruner is the address of the user pruning expired allowances.
-            description: |-
-              MsgPruneAllowances prunes expired fee allowances.
-
-              Since cosmos-sdk 0.50
-      tags:
-        - Msg
-  /cosmos.feegrant.v1beta1.Msg/RevokeAllowance:
-    post:
-      summary: |-
-        RevokeAllowance revokes any fee allowance of granter's account that
-        has been granted to the grantee.
-      operationId: CosmosFeegrantV1Beta1Msg_RevokeAllowance
-      responses:
-        '200':
-          description: A successful response.
-          schema:
-            type: object
-            description: >-
-              MsgRevokeAllowanceResponse defines the Msg/RevokeAllowanceResponse
-              response type.
-        default:
-          description: An unexpected error response.
-          schema:
-            type: object
-            properties:
-              code:
-                type: integer
-                format: int32
-              message:
-                type: string
-              details:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    '@type':
-                      type: string
-                      description: >-
-                        A URL/resource name that uniquely identifies the type of
-                        the serialized
-
-                        protocol buffer message. This string must contain at
-                        least
-
-                        one "/" character. The last segment of the URL's path
-                        must represent
-
-                        the fully qualified name of the type (as in
-
-                        `path/google.protobuf.Duration`). The name should be in
-                        a canonical form
-
-                        (e.g., leading "." is not accepted).
-
-
-                        In practice, teams usually precompile into the binary
-                        all types that they
-
-                        expect it to use in the context of Any. However, for
-                        URLs which use the
-
-                        scheme `http`, `https`, or no scheme, one can optionally
-                        set up a type
-
-                        server that maps type URLs to message definitions as
-                        follows:
-
-
-                        * If no scheme is provided, `https` is assumed.
-
-                        * An HTTP GET on the URL must yield a
-                        [google.protobuf.Type][]
-                          value in binary format, or produce an error.
-                        * Applications are allowed to cache lookup results based
-                        on the
-                          URL, or have them precompiled into a binary to avoid any
-                          lookup. Therefore, binary compatibility needs to be preserved
-                          on changes to types. (Use versioned type names to manage
-                          breaking changes.)
-
-                        Note: this functionality is not currently available in
-                        the official
-
-                        protobuf release, and it is not used for type URLs
-                        beginning with
-
-                        type.googleapis.com. As of May 2023, there are no widely
-                        used type server
-
-                        implementations and no plans to implement one.
-
-
-                        Schemes other than `http`, `https` (or the empty scheme)
-                        might be
-
-                        used with implementation specific semantics.
-                  additionalProperties: {}
-                  description: >-
-                    `Any` contains an arbitrary serialized protocol buffer
-                    message along with a
-
-                    URL that describes the type of the serialized message.
-
-
-                    Protobuf library provides support to pack/unpack Any values
-                    in the form
-
-                    of utility functions or additional generated methods of the
-                    Any type.
-
-
-                    Example 1: Pack and unpack a message in C++.
-
-                        Foo foo = ...;
-                        Any any;
-                        any.PackFrom(foo);
-                        ...
-                        if (any.UnpackTo(&foo)) {
-                          ...
-                        }
-
-                    Example 2: Pack and unpack a message in Java.
-
-                        Foo foo = ...;
-                        Any any = Any.pack(foo);
-                        ...
-                        if (any.is(Foo.class)) {
-                          foo = any.unpack(Foo.class);
-                        }
-                        // or ...
-                        if (any.isSameTypeAs(Foo.getDefaultInstance())) {
-                          foo = any.unpack(Foo.getDefaultInstance());
-                        }
-
-                     Example 3: Pack and unpack a message in Python.
-
-                        foo = Foo(...)
-                        any = Any()
-                        any.Pack(foo)
-                        ...
-                        if any.Is(Foo.DESCRIPTOR):
-                          any.Unpack(foo)
-                          ...
-
-                     Example 4: Pack and unpack a message in Go
-
-                         foo := &pb.Foo{...}
-                         any, err := anypb.New(foo)
-                         if err != nil {
-                           ...
-                         }
-                         ...
-                         foo := &pb.Foo{}
-                         if err := any.UnmarshalTo(foo); err != nil {
-                           ...
-                         }
-
-                    The pack methods provided by protobuf library will by
-                    default use
-
-                    'type.googleapis.com/full.type.name' as the type URL and the
-                    unpack
-
-                    methods only use the fully qualified type name after the
-                    last '/'
-
-                    in the type URL, for example "foo.bar.com/x/y.z" will yield
-                    type
-
-                    name "y.z".
-
-
-                    JSON
-
-                    ====
-
-                    The JSON representation of an `Any` value uses the regular
-
-                    representation of the deserialized, embedded message, with
-                    an
-
-                    additional field `@type` which contains the type URL.
-                    Example:
-
-                        package google.profile;
-                        message Person {
-                          string first_name = 1;
-                          string last_name = 2;
-                        }
-
-                        {
-                          "@type": "type.googleapis.com/google.profile.Person",
-                          "firstName": <string>,
-                          "lastName": <string>
-                        }
-
-                    If the embedded message type is well-known and has a custom
-                    JSON
-
-                    representation, that representation will be embedded adding
-                    a field
-
-                    `value` which holds the custom JSON in addition to the
-                    `@type`
-
-                    field. Example (for message [google.protobuf.Duration][]):
-
-                        {
-                          "@type": "type.googleapis.com/google.protobuf.Duration",
-                          "value": "1.212s"
-                        }
-      parameters:
-        - name: body
-          description: >-
-            MsgRevokeAllowance removes any existing Allowance from Granter to
-            Grantee.
-          in: body
-          required: true
-          schema:
-            type: object
-            properties:
-              granter:
-                type: string
-                description: >-
-                  granter is the address of the user granting an allowance of
-                  their funds.
-              grantee:
-                type: string
-                description: >-
-                  grantee is the address of the user being granted an allowance
-                  of another user's funds.
-            description: >-
-              MsgRevokeAllowance removes any existing Allowance from Granter to
-              Grantee.
-      tags:
-        - Msg
   /cosmos.gov.v1.Msg/CancelProposal:
     post:
       summary: CancelProposal defines a method to cancel governance proposal
@@ -9414,7 +8654,14 @@ paths:
                 properties:
                   proof_system:
                     type: string
-                    format: uint64
+                    enum:
+                      - GROTH16_BN254_BITVM
+                      - PLONK_BN254
+                      - PLONK_BLS12_381
+                      - GROTH16_BN254
+                      - SP1
+                    default: GROTH16_BN254_BITVM
+                    title: ProofSystem is the proof system for the proof verification
                   proof:
                     type: string
                     format: byte
@@ -9510,20 +8757,39 @@ paths:
                   properties:
                     proof_id:
                       type: string
+                    proof_system:
+                      type: string
+                      enum:
+                        - GROTH16_BN254_BITVM
+                        - PLONK_BN254
+                        - PLONK_BLS12_381
+                        - GROTH16_BN254
+                        - SP1
+                      default: GROTH16_BN254_BITVM
+                      title: >-
+                        ProofSystem is the proof system for the proof
+                        verification
                     data_commitment:
                       type: string
                     data_location:
                       type: string
-                      format: uint64
+                      enum:
+                        - FIAMMA
+                        - NUBITDA
+                        - AVAILDA
+                      default: FIAMMA
+                      title: >-
+                        DataLocation is the proof data location for the proof
+                        verification
                     result:
                       type: boolean
                     status:
                       type: string
                       enum:
-                        - INITIALVALIDATION
-                        - COMMUNITYVALIDATION
-                        - DEFINITIVEVALIDATION
-                      default: INITIALVALIDATION
+                        - INITIAL_VALIDATION
+                        - COMMUNITY_VALIDATION
+                        - DEFINITIVE_VALIDATION
+                      default: INITIAL_VALIDATION
                       title: >-
                         VerificationStatus is the verification status for the
                         proof verification
@@ -18548,124 +17814,6 @@ definitions:
         format: byte
         description: hash defines the hash of the evidence.
     description: MsgSubmitEvidenceResponse defines the Msg/SubmitEvidence response type.
-  cosmos.feegrant.v1beta1.MsgGrantAllowance:
-    type: object
-    properties:
-      granter:
-        type: string
-        description: >-
-          granter is the address of the user granting an allowance of their
-          funds.
-      grantee:
-        type: string
-        description: >-
-          grantee is the address of the user being granted an allowance of
-          another user's funds.
-      allowance:
-        description: allowance can be any of basic, periodic, allowed fee allowance.
-        type: object
-        properties:
-          '@type':
-            type: string
-            description: >-
-              A URL/resource name that uniquely identifies the type of the
-              serialized
-
-              protocol buffer message. This string must contain at least
-
-              one "/" character. The last segment of the URL's path must
-              represent
-
-              the fully qualified name of the type (as in
-
-              `path/google.protobuf.Duration`). The name should be in a
-              canonical form
-
-              (e.g., leading "." is not accepted).
-
-
-              In practice, teams usually precompile into the binary all types
-              that they
-
-              expect it to use in the context of Any. However, for URLs which
-              use the
-
-              scheme `http`, `https`, or no scheme, one can optionally set up a
-              type
-
-              server that maps type URLs to message definitions as follows:
-
-
-              * If no scheme is provided, `https` is assumed.
-
-              * An HTTP GET on the URL must yield a [google.protobuf.Type][]
-                value in binary format, or produce an error.
-              * Applications are allowed to cache lookup results based on the
-                URL, or have them precompiled into a binary to avoid any
-                lookup. Therefore, binary compatibility needs to be preserved
-                on changes to types. (Use versioned type names to manage
-                breaking changes.)
-
-              Note: this functionality is not currently available in the
-              official
-
-              protobuf release, and it is not used for type URLs beginning with
-
-              type.googleapis.com. As of May 2023, there are no widely used type
-              server
-
-              implementations and no plans to implement one.
-
-
-              Schemes other than `http`, `https` (or the empty scheme) might be
-
-              used with implementation specific semantics.
-        additionalProperties: {}
-    description: |-
-      MsgGrantAllowance adds permission for Grantee to spend up to Allowance
-      of fees from the account of Granter.
-  cosmos.feegrant.v1beta1.MsgGrantAllowanceResponse:
-    type: object
-    description: >-
-      MsgGrantAllowanceResponse defines the Msg/GrantAllowanceResponse response
-      type.
-  cosmos.feegrant.v1beta1.MsgPruneAllowances:
-    type: object
-    properties:
-      pruner:
-        type: string
-        description: pruner is the address of the user pruning expired allowances.
-    description: |-
-      MsgPruneAllowances prunes expired fee allowances.
-
-      Since cosmos-sdk 0.50
-  cosmos.feegrant.v1beta1.MsgPruneAllowancesResponse:
-    type: object
-    description: >-
-      MsgPruneAllowancesResponse defines the Msg/PruneAllowancesResponse
-      response type.
-
-
-      Since cosmos-sdk 0.50
-  cosmos.feegrant.v1beta1.MsgRevokeAllowance:
-    type: object
-    properties:
-      granter:
-        type: string
-        description: >-
-          granter is the address of the user granting an allowance of their
-          funds.
-      grantee:
-        type: string
-        description: >-
-          grantee is the address of the user being granted an allowance of
-          another user's funds.
-    description: MsgRevokeAllowance removes any existing Allowance from Granter to Grantee.
-  cosmos.feegrant.v1beta1.MsgRevokeAllowanceResponse:
-    type: object
-    description: >-
-      MsgRevokeAllowanceResponse defines the Msg/RevokeAllowanceResponse
-      response type.
   cosmos.gov.v1.MsgCancelProposal:
     type: object
     properties:
@@ -20536,12 +19684,27 @@ definitions:
                repeated Bar results = 1;
                PageResponse page = 2;
        }
+  fiamma.zkpverify.DataLocation:
+    type: string
+    enum:
+      - FIAMMA
+      - NUBITDA
+      - AVAILDA
+    default: FIAMMA
+    title: DataLocation is the proof data location for the proof verification
   fiamma.zkpverify.ProofData:
     type: object
     properties:
       proof_system:
         type: string
-        format: uint64
+        enum:
+          - GROTH16_BN254_BITVM
+          - PLONK_BN254
+          - PLONK_BLS12_381
+          - GROTH16_BN254
+          - SP1
+        default: GROTH16_BN254_BITVM
+        title: ProofSystem is the proof system for the proof verification
       proof:
         type: string
         format: byte
@@ -20552,6 +19715,16 @@ definitions:
         type: string
         format: byte
     title: ProofData is the data structure for the proof verification request
+  fiamma.zkpverify.ProofSystem:
+    type: string
+    enum:
+      - GROTH16_BN254_BITVM
+      - PLONK_BN254
+      - PLONK_BLS12_381
+      - GROTH16_BN254
+      - SP1
+    default: GROTH16_BN254_BITVM
+    title: ProofSystem is the proof system for the proof verification
   fiamma.zkpverify.QueryBitVMWitnessResponse:
     type: object
     properties:
@@ -20577,20 +19750,37 @@ definitions:
           properties:
             proof_id:
               type: string
+            proof_system:
+              type: string
+              enum:
+                - GROTH16_BN254_BITVM
+                - PLONK_BN254
+                - PLONK_BLS12_381
+                - GROTH16_BN254
+                - SP1
+              default: GROTH16_BN254_BITVM
+              title: ProofSystem is the proof system for the proof verification
             data_commitment:
               type: string
             data_location:
               type: string
-              format: uint64
+              enum:
+                - FIAMMA
+                - NUBITDA
+                - AVAILDA
+              default: FIAMMA
+              title: >-
+                DataLocation is the proof data location for the proof
+                verification
             result:
               type: boolean
             status:
               type: string
               enum:
-                - INITIALVALIDATION
-                - COMMUNITYVALIDATION
-                - DEFINITIVEVALIDATION
-              default: INITIALVALIDATION
+                - INITIAL_VALIDATION
+                - COMMUNITY_VALIDATION
+                - DEFINITIVE_VALIDATION
+              default: INITIAL_VALIDATION
               title: >-
                 VerificationStatus is the verification status for the proof
                 verification
@@ -20635,7 +19825,14 @@ definitions:
         properties:
           proof_system:
             type: string
-            format: uint64
+            enum:
+              - GROTH16_BN254_BITVM
+              - PLONK_BN254
+              - PLONK_BLS12_381
+              - GROTH16_BN254
+              - SP1
+            default: GROTH16_BN254_BITVM
+            title: ProofSystem is the proof system for the proof verification
           proof:
             type: string
             format: byte
@@ -20652,30 +19849,45 @@ definitions:
   fiamma.zkpverify.VerificationStatus:
     type: string
     enum:
-      - INITIALVALIDATION
-      - COMMUNITYVALIDATION
-      - DEFINITIVEVALIDATION
-    default: INITIALVALIDATION
+      - INITIAL_VALIDATION
+      - COMMUNITY_VALIDATION
+      - DEFINITIVE_VALIDATION
+    default: INITIAL_VALIDATION
     title: VerificationStatus is the verification status for the proof verification
   fiamma.zkpverify.VerifyResult:
     type: object
     properties:
       proof_id:
         type: string
+      proof_system:
+        type: string
+        enum:
+          - GROTH16_BN254_BITVM
+          - PLONK_BN254
+          - PLONK_BLS12_381
+          - GROTH16_BN254
+          - SP1
+        default: GROTH16_BN254_BITVM
+        title: ProofSystem is the proof system for the proof verification
       data_commitment:
         type: string
       data_location:
         type: string
-        format: uint64
+        enum:
+          - FIAMMA
+          - NUBITDA
+          - AVAILDA
+        default: FIAMMA
+        title: DataLocation is the proof data location for the proof verification
       result:
         type: boolean
       status:
         type: string
         enum:
-          - INITIALVALIDATION
-          - COMMUNITYVALIDATION
-          - DEFINITIVEVALIDATION
-        default: INITIALVALIDATION
+          - INITIAL_VALIDATION
+          - COMMUNITY_VALIDATION
+          - DEFINITIVE_VALIDATION
+        default: INITIAL_VALIDATION
         title: >-
           VerificationStatus is the verification status for the proof
           verification

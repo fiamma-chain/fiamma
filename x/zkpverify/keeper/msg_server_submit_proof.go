@@ -12,14 +12,9 @@ import (
 
 func (k msgServer) SubmitProof(goCtx context.Context, msg *types.MsgSubmitProof) (*types.MsgSubmitProofResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
-	proofSystemId, err := types.ProofSystemIdFromString(msg.ProofSystem)
-	if err != nil {
-		k.Logger().Info("Error parsing proof system:", "error", err)
-		return nil, types.ErrInvalidProofSystem
 
-	}
 	proofData := types.ProofData{
-		ProofSystem: uint64(proofSystemId),
+		ProofSystem: types.ProofSystem(types.ProofSystem_value[msg.ProofSystem]),
 		Proof:       msg.Proof,
 		PublicInput: msg.PublicInput,
 		Vk:          msg.Vk,
@@ -33,7 +28,7 @@ func (k msgServer) SubmitProof(goCtx context.Context, msg *types.MsgSubmitProof)
 	}
 
 	// submit proof data to DA
-	dataCommitmentStr, dataLocationId, err := k.SubmitProofData(ctx, proofId[:], proofData)
+	dataCommitmentStr, dataLocation, err := k.SubmitProofData(ctx, proofId[:], proofData)
 	if err != nil {
 		k.Logger().Info("Error submitting proof to DA:", "error", err)
 		return nil, types.ErrSubmitProof
@@ -46,7 +41,7 @@ func (k msgServer) SubmitProof(goCtx context.Context, msg *types.MsgSubmitProof)
 	result, witness := k.verifyProof(&proofData)
 
 	// store witness if the proof system is BitVM
-	if proofData.ProofSystem == uint64(types.Groth16Bn254_BitVM) {
+	if proofData.ProofSystem == types.ProofSystem_GROTH16_BN254_BITVM {
 		k.SetBitVMWitness(ctx, proofId[:], witness)
 	}
 
@@ -55,21 +50,23 @@ func (k msgServer) SubmitProof(goCtx context.Context, msg *types.MsgSubmitProof)
 	// store verify data in the store
 	verifyResult := types.VerifyResult{
 		ProofId:                    proofIdStr,
+		ProofSystem:                proofData.ProofSystem,
 		DataCommitment:             dataCommitmentStr,
-		DataLocation:               uint64(dataLocationId),
+		DataLocation:               dataLocation,
 		Result:                     result,
-		Status:                     types.VerificationStatus_INITIALVALIDATION,
+		Status:                     types.VerificationStatus_INITIAL_VALIDATION,
 		CommunityVerificationCount: uint64(0),
 	}
 
 	k.SetVerifyResult(ctx, proofId[:], verifyResult)
 
-	event := sdk.NewEvent("InitVerifyFinished",
+	event := sdk.NewEvent("SubmitProof",
+		sdk.NewAttribute("proofSystem", msg.ProofSystem),
 		sdk.NewAttribute("proofId", proofIdStr),
 		sdk.NewAttribute("dataCommitment", dataCommitmentStr),
-		sdk.NewAttribute("dataLocation", dataLocationId.String()),
-		sdk.NewAttribute("verifyResult", strconv.FormatBool(result)),
-		sdk.NewAttribute("proofSystem", msg.ProofSystem))
+		sdk.NewAttribute("dataLocation", dataLocation.String()),
+		sdk.NewAttribute("verifyResult", strconv.FormatBool(result)))
+
 	ctx.EventManager().EmitEvent(event)
 
 	return &types.MsgSubmitProofResponse{}, nil

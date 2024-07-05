@@ -143,7 +143,7 @@ func (k Keeper) GetPendingProofs(ctx context.Context, req *types.QueryPendingPro
 		if err := k.cdc.Unmarshal(value, &verifyResult); err != nil {
 			return err
 		}
-		if verifyResult.Status != types.VerificationStatus_DEFINITIVEVALIDATION {
+		if verifyResult.Status != types.VerificationStatus_DEFINITIVE_VALIDATION {
 			verifyResults = append(verifyResults, &verifyResult)
 		}
 		return nil
