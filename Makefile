@@ -136,8 +136,8 @@ ifndef GOLANGCI_LINT
 	go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
 endif
 
-lint: install-golangci-lint
-	golangci-lint run
+lint: install-golangci-lint 
+	golangci-lint run  --timeout 5m
 	find . -name '*.go' -type f -not -path "./vendor*" -not -path "*.git*" | xargs gofmt -d -s
 
 lint-fix: install-golangci-lint
