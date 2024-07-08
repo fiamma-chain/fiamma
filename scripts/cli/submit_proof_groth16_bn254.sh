@@ -11,7 +11,7 @@ else
 fi
 
 : ${CHAIN_ID:="fiamma-testnet-1"}
-: ${NODE:="http://127.0.0.1:26657"}
+: ${NODE:="https://testnet-rpc.fiammachain.io"}
 : ${FEES:=2000ufia}
 : ${GAS:=20000000}
 

@@ -11,7 +11,7 @@ else
 fi
 
 : ${CHAIN_ID:="fiamma-testnet-1"}
-: ${NODE:="http://127.0.0.1:26657"}
+: ${NODE:="https://testnet-rpc.fiammachain.io"}
 : ${PROOF_FILE:=../../prover_examples/bitvm/proof.bitvm}
 : ${PUBLIC_INPUT_FILE:=../../prover_examples/bitvm/public_input.bitvm}
 : ${VK_FILE:=../../prover_examples/bitvm/vk.bitvm}

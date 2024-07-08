@@ -4,6 +4,6 @@ set -e
 
 
 : ${CHAIN_ID:="fiamma-testnet-1"}
-: ${NODE:="http://127.0.0.1:26657"}
+: ${NODE:="https://testnet-rpc.fiammachain.io"}
 
 fiammad query zkpverify pending-proof
