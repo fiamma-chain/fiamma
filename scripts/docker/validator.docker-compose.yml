@@ -5,7 +5,7 @@ services:
     image: fiammachain/fiammad
     build:
       context: ../../
-      dockerfile: ./contrib/images/fiammad/Dockerfile
+      dockerfile: ../../Dockerfile
     volumes:
       - ../testnet-nodes/${NODE_NAME}:/root/.fiamma
       - ../setup_node.sh:/entrypoint.sh
@@ -14,8 +14,8 @@ services:
   validator-setup:
     image: fiammachain/fiammad
     build:
-      context: ../
-      dockerfile: ./contrib/images/fiammad/Dockerfile
+      context: ../../
+      dockerfile: ../../Dockerfile
     volumes:
       - ../testnet-nodes/${NODE_NAME}:/root/.fiamma
       - ../setup_validator.sh:/entrypoint.sh
@@ -25,7 +25,7 @@ services:
     image: fiammachain/fiammad
     build:
       context: ../../
-      dockerfile: ./contrib/images/fiammad/Dockerfile
+      dockerfile: ../../Dockerfile
     ports:
       - 26656:26656
       - 26657:26657

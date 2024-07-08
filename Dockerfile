@@ -4,10 +4,7 @@ FROM golang:1.22 AS build-env
 
 # TARGETPLATFORM should be one of linux/amd64 or linux/arm64.
 ARG TARGETPLATFORM="linux/amd64"
-# Version to build. Default is empty
-ARG VERSION
 
-ARG LEDGER_ENABLED="false"
 # Cosmos build options
 ARG COSMOS_BUILD_OPTIONS=""
 
@@ -29,10 +26,6 @@ COPY go.mod go.sum .
 RUN go mod download
 # Then copy everything else
 COPY . .
-# If version is set, then checkout this version
-RUN if [ -n "${VERSION}" ]; then \
-        git checkout -f ${VERSION}; \
-    fi
 
 RUN LEDGER_ENABLED=$LEDGER_ENABLED \
     BUILD_TAGS=$BUILD_TAGS \
@@ -44,8 +37,6 @@ FROM debian:bookworm-slim AS run
 
 RUN apt-get update && apt-get install -y bash curl jq wget pkg-config openssl libssl-dev
 
-# Label should match your github repo
-LABEL org.opencontainers.image.source="https://github.com/fiamma-chain/fiammad:${VERSION}"
 
 # Install libraries
 # Cosmwasm - Download correct libwasmvm version
