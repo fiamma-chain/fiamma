@@ -8704,6 +8704,88 @@ paths:
           type: string
       tags:
         - Query
+  /fiamma/zkpverify/get_verify_result:
+    get:
+      operationId: FiammaZkpverifyQuery_VerifyResult
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              verify_result:
+                type: object
+                properties:
+                  proof_id:
+                    type: string
+                  proof_system:
+                    type: string
+                    enum:
+                      - GROTH16_BN254_BITVM
+                      - PLONK_BN254
+                      - PLONK_BLS12_381
+                      - GROTH16_BN254
+                      - SP1
+                    default: GROTH16_BN254_BITVM
+                    title: ProofSystem is the proof system for the proof verification
+                  data_commitment:
+                    type: string
+                  data_location:
+                    type: string
+                    enum:
+                      - FIAMMA
+                      - NUBITDA
+                      - AVAILDA
+                    default: FIAMMA
+                    title: >-
+                      DataLocation is the proof data location for the proof
+                      verification
+                  result:
+                    type: boolean
+                  status:
+                    type: string
+                    enum:
+                      - INITIAL_VALIDATION
+                      - COMMUNITY_VALIDATION
+                      - DEFINITIVE_VALIDATION
+                    default: INITIAL_VALIDATION
+                    title: >-
+                      VerificationStatus is the verification status for the
+                      proof verification
+                  community_verification_count:
+                    type: string
+                    format: uint64
+                title: >-
+                  VerifyResult is the data structure for the proof verification
+                  result
+            title: >-
+              QueryVerifyResultResponse is response type for the Query Proof
+              verify result RPC
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: proof_id
+          in: query
+          required: false
+          type: string
+      tags:
+        - Query
   /fiamma/zkpverify/params:
     get:
       summary: Parameters queries the parameters of the module.
@@ -19846,6 +19928,53 @@ definitions:
     description: |-
       QueryProofDataResponse is response type for the Query/ProofData RPC
       method.
+  fiamma.zkpverify.QueryVerifyResultResponse:
+    type: object
+    properties:
+      verify_result:
+        type: object
+        properties:
+          proof_id:
+            type: string
+          proof_system:
+            type: string
+            enum:
+              - GROTH16_BN254_BITVM
+              - PLONK_BN254
+              - PLONK_BLS12_381
+              - GROTH16_BN254
+              - SP1
+            default: GROTH16_BN254_BITVM
+            title: ProofSystem is the proof system for the proof verification
+          data_commitment:
+            type: string
+          data_location:
+            type: string
+            enum:
+              - FIAMMA
+              - NUBITDA
+              - AVAILDA
+            default: FIAMMA
+            title: DataLocation is the proof data location for the proof verification
+          result:
+            type: boolean
+          status:
+            type: string
+            enum:
+              - INITIAL_VALIDATION
+              - COMMUNITY_VALIDATION
+              - DEFINITIVE_VALIDATION
+            default: INITIAL_VALIDATION
+            title: >-
+              VerificationStatus is the verification status for the proof
+              verification
+          community_verification_count:
+            type: string
+            format: uint64
+        title: VerifyResult is the data structure for the proof verification result
+    title: >-
+      QueryVerifyResultResponse is response type for the Query Proof verify
+      result RPC
   fiamma.zkpverify.VerificationStatus:
     type: string
     enum:

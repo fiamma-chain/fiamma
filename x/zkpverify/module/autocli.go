@@ -32,6 +32,13 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 				},
 
 				{
+					RpcMethod:      "VerifyResult",
+					Use:            "get-verify-result [proof_id]",
+					Short:          "Query Proof verified result by proof_id",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "proof_id"}},
+				},
+
+				{
 					RpcMethod:      "BitVMWitness",
 					Use:            "get-bitvm-witness [proof_id]",
 					Short:          "Query bitvm witness stored in the fiamma by proof_id",

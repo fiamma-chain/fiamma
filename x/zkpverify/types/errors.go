@@ -19,4 +19,5 @@ var (
 	ErrVerifyPeriod         = sdkerrors.Register(ModuleName, 1108, "err exceeding verification period")
 	ErrVerifyResult         = sdkerrors.Register(ModuleName, 1109, "error verifying proof result")
 	ErrPendingProofs        = sdkerrors.Register(ModuleName, 1110, "none pending proofs")
+	ErrVerifyResultNotFound = sdkerrors.Register(ModuleName, 1111, "verify result not found")
 )

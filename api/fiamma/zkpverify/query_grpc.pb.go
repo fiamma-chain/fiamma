@@ -22,6 +22,7 @@ const (
 	Query_Params_FullMethodName       = "/fiamma.zkpverify.Query/Params"
 	Query_PendingProof_FullMethodName = "/fiamma.zkpverify.Query/PendingProof"
 	Query_ProofData_FullMethodName    = "/fiamma.zkpverify.Query/ProofData"
+	Query_VerifyResult_FullMethodName = "/fiamma.zkpverify.Query/VerifyResult"
 	Query_BitVMWitness_FullMethodName = "/fiamma.zkpverify.Query/BitVMWitness"
 )
 
@@ -35,6 +36,7 @@ type QueryClient interface {
 	PendingProof(ctx context.Context, in *QueryPendingProofRequest, opts ...grpc.CallOption) (*QueryPendingProofResponse, error)
 	// Queries proof data by proof id
 	ProofData(ctx context.Context, in *QueryProofDataRequest, opts ...grpc.CallOption) (*QueryProofDataResponse, error)
+	VerifyResult(ctx context.Context, in *QueryVerifyResultRequest, opts ...grpc.CallOption) (*QueryVerifyResultResponse, error)
 	// Queries bitvm witness by proof id
 	BitVMWitness(ctx context.Context, in *QueryBitVMWitnessRequest, opts ...grpc.CallOption) (*QueryBitVMWitnessResponse, error)
 }
@@ -74,6 +76,15 @@ func (c *queryClient) ProofData(ctx context.Context, in *QueryProofDataRequest, 
 	return out, nil
 }
 
+func (c *queryClient) VerifyResult(ctx context.Context, in *QueryVerifyResultRequest, opts ...grpc.CallOption) (*QueryVerifyResultResponse, error) {
+	out := new(QueryVerifyResultResponse)
+	err := c.cc.Invoke(ctx, Query_VerifyResult_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *queryClient) BitVMWitness(ctx context.Context, in *QueryBitVMWitnessRequest, opts ...grpc.CallOption) (*QueryBitVMWitnessResponse, error) {
 	out := new(QueryBitVMWitnessResponse)
 	err := c.cc.Invoke(ctx, Query_BitVMWitness_FullMethodName, in, out, opts...)
@@ -93,6 +104,7 @@ type QueryServer interface {
 	PendingProof(context.Context, *QueryPendingProofRequest) (*QueryPendingProofResponse, error)
 	// Queries proof data by proof id
 	ProofData(context.Context, *QueryProofDataRequest) (*QueryProofDataResponse, error)
+	VerifyResult(context.Context, *QueryVerifyResultRequest) (*QueryVerifyResultResponse, error)
 	// Queries bitvm witness by proof id
 	BitVMWitness(context.Context, *QueryBitVMWitnessRequest) (*QueryBitVMWitnessResponse, error)
 	mustEmbedUnimplementedQueryServer()
@@ -110,6 +122,9 @@ func (UnimplementedQueryServer) PendingProof(context.Context, *QueryPendingProof
 }
 func (UnimplementedQueryServer) ProofData(context.Context, *QueryProofDataRequest) (*QueryProofDataResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ProofData not implemented")
+}
+func (UnimplementedQueryServer) VerifyResult(context.Context, *QueryVerifyResultRequest) (*QueryVerifyResultResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method VerifyResult not implemented")
 }
 func (UnimplementedQueryServer) BitVMWitness(context.Context, *QueryBitVMWitnessRequest) (*QueryBitVMWitnessResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method BitVMWitness not implemented")
@@ -181,6 +196,24 @@ func _Query_ProofData_Handler(srv interface{}, ctx context.Context, dec func(int
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Query_VerifyResult_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryVerifyResultRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QueryServer).VerifyResult(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Query_VerifyResult_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QueryServer).VerifyResult(ctx, req.(*QueryVerifyResultRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Query_BitVMWitness_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(QueryBitVMWitnessRequest)
 	if err := dec(in); err != nil {
@@ -217,6 +250,10 @@ var Query_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ProofData",
 			Handler:    _Query_ProofData_Handler,
+		},
+		{
+			MethodName: "VerifyResult",
+			Handler:    _Query_VerifyResult_Handler,
 		},
 		{
 			MethodName: "BitVMWitness",
