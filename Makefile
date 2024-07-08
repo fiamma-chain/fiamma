@@ -219,6 +219,13 @@ test:
 ###############################################################################
 
 build-docker:
-	$(MAKE) -C contrib/images fiammad
+	docker build \
+	-t fiammachain/fiammad \
+	--build-arg GIT_VERSION=$(VERSION) \
+	--build-arg GIT_COMMIT=$(COMMIT) \
+	-f Dockerfile .
 
-.PHONY: build-docker
+docker-rmi: 
+	docker rmi fiammachain/fiammad 2>/dev/null; true
+
+.PHONY: build-docker docker-rmi
