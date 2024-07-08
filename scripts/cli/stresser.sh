@@ -48,6 +48,7 @@ do
     --gas 20000000 \
     --sequence $SEQUENCE \
     --account-number $ACCOUNT_NUMBER \
+    --node $NODE_RPC \
     --yes \
     PlonkBn254 \
     $(cat ../../prover_examples/gnark_plonk/example/proof) \

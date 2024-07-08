@@ -24,4 +24,4 @@ allDataHex="${NEW_PROOF_SYSTEM}${NEW_PROOF}${NEW_PUBLIC_INPUT}${NEW_VK}"
 
 proof_id=$(echo -n "$allDataHex" | xxd -r -p | sha256sum | awk '{print $1}')
 
-fiammad query zkpverify get-proof-data $proof_id
+fiammad query zkpverify get-proof-data $proof_id --node $NODE
