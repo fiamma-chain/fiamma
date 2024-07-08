@@ -2,7 +2,7 @@ version: "3.2"
 
 services:
   node-setup:
-    image: fiammachain/fiammad
+    image: ghcr.io/fiamma-chain/fiamma
     build:
       context: ../../
       dockerfile: ../../Dockerfile
@@ -12,7 +12,7 @@ services:
     entrypoint: /entrypoint.sh ${NODE_NAME}
 
   node-runner:
-    image: fiammachain/fiammad
+    image: ghcr.io/fiamma-chain/fiamma
     build:
       dockerfile: ../../Dockerfile
     volumes:
