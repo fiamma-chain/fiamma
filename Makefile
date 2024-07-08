@@ -10,22 +10,11 @@ PROJECT_NAME ?= fiamma
 BUILDDIR ?= $(CURDIR)/build
 DOCKER := $(shell which docker)
 SIMAPP = ./app
-GORELEASER_CROSS_VERSION = v1.21.9
-GORELEASER_VERSION = v1.21.0
+
 HTTPS_GIT := https://github.com/fiamma-chain/fiamma.git
 
 BRANCH := $(shell git rev-parse --abbrev-ref HEAD)
 COMMIT := $(shell git log -1 --format='%H')
-
-GOLANGCI_LINT := $(shell which golangci-lint)
-MISSPELL := $(shell which misspell)
-
-LIBWASM_VERSION = $(shell go list -m -f '{{ .Version }}' github.com/CosmWasm/wasmvm)
-
-# Release environment variable
-RELEASE ?= false
-GORELEASER_SKIP_VALIDATE ?= false
-
 
 export GO111MODULE = on
 
@@ -130,30 +119,25 @@ all: tools build lint test
 ###                          Formatting & Linting                           ###
 ###############################################################################
 
-install-golangci-lint: 
-ifndef GOLANGCI_LINT
-	@echo "Installing golangci-lint..."
-	go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
-endif
+golangci_lint_cmd=golangci-lint
+golangci_version=v1.59.1
 
-lint: install-golangci-lint 
-	golangci-lint run  --timeout 5m
-	find . -name '*.go' -type f -not -path "./vendor*" -not -path "*.git*" | xargs gofmt -d -s
+lint:
+	@echo "--> Running linter"
+	@go install github.com/golangci/golangci-lint/cmd/golangci-lint@$(golangci_version)
+	@$(golangci_lint_cmd) run --timeout=10m
 
-lint-fix: install-golangci-lint
-	golangci-lint run --fix --out-format=tab --issues-exit-code=0
+lint-fix:
+	@echo "--> Running linter"
+	@go install github.com/golangci/golangci-lint/cmd/golangci-lint@$(golangci_version)
+	@$(golangci_lint_cmd) run --fix --out-format=tab --issues-exit-code=0
 
-install-misspell:
-ifndef MISSPELL
-	@echo "Installing misspell..."
-	go install github.com/client9/misspell/cmd/misspell@latest
-endif
-
-format: install-misspell
-	find . -name '*.go' -type f -not -path "./vendor*" -not -path "*.git*" -not -path "./client/docs/statik/statik.go" -not -path "./tests/mocks/*" -not -name '*.pb.go' | xargs gofmt -w -s
-	find . -name '*.go' -type f -not -path "./vendor*" -not -path "*.git*" -not -path "./client/docs/statik/statik.go" -not -path "./tests/mocks/*" -not -name '*.pb.go' | xargs misspell -w
-	find . -name '*.go' -type f -not -path "./vendor*" -not -path "*.git*" -not -path "./client/docs/statik/statik.go" -not -path "./tests/mocks/*" -not -name '*.pb.go' | xargs goimports -w -local fiamma
-.PHONY: lint lint-fix format
+format:
+	@go install mvdan.cc/gofumpt@latest
+	@go install github.com/golangci/golangci-lint/cmd/golangci-lint@$(golangci_version)
+	find . -name '*.go' -type f -not -path "./vendor*" -not -path "*.git*" -not -path "./client/docs/statik/statik.go" -not -path "./tests/mocks/*" -not -name "*.pb.go" -not -name "*.pb.gw.go" -not -name "*.pulsar.go" -not -path "./crypto/keys/secp256k1/*" | xargs gofumpt -w -l
+	$(golangci_lint_cmd) run --fix
+.PHONY: format
 
 ###############################################################################
 ###                                  Build                                  ###
@@ -220,7 +204,7 @@ test:
 
 build-docker:
 	docker build \
-	-t fiammachain/fiammad \
+	-t ghcr.io/fiamma-chain/fiamma:$(VERSION) \
 	--build-arg GIT_VERSION=$(VERSION) \
 	--build-arg GIT_COMMIT=$(COMMIT) \
 	-f Dockerfile .

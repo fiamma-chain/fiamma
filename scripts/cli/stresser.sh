@@ -13,7 +13,7 @@ else
 fi
 
 : ${CHAIN_ID:="fiamma-testnet-1"}
-: ${NODE_RPC:="http://127.0.0.1:26657"}
+: ${NODE_RPC:="https://testnet-rpc.fiammachain.io"}
 : ${NODE_API:="http://127.0.0.1:1317"}
 
 # New elements can be added to the array to send more transactions

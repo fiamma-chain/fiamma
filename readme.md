@@ -48,7 +48,7 @@ This will install the `fiammad` binary to your `GOPATH`.
 
 A docker image for production purposes (no shell access):
 
-[Packages: fiammad](https://github.com/orgs/fiamma-chain/packages/container/package/fiammad)
+[Packages: fiammad](https://github.com/fiamma-chain/fiamma/pkgs/container/fiamma)
 
 
 ## Joining the testnet
