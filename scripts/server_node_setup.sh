@@ -30,7 +30,7 @@ for server in "${servers[@]}"; do
     echo "Stopped fiamma service on $server"
 done
 
-rm -rf server-setup
+
 
 echo "Downloading source code into servers..."
 for server in "${servers[@]}"; do
@@ -40,6 +40,7 @@ for server in "${servers[@]}"; do
     echo "Source code downloaded into $server successfully"
 done
 
+rm -rf server-setup
 mkdir -p server-setup
 cd server-setup
 

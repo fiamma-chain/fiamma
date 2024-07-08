@@ -36,14 +36,18 @@ done
 
 echo "Sending directories to servers..."
 for i in "${!servers[@]}"; do  
-    ssh ${servers[$i]} "rm -rf /home/ubuntu/.fiamma"
-    scp -r "testnet-nodes/${nodes[$i]}" "${servers[$i]}:/home/ubuntu/.fiamma"
 
     ## Config Cosmovisor for chain upgrade
     ssh ${servers[$i]} "mkdir -p ~/.fiamma/cosmovisor/upgrades/$2/bin/"
-    ssh ${servers[$i]} "cp /home/ubuntu/go/bin/fiammad /home/ubuntu/.fiamma/cosmovisor/genesis/bin/fiammad"
+    ssh ${servers[$i]} "cp /home/ubuntu/go/bin/fiammad /home/ubuntu/.fiamma/cosmovisor/upgrades/$2/bin/fiammad"
 done
 
 
 cd ..
 
+
+echo "Starting new fiamma services..."
+for server in "${servers[@]}"; do
+    ssh $server "sudo systemctl start fiamma"
+    echo "Started fiamma service on $server"
+done

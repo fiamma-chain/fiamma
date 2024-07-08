@@ -4,7 +4,7 @@ set -e
 
 
 : ${CHAIN_ID:="fiamma-testnet-1"}
-: ${NODE:="http://127.0.0.1:26657"}
+: ${NODE:="https://testnet-rpc.fiammachain.io"}
 : ${PROOF_FILE:=../../prover_examples/gnark_groth16/example/proof}
 : ${PUBLIC_INPUT_FILE:=../../prover_examples/gnark_groth16/example/public_input}
 : ${VK_FILE:=../../prover_examples/gnark_groth16/example/vk}
