@@ -50,12 +50,12 @@ bash ../multi_node_setup.sh "${nodes[@]}"
 echo "Setting node addresses in config..."
 for i in "${!nodes[@]}"; do 
     echo $(pwd)
-    seeds=$(docker run -v "$(pwd)/testnet-nodes/${nodes[$i]}:/root/.fiamma" -it fiammachain/fiammad  config get config p2p.persistent_peers)
+    seeds=$(docker run -v "$(pwd)/testnet-nodes/${nodes[$i]}:/root/.fiamma" -it ghcr.io/fiamma-chain/fiamma  config get config p2p.persistent_peers)
     for j in "${!nodes[@]}"; do  
         seeds=${seeds//${nodes[$j]}/${nodes_ips[$j]}}
     done
     
-    docker run -v "$(pwd)/testnet-nodes/${nodes[$i]}:/root/.fiamma" -it fiammachain/fiammad  config set config p2p.persistent_peers $seeds --skip-validate    
+    docker run -v "$(pwd)/testnet-nodes/${nodes[$i]}:/root/.fiamma" -it ghcr.io/fiamma-chain/fiamma  config set config p2p.persistent_peers $seeds --skip-validate    
 done
 
 echo "Sending directories to servers..."

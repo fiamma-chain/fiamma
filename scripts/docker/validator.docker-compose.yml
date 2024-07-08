@@ -2,7 +2,7 @@ version: "3.2"
 
 services:
   node-setup:
-    image: fiammachain/fiammad
+    image: ghcr.io/fiamma-chain/fiamma
     build:
       context: ../../
       dockerfile: ../../Dockerfile
@@ -12,7 +12,7 @@ services:
     entrypoint: /entrypoint.sh ${NODE_NAME}
 
   validator-setup:
-    image: fiammachain/fiammad
+    image: ghcr.io/fiamma-chain/fiamma
     build:
       context: ../../
       dockerfile: ../../Dockerfile
@@ -22,7 +22,7 @@ services:
     entrypoint: /entrypoint.sh ${NODE_NAME} 1000000fiamma
 
   validator-runner:
-    image: fiammachain/fiammad
+    image: ghcr.io/fiamma-chain/fiamma
     build:
       context: ../../
       dockerfile: ../../Dockerfile

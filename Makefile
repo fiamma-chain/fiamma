@@ -204,12 +204,12 @@ test:
 
 build-docker:
 	docker build \
-	-t ghcr.io/fiamma-chain/fiamma:$(VERSION) \
+	-t ghcr.io/fiamma-chain/fiamma \
 	--build-arg GIT_VERSION=$(VERSION) \
 	--build-arg GIT_COMMIT=$(COMMIT) \
 	-f Dockerfile .
 
 docker-rmi: 
-	docker rmi fiammachain/fiammad 2>/dev/null; true
+	docker rmi ghcr.io/fiamma-chain/fiamma 2>/dev/null; true
 
 .PHONY: build-docker docker-rmi
