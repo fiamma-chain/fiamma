@@ -1,7 +1,6 @@
 #!/usr/bin/make -f
 
 PACKAGES_NOSIMULATION=$(shell go list ./... | grep -v '/simulation')
-VERSION := $(shell echo $(shell git describe --tags) | sed 's/^v//')
 PACKAGES_SIMTEST=$(shell go list ./... | grep '/simulation')
 COMMIT := $(shell git log -1 --format='%H')
 LEDGER_ENABLED ?= true
@@ -13,8 +12,20 @@ SIMAPP = ./app
 
 HTTPS_GIT := https://github.com/fiamma-chain/fiamma.git
 
+
 BRANCH := $(shell git rev-parse --abbrev-ref HEAD)
 COMMIT := $(shell git log -1 --format='%H')
+
+# don't override user values
+ifeq (,$(VERSION))
+  # Find a name that exactly describes the current commit (e.g. a version tag)
+  VERSION := $(shell git describe --exact-match 2>/dev/null)
+  # if VERSION is empty, then populate it with branch's name and raw commit hash
+  ifeq (,$(VERSION))
+    VERSION := $(BRANCH)-$(COMMIT)
+  endif
+endif
+
 
 export GO111MODULE = on
 

@@ -11,14 +11,14 @@ fi
 NODE_HOME=$HOME/.fiamma
 CHAIN_BINARY=fiammad
 : ${CHAIN_ID:="fiamma-testnet-1"}
-: ${MINIMUM_GAS_PRICES="0.0001fia"}
+: ${MINIMUM_GAS_PRICES="0ufia"}
 
-: ${PEER_ADDR="35.73.202.182,18.182.20.173", "35.74.243.172", "18.179.17.155"}
+: ${PEER_ADDR="35.73.202.182,18.182.20.173"}
 
 PEER_ARRAY=(${PEER_ADDR//,/ })
 
 # You should ensure that the fiammad binary files have been correctly installed.
-$CHAIN_BINARY comet unsafe-reset-all
+
 $CHAIN_BINARY init $MONIKER \
     --chain-id $CHAIN_ID --overwrite
 
