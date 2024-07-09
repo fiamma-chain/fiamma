@@ -12,8 +12,8 @@ minimum_gas_price=0
 
 # nubit da rpc url and authkey
 
-rpc="http://172.31.46.84:26658"
-authkey="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBbGxvdyI6WyJwdWJsaWMiLCJyZWFkIiwid3JpdGUiLCJhZG1pbiJdfQ.z8uQPBAWnOTKS8C1BrT29O0it38o66sXSWHhyfGejKk"
+rpc="http://127.0.0.1:26658"
+authkey=""
 
 
 if [ $# -lt 1 ]; then
