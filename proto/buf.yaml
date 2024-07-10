@@ -1,6 +1,7 @@
 breaking:
   use:
   - FILE
+name: buf.build/fiamma-chain/fiamma
 deps:
 - buf.build/protocolbuffers/wellknowntypes
 - buf.build/cosmos/cosmos-sdk
