@@ -5,21 +5,21 @@ import "gogoproto/gogo.proto";
 
 option go_package = "fiamma/x/zkpverify/types";
 
-// VerificationStatus is the verification status for the proof verification
+// VerificationStatus is the verification status enum for the proof verification
 enum VerificationStatus { 
   INITIAL_VALIDATION = 0;
   COMMUNITY_VALIDATION = 1;
   DEFINITIVE_VALIDATION = 2;
 }
 
-// DataLocation is the proof data location for the proof verification
+// DataLocation is the proof data location enum for the proof verification
 enum DataLocation {
   FIAMMA = 0; 
   NUBITDA = 1;
   AVAILDA = 2;
 }
 
-// ProofSystem is the proof system for the proof verification
+// ProofSystem is the proof system enum for the proof verification
 enum ProofSystem {
   GROTH16_BN254_BITVM = 0; 
   PLONK_BN254 = 1;
