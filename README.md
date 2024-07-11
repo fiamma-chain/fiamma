@@ -53,9 +53,9 @@ A docker image for production purposes (no shell access):
 
 ## Joining the testnet
 
-Please follow the instructions on the [User Guides](https://fiamma.gitbook.io/fiamma/).
+Please follow the instructions on the [Developer Guides](https://docs.fiammachain.io/developer-guides/set-up-a-node).
 
 
 ## Documentation
 
-To learn more, please [visit the official fiamma documentation](https://fiamma.gitbook.io/fiamma/).
+To learn more, please [visit the official fiamma documentation](https://docs.fiammachain.io).
