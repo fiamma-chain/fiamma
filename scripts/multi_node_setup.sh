@@ -120,6 +120,7 @@ for (( i=1; i <= "$#"; i++ )); do
     docker run --rm -v $(pwd)/testnet-nodes/${!i}:/root/.fiamma -it ghcr.io/fiamma-chain/fiamma config set app api.enable true --skip-validate 
     docker run --rm -v $(pwd)/testnet-nodes/${!i}:/root/.fiamma -it ghcr.io/fiamma-chain/fiamma config set app api.enabled-unsafe-cors true --skip-validate 
     docker run --rm -v $(pwd)/testnet-nodes/${!i}:/root/.fiamma -it ghcr.io/fiamma-chain/fiamma config set app api.address "tcp://0.0.0.0:1317" --skip-validate
+    docker run --rm -v $(pwd)/testnet-nodes/${!i}:/root/.fiamma -it ghcr.io/fiamma-chain/fiamma config set app grpc.address "0.0.0.0:9090" --skip-validate
 done
 
 
