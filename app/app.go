@@ -82,6 +82,7 @@ import (
 	wasmkeeper "github.com/CosmWasm/wasmd/x/wasm/keeper"
 	tmproto "github.com/cometbft/cometbft/proto/tendermint/types"
 
+	bitvmstakermodulekeeper "fiamma/x/bitvmstaker/keeper"
 	// this line is used by starport scaffolding # stargate/app/moduleImport
 
 	"fiamma/docs"
@@ -152,6 +153,7 @@ type App struct {
 	WasmKeeper       wasmkeeper.Keeper
 	ScopedWasmKeeper capabilitykeeper.ScopedKeeper
 
+	BitvmstakerKeeper bitvmstakermodulekeeper.Keeper
 	// this line is used by starport scaffolding # stargate/app/keeperDeclaration
 
 	// simulation manager
@@ -304,6 +306,7 @@ func New(
 		&app.GroupKeeper,
 		&app.CircuitBreakerKeeper,
 		&app.ZkpVerifyKeeper,
+		&app.BitvmstakerKeeper,
 		// this line is used by starport scaffolding # stargate/app/keeperDefinition
 	); err != nil {
 		panic(err)
