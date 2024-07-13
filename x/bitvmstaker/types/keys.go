@@ -12,7 +12,9 @@ const (
 )
 
 var (
-	ParamsKey = []byte("p_bitvmstaker")
+	ParamsKey           = []byte{0x01} // key prefix for the parameters
+	CommitteeAddressKey = []byte{0x02} // key prefix for the committee address
+
 )
 
 func KeyPrefix(p string) []byte {

@@ -8435,22 +8435,14 @@ paths:
               Since: cosmos-sdk 0.47
       tags:
         - Msg
-  /fiamma/bitvmstaker/params:
-    get:
-      summary: Parameters queries the parameters of the module.
-      operationId: FiammaBitvmstakerQuery_Params
+  /fiamma.bitvmstaker.Msg/CreateStaker:
+    post:
+      operationId: FiammaBitvmstakerMsg_CreateStaker
       responses:
         '200':
           description: A successful response.
           schema:
             type: object
-            properties:
-              params:
-                description: params holds all the parameters of this module.
-                type: object
-            description: >-
-              QueryParamsResponse is response type for the Query/Params RPC
-              method.
         default:
           description: An unexpected error response.
           schema:
@@ -8469,8 +8461,19 @@ paths:
                     '@type':
                       type: string
                   additionalProperties: {}
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              creator:
+                type: string
+              stakerAddress:
+                type: string
       tags:
-        - Query
+        - Msg
   /fiamma.bitvmstaker.Msg/UpdateParams:
     post:
       summary: |-
@@ -8519,14 +8522,47 @@ paths:
                   authority is the address that controls the module (defaults to
                   x/gov unless overwritten).
               params:
-                description: |-
-                  params defines the module parameters to update.
-
-                  NOTE: All parameters must be supplied.
+                description: 'NOTE: All parameters must be supplied.'
                 type: object
             description: MsgUpdateParams is the Msg/UpdateParams request type.
       tags:
         - Msg
+  /fiamma/bitvmstaker/params:
+    get:
+      summary: Parameters queries the parameters of the module.
+      operationId: FiammaBitvmstakerQuery_Params
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              params:
+                description: params holds all the parameters of this module.
+                type: object
+            description: >-
+              QueryParamsResponse is response type for the Query/Params RPC
+              method.
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      tags:
+        - Query
   /ibc.applications.fee.v1.Msg/PayPacketFee:
     post:
       summary: >-
@@ -19164,6 +19200,32 @@ definitions:
           min_commission_rate is the chain-wide minimum commission rate that a
           validator can charge their delegators
     description: Params defines the parameters for the x/staking module.
+  fiamma.bitvmstaker.MsgCreateStaker:
+    type: object
+    properties:
+      creator:
+        type: string
+      stakerAddress:
+        type: string
+  fiamma.bitvmstaker.MsgCreateStakerResponse:
+    type: object
+  fiamma.bitvmstaker.MsgUpdateParams:
+    type: object
+    properties:
+      authority:
+        type: string
+        description: >-
+          authority is the address that controls the module (defaults to x/gov
+          unless overwritten).
+      params:
+        description: 'NOTE: All parameters must be supplied.'
+        type: object
+    description: MsgUpdateParams is the Msg/UpdateParams request type.
+  fiamma.bitvmstaker.MsgUpdateParamsResponse:
+    type: object
+    description: |-
+      MsgUpdateParamsResponse defines the response structure for executing a
+      MsgUpdateParams message.
   fiamma.bitvmstaker.Params:
     type: object
     description: Params defines the parameters for the module.
@@ -19174,26 +19236,6 @@ definitions:
         description: params holds all the parameters of this module.
         type: object
     description: QueryParamsResponse is response type for the Query/Params RPC method.
-  fiamma.bitvmstaker.MsgUpdateParams:
-    type: object
-    properties:
-      authority:
-        type: string
-        description: >-
-          authority is the address that controls the module (defaults to x/gov
-          unless overwritten).
-      params:
-        description: |-
-          params defines the module parameters to update.
-
-          NOTE: All parameters must be supplied.
-        type: object
-    description: MsgUpdateParams is the Msg/UpdateParams request type.
-  fiamma.bitvmstaker.MsgUpdateParamsResponse:
-    type: object
-    description: |-
-      MsgUpdateParamsResponse defines the response structure for executing a
-      MsgUpdateParams message.
   ibc.applications.fee.v1.Fee:
     type: object
     properties:
