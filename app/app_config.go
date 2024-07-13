@@ -7,6 +7,10 @@ import (
 	_ "fiamma/x/zkpverify/module" // import for side-effects
 	zkpverifymoduletypes "fiamma/x/zkpverify/types"
 
+	bitvmstakermodulev1 "fiamma/api/fiamma/bitvmstaker/module"
+	_ "fiamma/x/bitvmstaker/module" // import for side-effects
+	bitvmstakermoduletypes "fiamma/x/bitvmstaker/types"
+
 	runtimev1alpha1 "cosmossdk.io/api/cosmos/app/runtime/v1alpha1"
 	appv1alpha1 "cosmossdk.io/api/cosmos/app/v1alpha1"
 	authmodulev1 "cosmossdk.io/api/cosmos/auth/module/v1"
@@ -96,6 +100,7 @@ var (
 		// chain modules
 		zkpverifymoduletypes.ModuleName,
 		wasmtypes.ModuleName,
+		bitvmstakermoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/initGenesis
 	}
 
@@ -122,6 +127,7 @@ var (
 		// chain modules
 		zkpverifymoduletypes.ModuleName,
 		wasmtypes.ModuleName,
+		bitvmstakermoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/beginBlockers
 	}
 
@@ -142,6 +148,7 @@ var (
 		// chain modules
 		zkpverifymoduletypes.ModuleName,
 		wasmtypes.ModuleName,
+		bitvmstakermoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/endBlockers
 	}
 
@@ -301,6 +308,10 @@ var (
 			{
 				Name:   zkpverifymoduletypes.ModuleName,
 				Config: appconfig.WrapAny(&zkpverifymodulev1.Module{}),
+			},
+			{
+				Name:   bitvmstakermoduletypes.ModuleName,
+				Config: appconfig.WrapAny(&bitvmstakermodulev1.Module{}),
 			},
 			// this line is used by starport scaffolding # stargate/app/moduleConfig
 		},
