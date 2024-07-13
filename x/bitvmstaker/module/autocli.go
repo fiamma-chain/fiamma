@@ -28,6 +28,12 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					RpcMethod: "UpdateParams",
 					Skip:      true, // skipped because authority gated
 				},
+				{
+					RpcMethod:      "CreateStaker",
+					Use:            "create-staker [staker-address]",
+					Short:          "Send a create-staker tx",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "stakerAddress"}},
+				},
 				// this line is used by ignite scaffolding # autocli/tx
 			},
 		},
