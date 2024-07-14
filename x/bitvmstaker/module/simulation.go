@@ -31,6 +31,10 @@ const (
 	// TODO: Determine the simulation weight value
 	defaultWeightMsgSlashStaker int = 100
 
+	opWeightMsgUpdateCommitteeAddress = "op_weight_msg_update_committee_address"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgUpdateCommitteeAddress int = 100
+
 	// this line is used by starport scaffolding # simapp/module/const
 )
 
@@ -76,6 +80,17 @@ func (am AppModule) WeightedOperations(simState module.SimulationState) []simtyp
 		bitvmstakersimulation.SimulateMsgSlashStaker(am.accountKeeper, am.bankKeeper, am.keeper),
 	))
 
+	var weightMsgUpdateCommitteeAddress int
+	simState.AppParams.GetOrGenerate(opWeightMsgUpdateCommitteeAddress, &weightMsgUpdateCommitteeAddress, nil,
+		func(_ *rand.Rand) {
+			weightMsgUpdateCommitteeAddress = defaultWeightMsgUpdateCommitteeAddress
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgUpdateCommitteeAddress,
+		bitvmstakersimulation.SimulateMsgUpdateCommitteeAddress(am.accountKeeper, am.bankKeeper, am.keeper),
+	))
+
 	// this line is used by starport scaffolding # simapp/module/operation
 
 	return operations
@@ -97,6 +112,14 @@ func (am AppModule) ProposalMsgs(simState module.SimulationState) []simtypes.Wei
 			defaultWeightMsgSlashStaker,
 			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
 				bitvmstakersimulation.SimulateMsgSlashStaker(am.accountKeeper, am.bankKeeper, am.keeper)
+				return nil
+			},
+		),
+		simulation.NewWeightedProposalMsg(
+			opWeightMsgUpdateCommitteeAddress,
+			defaultWeightMsgUpdateCommitteeAddress,
+			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
+				bitvmstakersimulation.SimulateMsgUpdateCommitteeAddress(am.accountKeeper, am.bankKeeper, am.keeper)
 				return nil
 			},
 		),
