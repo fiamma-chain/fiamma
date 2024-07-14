@@ -6,6 +6,10 @@ package types
 import (
 	context "context"
 	fmt "fmt"
+	io "io"
+	math "math"
+	math_bits "math/bits"
+
 	_ "github.com/cosmos/cosmos-proto"
 	_ "github.com/cosmos/cosmos-sdk/types/msgservice"
 	_ "github.com/cosmos/cosmos-sdk/types/tx/amino"
@@ -15,9 +19,6 @@ import (
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
-	io "io"
-	math "math"
-	math_bits "math/bits"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -212,17 +213,107 @@ func (m *MsgCreateStakerResponse) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_MsgCreateStakerResponse proto.InternalMessageInfo
 
+type MsgSlashStaker struct {
+	Creator       string `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
+	StakerAddress string `protobuf:"bytes,2,opt,name=stakerAddress,proto3" json:"stakerAddress,omitempty"`
+}
+
+func (m *MsgSlashStaker) Reset()         { *m = MsgSlashStaker{} }
+func (m *MsgSlashStaker) String() string { return proto.CompactTextString(m) }
+func (*MsgSlashStaker) ProtoMessage()    {}
+func (*MsgSlashStaker) Descriptor() ([]byte, []int) {
+	return fileDescriptor_ca62a47b6be03f96, []int{4}
+}
+func (m *MsgSlashStaker) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *MsgSlashStaker) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_MsgSlashStaker.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *MsgSlashStaker) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgSlashStaker.Merge(m, src)
+}
+func (m *MsgSlashStaker) XXX_Size() int {
+	return m.Size()
+}
+func (m *MsgSlashStaker) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgSlashStaker.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_MsgSlashStaker proto.InternalMessageInfo
+
+func (m *MsgSlashStaker) GetCreator() string {
+	if m != nil {
+		return m.Creator
+	}
+	return ""
+}
+
+func (m *MsgSlashStaker) GetStakerAddress() string {
+	if m != nil {
+		return m.StakerAddress
+	}
+	return ""
+}
+
+type MsgSlashStakerResponse struct {
+}
+
+func (m *MsgSlashStakerResponse) Reset()         { *m = MsgSlashStakerResponse{} }
+func (m *MsgSlashStakerResponse) String() string { return proto.CompactTextString(m) }
+func (*MsgSlashStakerResponse) ProtoMessage()    {}
+func (*MsgSlashStakerResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_ca62a47b6be03f96, []int{5}
+}
+func (m *MsgSlashStakerResponse) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *MsgSlashStakerResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_MsgSlashStakerResponse.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *MsgSlashStakerResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgSlashStakerResponse.Merge(m, src)
+}
+func (m *MsgSlashStakerResponse) XXX_Size() int {
+	return m.Size()
+}
+func (m *MsgSlashStakerResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgSlashStakerResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_MsgSlashStakerResponse proto.InternalMessageInfo
+
 func init() {
 	proto.RegisterType((*MsgUpdateParams)(nil), "fiamma.bitvmstaker.MsgUpdateParams")
 	proto.RegisterType((*MsgUpdateParamsResponse)(nil), "fiamma.bitvmstaker.MsgUpdateParamsResponse")
 	proto.RegisterType((*MsgCreateStaker)(nil), "fiamma.bitvmstaker.MsgCreateStaker")
 	proto.RegisterType((*MsgCreateStakerResponse)(nil), "fiamma.bitvmstaker.MsgCreateStakerResponse")
+	proto.RegisterType((*MsgSlashStaker)(nil), "fiamma.bitvmstaker.MsgSlashStaker")
+	proto.RegisterType((*MsgSlashStakerResponse)(nil), "fiamma.bitvmstaker.MsgSlashStakerResponse")
 }
 
 func init() { proto.RegisterFile("fiamma/bitvmstaker/tx.proto", fileDescriptor_ca62a47b6be03f96) }
 
 var fileDescriptor_ca62a47b6be03f96 = []byte{
-	// 396 bytes of a gzipped FileDescriptorProto
+	// 436 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x92, 0x4e, 0xcb, 0x4c, 0xcc,
 	0xcd, 0x4d, 0xd4, 0x4f, 0xca, 0x2c, 0x29, 0xcb, 0x2d, 0x2e, 0x49, 0xcc, 0x4e, 0x2d, 0xd2, 0x2f,
 	0xa9, 0xd0, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0x12, 0x82, 0x48, 0xea, 0x21, 0x49, 0x4a, 0x09,
@@ -241,13 +332,16 @@ var fileDescriptor_ca62a47b6be03f96 = []byte{
 	0x78, 0xb0, 0xef, 0x9c, 0x8b, 0x52, 0x13, 0x4b, 0x52, 0x83, 0xc1, 0xba, 0x85, 0x24, 0xb8, 0xd8,
 	0x93, 0x41, 0xfc, 0xfc, 0x22, 0x88, 0xdf, 0x82, 0x60, 0x5c, 0x21, 0x15, 0x2e, 0x5e, 0x88, 0x0d,
 	0x50, 0x1f, 0x82, 0xbd, 0xc1, 0x19, 0x84, 0x2a, 0x68, 0xc5, 0x03, 0x72, 0x26, 0x4c, 0x0f, 0xd4,
-	0x6e, 0x64, 0x0b, 0x60, 0x76, 0x1b, 0x5d, 0x60, 0xe4, 0x62, 0xf6, 0x2d, 0x4e, 0x17, 0x4a, 0xe0,
-	0xe2, 0x41, 0x09, 0x5e, 0x65, 0x6c, 0xc1, 0x82, 0xe6, 0x01, 0x29, 0x6d, 0x22, 0x14, 0xc1, 0x6c,
-	0x02, 0xd9, 0x80, 0xe2, 0x45, 0x5c, 0x36, 0x20, 0x2b, 0xc2, 0x69, 0x03, 0x36, 0xbf, 0x48, 0xb1,
-	0x36, 0x80, 0xa2, 0xca, 0xc9, 0xe4, 0xc4, 0x23, 0x39, 0xc6, 0x0b, 0x8f, 0xe4, 0x18, 0x1f, 0x3c,
-	0x92, 0x63, 0x9c, 0xf0, 0x58, 0x8e, 0xe1, 0xc2, 0x63, 0x39, 0x86, 0x1b, 0x8f, 0xe5, 0x18, 0xa2,
-	0xa4, 0xb0, 0xc6, 0x54, 0x49, 0x65, 0x41, 0x6a, 0x71, 0x12, 0x1b, 0x38, 0xa9, 0x19, 0x03, 0x02,
-	0x00, 0x00, 0xff, 0xff, 0xa9, 0x62, 0xcc, 0xfe, 0x1b, 0x03, 0x00, 0x00,
+	0x6e, 0x64, 0x0b, 0xe0, 0x76, 0xc7, 0x71, 0xf1, 0xf9, 0x16, 0xa7, 0x07, 0xe7, 0x24, 0x16, 0x67,
+	0xd0, 0xc4, 0x6a, 0x09, 0x2e, 0x31, 0x54, 0xf3, 0x61, 0x36, 0x1b, 0xad, 0x67, 0xe2, 0x62, 0xf6,
+	0x2d, 0x4e, 0x17, 0x4a, 0xe0, 0xe2, 0x41, 0x89, 0x58, 0x65, 0x6c, 0x11, 0x82, 0x16, 0x74, 0x52,
+	0xda, 0x44, 0x28, 0x82, 0xd9, 0x04, 0xb2, 0x01, 0x25, 0x70, 0x71, 0xd9, 0x80, 0xac, 0x08, 0xa7,
+	0x0d, 0xd8, 0x42, 0x51, 0x28, 0x96, 0x8b, 0x1b, 0x39, 0x08, 0x95, 0x70, 0xe8, 0x45, 0x52, 0x23,
+	0xa5, 0x45, 0x58, 0x0d, 0xcc, 0x78, 0x29, 0xd6, 0x06, 0x50, 0x1a, 0x74, 0x32, 0x39, 0xf1, 0x48,
+	0x8e, 0xf1, 0xc2, 0x23, 0x39, 0xc6, 0x07, 0x8f, 0xe4, 0x18, 0x27, 0x3c, 0x96, 0x63, 0xb8, 0xf0,
+	0x58, 0x8e, 0xe1, 0xc6, 0x63, 0x39, 0x86, 0x28, 0x29, 0xac, 0x49, 0xb0, 0xa4, 0xb2, 0x20, 0xb5,
+	0x38, 0x89, 0x0d, 0x9c, 0x87, 0x8c, 0x01, 0x01, 0x00, 0x00, 0xff, 0xff, 0xe4, 0x16, 0x4f, 0x7e,
+	0xf4, 0x03, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -266,6 +360,7 @@ type MsgClient interface {
 	// parameters. The authority defaults to the x/gov module account.
 	UpdateParams(ctx context.Context, in *MsgUpdateParams, opts ...grpc.CallOption) (*MsgUpdateParamsResponse, error)
 	CreateStaker(ctx context.Context, in *MsgCreateStaker, opts ...grpc.CallOption) (*MsgCreateStakerResponse, error)
+	SlashStaker(ctx context.Context, in *MsgSlashStaker, opts ...grpc.CallOption) (*MsgSlashStakerResponse, error)
 }
 
 type msgClient struct {
@@ -294,12 +389,22 @@ func (c *msgClient) CreateStaker(ctx context.Context, in *MsgCreateStaker, opts 
 	return out, nil
 }
 
+func (c *msgClient) SlashStaker(ctx context.Context, in *MsgSlashStaker, opts ...grpc.CallOption) (*MsgSlashStakerResponse, error) {
+	out := new(MsgSlashStakerResponse)
+	err := c.cc.Invoke(ctx, "/fiamma.bitvmstaker.Msg/SlashStaker", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // MsgServer is the server API for Msg service.
 type MsgServer interface {
 	// UpdateParams defines a (governance) operation for updating the module
 	// parameters. The authority defaults to the x/gov module account.
 	UpdateParams(context.Context, *MsgUpdateParams) (*MsgUpdateParamsResponse, error)
 	CreateStaker(context.Context, *MsgCreateStaker) (*MsgCreateStakerResponse, error)
+	SlashStaker(context.Context, *MsgSlashStaker) (*MsgSlashStakerResponse, error)
 }
 
 // UnimplementedMsgServer can be embedded to have forward compatible implementations.
@@ -311,6 +416,9 @@ func (*UnimplementedMsgServer) UpdateParams(ctx context.Context, req *MsgUpdateP
 }
 func (*UnimplementedMsgServer) CreateStaker(ctx context.Context, req *MsgCreateStaker) (*MsgCreateStakerResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateStaker not implemented")
+}
+func (*UnimplementedMsgServer) SlashStaker(ctx context.Context, req *MsgSlashStaker) (*MsgSlashStakerResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SlashStaker not implemented")
 }
 
 func RegisterMsgServer(s grpc1.Server, srv MsgServer) {
@@ -353,6 +461,24 @@ func _Msg_CreateStaker_Handler(srv interface{}, ctx context.Context, dec func(in
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Msg_SlashStaker_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgSlashStaker)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MsgServer).SlashStaker(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/fiamma.bitvmstaker.Msg/SlashStaker",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MsgServer).SlashStaker(ctx, req.(*MsgSlashStaker))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _Msg_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "fiamma.bitvmstaker.Msg",
 	HandlerType: (*MsgServer)(nil),
@@ -364,6 +490,10 @@ var _Msg_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CreateStaker",
 			Handler:    _Msg_CreateStaker_Handler,
+		},
+		{
+			MethodName: "SlashStaker",
+			Handler:    _Msg_SlashStaker_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
@@ -493,6 +623,66 @@ func (m *MsgCreateStakerResponse) MarshalToSizedBuffer(dAtA []byte) (int, error)
 	return len(dAtA) - i, nil
 }
 
+func (m *MsgSlashStaker) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *MsgSlashStaker) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *MsgSlashStaker) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.StakerAddress) > 0 {
+		i -= len(m.StakerAddress)
+		copy(dAtA[i:], m.StakerAddress)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.StakerAddress)))
+		i--
+		dAtA[i] = 0x12
+	}
+	if len(m.Creator) > 0 {
+		i -= len(m.Creator)
+		copy(dAtA[i:], m.Creator)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.Creator)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *MsgSlashStakerResponse) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *MsgSlashStakerResponse) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *MsgSlashStakerResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	return len(dAtA) - i, nil
+}
+
 func encodeVarintTx(dAtA []byte, offset int, v uint64) int {
 	offset -= sovTx(v)
 	base := offset
@@ -546,6 +736,32 @@ func (m *MsgCreateStaker) Size() (n int) {
 }
 
 func (m *MsgCreateStakerResponse) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	return n
+}
+
+func (m *MsgSlashStaker) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.Creator)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	l = len(m.StakerAddress)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	return n
+}
+
+func (m *MsgSlashStakerResponse) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -866,6 +1082,170 @@ func (m *MsgCreateStakerResponse) Unmarshal(dAtA []byte) error {
 		}
 		if fieldNum <= 0 {
 			return fmt.Errorf("proto: MsgCreateStakerResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		default:
+			iNdEx = preIndex
+			skippy, err := skipTx(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthTx
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *MsgSlashStaker) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowTx
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: MsgSlashStaker: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: MsgSlashStaker: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Creator", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Creator = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field StakerAddress", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.StakerAddress = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipTx(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthTx
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *MsgSlashStakerResponse) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowTx
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: MsgSlashStakerResponse: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: MsgSlashStakerResponse: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		default:

@@ -8470,7 +8470,46 @@ paths:
             properties:
               creator:
                 type: string
-              stakerAddress:
+              staker_address:
+                type: string
+      tags:
+        - Msg
+  /fiamma.bitvmstaker.Msg/SlashStaker:
+    post:
+      operationId: FiammaBitvmstakerMsg_SlashStaker
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              creator:
+                type: string
+              staker_adress:
                 type: string
       tags:
         - Msg
@@ -19205,9 +19244,18 @@ definitions:
     properties:
       creator:
         type: string
-      stakerAddress:
+      staker_address:
         type: string
   fiamma.bitvmstaker.MsgCreateStakerResponse:
+    type: object
+  fiamma.bitvmstaker.MsgSlashStaker:
+    type: object
+    properties:
+      creator:
+        type: string
+      staker_adress:
+        type: string
+  fiamma.bitvmstaker.MsgSlashStakerResponse:
     type: object
   fiamma.bitvmstaker.MsgUpdateParams:
     type: object
