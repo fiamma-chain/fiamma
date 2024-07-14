@@ -24,6 +24,12 @@ service Query {
     option (google.api.http).get = "/fiamma/bitvmstaker/list_staker_addresses";
   
   }
+  
+  // Queries a list of CommitteeAddress items.
+  rpc CommitteeAddress (QueryCommitteeAddressRequest) returns (QueryCommitteeAddressResponse) {
+    option (google.api.http).get = "/fiamma/bitvmstaker/committee_address";
+  
+  }
 }
 // QueryParamsRequest is request type for the Query/Params RPC method.
 message QueryParamsRequest {}
@@ -42,5 +48,11 @@ message QueryListStakerAddressesRequest {
 message QueryListStakerAddressesResponse {
   string                                 stakerAddresses = 1;
   cosmos.base.query.v1beta1.PageResponse pagination      = 2;
+}
+
+message QueryCommitteeAddressRequest {}
+
+message QueryCommitteeAddressResponse {
+  string committeeAddress = 1;
 }
 
