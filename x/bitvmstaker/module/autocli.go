@@ -34,6 +34,12 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					Short:          "Send a create-staker tx",
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "stakerAddress"}},
 				},
+				{
+					RpcMethod:      "SlashStaker",
+					Use:            "slash-staker [staker-address]",
+					Short:          "Send a slash-staker tx",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "stakerAddress"}},
+				},
 				// this line is used by ignite scaffolding # autocli/tx
 			},
 		},
