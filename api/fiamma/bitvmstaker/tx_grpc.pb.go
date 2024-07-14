@@ -20,9 +20,10 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	Msg_UpdateParams_FullMethodName = "/fiamma.bitvmstaker.Msg/UpdateParams"
-	Msg_CreateStaker_FullMethodName = "/fiamma.bitvmstaker.Msg/CreateStaker"
-	Msg_SlashStaker_FullMethodName  = "/fiamma.bitvmstaker.Msg/SlashStaker"
+	Msg_UpdateParams_FullMethodName           = "/fiamma.bitvmstaker.Msg/UpdateParams"
+	Msg_CreateStaker_FullMethodName           = "/fiamma.bitvmstaker.Msg/CreateStaker"
+	Msg_SlashStaker_FullMethodName            = "/fiamma.bitvmstaker.Msg/SlashStaker"
+	Msg_UpdateCommitteeAddress_FullMethodName = "/fiamma.bitvmstaker.Msg/UpdateCommitteeAddress"
 )
 
 // MsgClient is the client API for Msg service.
@@ -34,6 +35,7 @@ type MsgClient interface {
 	UpdateParams(ctx context.Context, in *MsgUpdateParams, opts ...grpc.CallOption) (*MsgUpdateParamsResponse, error)
 	CreateStaker(ctx context.Context, in *MsgCreateStaker, opts ...grpc.CallOption) (*MsgCreateStakerResponse, error)
 	SlashStaker(ctx context.Context, in *MsgSlashStaker, opts ...grpc.CallOption) (*MsgSlashStakerResponse, error)
+	UpdateCommitteeAddress(ctx context.Context, in *MsgUpdateCommitteeAddress, opts ...grpc.CallOption) (*MsgUpdateCommitteeAddressResponse, error)
 }
 
 type msgClient struct {
@@ -71,6 +73,15 @@ func (c *msgClient) SlashStaker(ctx context.Context, in *MsgSlashStaker, opts ..
 	return out, nil
 }
 
+func (c *msgClient) UpdateCommitteeAddress(ctx context.Context, in *MsgUpdateCommitteeAddress, opts ...grpc.CallOption) (*MsgUpdateCommitteeAddressResponse, error) {
+	out := new(MsgUpdateCommitteeAddressResponse)
+	err := c.cc.Invoke(ctx, Msg_UpdateCommitteeAddress_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // MsgServer is the server API for Msg service.
 // All implementations must embed UnimplementedMsgServer
 // for forward compatibility
@@ -80,6 +91,7 @@ type MsgServer interface {
 	UpdateParams(context.Context, *MsgUpdateParams) (*MsgUpdateParamsResponse, error)
 	CreateStaker(context.Context, *MsgCreateStaker) (*MsgCreateStakerResponse, error)
 	SlashStaker(context.Context, *MsgSlashStaker) (*MsgSlashStakerResponse, error)
+	UpdateCommitteeAddress(context.Context, *MsgUpdateCommitteeAddress) (*MsgUpdateCommitteeAddressResponse, error)
 	mustEmbedUnimplementedMsgServer()
 }
 
@@ -95,6 +107,9 @@ func (UnimplementedMsgServer) CreateStaker(context.Context, *MsgCreateStaker) (*
 }
 func (UnimplementedMsgServer) SlashStaker(context.Context, *MsgSlashStaker) (*MsgSlashStakerResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SlashStaker not implemented")
+}
+func (UnimplementedMsgServer) UpdateCommitteeAddress(context.Context, *MsgUpdateCommitteeAddress) (*MsgUpdateCommitteeAddressResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateCommitteeAddress not implemented")
 }
 func (UnimplementedMsgServer) mustEmbedUnimplementedMsgServer() {}
 
@@ -163,6 +178,24 @@ func _Msg_SlashStaker_Handler(srv interface{}, ctx context.Context, dec func(int
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Msg_UpdateCommitteeAddress_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgUpdateCommitteeAddress)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MsgServer).UpdateCommitteeAddress(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Msg_UpdateCommitteeAddress_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MsgServer).UpdateCommitteeAddress(ctx, req.(*MsgUpdateCommitteeAddress))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Msg_ServiceDesc is the grpc.ServiceDesc for Msg service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -181,6 +214,10 @@ var Msg_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SlashStaker",
 			Handler:    _Msg_SlashStaker_Handler,
+		},
+		{
+			MethodName: "UpdateCommitteeAddress",
+			Handler:    _Msg_UpdateCommitteeAddress_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
