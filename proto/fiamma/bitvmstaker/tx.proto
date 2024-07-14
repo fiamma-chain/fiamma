@@ -49,7 +49,7 @@ message MsgCreateStakerResponse {}
 message MsgSlashStaker {
   option (cosmos.msg.v1.signer) = "creator";
   string creator       = 1;
-  string staker_adress = 2;
+  string staker_address = 2;
 }
 
 message MsgSlashStakerResponse {}
