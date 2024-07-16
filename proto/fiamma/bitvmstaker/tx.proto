@@ -18,7 +18,7 @@ service Msg {
   // parameters. The authority defaults to the x/gov module account.
   rpc UpdateParams           (MsgUpdateParams          ) returns (MsgUpdateParamsResponse          );
   rpc CreateStaker           (MsgCreateStaker          ) returns (MsgCreateStakerResponse          );
-  rpc SlashStaker            (MsgSlashStaker           ) returns (MsgSlashStakerResponse           );
+  rpc RemoveStaker            (MsgRemoveStaker           ) returns (MsgRemoveStakerResponse           );
   rpc UpdateCommitteeAddress (MsgUpdateCommitteeAddress) returns (MsgUpdateCommitteeAddressResponse);
 }
 // MsgUpdateParams is the Msg/UpdateParams request type.
@@ -47,18 +47,18 @@ message MsgCreateStaker {
 
 message MsgCreateStakerResponse {}
 
-message MsgSlashStaker {
+message MsgRemoveStaker {
   option (cosmos.msg.v1.signer) = "creator";
   string creator        = 1;
   string staker_address = 2;
 }
 
-message MsgSlashStakerResponse {}
+message MsgRemoveStakerResponse {}
 
 message MsgUpdateCommitteeAddress {
   option (cosmos.msg.v1.signer) = "creator";
   string creator             = 1;
-  string newCommitteeAddress = 2;
+  string new_committee_address = 2;
 }
 
 message MsgUpdateCommitteeAddressResponse {}

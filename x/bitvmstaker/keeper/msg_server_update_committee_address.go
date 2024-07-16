@@ -11,8 +11,13 @@ import (
 func (k msgServer) UpdateCommitteeAddress(goCtx context.Context, msg *types.MsgUpdateCommitteeAddress) (*types.MsgUpdateCommitteeAddressResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
-	// TODO: Handling the message
-	_ = ctx
+	committeeAddress := k.GetCommitteeAddress(ctx)
+
+	if msg.Creator != committeeAddress {
+		return nil, types.ErrUnauthorized
+	}
+
+	k.SetCommitteeAddress(ctx, msg.NewCommitteeAddress)
 
 	return &types.MsgUpdateCommitteeAddressResponse{}, nil
 }

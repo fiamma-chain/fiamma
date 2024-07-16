@@ -2,7 +2,6 @@
 package bitvmstaker
 
 import (
-	_ "cosmossdk.io/api/amino"
 	fmt "fmt"
 	runtime "github.com/cosmos/cosmos-proto/runtime"
 	_ "github.com/cosmos/gogoproto/gogoproto"
@@ -15,28 +14,28 @@ import (
 )
 
 var (
-	md_GenesisState                   protoreflect.MessageDescriptor
-	fd_GenesisState_params            protoreflect.FieldDescriptor
-	fd_GenesisState_committee_address protoreflect.FieldDescriptor
+	md_StakerInfo                protoreflect.MessageDescriptor
+	fd_StakerInfo_staker_index   protoreflect.FieldDescriptor
+	fd_StakerInfo_staker_address protoreflect.FieldDescriptor
 )
 
 func init() {
-	file_fiamma_bitvmstaker_genesis_proto_init()
-	md_GenesisState = File_fiamma_bitvmstaker_genesis_proto.Messages().ByName("GenesisState")
-	fd_GenesisState_params = md_GenesisState.Fields().ByName("params")
-	fd_GenesisState_committee_address = md_GenesisState.Fields().ByName("committee_address")
+	file_fiamma_bitvmstaker_bitvmstaker_proto_init()
+	md_StakerInfo = File_fiamma_bitvmstaker_bitvmstaker_proto.Messages().ByName("StakerInfo")
+	fd_StakerInfo_staker_index = md_StakerInfo.Fields().ByName("staker_index")
+	fd_StakerInfo_staker_address = md_StakerInfo.Fields().ByName("staker_address")
 }
 
-var _ protoreflect.Message = (*fastReflection_GenesisState)(nil)
+var _ protoreflect.Message = (*fastReflection_StakerInfo)(nil)
 
-type fastReflection_GenesisState GenesisState
+type fastReflection_StakerInfo StakerInfo
 
-func (x *GenesisState) ProtoReflect() protoreflect.Message {
-	return (*fastReflection_GenesisState)(x)
+func (x *StakerInfo) ProtoReflect() protoreflect.Message {
+	return (*fastReflection_StakerInfo)(x)
 }
 
-func (x *GenesisState) slowProtoReflect() protoreflect.Message {
-	mi := &file_fiamma_bitvmstaker_genesis_proto_msgTypes[0]
+func (x *StakerInfo) slowProtoReflect() protoreflect.Message {
+	mi := &file_fiamma_bitvmstaker_bitvmstaker_proto_msgTypes[0]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -47,43 +46,43 @@ func (x *GenesisState) slowProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-var _fastReflection_GenesisState_messageType fastReflection_GenesisState_messageType
-var _ protoreflect.MessageType = fastReflection_GenesisState_messageType{}
+var _fastReflection_StakerInfo_messageType fastReflection_StakerInfo_messageType
+var _ protoreflect.MessageType = fastReflection_StakerInfo_messageType{}
 
-type fastReflection_GenesisState_messageType struct{}
+type fastReflection_StakerInfo_messageType struct{}
 
-func (x fastReflection_GenesisState_messageType) Zero() protoreflect.Message {
-	return (*fastReflection_GenesisState)(nil)
+func (x fastReflection_StakerInfo_messageType) Zero() protoreflect.Message {
+	return (*fastReflection_StakerInfo)(nil)
 }
-func (x fastReflection_GenesisState_messageType) New() protoreflect.Message {
-	return new(fastReflection_GenesisState)
+func (x fastReflection_StakerInfo_messageType) New() protoreflect.Message {
+	return new(fastReflection_StakerInfo)
 }
-func (x fastReflection_GenesisState_messageType) Descriptor() protoreflect.MessageDescriptor {
-	return md_GenesisState
+func (x fastReflection_StakerInfo_messageType) Descriptor() protoreflect.MessageDescriptor {
+	return md_StakerInfo
 }
 
 // Descriptor returns message descriptor, which contains only the protobuf
 // type information for the message.
-func (x *fastReflection_GenesisState) Descriptor() protoreflect.MessageDescriptor {
-	return md_GenesisState
+func (x *fastReflection_StakerInfo) Descriptor() protoreflect.MessageDescriptor {
+	return md_StakerInfo
 }
 
 // Type returns the message type, which encapsulates both Go and protobuf
 // type information. If the Go type information is not needed,
 // it is recommended that the message descriptor be used instead.
-func (x *fastReflection_GenesisState) Type() protoreflect.MessageType {
-	return _fastReflection_GenesisState_messageType
+func (x *fastReflection_StakerInfo) Type() protoreflect.MessageType {
+	return _fastReflection_StakerInfo_messageType
 }
 
 // New returns a newly allocated and mutable empty message.
-func (x *fastReflection_GenesisState) New() protoreflect.Message {
-	return new(fastReflection_GenesisState)
+func (x *fastReflection_StakerInfo) New() protoreflect.Message {
+	return new(fastReflection_StakerInfo)
 }
 
 // Interface unwraps the message reflection interface and
 // returns the underlying ProtoMessage interface.
-func (x *fastReflection_GenesisState) Interface() protoreflect.ProtoMessage {
-	return (*GenesisState)(x)
+func (x *fastReflection_StakerInfo) Interface() protoreflect.ProtoMessage {
+	return (*StakerInfo)(x)
 }
 
 // Range iterates over every populated field in an undefined order,
@@ -91,16 +90,16 @@ func (x *fastReflection_GenesisState) Interface() protoreflect.ProtoMessage {
 // Range returns immediately if f returns false.
 // While iterating, mutating operations may only be performed
 // on the current field descriptor.
-func (x *fastReflection_GenesisState) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
-	if x.Params != nil {
-		value := protoreflect.ValueOfMessage(x.Params.ProtoReflect())
-		if !f(fd_GenesisState_params, value) {
+func (x *fastReflection_StakerInfo) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
+	if x.StakerIndex != uint64(0) {
+		value := protoreflect.ValueOfUint64(x.StakerIndex)
+		if !f(fd_StakerInfo_staker_index, value) {
 			return
 		}
 	}
-	if x.CommitteeAddress != "" {
-		value := protoreflect.ValueOfString(x.CommitteeAddress)
-		if !f(fd_GenesisState_committee_address, value) {
+	if x.StakerAddress != "" {
+		value := protoreflect.ValueOfString(x.StakerAddress)
+		if !f(fd_StakerInfo_staker_address, value) {
 			return
 		}
 	}
@@ -117,17 +116,17 @@ func (x *fastReflection_GenesisState) Range(f func(protoreflect.FieldDescriptor,
 // In other cases (aside from the nullable cases above),
 // a proto3 scalar field is populated if it contains a non-zero value, and
 // a repeated field is populated if it is non-empty.
-func (x *fastReflection_GenesisState) Has(fd protoreflect.FieldDescriptor) bool {
+func (x *fastReflection_StakerInfo) Has(fd protoreflect.FieldDescriptor) bool {
 	switch fd.FullName() {
-	case "fiamma.bitvmstaker.GenesisState.params":
-		return x.Params != nil
-	case "fiamma.bitvmstaker.GenesisState.committee_address":
-		return x.CommitteeAddress != ""
+	case "fiamma.bitvmstaker.StakerInfo.staker_index":
+		return x.StakerIndex != uint64(0)
+	case "fiamma.bitvmstaker.StakerInfo.staker_address":
+		return x.StakerAddress != ""
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.bitvmstaker.GenesisState"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.bitvmstaker.StakerInfo"))
 		}
-		panic(fmt.Errorf("message fiamma.bitvmstaker.GenesisState does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message fiamma.bitvmstaker.StakerInfo does not contain field %s", fd.FullName()))
 	}
 }
 
@@ -137,17 +136,17 @@ func (x *fastReflection_GenesisState) Has(fd protoreflect.FieldDescriptor) bool 
 // associated with the given field number.
 //
 // Clear is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_GenesisState) Clear(fd protoreflect.FieldDescriptor) {
+func (x *fastReflection_StakerInfo) Clear(fd protoreflect.FieldDescriptor) {
 	switch fd.FullName() {
-	case "fiamma.bitvmstaker.GenesisState.params":
-		x.Params = nil
-	case "fiamma.bitvmstaker.GenesisState.committee_address":
-		x.CommitteeAddress = ""
+	case "fiamma.bitvmstaker.StakerInfo.staker_index":
+		x.StakerIndex = uint64(0)
+	case "fiamma.bitvmstaker.StakerInfo.staker_address":
+		x.StakerAddress = ""
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.bitvmstaker.GenesisState"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.bitvmstaker.StakerInfo"))
 		}
-		panic(fmt.Errorf("message fiamma.bitvmstaker.GenesisState does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message fiamma.bitvmstaker.StakerInfo does not contain field %s", fd.FullName()))
 	}
 }
 
@@ -157,19 +156,19 @@ func (x *fastReflection_GenesisState) Clear(fd protoreflect.FieldDescriptor) {
 // the default value of a bytes scalar is guaranteed to be a copy.
 // For unpopulated composite types, it returns an empty, read-only view
 // of the value; to obtain a mutable reference, use Mutable.
-func (x *fastReflection_GenesisState) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
+func (x *fastReflection_StakerInfo) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
 	switch descriptor.FullName() {
-	case "fiamma.bitvmstaker.GenesisState.params":
-		value := x.Params
-		return protoreflect.ValueOfMessage(value.ProtoReflect())
-	case "fiamma.bitvmstaker.GenesisState.committee_address":
-		value := x.CommitteeAddress
+	case "fiamma.bitvmstaker.StakerInfo.staker_index":
+		value := x.StakerIndex
+		return protoreflect.ValueOfUint64(value)
+	case "fiamma.bitvmstaker.StakerInfo.staker_address":
+		value := x.StakerAddress
 		return protoreflect.ValueOfString(value)
 	default:
 		if descriptor.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.bitvmstaker.GenesisState"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.bitvmstaker.StakerInfo"))
 		}
-		panic(fmt.Errorf("message fiamma.bitvmstaker.GenesisState does not contain field %s", descriptor.FullName()))
+		panic(fmt.Errorf("message fiamma.bitvmstaker.StakerInfo does not contain field %s", descriptor.FullName()))
 	}
 }
 
@@ -183,17 +182,17 @@ func (x *fastReflection_GenesisState) Get(descriptor protoreflect.FieldDescripto
 // empty, read-only value, then it panics.
 //
 // Set is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_GenesisState) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
+func (x *fastReflection_StakerInfo) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
 	switch fd.FullName() {
-	case "fiamma.bitvmstaker.GenesisState.params":
-		x.Params = value.Message().Interface().(*Params)
-	case "fiamma.bitvmstaker.GenesisState.committee_address":
-		x.CommitteeAddress = value.Interface().(string)
+	case "fiamma.bitvmstaker.StakerInfo.staker_index":
+		x.StakerIndex = value.Uint()
+	case "fiamma.bitvmstaker.StakerInfo.staker_address":
+		x.StakerAddress = value.Interface().(string)
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.bitvmstaker.GenesisState"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.bitvmstaker.StakerInfo"))
 		}
-		panic(fmt.Errorf("message fiamma.bitvmstaker.GenesisState does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message fiamma.bitvmstaker.StakerInfo does not contain field %s", fd.FullName()))
 	}
 }
 
@@ -207,48 +206,44 @@ func (x *fastReflection_GenesisState) Set(fd protoreflect.FieldDescriptor, value
 // It panics if the field does not contain a composite type.
 //
 // Mutable is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_GenesisState) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
+func (x *fastReflection_StakerInfo) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "fiamma.bitvmstaker.GenesisState.params":
-		if x.Params == nil {
-			x.Params = new(Params)
-		}
-		return protoreflect.ValueOfMessage(x.Params.ProtoReflect())
-	case "fiamma.bitvmstaker.GenesisState.committee_address":
-		panic(fmt.Errorf("field committee_address of message fiamma.bitvmstaker.GenesisState is not mutable"))
+	case "fiamma.bitvmstaker.StakerInfo.staker_index":
+		panic(fmt.Errorf("field staker_index of message fiamma.bitvmstaker.StakerInfo is not mutable"))
+	case "fiamma.bitvmstaker.StakerInfo.staker_address":
+		panic(fmt.Errorf("field staker_address of message fiamma.bitvmstaker.StakerInfo is not mutable"))
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.bitvmstaker.GenesisState"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.bitvmstaker.StakerInfo"))
 		}
-		panic(fmt.Errorf("message fiamma.bitvmstaker.GenesisState does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message fiamma.bitvmstaker.StakerInfo does not contain field %s", fd.FullName()))
 	}
 }
 
 // NewField returns a new value that is assignable to the field
 // for the given descriptor. For scalars, this returns the default value.
 // For lists, maps, and messages, this returns a new, empty, mutable value.
-func (x *fastReflection_GenesisState) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
+func (x *fastReflection_StakerInfo) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "fiamma.bitvmstaker.GenesisState.params":
-		m := new(Params)
-		return protoreflect.ValueOfMessage(m.ProtoReflect())
-	case "fiamma.bitvmstaker.GenesisState.committee_address":
+	case "fiamma.bitvmstaker.StakerInfo.staker_index":
+		return protoreflect.ValueOfUint64(uint64(0))
+	case "fiamma.bitvmstaker.StakerInfo.staker_address":
 		return protoreflect.ValueOfString("")
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.bitvmstaker.GenesisState"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.bitvmstaker.StakerInfo"))
 		}
-		panic(fmt.Errorf("message fiamma.bitvmstaker.GenesisState does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message fiamma.bitvmstaker.StakerInfo does not contain field %s", fd.FullName()))
 	}
 }
 
 // WhichOneof reports which field within the oneof is populated,
 // returning nil if none are populated.
 // It panics if the oneof descriptor does not belong to this message.
-func (x *fastReflection_GenesisState) WhichOneof(d protoreflect.OneofDescriptor) protoreflect.FieldDescriptor {
+func (x *fastReflection_StakerInfo) WhichOneof(d protoreflect.OneofDescriptor) protoreflect.FieldDescriptor {
 	switch d.FullName() {
 	default:
-		panic(fmt.Errorf("%s is not a oneof field in fiamma.bitvmstaker.GenesisState", d.FullName()))
+		panic(fmt.Errorf("%s is not a oneof field in fiamma.bitvmstaker.StakerInfo", d.FullName()))
 	}
 	panic("unreachable")
 }
@@ -256,7 +251,7 @@ func (x *fastReflection_GenesisState) WhichOneof(d protoreflect.OneofDescriptor)
 // GetUnknown retrieves the entire list of unknown fields.
 // The caller may only mutate the contents of the RawFields
 // if the mutated bytes are stored back into the message with SetUnknown.
-func (x *fastReflection_GenesisState) GetUnknown() protoreflect.RawFields {
+func (x *fastReflection_StakerInfo) GetUnknown() protoreflect.RawFields {
 	return x.unknownFields
 }
 
@@ -267,7 +262,7 @@ func (x *fastReflection_GenesisState) GetUnknown() protoreflect.RawFields {
 // An empty RawFields may be passed to clear the fields.
 //
 // SetUnknown is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_GenesisState) SetUnknown(fields protoreflect.RawFields) {
+func (x *fastReflection_StakerInfo) SetUnknown(fields protoreflect.RawFields) {
 	x.unknownFields = fields
 }
 
@@ -279,7 +274,7 @@ func (x *fastReflection_GenesisState) SetUnknown(fields protoreflect.RawFields) 
 // message type, but the details are implementation dependent.
 // Validity is not part of the protobuf data model, and may not
 // be preserved in marshaling or other operations.
-func (x *fastReflection_GenesisState) IsValid() bool {
+func (x *fastReflection_StakerInfo) IsValid() bool {
 	return x != nil
 }
 
@@ -289,9 +284,9 @@ func (x *fastReflection_GenesisState) IsValid() bool {
 // The returned methods type is identical to
 // "google.golang.org/protobuf/runtime/protoiface".Methods.
 // Consult the protoiface package documentation for details.
-func (x *fastReflection_GenesisState) ProtoMethods() *protoiface.Methods {
+func (x *fastReflection_StakerInfo) ProtoMethods() *protoiface.Methods {
 	size := func(input protoiface.SizeInput) protoiface.SizeOutput {
-		x := input.Message.Interface().(*GenesisState)
+		x := input.Message.Interface().(*StakerInfo)
 		if x == nil {
 			return protoiface.SizeOutput{
 				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
@@ -303,11 +298,10 @@ func (x *fastReflection_GenesisState) ProtoMethods() *protoiface.Methods {
 		var n int
 		var l int
 		_ = l
-		if x.Params != nil {
-			l = options.Size(x.Params)
-			n += 1 + l + runtime.Sov(uint64(l))
+		if x.StakerIndex != 0 {
+			n += 1 + runtime.Sov(uint64(x.StakerIndex))
 		}
-		l = len(x.CommitteeAddress)
+		l = len(x.StakerAddress)
 		if l > 0 {
 			n += 1 + l + runtime.Sov(uint64(l))
 		}
@@ -321,7 +315,7 @@ func (x *fastReflection_GenesisState) ProtoMethods() *protoiface.Methods {
 	}
 
 	marshal := func(input protoiface.MarshalInput) (protoiface.MarshalOutput, error) {
-		x := input.Message.Interface().(*GenesisState)
+		x := input.Message.Interface().(*StakerInfo)
 		if x == nil {
 			return protoiface.MarshalOutput{
 				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
@@ -340,26 +334,17 @@ func (x *fastReflection_GenesisState) ProtoMethods() *protoiface.Methods {
 			i -= len(x.unknownFields)
 			copy(dAtA[i:], x.unknownFields)
 		}
-		if len(x.CommitteeAddress) > 0 {
-			i -= len(x.CommitteeAddress)
-			copy(dAtA[i:], x.CommitteeAddress)
-			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.CommitteeAddress)))
+		if len(x.StakerAddress) > 0 {
+			i -= len(x.StakerAddress)
+			copy(dAtA[i:], x.StakerAddress)
+			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.StakerAddress)))
 			i--
 			dAtA[i] = 0x12
 		}
-		if x.Params != nil {
-			encoded, err := options.Marshal(x.Params)
-			if err != nil {
-				return protoiface.MarshalOutput{
-					NoUnkeyedLiterals: input.NoUnkeyedLiterals,
-					Buf:               input.Buf,
-				}, err
-			}
-			i -= len(encoded)
-			copy(dAtA[i:], encoded)
-			i = runtime.EncodeVarint(dAtA, i, uint64(len(encoded)))
+		if x.StakerIndex != 0 {
+			i = runtime.EncodeVarint(dAtA, i, uint64(x.StakerIndex))
 			i--
-			dAtA[i] = 0xa
+			dAtA[i] = 0x8
 		}
 		if input.Buf != nil {
 			input.Buf = append(input.Buf, dAtA...)
@@ -372,7 +357,7 @@ func (x *fastReflection_GenesisState) ProtoMethods() *protoiface.Methods {
 		}, nil
 	}
 	unmarshal := func(input protoiface.UnmarshalInput) (protoiface.UnmarshalOutput, error) {
-		x := input.Message.Interface().(*GenesisState)
+		x := input.Message.Interface().(*StakerInfo)
 		if x == nil {
 			return protoiface.UnmarshalOutput{
 				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
@@ -404,17 +389,17 @@ func (x *fastReflection_GenesisState) ProtoMethods() *protoiface.Methods {
 			fieldNum := int32(wire >> 3)
 			wireType := int(wire & 0x7)
 			if wireType == 4 {
-				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: GenesisState: wiretype end group for non-group")
+				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: StakerInfo: wiretype end group for non-group")
 			}
 			if fieldNum <= 0 {
-				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: GenesisState: illegal tag %d (wire type %d)", fieldNum, wire)
+				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: StakerInfo: illegal tag %d (wire type %d)", fieldNum, wire)
 			}
 			switch fieldNum {
 			case 1:
-				if wireType != 2 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Params", wireType)
+				if wireType != 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field StakerIndex", wireType)
 				}
-				var msglen int
+				x.StakerIndex = 0
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
 						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
@@ -424,31 +409,14 @@ func (x *fastReflection_GenesisState) ProtoMethods() *protoiface.Methods {
 					}
 					b := dAtA[iNdEx]
 					iNdEx++
-					msglen |= int(b&0x7F) << shift
+					x.StakerIndex |= uint64(b&0x7F) << shift
 					if b < 0x80 {
 						break
 					}
 				}
-				if msglen < 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
-				}
-				postIndex := iNdEx + msglen
-				if postIndex < 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
-				}
-				if postIndex > l {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
-				}
-				if x.Params == nil {
-					x.Params = &Params{}
-				}
-				if err := options.Unmarshal(dAtA[iNdEx:postIndex], x.Params); err != nil {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, err
-				}
-				iNdEx = postIndex
 			case 2:
 				if wireType != 2 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field CommitteeAddress", wireType)
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field StakerAddress", wireType)
 				}
 				var stringLen uint64
 				for shift := uint(0); ; shift += 7 {
@@ -476,7 +444,7 @@ func (x *fastReflection_GenesisState) ProtoMethods() *protoiface.Methods {
 				if postIndex > l {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
 				}
-				x.CommitteeAddress = string(dAtA[iNdEx:postIndex])
+				x.StakerAddress = string(dAtA[iNdEx:postIndex])
 				iNdEx = postIndex
 			default:
 				iNdEx = preIndex
@@ -517,7 +485,7 @@ func (x *fastReflection_GenesisState) ProtoMethods() *protoiface.Methods {
 // versions:
 // 	protoc-gen-go v1.27.0
 // 	protoc        (unknown)
-// source: fiamma/bitvmstaker/genesis.proto
+// source: fiamma/bitvmstaker/bitvmstaker.proto
 
 const (
 	// Verify that this generated code is sufficiently up-to-date.
@@ -526,72 +494,66 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// GenesisState defines the bitvmstaker module's genesis state.
-type GenesisState struct {
+// StakerInfo is the data structure for the BitVM staker information
+type StakerInfo struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// params defines all the parameters of the module.
-	Params           *Params `protobuf:"bytes,1,opt,name=params,proto3" json:"params,omitempty"`
-	CommitteeAddress string  `protobuf:"bytes,2,opt,name=committee_address,json=committeeAddress,proto3" json:"committee_address,omitempty"`
+	StakerIndex   uint64 `protobuf:"varint,1,opt,name=staker_index,json=stakerIndex,proto3" json:"staker_index,omitempty"`
+	StakerAddress string `protobuf:"bytes,2,opt,name=staker_address,json=stakerAddress,proto3" json:"staker_address,omitempty"`
 }
 
-func (x *GenesisState) Reset() {
-	*x = GenesisState{}
+func (x *StakerInfo) Reset() {
+	*x = StakerInfo{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_fiamma_bitvmstaker_genesis_proto_msgTypes[0]
+		mi := &file_fiamma_bitvmstaker_bitvmstaker_proto_msgTypes[0]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
 }
 
-func (x *GenesisState) String() string {
+func (x *StakerInfo) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GenesisState) ProtoMessage() {}
+func (*StakerInfo) ProtoMessage() {}
 
-// Deprecated: Use GenesisState.ProtoReflect.Descriptor instead.
-func (*GenesisState) Descriptor() ([]byte, []int) {
-	return file_fiamma_bitvmstaker_genesis_proto_rawDescGZIP(), []int{0}
+// Deprecated: Use StakerInfo.ProtoReflect.Descriptor instead.
+func (*StakerInfo) Descriptor() ([]byte, []int) {
+	return file_fiamma_bitvmstaker_bitvmstaker_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *GenesisState) GetParams() *Params {
+func (x *StakerInfo) GetStakerIndex() uint64 {
 	if x != nil {
-		return x.Params
+		return x.StakerIndex
 	}
-	return nil
+	return 0
 }
 
-func (x *GenesisState) GetCommitteeAddress() string {
+func (x *StakerInfo) GetStakerAddress() string {
 	if x != nil {
-		return x.CommitteeAddress
+		return x.StakerAddress
 	}
 	return ""
 }
 
-var File_fiamma_bitvmstaker_genesis_proto protoreflect.FileDescriptor
+var File_fiamma_bitvmstaker_bitvmstaker_proto protoreflect.FileDescriptor
 
-var file_fiamma_bitvmstaker_genesis_proto_rawDesc = []byte{
-	0x0a, 0x20, 0x66, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x2f, 0x62, 0x69, 0x74, 0x76, 0x6d, 0x73, 0x74,
-	0x61, 0x6b, 0x65, 0x72, 0x2f, 0x67, 0x65, 0x6e, 0x65, 0x73, 0x69, 0x73, 0x2e, 0x70, 0x72, 0x6f,
-	0x74, 0x6f, 0x12, 0x12, 0x66, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x2e, 0x62, 0x69, 0x74, 0x76, 0x6d,
-	0x73, 0x74, 0x61, 0x6b, 0x65, 0x72, 0x1a, 0x11, 0x61, 0x6d, 0x69, 0x6e, 0x6f, 0x2f, 0x61, 0x6d,
-	0x69, 0x6e, 0x6f, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x14, 0x67, 0x6f, 0x67, 0x6f, 0x70,
-	0x72, 0x6f, 0x74, 0x6f, 0x2f, 0x67, 0x6f, 0x67, 0x6f, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a,
-	0x1f, 0x66, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x2f, 0x62, 0x69, 0x74, 0x76, 0x6d, 0x73, 0x74, 0x61,
-	0x6b, 0x65, 0x72, 0x2f, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f,
-	0x22, 0x7a, 0x0a, 0x0c, 0x47, 0x65, 0x6e, 0x65, 0x73, 0x69, 0x73, 0x53, 0x74, 0x61, 0x74, 0x65,
-	0x12, 0x3d, 0x0a, 0x06, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b,
-	0x32, 0x1a, 0x2e, 0x66, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x2e, 0x62, 0x69, 0x74, 0x76, 0x6d, 0x73,
-	0x74, 0x61, 0x6b, 0x65, 0x72, 0x2e, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x42, 0x09, 0xc8, 0xde,
-	0x1f, 0x00, 0xa8, 0xe7, 0xb0, 0x2a, 0x01, 0x52, 0x06, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x12,
-	0x2b, 0x0a, 0x11, 0x63, 0x6f, 0x6d, 0x6d, 0x69, 0x74, 0x74, 0x65, 0x65, 0x5f, 0x61, 0x64, 0x64,
-	0x72, 0x65, 0x73, 0x73, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x10, 0x63, 0x6f, 0x6d, 0x6d,
-	0x69, 0x74, 0x74, 0x65, 0x65, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x42, 0xb4, 0x01, 0x0a,
-	0x16, 0x63, 0x6f, 0x6d, 0x2e, 0x66, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x2e, 0x62, 0x69, 0x74, 0x76,
-	0x6d, 0x73, 0x74, 0x61, 0x6b, 0x65, 0x72, 0x42, 0x0c, 0x47, 0x65, 0x6e, 0x65, 0x73, 0x69, 0x73,
+var file_fiamma_bitvmstaker_bitvmstaker_proto_rawDesc = []byte{
+	0x0a, 0x24, 0x66, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x2f, 0x62, 0x69, 0x74, 0x76, 0x6d, 0x73, 0x74,
+	0x61, 0x6b, 0x65, 0x72, 0x2f, 0x62, 0x69, 0x74, 0x76, 0x6d, 0x73, 0x74, 0x61, 0x6b, 0x65, 0x72,
+	0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x12, 0x66, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x2e, 0x62,
+	0x69, 0x74, 0x76, 0x6d, 0x73, 0x74, 0x61, 0x6b, 0x65, 0x72, 0x1a, 0x14, 0x67, 0x6f, 0x67, 0x6f,
+	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2f, 0x67, 0x6f, 0x67, 0x6f, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f,
+	0x22, 0x56, 0x0a, 0x0a, 0x53, 0x74, 0x61, 0x6b, 0x65, 0x72, 0x49, 0x6e, 0x66, 0x6f, 0x12, 0x21,
+	0x0a, 0x0c, 0x73, 0x74, 0x61, 0x6b, 0x65, 0x72, 0x5f, 0x69, 0x6e, 0x64, 0x65, 0x78, 0x18, 0x01,
+	0x20, 0x01, 0x28, 0x04, 0x52, 0x0b, 0x73, 0x74, 0x61, 0x6b, 0x65, 0x72, 0x49, 0x6e, 0x64, 0x65,
+	0x78, 0x12, 0x25, 0x0a, 0x0e, 0x73, 0x74, 0x61, 0x6b, 0x65, 0x72, 0x5f, 0x61, 0x64, 0x64, 0x72,
+	0x65, 0x73, 0x73, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0d, 0x73, 0x74, 0x61, 0x6b, 0x65,
+	0x72, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x42, 0xb8, 0x01, 0x0a, 0x16, 0x63, 0x6f, 0x6d,
+	0x2e, 0x66, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x2e, 0x62, 0x69, 0x74, 0x76, 0x6d, 0x73, 0x74, 0x61,
+	0x6b, 0x65, 0x72, 0x42, 0x10, 0x42, 0x69, 0x74, 0x76, 0x6d, 0x73, 0x74, 0x61, 0x6b, 0x65, 0x72,
 	0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x23, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x73,
 	0x64, 0x6b, 0x2e, 0x69, 0x6f, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x66, 0x69, 0x61, 0x6d, 0x6d, 0x61,
 	0x2f, 0x62, 0x69, 0x74, 0x76, 0x6d, 0x73, 0x74, 0x61, 0x6b, 0x65, 0x72, 0xa2, 0x02, 0x03, 0x46,
@@ -605,40 +567,37 @@ var file_fiamma_bitvmstaker_genesis_proto_rawDesc = []byte{
 }
 
 var (
-	file_fiamma_bitvmstaker_genesis_proto_rawDescOnce sync.Once
-	file_fiamma_bitvmstaker_genesis_proto_rawDescData = file_fiamma_bitvmstaker_genesis_proto_rawDesc
+	file_fiamma_bitvmstaker_bitvmstaker_proto_rawDescOnce sync.Once
+	file_fiamma_bitvmstaker_bitvmstaker_proto_rawDescData = file_fiamma_bitvmstaker_bitvmstaker_proto_rawDesc
 )
 
-func file_fiamma_bitvmstaker_genesis_proto_rawDescGZIP() []byte {
-	file_fiamma_bitvmstaker_genesis_proto_rawDescOnce.Do(func() {
-		file_fiamma_bitvmstaker_genesis_proto_rawDescData = protoimpl.X.CompressGZIP(file_fiamma_bitvmstaker_genesis_proto_rawDescData)
+func file_fiamma_bitvmstaker_bitvmstaker_proto_rawDescGZIP() []byte {
+	file_fiamma_bitvmstaker_bitvmstaker_proto_rawDescOnce.Do(func() {
+		file_fiamma_bitvmstaker_bitvmstaker_proto_rawDescData = protoimpl.X.CompressGZIP(file_fiamma_bitvmstaker_bitvmstaker_proto_rawDescData)
 	})
-	return file_fiamma_bitvmstaker_genesis_proto_rawDescData
+	return file_fiamma_bitvmstaker_bitvmstaker_proto_rawDescData
 }
 
-var file_fiamma_bitvmstaker_genesis_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
-var file_fiamma_bitvmstaker_genesis_proto_goTypes = []interface{}{
-	(*GenesisState)(nil), // 0: fiamma.bitvmstaker.GenesisState
-	(*Params)(nil),       // 1: fiamma.bitvmstaker.Params
+var file_fiamma_bitvmstaker_bitvmstaker_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
+var file_fiamma_bitvmstaker_bitvmstaker_proto_goTypes = []interface{}{
+	(*StakerInfo)(nil), // 0: fiamma.bitvmstaker.StakerInfo
 }
-var file_fiamma_bitvmstaker_genesis_proto_depIdxs = []int32{
-	1, // 0: fiamma.bitvmstaker.GenesisState.params:type_name -> fiamma.bitvmstaker.Params
-	1, // [1:1] is the sub-list for method output_type
-	1, // [1:1] is the sub-list for method input_type
-	1, // [1:1] is the sub-list for extension type_name
-	1, // [1:1] is the sub-list for extension extendee
-	0, // [0:1] is the sub-list for field type_name
+var file_fiamma_bitvmstaker_bitvmstaker_proto_depIdxs = []int32{
+	0, // [0:0] is the sub-list for method output_type
+	0, // [0:0] is the sub-list for method input_type
+	0, // [0:0] is the sub-list for extension type_name
+	0, // [0:0] is the sub-list for extension extendee
+	0, // [0:0] is the sub-list for field type_name
 }
 
-func init() { file_fiamma_bitvmstaker_genesis_proto_init() }
-func file_fiamma_bitvmstaker_genesis_proto_init() {
-	if File_fiamma_bitvmstaker_genesis_proto != nil {
+func init() { file_fiamma_bitvmstaker_bitvmstaker_proto_init() }
+func file_fiamma_bitvmstaker_bitvmstaker_proto_init() {
+	if File_fiamma_bitvmstaker_bitvmstaker_proto != nil {
 		return
 	}
-	file_fiamma_bitvmstaker_params_proto_init()
 	if !protoimpl.UnsafeEnabled {
-		file_fiamma_bitvmstaker_genesis_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GenesisState); i {
+		file_fiamma_bitvmstaker_bitvmstaker_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*StakerInfo); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -654,18 +613,18 @@ func file_fiamma_bitvmstaker_genesis_proto_init() {
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: file_fiamma_bitvmstaker_genesis_proto_rawDesc,
+			RawDescriptor: file_fiamma_bitvmstaker_bitvmstaker_proto_rawDesc,
 			NumEnums:      0,
 			NumMessages:   1,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
-		GoTypes:           file_fiamma_bitvmstaker_genesis_proto_goTypes,
-		DependencyIndexes: file_fiamma_bitvmstaker_genesis_proto_depIdxs,
-		MessageInfos:      file_fiamma_bitvmstaker_genesis_proto_msgTypes,
+		GoTypes:           file_fiamma_bitvmstaker_bitvmstaker_proto_goTypes,
+		DependencyIndexes: file_fiamma_bitvmstaker_bitvmstaker_proto_depIdxs,
+		MessageInfos:      file_fiamma_bitvmstaker_bitvmstaker_proto_msgTypes,
 	}.Build()
-	File_fiamma_bitvmstaker_genesis_proto = out.File
-	file_fiamma_bitvmstaker_genesis_proto_rawDesc = nil
-	file_fiamma_bitvmstaker_genesis_proto_goTypes = nil
-	file_fiamma_bitvmstaker_genesis_proto_depIdxs = nil
+	File_fiamma_bitvmstaker_bitvmstaker_proto = out.File
+	file_fiamma_bitvmstaker_bitvmstaker_proto_rawDesc = nil
+	file_fiamma_bitvmstaker_bitvmstaker_proto_goTypes = nil
+	file_fiamma_bitvmstaker_bitvmstaker_proto_depIdxs = nil
 }

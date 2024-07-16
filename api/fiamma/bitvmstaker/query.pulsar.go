@@ -2,19 +2,18 @@
 package bitvmstaker
 
 import (
-	fmt "fmt"
-	io "io"
-	reflect "reflect"
-	sync "sync"
-
 	_ "cosmossdk.io/api/amino"
 	v1beta1 "cosmossdk.io/api/cosmos/base/query/v1beta1"
+	fmt "fmt"
 	runtime "github.com/cosmos/cosmos-proto/runtime"
 	_ "github.com/cosmos/gogoproto/gogoproto"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoiface "google.golang.org/protobuf/runtime/protoiface"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	io "io"
+	reflect "reflect"
+	sync "sync"
 )
 
 var (
@@ -809,25 +808,25 @@ func (x *fastReflection_QueryParamsResponse) ProtoMethods() *protoiface.Methods 
 }
 
 var (
-	md_QueryListStakerAddressesRequest            protoreflect.MessageDescriptor
-	fd_QueryListStakerAddressesRequest_pagination protoreflect.FieldDescriptor
+	md_QueryAllStakerInfoRequest            protoreflect.MessageDescriptor
+	fd_QueryAllStakerInfoRequest_pagination protoreflect.FieldDescriptor
 )
 
 func init() {
 	file_fiamma_bitvmstaker_query_proto_init()
-	md_QueryListStakerAddressesRequest = File_fiamma_bitvmstaker_query_proto.Messages().ByName("QueryListStakerAddressesRequest")
-	fd_QueryListStakerAddressesRequest_pagination = md_QueryListStakerAddressesRequest.Fields().ByName("pagination")
+	md_QueryAllStakerInfoRequest = File_fiamma_bitvmstaker_query_proto.Messages().ByName("QueryAllStakerInfoRequest")
+	fd_QueryAllStakerInfoRequest_pagination = md_QueryAllStakerInfoRequest.Fields().ByName("pagination")
 }
 
-var _ protoreflect.Message = (*fastReflection_QueryListStakerAddressesRequest)(nil)
+var _ protoreflect.Message = (*fastReflection_QueryAllStakerInfoRequest)(nil)
 
-type fastReflection_QueryListStakerAddressesRequest QueryListStakerAddressesRequest
+type fastReflection_QueryAllStakerInfoRequest QueryAllStakerInfoRequest
 
-func (x *QueryListStakerAddressesRequest) ProtoReflect() protoreflect.Message {
-	return (*fastReflection_QueryListStakerAddressesRequest)(x)
+func (x *QueryAllStakerInfoRequest) ProtoReflect() protoreflect.Message {
+	return (*fastReflection_QueryAllStakerInfoRequest)(x)
 }
 
-func (x *QueryListStakerAddressesRequest) slowProtoReflect() protoreflect.Message {
+func (x *QueryAllStakerInfoRequest) slowProtoReflect() protoreflect.Message {
 	mi := &file_fiamma_bitvmstaker_query_proto_msgTypes[2]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -839,43 +838,43 @@ func (x *QueryListStakerAddressesRequest) slowProtoReflect() protoreflect.Messag
 	return mi.MessageOf(x)
 }
 
-var _fastReflection_QueryListStakerAddressesRequest_messageType fastReflection_QueryListStakerAddressesRequest_messageType
-var _ protoreflect.MessageType = fastReflection_QueryListStakerAddressesRequest_messageType{}
+var _fastReflection_QueryAllStakerInfoRequest_messageType fastReflection_QueryAllStakerInfoRequest_messageType
+var _ protoreflect.MessageType = fastReflection_QueryAllStakerInfoRequest_messageType{}
 
-type fastReflection_QueryListStakerAddressesRequest_messageType struct{}
+type fastReflection_QueryAllStakerInfoRequest_messageType struct{}
 
-func (x fastReflection_QueryListStakerAddressesRequest_messageType) Zero() protoreflect.Message {
-	return (*fastReflection_QueryListStakerAddressesRequest)(nil)
+func (x fastReflection_QueryAllStakerInfoRequest_messageType) Zero() protoreflect.Message {
+	return (*fastReflection_QueryAllStakerInfoRequest)(nil)
 }
-func (x fastReflection_QueryListStakerAddressesRequest_messageType) New() protoreflect.Message {
-	return new(fastReflection_QueryListStakerAddressesRequest)
+func (x fastReflection_QueryAllStakerInfoRequest_messageType) New() protoreflect.Message {
+	return new(fastReflection_QueryAllStakerInfoRequest)
 }
-func (x fastReflection_QueryListStakerAddressesRequest_messageType) Descriptor() protoreflect.MessageDescriptor {
-	return md_QueryListStakerAddressesRequest
+func (x fastReflection_QueryAllStakerInfoRequest_messageType) Descriptor() protoreflect.MessageDescriptor {
+	return md_QueryAllStakerInfoRequest
 }
 
 // Descriptor returns message descriptor, which contains only the protobuf
 // type information for the message.
-func (x *fastReflection_QueryListStakerAddressesRequest) Descriptor() protoreflect.MessageDescriptor {
-	return md_QueryListStakerAddressesRequest
+func (x *fastReflection_QueryAllStakerInfoRequest) Descriptor() protoreflect.MessageDescriptor {
+	return md_QueryAllStakerInfoRequest
 }
 
 // Type returns the message type, which encapsulates both Go and protobuf
 // type information. If the Go type information is not needed,
 // it is recommended that the message descriptor be used instead.
-func (x *fastReflection_QueryListStakerAddressesRequest) Type() protoreflect.MessageType {
-	return _fastReflection_QueryListStakerAddressesRequest_messageType
+func (x *fastReflection_QueryAllStakerInfoRequest) Type() protoreflect.MessageType {
+	return _fastReflection_QueryAllStakerInfoRequest_messageType
 }
 
 // New returns a newly allocated and mutable empty message.
-func (x *fastReflection_QueryListStakerAddressesRequest) New() protoreflect.Message {
-	return new(fastReflection_QueryListStakerAddressesRequest)
+func (x *fastReflection_QueryAllStakerInfoRequest) New() protoreflect.Message {
+	return new(fastReflection_QueryAllStakerInfoRequest)
 }
 
 // Interface unwraps the message reflection interface and
 // returns the underlying ProtoMessage interface.
-func (x *fastReflection_QueryListStakerAddressesRequest) Interface() protoreflect.ProtoMessage {
-	return (*QueryListStakerAddressesRequest)(x)
+func (x *fastReflection_QueryAllStakerInfoRequest) Interface() protoreflect.ProtoMessage {
+	return (*QueryAllStakerInfoRequest)(x)
 }
 
 // Range iterates over every populated field in an undefined order,
@@ -883,10 +882,10 @@ func (x *fastReflection_QueryListStakerAddressesRequest) Interface() protoreflec
 // Range returns immediately if f returns false.
 // While iterating, mutating operations may only be performed
 // on the current field descriptor.
-func (x *fastReflection_QueryListStakerAddressesRequest) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
+func (x *fastReflection_QueryAllStakerInfoRequest) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
 	if x.Pagination != nil {
 		value := protoreflect.ValueOfMessage(x.Pagination.ProtoReflect())
-		if !f(fd_QueryListStakerAddressesRequest_pagination, value) {
+		if !f(fd_QueryAllStakerInfoRequest_pagination, value) {
 			return
 		}
 	}
@@ -903,15 +902,15 @@ func (x *fastReflection_QueryListStakerAddressesRequest) Range(f func(protorefle
 // In other cases (aside from the nullable cases above),
 // a proto3 scalar field is populated if it contains a non-zero value, and
 // a repeated field is populated if it is non-empty.
-func (x *fastReflection_QueryListStakerAddressesRequest) Has(fd protoreflect.FieldDescriptor) bool {
+func (x *fastReflection_QueryAllStakerInfoRequest) Has(fd protoreflect.FieldDescriptor) bool {
 	switch fd.FullName() {
-	case "fiamma.bitvmstaker.QueryListStakerAddressesRequest.pagination":
+	case "fiamma.bitvmstaker.QueryAllStakerInfoRequest.pagination":
 		return x.Pagination != nil
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.bitvmstaker.QueryListStakerAddressesRequest"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.bitvmstaker.QueryAllStakerInfoRequest"))
 		}
-		panic(fmt.Errorf("message fiamma.bitvmstaker.QueryListStakerAddressesRequest does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message fiamma.bitvmstaker.QueryAllStakerInfoRequest does not contain field %s", fd.FullName()))
 	}
 }
 
@@ -921,15 +920,15 @@ func (x *fastReflection_QueryListStakerAddressesRequest) Has(fd protoreflect.Fie
 // associated with the given field number.
 //
 // Clear is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_QueryListStakerAddressesRequest) Clear(fd protoreflect.FieldDescriptor) {
+func (x *fastReflection_QueryAllStakerInfoRequest) Clear(fd protoreflect.FieldDescriptor) {
 	switch fd.FullName() {
-	case "fiamma.bitvmstaker.QueryListStakerAddressesRequest.pagination":
+	case "fiamma.bitvmstaker.QueryAllStakerInfoRequest.pagination":
 		x.Pagination = nil
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.bitvmstaker.QueryListStakerAddressesRequest"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.bitvmstaker.QueryAllStakerInfoRequest"))
 		}
-		panic(fmt.Errorf("message fiamma.bitvmstaker.QueryListStakerAddressesRequest does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message fiamma.bitvmstaker.QueryAllStakerInfoRequest does not contain field %s", fd.FullName()))
 	}
 }
 
@@ -939,16 +938,16 @@ func (x *fastReflection_QueryListStakerAddressesRequest) Clear(fd protoreflect.F
 // the default value of a bytes scalar is guaranteed to be a copy.
 // For unpopulated composite types, it returns an empty, read-only view
 // of the value; to obtain a mutable reference, use Mutable.
-func (x *fastReflection_QueryListStakerAddressesRequest) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
+func (x *fastReflection_QueryAllStakerInfoRequest) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
 	switch descriptor.FullName() {
-	case "fiamma.bitvmstaker.QueryListStakerAddressesRequest.pagination":
+	case "fiamma.bitvmstaker.QueryAllStakerInfoRequest.pagination":
 		value := x.Pagination
 		return protoreflect.ValueOfMessage(value.ProtoReflect())
 	default:
 		if descriptor.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.bitvmstaker.QueryListStakerAddressesRequest"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.bitvmstaker.QueryAllStakerInfoRequest"))
 		}
-		panic(fmt.Errorf("message fiamma.bitvmstaker.QueryListStakerAddressesRequest does not contain field %s", descriptor.FullName()))
+		panic(fmt.Errorf("message fiamma.bitvmstaker.QueryAllStakerInfoRequest does not contain field %s", descriptor.FullName()))
 	}
 }
 
@@ -962,15 +961,15 @@ func (x *fastReflection_QueryListStakerAddressesRequest) Get(descriptor protoref
 // empty, read-only value, then it panics.
 //
 // Set is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_QueryListStakerAddressesRequest) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
+func (x *fastReflection_QueryAllStakerInfoRequest) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
 	switch fd.FullName() {
-	case "fiamma.bitvmstaker.QueryListStakerAddressesRequest.pagination":
+	case "fiamma.bitvmstaker.QueryAllStakerInfoRequest.pagination":
 		x.Pagination = value.Message().Interface().(*v1beta1.PageRequest)
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.bitvmstaker.QueryListStakerAddressesRequest"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.bitvmstaker.QueryAllStakerInfoRequest"))
 		}
-		panic(fmt.Errorf("message fiamma.bitvmstaker.QueryListStakerAddressesRequest does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message fiamma.bitvmstaker.QueryAllStakerInfoRequest does not contain field %s", fd.FullName()))
 	}
 }
 
@@ -984,44 +983,44 @@ func (x *fastReflection_QueryListStakerAddressesRequest) Set(fd protoreflect.Fie
 // It panics if the field does not contain a composite type.
 //
 // Mutable is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_QueryListStakerAddressesRequest) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
+func (x *fastReflection_QueryAllStakerInfoRequest) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "fiamma.bitvmstaker.QueryListStakerAddressesRequest.pagination":
+	case "fiamma.bitvmstaker.QueryAllStakerInfoRequest.pagination":
 		if x.Pagination == nil {
 			x.Pagination = new(v1beta1.PageRequest)
 		}
 		return protoreflect.ValueOfMessage(x.Pagination.ProtoReflect())
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.bitvmstaker.QueryListStakerAddressesRequest"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.bitvmstaker.QueryAllStakerInfoRequest"))
 		}
-		panic(fmt.Errorf("message fiamma.bitvmstaker.QueryListStakerAddressesRequest does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message fiamma.bitvmstaker.QueryAllStakerInfoRequest does not contain field %s", fd.FullName()))
 	}
 }
 
 // NewField returns a new value that is assignable to the field
 // for the given descriptor. For scalars, this returns the default value.
 // For lists, maps, and messages, this returns a new, empty, mutable value.
-func (x *fastReflection_QueryListStakerAddressesRequest) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
+func (x *fastReflection_QueryAllStakerInfoRequest) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "fiamma.bitvmstaker.QueryListStakerAddressesRequest.pagination":
+	case "fiamma.bitvmstaker.QueryAllStakerInfoRequest.pagination":
 		m := new(v1beta1.PageRequest)
 		return protoreflect.ValueOfMessage(m.ProtoReflect())
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.bitvmstaker.QueryListStakerAddressesRequest"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.bitvmstaker.QueryAllStakerInfoRequest"))
 		}
-		panic(fmt.Errorf("message fiamma.bitvmstaker.QueryListStakerAddressesRequest does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message fiamma.bitvmstaker.QueryAllStakerInfoRequest does not contain field %s", fd.FullName()))
 	}
 }
 
 // WhichOneof reports which field within the oneof is populated,
 // returning nil if none are populated.
 // It panics if the oneof descriptor does not belong to this message.
-func (x *fastReflection_QueryListStakerAddressesRequest) WhichOneof(d protoreflect.OneofDescriptor) protoreflect.FieldDescriptor {
+func (x *fastReflection_QueryAllStakerInfoRequest) WhichOneof(d protoreflect.OneofDescriptor) protoreflect.FieldDescriptor {
 	switch d.FullName() {
 	default:
-		panic(fmt.Errorf("%s is not a oneof field in fiamma.bitvmstaker.QueryListStakerAddressesRequest", d.FullName()))
+		panic(fmt.Errorf("%s is not a oneof field in fiamma.bitvmstaker.QueryAllStakerInfoRequest", d.FullName()))
 	}
 	panic("unreachable")
 }
@@ -1029,7 +1028,7 @@ func (x *fastReflection_QueryListStakerAddressesRequest) WhichOneof(d protorefle
 // GetUnknown retrieves the entire list of unknown fields.
 // The caller may only mutate the contents of the RawFields
 // if the mutated bytes are stored back into the message with SetUnknown.
-func (x *fastReflection_QueryListStakerAddressesRequest) GetUnknown() protoreflect.RawFields {
+func (x *fastReflection_QueryAllStakerInfoRequest) GetUnknown() protoreflect.RawFields {
 	return x.unknownFields
 }
 
@@ -1040,7 +1039,7 @@ func (x *fastReflection_QueryListStakerAddressesRequest) GetUnknown() protorefle
 // An empty RawFields may be passed to clear the fields.
 //
 // SetUnknown is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_QueryListStakerAddressesRequest) SetUnknown(fields protoreflect.RawFields) {
+func (x *fastReflection_QueryAllStakerInfoRequest) SetUnknown(fields protoreflect.RawFields) {
 	x.unknownFields = fields
 }
 
@@ -1052,7 +1051,7 @@ func (x *fastReflection_QueryListStakerAddressesRequest) SetUnknown(fields proto
 // message type, but the details are implementation dependent.
 // Validity is not part of the protobuf data model, and may not
 // be preserved in marshaling or other operations.
-func (x *fastReflection_QueryListStakerAddressesRequest) IsValid() bool {
+func (x *fastReflection_QueryAllStakerInfoRequest) IsValid() bool {
 	return x != nil
 }
 
@@ -1062,9 +1061,9 @@ func (x *fastReflection_QueryListStakerAddressesRequest) IsValid() bool {
 // The returned methods type is identical to
 // "google.golang.org/protobuf/runtime/protoiface".Methods.
 // Consult the protoiface package documentation for details.
-func (x *fastReflection_QueryListStakerAddressesRequest) ProtoMethods() *protoiface.Methods {
+func (x *fastReflection_QueryAllStakerInfoRequest) ProtoMethods() *protoiface.Methods {
 	size := func(input protoiface.SizeInput) protoiface.SizeOutput {
-		x := input.Message.Interface().(*QueryListStakerAddressesRequest)
+		x := input.Message.Interface().(*QueryAllStakerInfoRequest)
 		if x == nil {
 			return protoiface.SizeOutput{
 				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
@@ -1090,7 +1089,7 @@ func (x *fastReflection_QueryListStakerAddressesRequest) ProtoMethods() *protoif
 	}
 
 	marshal := func(input protoiface.MarshalInput) (protoiface.MarshalOutput, error) {
-		x := input.Message.Interface().(*QueryListStakerAddressesRequest)
+		x := input.Message.Interface().(*QueryAllStakerInfoRequest)
 		if x == nil {
 			return protoiface.MarshalOutput{
 				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
@@ -1134,7 +1133,7 @@ func (x *fastReflection_QueryListStakerAddressesRequest) ProtoMethods() *protoif
 		}, nil
 	}
 	unmarshal := func(input protoiface.UnmarshalInput) (protoiface.UnmarshalOutput, error) {
-		x := input.Message.Interface().(*QueryListStakerAddressesRequest)
+		x := input.Message.Interface().(*QueryAllStakerInfoRequest)
 		if x == nil {
 			return protoiface.UnmarshalOutput{
 				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
@@ -1166,10 +1165,10 @@ func (x *fastReflection_QueryListStakerAddressesRequest) ProtoMethods() *protoif
 			fieldNum := int32(wire >> 3)
 			wireType := int(wire & 0x7)
 			if wireType == 4 {
-				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: QueryListStakerAddressesRequest: wiretype end group for non-group")
+				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: QueryAllStakerInfoRequest: wiretype end group for non-group")
 			}
 			if fieldNum <= 0 {
-				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: QueryListStakerAddressesRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: QueryAllStakerInfoRequest: illegal tag %d (wire type %d)", fieldNum, wire)
 			}
 			switch fieldNum {
 			case 1:
@@ -1243,28 +1242,79 @@ func (x *fastReflection_QueryListStakerAddressesRequest) ProtoMethods() *protoif
 	}
 }
 
+var _ protoreflect.List = (*_QueryAllStakerInfoResponse_1_list)(nil)
+
+type _QueryAllStakerInfoResponse_1_list struct {
+	list *[]*StakerInfo
+}
+
+func (x *_QueryAllStakerInfoResponse_1_list) Len() int {
+	if x.list == nil {
+		return 0
+	}
+	return len(*x.list)
+}
+
+func (x *_QueryAllStakerInfoResponse_1_list) Get(i int) protoreflect.Value {
+	return protoreflect.ValueOfMessage((*x.list)[i].ProtoReflect())
+}
+
+func (x *_QueryAllStakerInfoResponse_1_list) Set(i int, value protoreflect.Value) {
+	valueUnwrapped := value.Message()
+	concreteValue := valueUnwrapped.Interface().(*StakerInfo)
+	(*x.list)[i] = concreteValue
+}
+
+func (x *_QueryAllStakerInfoResponse_1_list) Append(value protoreflect.Value) {
+	valueUnwrapped := value.Message()
+	concreteValue := valueUnwrapped.Interface().(*StakerInfo)
+	*x.list = append(*x.list, concreteValue)
+}
+
+func (x *_QueryAllStakerInfoResponse_1_list) AppendMutable() protoreflect.Value {
+	v := new(StakerInfo)
+	*x.list = append(*x.list, v)
+	return protoreflect.ValueOfMessage(v.ProtoReflect())
+}
+
+func (x *_QueryAllStakerInfoResponse_1_list) Truncate(n int) {
+	for i := n; i < len(*x.list); i++ {
+		(*x.list)[i] = nil
+	}
+	*x.list = (*x.list)[:n]
+}
+
+func (x *_QueryAllStakerInfoResponse_1_list) NewElement() protoreflect.Value {
+	v := new(StakerInfo)
+	return protoreflect.ValueOfMessage(v.ProtoReflect())
+}
+
+func (x *_QueryAllStakerInfoResponse_1_list) IsValid() bool {
+	return x.list != nil
+}
+
 var (
-	md_QueryListStakerAddressesResponse                 protoreflect.MessageDescriptor
-	fd_QueryListStakerAddressesResponse_stakerAddresses protoreflect.FieldDescriptor
-	fd_QueryListStakerAddressesResponse_pagination      protoreflect.FieldDescriptor
+	md_QueryAllStakerInfoResponse                 protoreflect.MessageDescriptor
+	fd_QueryAllStakerInfoResponse_all_staker_info protoreflect.FieldDescriptor
+	fd_QueryAllStakerInfoResponse_pagination      protoreflect.FieldDescriptor
 )
 
 func init() {
 	file_fiamma_bitvmstaker_query_proto_init()
-	md_QueryListStakerAddressesResponse = File_fiamma_bitvmstaker_query_proto.Messages().ByName("QueryListStakerAddressesResponse")
-	fd_QueryListStakerAddressesResponse_stakerAddresses = md_QueryListStakerAddressesResponse.Fields().ByName("stakerAddresses")
-	fd_QueryListStakerAddressesResponse_pagination = md_QueryListStakerAddressesResponse.Fields().ByName("pagination")
+	md_QueryAllStakerInfoResponse = File_fiamma_bitvmstaker_query_proto.Messages().ByName("QueryAllStakerInfoResponse")
+	fd_QueryAllStakerInfoResponse_all_staker_info = md_QueryAllStakerInfoResponse.Fields().ByName("all_staker_info")
+	fd_QueryAllStakerInfoResponse_pagination = md_QueryAllStakerInfoResponse.Fields().ByName("pagination")
 }
 
-var _ protoreflect.Message = (*fastReflection_QueryListStakerAddressesResponse)(nil)
+var _ protoreflect.Message = (*fastReflection_QueryAllStakerInfoResponse)(nil)
 
-type fastReflection_QueryListStakerAddressesResponse QueryListStakerAddressesResponse
+type fastReflection_QueryAllStakerInfoResponse QueryAllStakerInfoResponse
 
-func (x *QueryListStakerAddressesResponse) ProtoReflect() protoreflect.Message {
-	return (*fastReflection_QueryListStakerAddressesResponse)(x)
+func (x *QueryAllStakerInfoResponse) ProtoReflect() protoreflect.Message {
+	return (*fastReflection_QueryAllStakerInfoResponse)(x)
 }
 
-func (x *QueryListStakerAddressesResponse) slowProtoReflect() protoreflect.Message {
+func (x *QueryAllStakerInfoResponse) slowProtoReflect() protoreflect.Message {
 	mi := &file_fiamma_bitvmstaker_query_proto_msgTypes[3]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1276,43 +1326,43 @@ func (x *QueryListStakerAddressesResponse) slowProtoReflect() protoreflect.Messa
 	return mi.MessageOf(x)
 }
 
-var _fastReflection_QueryListStakerAddressesResponse_messageType fastReflection_QueryListStakerAddressesResponse_messageType
-var _ protoreflect.MessageType = fastReflection_QueryListStakerAddressesResponse_messageType{}
+var _fastReflection_QueryAllStakerInfoResponse_messageType fastReflection_QueryAllStakerInfoResponse_messageType
+var _ protoreflect.MessageType = fastReflection_QueryAllStakerInfoResponse_messageType{}
 
-type fastReflection_QueryListStakerAddressesResponse_messageType struct{}
+type fastReflection_QueryAllStakerInfoResponse_messageType struct{}
 
-func (x fastReflection_QueryListStakerAddressesResponse_messageType) Zero() protoreflect.Message {
-	return (*fastReflection_QueryListStakerAddressesResponse)(nil)
+func (x fastReflection_QueryAllStakerInfoResponse_messageType) Zero() protoreflect.Message {
+	return (*fastReflection_QueryAllStakerInfoResponse)(nil)
 }
-func (x fastReflection_QueryListStakerAddressesResponse_messageType) New() protoreflect.Message {
-	return new(fastReflection_QueryListStakerAddressesResponse)
+func (x fastReflection_QueryAllStakerInfoResponse_messageType) New() protoreflect.Message {
+	return new(fastReflection_QueryAllStakerInfoResponse)
 }
-func (x fastReflection_QueryListStakerAddressesResponse_messageType) Descriptor() protoreflect.MessageDescriptor {
-	return md_QueryListStakerAddressesResponse
+func (x fastReflection_QueryAllStakerInfoResponse_messageType) Descriptor() protoreflect.MessageDescriptor {
+	return md_QueryAllStakerInfoResponse
 }
 
 // Descriptor returns message descriptor, which contains only the protobuf
 // type information for the message.
-func (x *fastReflection_QueryListStakerAddressesResponse) Descriptor() protoreflect.MessageDescriptor {
-	return md_QueryListStakerAddressesResponse
+func (x *fastReflection_QueryAllStakerInfoResponse) Descriptor() protoreflect.MessageDescriptor {
+	return md_QueryAllStakerInfoResponse
 }
 
 // Type returns the message type, which encapsulates both Go and protobuf
 // type information. If the Go type information is not needed,
 // it is recommended that the message descriptor be used instead.
-func (x *fastReflection_QueryListStakerAddressesResponse) Type() protoreflect.MessageType {
-	return _fastReflection_QueryListStakerAddressesResponse_messageType
+func (x *fastReflection_QueryAllStakerInfoResponse) Type() protoreflect.MessageType {
+	return _fastReflection_QueryAllStakerInfoResponse_messageType
 }
 
 // New returns a newly allocated and mutable empty message.
-func (x *fastReflection_QueryListStakerAddressesResponse) New() protoreflect.Message {
-	return new(fastReflection_QueryListStakerAddressesResponse)
+func (x *fastReflection_QueryAllStakerInfoResponse) New() protoreflect.Message {
+	return new(fastReflection_QueryAllStakerInfoResponse)
 }
 
 // Interface unwraps the message reflection interface and
 // returns the underlying ProtoMessage interface.
-func (x *fastReflection_QueryListStakerAddressesResponse) Interface() protoreflect.ProtoMessage {
-	return (*QueryListStakerAddressesResponse)(x)
+func (x *fastReflection_QueryAllStakerInfoResponse) Interface() protoreflect.ProtoMessage {
+	return (*QueryAllStakerInfoResponse)(x)
 }
 
 // Range iterates over every populated field in an undefined order,
@@ -1320,16 +1370,16 @@ func (x *fastReflection_QueryListStakerAddressesResponse) Interface() protorefle
 // Range returns immediately if f returns false.
 // While iterating, mutating operations may only be performed
 // on the current field descriptor.
-func (x *fastReflection_QueryListStakerAddressesResponse) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
-	if x.StakerAddresses != "" {
-		value := protoreflect.ValueOfString(x.StakerAddresses)
-		if !f(fd_QueryListStakerAddressesResponse_stakerAddresses, value) {
+func (x *fastReflection_QueryAllStakerInfoResponse) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
+	if len(x.AllStakerInfo) != 0 {
+		value := protoreflect.ValueOfList(&_QueryAllStakerInfoResponse_1_list{list: &x.AllStakerInfo})
+		if !f(fd_QueryAllStakerInfoResponse_all_staker_info, value) {
 			return
 		}
 	}
 	if x.Pagination != nil {
 		value := protoreflect.ValueOfMessage(x.Pagination.ProtoReflect())
-		if !f(fd_QueryListStakerAddressesResponse_pagination, value) {
+		if !f(fd_QueryAllStakerInfoResponse_pagination, value) {
 			return
 		}
 	}
@@ -1346,17 +1396,17 @@ func (x *fastReflection_QueryListStakerAddressesResponse) Range(f func(protorefl
 // In other cases (aside from the nullable cases above),
 // a proto3 scalar field is populated if it contains a non-zero value, and
 // a repeated field is populated if it is non-empty.
-func (x *fastReflection_QueryListStakerAddressesResponse) Has(fd protoreflect.FieldDescriptor) bool {
+func (x *fastReflection_QueryAllStakerInfoResponse) Has(fd protoreflect.FieldDescriptor) bool {
 	switch fd.FullName() {
-	case "fiamma.bitvmstaker.QueryListStakerAddressesResponse.stakerAddresses":
-		return x.StakerAddresses != ""
-	case "fiamma.bitvmstaker.QueryListStakerAddressesResponse.pagination":
+	case "fiamma.bitvmstaker.QueryAllStakerInfoResponse.all_staker_info":
+		return len(x.AllStakerInfo) != 0
+	case "fiamma.bitvmstaker.QueryAllStakerInfoResponse.pagination":
 		return x.Pagination != nil
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.bitvmstaker.QueryListStakerAddressesResponse"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.bitvmstaker.QueryAllStakerInfoResponse"))
 		}
-		panic(fmt.Errorf("message fiamma.bitvmstaker.QueryListStakerAddressesResponse does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message fiamma.bitvmstaker.QueryAllStakerInfoResponse does not contain field %s", fd.FullName()))
 	}
 }
 
@@ -1366,17 +1416,17 @@ func (x *fastReflection_QueryListStakerAddressesResponse) Has(fd protoreflect.Fi
 // associated with the given field number.
 //
 // Clear is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_QueryListStakerAddressesResponse) Clear(fd protoreflect.FieldDescriptor) {
+func (x *fastReflection_QueryAllStakerInfoResponse) Clear(fd protoreflect.FieldDescriptor) {
 	switch fd.FullName() {
-	case "fiamma.bitvmstaker.QueryListStakerAddressesResponse.stakerAddresses":
-		x.StakerAddresses = ""
-	case "fiamma.bitvmstaker.QueryListStakerAddressesResponse.pagination":
+	case "fiamma.bitvmstaker.QueryAllStakerInfoResponse.all_staker_info":
+		x.AllStakerInfo = nil
+	case "fiamma.bitvmstaker.QueryAllStakerInfoResponse.pagination":
 		x.Pagination = nil
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.bitvmstaker.QueryListStakerAddressesResponse"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.bitvmstaker.QueryAllStakerInfoResponse"))
 		}
-		panic(fmt.Errorf("message fiamma.bitvmstaker.QueryListStakerAddressesResponse does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message fiamma.bitvmstaker.QueryAllStakerInfoResponse does not contain field %s", fd.FullName()))
 	}
 }
 
@@ -1386,19 +1436,22 @@ func (x *fastReflection_QueryListStakerAddressesResponse) Clear(fd protoreflect.
 // the default value of a bytes scalar is guaranteed to be a copy.
 // For unpopulated composite types, it returns an empty, read-only view
 // of the value; to obtain a mutable reference, use Mutable.
-func (x *fastReflection_QueryListStakerAddressesResponse) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
+func (x *fastReflection_QueryAllStakerInfoResponse) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
 	switch descriptor.FullName() {
-	case "fiamma.bitvmstaker.QueryListStakerAddressesResponse.stakerAddresses":
-		value := x.StakerAddresses
-		return protoreflect.ValueOfString(value)
-	case "fiamma.bitvmstaker.QueryListStakerAddressesResponse.pagination":
+	case "fiamma.bitvmstaker.QueryAllStakerInfoResponse.all_staker_info":
+		if len(x.AllStakerInfo) == 0 {
+			return protoreflect.ValueOfList(&_QueryAllStakerInfoResponse_1_list{})
+		}
+		listValue := &_QueryAllStakerInfoResponse_1_list{list: &x.AllStakerInfo}
+		return protoreflect.ValueOfList(listValue)
+	case "fiamma.bitvmstaker.QueryAllStakerInfoResponse.pagination":
 		value := x.Pagination
 		return protoreflect.ValueOfMessage(value.ProtoReflect())
 	default:
 		if descriptor.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.bitvmstaker.QueryListStakerAddressesResponse"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.bitvmstaker.QueryAllStakerInfoResponse"))
 		}
-		panic(fmt.Errorf("message fiamma.bitvmstaker.QueryListStakerAddressesResponse does not contain field %s", descriptor.FullName()))
+		panic(fmt.Errorf("message fiamma.bitvmstaker.QueryAllStakerInfoResponse does not contain field %s", descriptor.FullName()))
 	}
 }
 
@@ -1412,17 +1465,19 @@ func (x *fastReflection_QueryListStakerAddressesResponse) Get(descriptor protore
 // empty, read-only value, then it panics.
 //
 // Set is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_QueryListStakerAddressesResponse) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
+func (x *fastReflection_QueryAllStakerInfoResponse) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
 	switch fd.FullName() {
-	case "fiamma.bitvmstaker.QueryListStakerAddressesResponse.stakerAddresses":
-		x.StakerAddresses = value.Interface().(string)
-	case "fiamma.bitvmstaker.QueryListStakerAddressesResponse.pagination":
+	case "fiamma.bitvmstaker.QueryAllStakerInfoResponse.all_staker_info":
+		lv := value.List()
+		clv := lv.(*_QueryAllStakerInfoResponse_1_list)
+		x.AllStakerInfo = *clv.list
+	case "fiamma.bitvmstaker.QueryAllStakerInfoResponse.pagination":
 		x.Pagination = value.Message().Interface().(*v1beta1.PageResponse)
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.bitvmstaker.QueryListStakerAddressesResponse"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.bitvmstaker.QueryAllStakerInfoResponse"))
 		}
-		panic(fmt.Errorf("message fiamma.bitvmstaker.QueryListStakerAddressesResponse does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message fiamma.bitvmstaker.QueryAllStakerInfoResponse does not contain field %s", fd.FullName()))
 	}
 }
 
@@ -1436,48 +1491,53 @@ func (x *fastReflection_QueryListStakerAddressesResponse) Set(fd protoreflect.Fi
 // It panics if the field does not contain a composite type.
 //
 // Mutable is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_QueryListStakerAddressesResponse) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
+func (x *fastReflection_QueryAllStakerInfoResponse) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "fiamma.bitvmstaker.QueryListStakerAddressesResponse.pagination":
+	case "fiamma.bitvmstaker.QueryAllStakerInfoResponse.all_staker_info":
+		if x.AllStakerInfo == nil {
+			x.AllStakerInfo = []*StakerInfo{}
+		}
+		value := &_QueryAllStakerInfoResponse_1_list{list: &x.AllStakerInfo}
+		return protoreflect.ValueOfList(value)
+	case "fiamma.bitvmstaker.QueryAllStakerInfoResponse.pagination":
 		if x.Pagination == nil {
 			x.Pagination = new(v1beta1.PageResponse)
 		}
 		return protoreflect.ValueOfMessage(x.Pagination.ProtoReflect())
-	case "fiamma.bitvmstaker.QueryListStakerAddressesResponse.stakerAddresses":
-		panic(fmt.Errorf("field stakerAddresses of message fiamma.bitvmstaker.QueryListStakerAddressesResponse is not mutable"))
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.bitvmstaker.QueryListStakerAddressesResponse"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.bitvmstaker.QueryAllStakerInfoResponse"))
 		}
-		panic(fmt.Errorf("message fiamma.bitvmstaker.QueryListStakerAddressesResponse does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message fiamma.bitvmstaker.QueryAllStakerInfoResponse does not contain field %s", fd.FullName()))
 	}
 }
 
 // NewField returns a new value that is assignable to the field
 // for the given descriptor. For scalars, this returns the default value.
 // For lists, maps, and messages, this returns a new, empty, mutable value.
-func (x *fastReflection_QueryListStakerAddressesResponse) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
+func (x *fastReflection_QueryAllStakerInfoResponse) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "fiamma.bitvmstaker.QueryListStakerAddressesResponse.stakerAddresses":
-		return protoreflect.ValueOfString("")
-	case "fiamma.bitvmstaker.QueryListStakerAddressesResponse.pagination":
+	case "fiamma.bitvmstaker.QueryAllStakerInfoResponse.all_staker_info":
+		list := []*StakerInfo{}
+		return protoreflect.ValueOfList(&_QueryAllStakerInfoResponse_1_list{list: &list})
+	case "fiamma.bitvmstaker.QueryAllStakerInfoResponse.pagination":
 		m := new(v1beta1.PageResponse)
 		return protoreflect.ValueOfMessage(m.ProtoReflect())
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.bitvmstaker.QueryListStakerAddressesResponse"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.bitvmstaker.QueryAllStakerInfoResponse"))
 		}
-		panic(fmt.Errorf("message fiamma.bitvmstaker.QueryListStakerAddressesResponse does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message fiamma.bitvmstaker.QueryAllStakerInfoResponse does not contain field %s", fd.FullName()))
 	}
 }
 
 // WhichOneof reports which field within the oneof is populated,
 // returning nil if none are populated.
 // It panics if the oneof descriptor does not belong to this message.
-func (x *fastReflection_QueryListStakerAddressesResponse) WhichOneof(d protoreflect.OneofDescriptor) protoreflect.FieldDescriptor {
+func (x *fastReflection_QueryAllStakerInfoResponse) WhichOneof(d protoreflect.OneofDescriptor) protoreflect.FieldDescriptor {
 	switch d.FullName() {
 	default:
-		panic(fmt.Errorf("%s is not a oneof field in fiamma.bitvmstaker.QueryListStakerAddressesResponse", d.FullName()))
+		panic(fmt.Errorf("%s is not a oneof field in fiamma.bitvmstaker.QueryAllStakerInfoResponse", d.FullName()))
 	}
 	panic("unreachable")
 }
@@ -1485,7 +1545,7 @@ func (x *fastReflection_QueryListStakerAddressesResponse) WhichOneof(d protorefl
 // GetUnknown retrieves the entire list of unknown fields.
 // The caller may only mutate the contents of the RawFields
 // if the mutated bytes are stored back into the message with SetUnknown.
-func (x *fastReflection_QueryListStakerAddressesResponse) GetUnknown() protoreflect.RawFields {
+func (x *fastReflection_QueryAllStakerInfoResponse) GetUnknown() protoreflect.RawFields {
 	return x.unknownFields
 }
 
@@ -1496,7 +1556,7 @@ func (x *fastReflection_QueryListStakerAddressesResponse) GetUnknown() protorefl
 // An empty RawFields may be passed to clear the fields.
 //
 // SetUnknown is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_QueryListStakerAddressesResponse) SetUnknown(fields protoreflect.RawFields) {
+func (x *fastReflection_QueryAllStakerInfoResponse) SetUnknown(fields protoreflect.RawFields) {
 	x.unknownFields = fields
 }
 
@@ -1508,7 +1568,7 @@ func (x *fastReflection_QueryListStakerAddressesResponse) SetUnknown(fields prot
 // message type, but the details are implementation dependent.
 // Validity is not part of the protobuf data model, and may not
 // be preserved in marshaling or other operations.
-func (x *fastReflection_QueryListStakerAddressesResponse) IsValid() bool {
+func (x *fastReflection_QueryAllStakerInfoResponse) IsValid() bool {
 	return x != nil
 }
 
@@ -1518,9 +1578,9 @@ func (x *fastReflection_QueryListStakerAddressesResponse) IsValid() bool {
 // The returned methods type is identical to
 // "google.golang.org/protobuf/runtime/protoiface".Methods.
 // Consult the protoiface package documentation for details.
-func (x *fastReflection_QueryListStakerAddressesResponse) ProtoMethods() *protoiface.Methods {
+func (x *fastReflection_QueryAllStakerInfoResponse) ProtoMethods() *protoiface.Methods {
 	size := func(input protoiface.SizeInput) protoiface.SizeOutput {
-		x := input.Message.Interface().(*QueryListStakerAddressesResponse)
+		x := input.Message.Interface().(*QueryAllStakerInfoResponse)
 		if x == nil {
 			return protoiface.SizeOutput{
 				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
@@ -1532,9 +1592,11 @@ func (x *fastReflection_QueryListStakerAddressesResponse) ProtoMethods() *protoi
 		var n int
 		var l int
 		_ = l
-		l = len(x.StakerAddresses)
-		if l > 0 {
-			n += 1 + l + runtime.Sov(uint64(l))
+		if len(x.AllStakerInfo) > 0 {
+			for _, e := range x.AllStakerInfo {
+				l = options.Size(e)
+				n += 1 + l + runtime.Sov(uint64(l))
+			}
 		}
 		if x.Pagination != nil {
 			l = options.Size(x.Pagination)
@@ -1550,7 +1612,7 @@ func (x *fastReflection_QueryListStakerAddressesResponse) ProtoMethods() *protoi
 	}
 
 	marshal := func(input protoiface.MarshalInput) (protoiface.MarshalOutput, error) {
-		x := input.Message.Interface().(*QueryListStakerAddressesResponse)
+		x := input.Message.Interface().(*QueryAllStakerInfoResponse)
 		if x == nil {
 			return protoiface.MarshalOutput{
 				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
@@ -1583,12 +1645,21 @@ func (x *fastReflection_QueryListStakerAddressesResponse) ProtoMethods() *protoi
 			i--
 			dAtA[i] = 0x12
 		}
-		if len(x.StakerAddresses) > 0 {
-			i -= len(x.StakerAddresses)
-			copy(dAtA[i:], x.StakerAddresses)
-			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.StakerAddresses)))
-			i--
-			dAtA[i] = 0xa
+		if len(x.AllStakerInfo) > 0 {
+			for iNdEx := len(x.AllStakerInfo) - 1; iNdEx >= 0; iNdEx-- {
+				encoded, err := options.Marshal(x.AllStakerInfo[iNdEx])
+				if err != nil {
+					return protoiface.MarshalOutput{
+						NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+						Buf:               input.Buf,
+					}, err
+				}
+				i -= len(encoded)
+				copy(dAtA[i:], encoded)
+				i = runtime.EncodeVarint(dAtA, i, uint64(len(encoded)))
+				i--
+				dAtA[i] = 0xa
+			}
 		}
 		if input.Buf != nil {
 			input.Buf = append(input.Buf, dAtA...)
@@ -1601,7 +1672,7 @@ func (x *fastReflection_QueryListStakerAddressesResponse) ProtoMethods() *protoi
 		}, nil
 	}
 	unmarshal := func(input protoiface.UnmarshalInput) (protoiface.UnmarshalOutput, error) {
-		x := input.Message.Interface().(*QueryListStakerAddressesResponse)
+		x := input.Message.Interface().(*QueryAllStakerInfoResponse)
 		if x == nil {
 			return protoiface.UnmarshalOutput{
 				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
@@ -1633,17 +1704,17 @@ func (x *fastReflection_QueryListStakerAddressesResponse) ProtoMethods() *protoi
 			fieldNum := int32(wire >> 3)
 			wireType := int(wire & 0x7)
 			if wireType == 4 {
-				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: QueryListStakerAddressesResponse: wiretype end group for non-group")
+				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: QueryAllStakerInfoResponse: wiretype end group for non-group")
 			}
 			if fieldNum <= 0 {
-				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: QueryListStakerAddressesResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: QueryAllStakerInfoResponse: illegal tag %d (wire type %d)", fieldNum, wire)
 			}
 			switch fieldNum {
 			case 1:
 				if wireType != 2 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field StakerAddresses", wireType)
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field AllStakerInfo", wireType)
 				}
-				var stringLen uint64
+				var msglen int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
 						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
@@ -1653,23 +1724,25 @@ func (x *fastReflection_QueryListStakerAddressesResponse) ProtoMethods() *protoi
 					}
 					b := dAtA[iNdEx]
 					iNdEx++
-					stringLen |= uint64(b&0x7F) << shift
+					msglen |= int(b&0x7F) << shift
 					if b < 0x80 {
 						break
 					}
 				}
-				intStringLen := int(stringLen)
-				if intStringLen < 0 {
+				if msglen < 0 {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
 				}
-				postIndex := iNdEx + intStringLen
+				postIndex := iNdEx + msglen
 				if postIndex < 0 {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
 				}
 				if postIndex > l {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
 				}
-				x.StakerAddresses = string(dAtA[iNdEx:postIndex])
+				x.AllStakerInfo = append(x.AllStakerInfo, &StakerInfo{})
+				if err := options.Unmarshal(dAtA[iNdEx:postIndex], x.AllStakerInfo[len(x.AllStakerInfo)-1]); err != nil {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, err
+				}
 				iNdEx = postIndex
 			case 2:
 				if wireType != 2 {
@@ -2595,7 +2668,7 @@ func (x *QueryParamsResponse) GetParams() *Params {
 	return nil
 }
 
-type QueryListStakerAddressesRequest struct {
+type QueryAllStakerInfoRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -2603,8 +2676,8 @@ type QueryListStakerAddressesRequest struct {
 	Pagination *v1beta1.PageRequest `protobuf:"bytes,1,opt,name=pagination,proto3" json:"pagination,omitempty"`
 }
 
-func (x *QueryListStakerAddressesRequest) Reset() {
-	*x = QueryListStakerAddressesRequest{}
+func (x *QueryAllStakerInfoRequest) Reset() {
+	*x = QueryAllStakerInfoRequest{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_fiamma_bitvmstaker_query_proto_msgTypes[2]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -2612,35 +2685,35 @@ func (x *QueryListStakerAddressesRequest) Reset() {
 	}
 }
 
-func (x *QueryListStakerAddressesRequest) String() string {
+func (x *QueryAllStakerInfoRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*QueryListStakerAddressesRequest) ProtoMessage() {}
+func (*QueryAllStakerInfoRequest) ProtoMessage() {}
 
-// Deprecated: Use QueryListStakerAddressesRequest.ProtoReflect.Descriptor instead.
-func (*QueryListStakerAddressesRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use QueryAllStakerInfoRequest.ProtoReflect.Descriptor instead.
+func (*QueryAllStakerInfoRequest) Descriptor() ([]byte, []int) {
 	return file_fiamma_bitvmstaker_query_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *QueryListStakerAddressesRequest) GetPagination() *v1beta1.PageRequest {
+func (x *QueryAllStakerInfoRequest) GetPagination() *v1beta1.PageRequest {
 	if x != nil {
 		return x.Pagination
 	}
 	return nil
 }
 
-type QueryListStakerAddressesResponse struct {
+type QueryAllStakerInfoResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	StakerAddresses string                `protobuf:"bytes,1,opt,name=stakerAddresses,proto3" json:"stakerAddresses,omitempty"`
-	Pagination      *v1beta1.PageResponse `protobuf:"bytes,2,opt,name=pagination,proto3" json:"pagination,omitempty"`
+	AllStakerInfo []*StakerInfo         `protobuf:"bytes,1,rep,name=all_staker_info,json=allStakerInfo,proto3" json:"all_staker_info,omitempty"`
+	Pagination    *v1beta1.PageResponse `protobuf:"bytes,2,opt,name=pagination,proto3" json:"pagination,omitempty"`
 }
 
-func (x *QueryListStakerAddressesResponse) Reset() {
-	*x = QueryListStakerAddressesResponse{}
+func (x *QueryAllStakerInfoResponse) Reset() {
+	*x = QueryAllStakerInfoResponse{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_fiamma_bitvmstaker_query_proto_msgTypes[3]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -2648,25 +2721,25 @@ func (x *QueryListStakerAddressesResponse) Reset() {
 	}
 }
 
-func (x *QueryListStakerAddressesResponse) String() string {
+func (x *QueryAllStakerInfoResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*QueryListStakerAddressesResponse) ProtoMessage() {}
+func (*QueryAllStakerInfoResponse) ProtoMessage() {}
 
-// Deprecated: Use QueryListStakerAddressesResponse.ProtoReflect.Descriptor instead.
-func (*QueryListStakerAddressesResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use QueryAllStakerInfoResponse.ProtoReflect.Descriptor instead.
+func (*QueryAllStakerInfoResponse) Descriptor() ([]byte, []int) {
 	return file_fiamma_bitvmstaker_query_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *QueryListStakerAddressesResponse) GetStakerAddresses() string {
+func (x *QueryAllStakerInfoResponse) GetAllStakerInfo() []*StakerInfo {
 	if x != nil {
-		return x.StakerAddresses
+		return x.AllStakerInfo
 	}
-	return ""
+	return nil
 }
 
-func (x *QueryListStakerAddressesResponse) GetPagination() *v1beta1.PageResponse {
+func (x *QueryAllStakerInfoResponse) GetPagination() *v1beta1.PageResponse {
 	if x != nil {
 		return x.Pagination
 	}
@@ -2749,79 +2822,82 @@ var file_fiamma_bitvmstaker_query_proto_rawDesc = []byte{
 	0x31, 0x62, 0x65, 0x74, 0x61, 0x31, 0x2f, 0x70, 0x61, 0x67, 0x69, 0x6e, 0x61, 0x74, 0x69, 0x6f,
 	0x6e, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x1f, 0x66, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x2f,
 	0x62, 0x69, 0x74, 0x76, 0x6d, 0x73, 0x74, 0x61, 0x6b, 0x65, 0x72, 0x2f, 0x70, 0x61, 0x72, 0x61,
-	0x6d, 0x73, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0x14, 0x0a, 0x12, 0x51, 0x75, 0x65, 0x72,
-	0x79, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x22, 0x54,
-	0x0a, 0x13, 0x51, 0x75, 0x65, 0x72, 0x79, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x52, 0x65, 0x73,
-	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x3d, 0x0a, 0x06, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x18,
-	0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1a, 0x2e, 0x66, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x2e, 0x62,
-	0x69, 0x74, 0x76, 0x6d, 0x73, 0x74, 0x61, 0x6b, 0x65, 0x72, 0x2e, 0x50, 0x61, 0x72, 0x61, 0x6d,
-	0x73, 0x42, 0x09, 0xc8, 0xde, 0x1f, 0x00, 0xa8, 0xe7, 0xb0, 0x2a, 0x01, 0x52, 0x06, 0x70, 0x61,
-	0x72, 0x61, 0x6d, 0x73, 0x22, 0x69, 0x0a, 0x1f, 0x51, 0x75, 0x65, 0x72, 0x79, 0x4c, 0x69, 0x73,
-	0x74, 0x53, 0x74, 0x61, 0x6b, 0x65, 0x72, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x65, 0x73,
+	0x6d, 0x73, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x24, 0x66, 0x69, 0x61, 0x6d, 0x6d, 0x61,
+	0x2f, 0x62, 0x69, 0x74, 0x76, 0x6d, 0x73, 0x74, 0x61, 0x6b, 0x65, 0x72, 0x2f, 0x62, 0x69, 0x74,
+	0x76, 0x6d, 0x73, 0x74, 0x61, 0x6b, 0x65, 0x72, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0x14,
+	0x0a, 0x12, 0x51, 0x75, 0x65, 0x72, 0x79, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x52, 0x65, 0x71,
+	0x75, 0x65, 0x73, 0x74, 0x22, 0x54, 0x0a, 0x13, 0x51, 0x75, 0x65, 0x72, 0x79, 0x50, 0x61, 0x72,
+	0x61, 0x6d, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x3d, 0x0a, 0x06, 0x70,
+	0x61, 0x72, 0x61, 0x6d, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1a, 0x2e, 0x66, 0x69,
+	0x61, 0x6d, 0x6d, 0x61, 0x2e, 0x62, 0x69, 0x74, 0x76, 0x6d, 0x73, 0x74, 0x61, 0x6b, 0x65, 0x72,
+	0x2e, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x42, 0x09, 0xc8, 0xde, 0x1f, 0x00, 0xa8, 0xe7, 0xb0,
+	0x2a, 0x01, 0x52, 0x06, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x22, 0x63, 0x0a, 0x19, 0x51, 0x75,
+	0x65, 0x72, 0x79, 0x41, 0x6c, 0x6c, 0x53, 0x74, 0x61, 0x6b, 0x65, 0x72, 0x49, 0x6e, 0x66, 0x6f,
 	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x46, 0x0a, 0x0a, 0x70, 0x61, 0x67, 0x69, 0x6e,
 	0x61, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x26, 0x2e, 0x63, 0x6f,
 	0x73, 0x6d, 0x6f, 0x73, 0x2e, 0x62, 0x61, 0x73, 0x65, 0x2e, 0x71, 0x75, 0x65, 0x72, 0x79, 0x2e,
 	0x76, 0x31, 0x62, 0x65, 0x74, 0x61, 0x31, 0x2e, 0x50, 0x61, 0x67, 0x65, 0x52, 0x65, 0x71, 0x75,
 	0x65, 0x73, 0x74, 0x52, 0x0a, 0x70, 0x61, 0x67, 0x69, 0x6e, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x22,
-	0x95, 0x01, 0x0a, 0x20, 0x51, 0x75, 0x65, 0x72, 0x79, 0x4c, 0x69, 0x73, 0x74, 0x53, 0x74, 0x61,
-	0x6b, 0x65, 0x72, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x65, 0x73, 0x52, 0x65, 0x73, 0x70,
-	0x6f, 0x6e, 0x73, 0x65, 0x12, 0x28, 0x0a, 0x0f, 0x73, 0x74, 0x61, 0x6b, 0x65, 0x72, 0x41, 0x64,
-	0x64, 0x72, 0x65, 0x73, 0x73, 0x65, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0f, 0x73,
-	0x74, 0x61, 0x6b, 0x65, 0x72, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x65, 0x73, 0x12, 0x47,
-	0x0a, 0x0a, 0x70, 0x61, 0x67, 0x69, 0x6e, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x02, 0x20, 0x01,
-	0x28, 0x0b, 0x32, 0x27, 0x2e, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2e, 0x62, 0x61, 0x73, 0x65,
-	0x2e, 0x71, 0x75, 0x65, 0x72, 0x79, 0x2e, 0x76, 0x31, 0x62, 0x65, 0x74, 0x61, 0x31, 0x2e, 0x50,
-	0x61, 0x67, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x52, 0x0a, 0x70, 0x61, 0x67,
-	0x69, 0x6e, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x22, 0x1e, 0x0a, 0x1c, 0x51, 0x75, 0x65, 0x72, 0x79,
-	0x43, 0x6f, 0x6d, 0x6d, 0x69, 0x74, 0x74, 0x65, 0x65, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73,
-	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x22, 0x4b, 0x0a, 0x1d, 0x51, 0x75, 0x65, 0x72, 0x79,
-	0x43, 0x6f, 0x6d, 0x6d, 0x69, 0x74, 0x74, 0x65, 0x65, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73,
-	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x2a, 0x0a, 0x10, 0x63, 0x6f, 0x6d, 0x6d,
-	0x69, 0x74, 0x74, 0x65, 0x65, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x18, 0x01, 0x20, 0x01,
-	0x28, 0x09, 0x52, 0x10, 0x63, 0x6f, 0x6d, 0x6d, 0x69, 0x74, 0x74, 0x65, 0x65, 0x41, 0x64, 0x64,
-	0x72, 0x65, 0x73, 0x73, 0x32, 0xe5, 0x03, 0x0a, 0x05, 0x51, 0x75, 0x65, 0x72, 0x79, 0x12, 0x7d,
-	0x0a, 0x06, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x12, 0x26, 0x2e, 0x66, 0x69, 0x61, 0x6d, 0x6d,
-	0x61, 0x2e, 0x62, 0x69, 0x74, 0x76, 0x6d, 0x73, 0x74, 0x61, 0x6b, 0x65, 0x72, 0x2e, 0x51, 0x75,
-	0x65, 0x72, 0x79, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
-	0x1a, 0x27, 0x2e, 0x66, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x2e, 0x62, 0x69, 0x74, 0x76, 0x6d, 0x73,
-	0x74, 0x61, 0x6b, 0x65, 0x72, 0x2e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x50, 0x61, 0x72, 0x61, 0x6d,
-	0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x22, 0x82, 0xd3, 0xe4, 0x93, 0x02,
-	0x1c, 0x12, 0x1a, 0x2f, 0x66, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x2f, 0x62, 0x69, 0x74, 0x76, 0x6d,
-	0x73, 0x74, 0x61, 0x6b, 0x65, 0x72, 0x2f, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x12, 0xb3, 0x01,
-	0x0a, 0x13, 0x4c, 0x69, 0x73, 0x74, 0x53, 0x74, 0x61, 0x6b, 0x65, 0x72, 0x41, 0x64, 0x64, 0x72,
-	0x65, 0x73, 0x73, 0x65, 0x73, 0x12, 0x33, 0x2e, 0x66, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x2e, 0x62,
-	0x69, 0x74, 0x76, 0x6d, 0x73, 0x74, 0x61, 0x6b, 0x65, 0x72, 0x2e, 0x51, 0x75, 0x65, 0x72, 0x79,
-	0x4c, 0x69, 0x73, 0x74, 0x53, 0x74, 0x61, 0x6b, 0x65, 0x72, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73,
-	0x73, 0x65, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x34, 0x2e, 0x66, 0x69, 0x61,
-	0x6d, 0x6d, 0x61, 0x2e, 0x62, 0x69, 0x74, 0x76, 0x6d, 0x73, 0x74, 0x61, 0x6b, 0x65, 0x72, 0x2e,
-	0x51, 0x75, 0x65, 0x72, 0x79, 0x4c, 0x69, 0x73, 0x74, 0x53, 0x74, 0x61, 0x6b, 0x65, 0x72, 0x41,
-	0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x65, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65,
-	0x22, 0x31, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x2b, 0x12, 0x29, 0x2f, 0x66, 0x69, 0x61, 0x6d, 0x6d,
-	0x61, 0x2f, 0x62, 0x69, 0x74, 0x76, 0x6d, 0x73, 0x74, 0x61, 0x6b, 0x65, 0x72, 0x2f, 0x6c, 0x69,
-	0x73, 0x74, 0x5f, 0x73, 0x74, 0x61, 0x6b, 0x65, 0x72, 0x5f, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73,
-	0x73, 0x65, 0x73, 0x12, 0xa6, 0x01, 0x0a, 0x10, 0x43, 0x6f, 0x6d, 0x6d, 0x69, 0x74, 0x74, 0x65,
-	0x65, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x12, 0x30, 0x2e, 0x66, 0x69, 0x61, 0x6d, 0x6d,
-	0x61, 0x2e, 0x62, 0x69, 0x74, 0x76, 0x6d, 0x73, 0x74, 0x61, 0x6b, 0x65, 0x72, 0x2e, 0x51, 0x75,
-	0x65, 0x72, 0x79, 0x43, 0x6f, 0x6d, 0x6d, 0x69, 0x74, 0x74, 0x65, 0x65, 0x41, 0x64, 0x64, 0x72,
-	0x65, 0x73, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x31, 0x2e, 0x66, 0x69, 0x61,
-	0x6d, 0x6d, 0x61, 0x2e, 0x62, 0x69, 0x74, 0x76, 0x6d, 0x73, 0x74, 0x61, 0x6b, 0x65, 0x72, 0x2e,
-	0x51, 0x75, 0x65, 0x72, 0x79, 0x43, 0x6f, 0x6d, 0x6d, 0x69, 0x74, 0x74, 0x65, 0x65, 0x41, 0x64,
-	0x64, 0x72, 0x65, 0x73, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x2d, 0x82,
-	0xd3, 0xe4, 0x93, 0x02, 0x27, 0x12, 0x25, 0x2f, 0x66, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x2f, 0x62,
-	0x69, 0x74, 0x76, 0x6d, 0x73, 0x74, 0x61, 0x6b, 0x65, 0x72, 0x2f, 0x63, 0x6f, 0x6d, 0x6d, 0x69,
-	0x74, 0x74, 0x65, 0x65, 0x5f, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x42, 0xb2, 0x01, 0x0a,
-	0x16, 0x63, 0x6f, 0x6d, 0x2e, 0x66, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x2e, 0x62, 0x69, 0x74, 0x76,
-	0x6d, 0x73, 0x74, 0x61, 0x6b, 0x65, 0x72, 0x42, 0x0a, 0x51, 0x75, 0x65, 0x72, 0x79, 0x50, 0x72,
-	0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x23, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x73, 0x64, 0x6b,
-	0x2e, 0x69, 0x6f, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x66, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x2f, 0x62,
-	0x69, 0x74, 0x76, 0x6d, 0x73, 0x74, 0x61, 0x6b, 0x65, 0x72, 0xa2, 0x02, 0x03, 0x46, 0x42, 0x58,
-	0xaa, 0x02, 0x12, 0x46, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x2e, 0x42, 0x69, 0x74, 0x76, 0x6d, 0x73,
-	0x74, 0x61, 0x6b, 0x65, 0x72, 0xca, 0x02, 0x12, 0x46, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x5c, 0x42,
-	0x69, 0x74, 0x76, 0x6d, 0x73, 0x74, 0x61, 0x6b, 0x65, 0x72, 0xe2, 0x02, 0x1e, 0x46, 0x69, 0x61,
-	0x6d, 0x6d, 0x61, 0x5c, 0x42, 0x69, 0x74, 0x76, 0x6d, 0x73, 0x74, 0x61, 0x6b, 0x65, 0x72, 0x5c,
-	0x47, 0x50, 0x42, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0xea, 0x02, 0x13, 0x46, 0x69,
-	0x61, 0x6d, 0x6d, 0x61, 0x3a, 0x3a, 0x42, 0x69, 0x74, 0x76, 0x6d, 0x73, 0x74, 0x61, 0x6b, 0x65,
-	0x72, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0xb3, 0x01, 0x0a, 0x1a, 0x51, 0x75, 0x65, 0x72, 0x79, 0x41, 0x6c, 0x6c, 0x53, 0x74, 0x61, 0x6b,
+	0x65, 0x72, 0x49, 0x6e, 0x66, 0x6f, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x4c,
+	0x0a, 0x0f, 0x61, 0x6c, 0x6c, 0x5f, 0x73, 0x74, 0x61, 0x6b, 0x65, 0x72, 0x5f, 0x69, 0x6e, 0x66,
+	0x6f, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x1e, 0x2e, 0x66, 0x69, 0x61, 0x6d, 0x6d, 0x61,
+	0x2e, 0x62, 0x69, 0x74, 0x76, 0x6d, 0x73, 0x74, 0x61, 0x6b, 0x65, 0x72, 0x2e, 0x53, 0x74, 0x61,
+	0x6b, 0x65, 0x72, 0x49, 0x6e, 0x66, 0x6f, 0x42, 0x04, 0xc8, 0xde, 0x1f, 0x00, 0x52, 0x0d, 0x61,
+	0x6c, 0x6c, 0x53, 0x74, 0x61, 0x6b, 0x65, 0x72, 0x49, 0x6e, 0x66, 0x6f, 0x12, 0x47, 0x0a, 0x0a,
+	0x70, 0x61, 0x67, 0x69, 0x6e, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b,
+	0x32, 0x27, 0x2e, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2e, 0x62, 0x61, 0x73, 0x65, 0x2e, 0x71,
+	0x75, 0x65, 0x72, 0x79, 0x2e, 0x76, 0x31, 0x62, 0x65, 0x74, 0x61, 0x31, 0x2e, 0x50, 0x61, 0x67,
+	0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x52, 0x0a, 0x70, 0x61, 0x67, 0x69, 0x6e,
+	0x61, 0x74, 0x69, 0x6f, 0x6e, 0x22, 0x1e, 0x0a, 0x1c, 0x51, 0x75, 0x65, 0x72, 0x79, 0x43, 0x6f,
+	0x6d, 0x6d, 0x69, 0x74, 0x74, 0x65, 0x65, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x52, 0x65,
+	0x71, 0x75, 0x65, 0x73, 0x74, 0x22, 0x4b, 0x0a, 0x1d, 0x51, 0x75, 0x65, 0x72, 0x79, 0x43, 0x6f,
+	0x6d, 0x6d, 0x69, 0x74, 0x74, 0x65, 0x65, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x52, 0x65,
+	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x2a, 0x0a, 0x10, 0x63, 0x6f, 0x6d, 0x6d, 0x69, 0x74,
+	0x74, 0x65, 0x65, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09,
+	0x52, 0x10, 0x63, 0x6f, 0x6d, 0x6d, 0x69, 0x74, 0x74, 0x65, 0x65, 0x41, 0x64, 0x64, 0x72, 0x65,
+	0x73, 0x73, 0x32, 0xd1, 0x03, 0x0a, 0x05, 0x51, 0x75, 0x65, 0x72, 0x79, 0x12, 0x7d, 0x0a, 0x06,
+	0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x12, 0x26, 0x2e, 0x66, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x2e,
+	0x62, 0x69, 0x74, 0x76, 0x6d, 0x73, 0x74, 0x61, 0x6b, 0x65, 0x72, 0x2e, 0x51, 0x75, 0x65, 0x72,
+	0x79, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x27,
+	0x2e, 0x66, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x2e, 0x62, 0x69, 0x74, 0x76, 0x6d, 0x73, 0x74, 0x61,
+	0x6b, 0x65, 0x72, 0x2e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x52,
+	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x22, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x1c, 0x12,
+	0x1a, 0x2f, 0x66, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x2f, 0x62, 0x69, 0x74, 0x76, 0x6d, 0x73, 0x74,
+	0x61, 0x6b, 0x65, 0x72, 0x2f, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x12, 0x9f, 0x01, 0x0a, 0x0d,
+	0x41, 0x6c, 0x6c, 0x53, 0x74, 0x61, 0x6b, 0x65, 0x72, 0x49, 0x6e, 0x66, 0x6f, 0x12, 0x2d, 0x2e,
+	0x66, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x2e, 0x62, 0x69, 0x74, 0x76, 0x6d, 0x73, 0x74, 0x61, 0x6b,
+	0x65, 0x72, 0x2e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x41, 0x6c, 0x6c, 0x53, 0x74, 0x61, 0x6b, 0x65,
+	0x72, 0x49, 0x6e, 0x66, 0x6f, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x2e, 0x2e, 0x66,
+	0x69, 0x61, 0x6d, 0x6d, 0x61, 0x2e, 0x62, 0x69, 0x74, 0x76, 0x6d, 0x73, 0x74, 0x61, 0x6b, 0x65,
+	0x72, 0x2e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x41, 0x6c, 0x6c, 0x53, 0x74, 0x61, 0x6b, 0x65, 0x72,
+	0x49, 0x6e, 0x66, 0x6f, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x2f, 0x82, 0xd3,
+	0xe4, 0x93, 0x02, 0x29, 0x12, 0x27, 0x2f, 0x66, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x2f, 0x62, 0x69,
+	0x74, 0x76, 0x6d, 0x73, 0x74, 0x61, 0x6b, 0x65, 0x72, 0x2f, 0x67, 0x65, 0x74, 0x5f, 0x61, 0x6c,
+	0x6c, 0x5f, 0x73, 0x74, 0x61, 0x6b, 0x65, 0x72, 0x5f, 0x69, 0x6e, 0x66, 0x6f, 0x12, 0xa6, 0x01,
+	0x0a, 0x10, 0x43, 0x6f, 0x6d, 0x6d, 0x69, 0x74, 0x74, 0x65, 0x65, 0x41, 0x64, 0x64, 0x72, 0x65,
+	0x73, 0x73, 0x12, 0x30, 0x2e, 0x66, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x2e, 0x62, 0x69, 0x74, 0x76,
+	0x6d, 0x73, 0x74, 0x61, 0x6b, 0x65, 0x72, 0x2e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x43, 0x6f, 0x6d,
+	0x6d, 0x69, 0x74, 0x74, 0x65, 0x65, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x52, 0x65, 0x71,
+	0x75, 0x65, 0x73, 0x74, 0x1a, 0x31, 0x2e, 0x66, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x2e, 0x62, 0x69,
+	0x74, 0x76, 0x6d, 0x73, 0x74, 0x61, 0x6b, 0x65, 0x72, 0x2e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x43,
+	0x6f, 0x6d, 0x6d, 0x69, 0x74, 0x74, 0x65, 0x65, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x52,
+	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x2d, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x27, 0x12,
+	0x25, 0x2f, 0x66, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x2f, 0x62, 0x69, 0x74, 0x76, 0x6d, 0x73, 0x74,
+	0x61, 0x6b, 0x65, 0x72, 0x2f, 0x63, 0x6f, 0x6d, 0x6d, 0x69, 0x74, 0x74, 0x65, 0x65, 0x5f, 0x61,
+	0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x42, 0xb2, 0x01, 0x0a, 0x16, 0x63, 0x6f, 0x6d, 0x2e, 0x66,
+	0x69, 0x61, 0x6d, 0x6d, 0x61, 0x2e, 0x62, 0x69, 0x74, 0x76, 0x6d, 0x73, 0x74, 0x61, 0x6b, 0x65,
+	0x72, 0x42, 0x0a, 0x51, 0x75, 0x65, 0x72, 0x79, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a,
+	0x23, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x73, 0x64, 0x6b, 0x2e, 0x69, 0x6f, 0x2f, 0x61, 0x70,
+	0x69, 0x2f, 0x66, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x2f, 0x62, 0x69, 0x74, 0x76, 0x6d, 0x73, 0x74,
+	0x61, 0x6b, 0x65, 0x72, 0xa2, 0x02, 0x03, 0x46, 0x42, 0x58, 0xaa, 0x02, 0x12, 0x46, 0x69, 0x61,
+	0x6d, 0x6d, 0x61, 0x2e, 0x42, 0x69, 0x74, 0x76, 0x6d, 0x73, 0x74, 0x61, 0x6b, 0x65, 0x72, 0xca,
+	0x02, 0x12, 0x46, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x5c, 0x42, 0x69, 0x74, 0x76, 0x6d, 0x73, 0x74,
+	0x61, 0x6b, 0x65, 0x72, 0xe2, 0x02, 0x1e, 0x46, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x5c, 0x42, 0x69,
+	0x74, 0x76, 0x6d, 0x73, 0x74, 0x61, 0x6b, 0x65, 0x72, 0x5c, 0x47, 0x50, 0x42, 0x4d, 0x65, 0x74,
+	0x61, 0x64, 0x61, 0x74, 0x61, 0xea, 0x02, 0x13, 0x46, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x3a, 0x3a,
+	0x42, 0x69, 0x74, 0x76, 0x6d, 0x73, 0x74, 0x61, 0x6b, 0x65, 0x72, 0x62, 0x06, 0x70, 0x72, 0x6f,
+	0x74, 0x6f, 0x33,
 }
 
 var (
@@ -2838,31 +2914,33 @@ func file_fiamma_bitvmstaker_query_proto_rawDescGZIP() []byte {
 
 var file_fiamma_bitvmstaker_query_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_fiamma_bitvmstaker_query_proto_goTypes = []interface{}{
-	(*QueryParamsRequest)(nil),               // 0: fiamma.bitvmstaker.QueryParamsRequest
-	(*QueryParamsResponse)(nil),              // 1: fiamma.bitvmstaker.QueryParamsResponse
-	(*QueryListStakerAddressesRequest)(nil),  // 2: fiamma.bitvmstaker.QueryListStakerAddressesRequest
-	(*QueryListStakerAddressesResponse)(nil), // 3: fiamma.bitvmstaker.QueryListStakerAddressesResponse
-	(*QueryCommitteeAddressRequest)(nil),     // 4: fiamma.bitvmstaker.QueryCommitteeAddressRequest
-	(*QueryCommitteeAddressResponse)(nil),    // 5: fiamma.bitvmstaker.QueryCommitteeAddressResponse
-	(*Params)(nil),                           // 6: fiamma.bitvmstaker.Params
-	(*v1beta1.PageRequest)(nil),              // 7: cosmos.base.query.v1beta1.PageRequest
-	(*v1beta1.PageResponse)(nil),             // 8: cosmos.base.query.v1beta1.PageResponse
+	(*QueryParamsRequest)(nil),            // 0: fiamma.bitvmstaker.QueryParamsRequest
+	(*QueryParamsResponse)(nil),           // 1: fiamma.bitvmstaker.QueryParamsResponse
+	(*QueryAllStakerInfoRequest)(nil),     // 2: fiamma.bitvmstaker.QueryAllStakerInfoRequest
+	(*QueryAllStakerInfoResponse)(nil),    // 3: fiamma.bitvmstaker.QueryAllStakerInfoResponse
+	(*QueryCommitteeAddressRequest)(nil),  // 4: fiamma.bitvmstaker.QueryCommitteeAddressRequest
+	(*QueryCommitteeAddressResponse)(nil), // 5: fiamma.bitvmstaker.QueryCommitteeAddressResponse
+	(*Params)(nil),                        // 6: fiamma.bitvmstaker.Params
+	(*v1beta1.PageRequest)(nil),           // 7: cosmos.base.query.v1beta1.PageRequest
+	(*StakerInfo)(nil),                    // 8: fiamma.bitvmstaker.StakerInfo
+	(*v1beta1.PageResponse)(nil),          // 9: cosmos.base.query.v1beta1.PageResponse
 }
 var file_fiamma_bitvmstaker_query_proto_depIdxs = []int32{
 	6, // 0: fiamma.bitvmstaker.QueryParamsResponse.params:type_name -> fiamma.bitvmstaker.Params
-	7, // 1: fiamma.bitvmstaker.QueryListStakerAddressesRequest.pagination:type_name -> cosmos.base.query.v1beta1.PageRequest
-	8, // 2: fiamma.bitvmstaker.QueryListStakerAddressesResponse.pagination:type_name -> cosmos.base.query.v1beta1.PageResponse
-	0, // 3: fiamma.bitvmstaker.Query.Params:input_type -> fiamma.bitvmstaker.QueryParamsRequest
-	2, // 4: fiamma.bitvmstaker.Query.ListStakerAddresses:input_type -> fiamma.bitvmstaker.QueryListStakerAddressesRequest
-	4, // 5: fiamma.bitvmstaker.Query.CommitteeAddress:input_type -> fiamma.bitvmstaker.QueryCommitteeAddressRequest
-	1, // 6: fiamma.bitvmstaker.Query.Params:output_type -> fiamma.bitvmstaker.QueryParamsResponse
-	3, // 7: fiamma.bitvmstaker.Query.ListStakerAddresses:output_type -> fiamma.bitvmstaker.QueryListStakerAddressesResponse
-	5, // 8: fiamma.bitvmstaker.Query.CommitteeAddress:output_type -> fiamma.bitvmstaker.QueryCommitteeAddressResponse
-	6, // [6:9] is the sub-list for method output_type
-	3, // [3:6] is the sub-list for method input_type
-	3, // [3:3] is the sub-list for extension type_name
-	3, // [3:3] is the sub-list for extension extendee
-	0, // [0:3] is the sub-list for field type_name
+	7, // 1: fiamma.bitvmstaker.QueryAllStakerInfoRequest.pagination:type_name -> cosmos.base.query.v1beta1.PageRequest
+	8, // 2: fiamma.bitvmstaker.QueryAllStakerInfoResponse.all_staker_info:type_name -> fiamma.bitvmstaker.StakerInfo
+	9, // 3: fiamma.bitvmstaker.QueryAllStakerInfoResponse.pagination:type_name -> cosmos.base.query.v1beta1.PageResponse
+	0, // 4: fiamma.bitvmstaker.Query.Params:input_type -> fiamma.bitvmstaker.QueryParamsRequest
+	2, // 5: fiamma.bitvmstaker.Query.AllStakerInfo:input_type -> fiamma.bitvmstaker.QueryAllStakerInfoRequest
+	4, // 6: fiamma.bitvmstaker.Query.CommitteeAddress:input_type -> fiamma.bitvmstaker.QueryCommitteeAddressRequest
+	1, // 7: fiamma.bitvmstaker.Query.Params:output_type -> fiamma.bitvmstaker.QueryParamsResponse
+	3, // 8: fiamma.bitvmstaker.Query.AllStakerInfo:output_type -> fiamma.bitvmstaker.QueryAllStakerInfoResponse
+	5, // 9: fiamma.bitvmstaker.Query.CommitteeAddress:output_type -> fiamma.bitvmstaker.QueryCommitteeAddressResponse
+	7, // [7:10] is the sub-list for method output_type
+	4, // [4:7] is the sub-list for method input_type
+	4, // [4:4] is the sub-list for extension type_name
+	4, // [4:4] is the sub-list for extension extendee
+	0, // [0:4] is the sub-list for field type_name
 }
 
 func init() { file_fiamma_bitvmstaker_query_proto_init() }
@@ -2871,6 +2949,7 @@ func file_fiamma_bitvmstaker_query_proto_init() {
 		return
 	}
 	file_fiamma_bitvmstaker_params_proto_init()
+	file_fiamma_bitvmstaker_bitvmstaker_proto_init()
 	if !protoimpl.UnsafeEnabled {
 		file_fiamma_bitvmstaker_query_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*QueryParamsRequest); i {
@@ -2897,7 +2976,7 @@ func file_fiamma_bitvmstaker_query_proto_init() {
 			}
 		}
 		file_fiamma_bitvmstaker_query_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*QueryListStakerAddressesRequest); i {
+			switch v := v.(*QueryAllStakerInfoRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2909,7 +2988,7 @@ func file_fiamma_bitvmstaker_query_proto_init() {
 			}
 		}
 		file_fiamma_bitvmstaker_query_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*QueryListStakerAddressesResponse); i {
+			switch v := v.(*QueryAllStakerInfoResponse); i {
 			case 0:
 				return &v.state
 			case 1:

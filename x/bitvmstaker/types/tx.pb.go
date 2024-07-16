@@ -6,10 +6,6 @@ package types
 import (
 	context "context"
 	fmt "fmt"
-	io "io"
-	math "math"
-	math_bits "math/bits"
-
 	_ "github.com/cosmos/cosmos-proto"
 	_ "github.com/cosmos/cosmos-sdk/types/msgservice"
 	_ "github.com/cosmos/cosmos-sdk/types/tx/amino"
@@ -19,6 +15,9 @@ import (
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
+	io "io"
+	math "math"
+	math_bits "math/bits"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -213,23 +212,23 @@ func (m *MsgCreateStakerResponse) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_MsgCreateStakerResponse proto.InternalMessageInfo
 
-type MsgSlashStaker struct {
+type MsgRemoveStaker struct {
 	Creator       string `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
 	StakerAddress string `protobuf:"bytes,2,opt,name=staker_address,json=stakerAddress,proto3" json:"staker_address,omitempty"`
 }
 
-func (m *MsgSlashStaker) Reset()         { *m = MsgSlashStaker{} }
-func (m *MsgSlashStaker) String() string { return proto.CompactTextString(m) }
-func (*MsgSlashStaker) ProtoMessage()    {}
-func (*MsgSlashStaker) Descriptor() ([]byte, []int) {
+func (m *MsgRemoveStaker) Reset()         { *m = MsgRemoveStaker{} }
+func (m *MsgRemoveStaker) String() string { return proto.CompactTextString(m) }
+func (*MsgRemoveStaker) ProtoMessage()    {}
+func (*MsgRemoveStaker) Descriptor() ([]byte, []int) {
 	return fileDescriptor_ca62a47b6be03f96, []int{4}
 }
-func (m *MsgSlashStaker) XXX_Unmarshal(b []byte) error {
+func (m *MsgRemoveStaker) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *MsgSlashStaker) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *MsgRemoveStaker) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_MsgSlashStaker.Marshal(b, m, deterministic)
+		return xxx_messageInfo_MsgRemoveStaker.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -239,47 +238,47 @@ func (m *MsgSlashStaker) XXX_Marshal(b []byte, deterministic bool) ([]byte, erro
 		return b[:n], nil
 	}
 }
-func (m *MsgSlashStaker) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MsgSlashStaker.Merge(m, src)
+func (m *MsgRemoveStaker) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgRemoveStaker.Merge(m, src)
 }
-func (m *MsgSlashStaker) XXX_Size() int {
+func (m *MsgRemoveStaker) XXX_Size() int {
 	return m.Size()
 }
-func (m *MsgSlashStaker) XXX_DiscardUnknown() {
-	xxx_messageInfo_MsgSlashStaker.DiscardUnknown(m)
+func (m *MsgRemoveStaker) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgRemoveStaker.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_MsgSlashStaker proto.InternalMessageInfo
+var xxx_messageInfo_MsgRemoveStaker proto.InternalMessageInfo
 
-func (m *MsgSlashStaker) GetCreator() string {
+func (m *MsgRemoveStaker) GetCreator() string {
 	if m != nil {
 		return m.Creator
 	}
 	return ""
 }
 
-func (m *MsgSlashStaker) GetStakerAddress() string {
+func (m *MsgRemoveStaker) GetStakerAddress() string {
 	if m != nil {
 		return m.StakerAddress
 	}
 	return ""
 }
 
-type MsgSlashStakerResponse struct {
+type MsgRemoveStakerResponse struct {
 }
 
-func (m *MsgSlashStakerResponse) Reset()         { *m = MsgSlashStakerResponse{} }
-func (m *MsgSlashStakerResponse) String() string { return proto.CompactTextString(m) }
-func (*MsgSlashStakerResponse) ProtoMessage()    {}
-func (*MsgSlashStakerResponse) Descriptor() ([]byte, []int) {
+func (m *MsgRemoveStakerResponse) Reset()         { *m = MsgRemoveStakerResponse{} }
+func (m *MsgRemoveStakerResponse) String() string { return proto.CompactTextString(m) }
+func (*MsgRemoveStakerResponse) ProtoMessage()    {}
+func (*MsgRemoveStakerResponse) Descriptor() ([]byte, []int) {
 	return fileDescriptor_ca62a47b6be03f96, []int{5}
 }
-func (m *MsgSlashStakerResponse) XXX_Unmarshal(b []byte) error {
+func (m *MsgRemoveStakerResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *MsgSlashStakerResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *MsgRemoveStakerResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_MsgSlashStakerResponse.Marshal(b, m, deterministic)
+		return xxx_messageInfo_MsgRemoveStakerResponse.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -289,21 +288,21 @@ func (m *MsgSlashStakerResponse) XXX_Marshal(b []byte, deterministic bool) ([]by
 		return b[:n], nil
 	}
 }
-func (m *MsgSlashStakerResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MsgSlashStakerResponse.Merge(m, src)
+func (m *MsgRemoveStakerResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgRemoveStakerResponse.Merge(m, src)
 }
-func (m *MsgSlashStakerResponse) XXX_Size() int {
+func (m *MsgRemoveStakerResponse) XXX_Size() int {
 	return m.Size()
 }
-func (m *MsgSlashStakerResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_MsgSlashStakerResponse.DiscardUnknown(m)
+func (m *MsgRemoveStakerResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgRemoveStakerResponse.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_MsgSlashStakerResponse proto.InternalMessageInfo
+var xxx_messageInfo_MsgRemoveStakerResponse proto.InternalMessageInfo
 
 type MsgUpdateCommitteeAddress struct {
 	Creator             string `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
-	NewCommitteeAddress string `protobuf:"bytes,2,opt,name=newCommitteeAddress,proto3" json:"newCommitteeAddress,omitempty"`
+	NewCommitteeAddress string `protobuf:"bytes,2,opt,name=new_committee_address,json=newCommitteeAddress,proto3" json:"new_committee_address,omitempty"`
 }
 
 func (m *MsgUpdateCommitteeAddress) Reset()         { *m = MsgUpdateCommitteeAddress{} }
@@ -394,8 +393,8 @@ func init() {
 	proto.RegisterType((*MsgUpdateParamsResponse)(nil), "fiamma.bitvmstaker.MsgUpdateParamsResponse")
 	proto.RegisterType((*MsgCreateStaker)(nil), "fiamma.bitvmstaker.MsgCreateStaker")
 	proto.RegisterType((*MsgCreateStakerResponse)(nil), "fiamma.bitvmstaker.MsgCreateStakerResponse")
-	proto.RegisterType((*MsgSlashStaker)(nil), "fiamma.bitvmstaker.MsgSlashStaker")
-	proto.RegisterType((*MsgSlashStakerResponse)(nil), "fiamma.bitvmstaker.MsgSlashStakerResponse")
+	proto.RegisterType((*MsgRemoveStaker)(nil), "fiamma.bitvmstaker.MsgRemoveStaker")
+	proto.RegisterType((*MsgRemoveStakerResponse)(nil), "fiamma.bitvmstaker.MsgRemoveStakerResponse")
 	proto.RegisterType((*MsgUpdateCommitteeAddress)(nil), "fiamma.bitvmstaker.MsgUpdateCommitteeAddress")
 	proto.RegisterType((*MsgUpdateCommitteeAddressResponse)(nil), "fiamma.bitvmstaker.MsgUpdateCommitteeAddressResponse")
 }
@@ -403,7 +402,7 @@ func init() {
 func init() { proto.RegisterFile("fiamma/bitvmstaker/tx.proto", fileDescriptor_ca62a47b6be03f96) }
 
 var fileDescriptor_ca62a47b6be03f96 = []byte{
-	// 501 bytes of a gzipped FileDescriptorProto
+	// 495 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x92, 0x4e, 0xcb, 0x4c, 0xcc,
 	0xcd, 0x4d, 0xd4, 0x4f, 0xca, 0x2c, 0x29, 0xcb, 0x2d, 0x2e, 0x49, 0xcc, 0x4e, 0x2d, 0xd2, 0x2f,
 	0xa9, 0xd0, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0x12, 0x82, 0x48, 0xea, 0x21, 0x49, 0x4a, 0x09,
@@ -422,20 +421,19 @@ var fileDescriptor_ca62a47b6be03f96 = []byte{
 	0x04, 0xb0, 0xef, 0x9c, 0x8b, 0x52, 0x13, 0x4b, 0x52, 0x83, 0xc1, 0xba, 0x85, 0x24, 0xb8, 0xd8,
 	0x93, 0x41, 0xfc, 0xfc, 0x22, 0x88, 0xdf, 0x82, 0x60, 0x5c, 0x21, 0x55, 0x2e, 0x3e, 0x88, 0x0d,
 	0xf1, 0x89, 0x10, 0x2f, 0x82, 0xfd, 0xc1, 0x19, 0xc4, 0x0b, 0x11, 0x85, 0xfa, 0xdb, 0x8a, 0x07,
-	0xe4, 0x4e, 0x98, 0x26, 0xa8, 0xe5, 0xc8, 0x36, 0xc0, 0x2d, 0x8f, 0xe7, 0xe2, 0xf3, 0x2d, 0x4e,
-	0x0f, 0xce, 0x49, 0x2c, 0xce, 0xa0, 0x8d, 0xdd, 0x12, 0x5c, 0x62, 0xa8, 0x16, 0xc0, 0xad, 0x2e,
-	0xe5, 0x92, 0x84, 0x07, 0x89, 0x73, 0x7e, 0x6e, 0x6e, 0x66, 0x49, 0x49, 0x6a, 0x2a, 0xd4, 0x10,
-	0x3c, 0xae, 0x30, 0xe0, 0x12, 0xce, 0x4b, 0x2d, 0x47, 0xd7, 0x00, 0x75, 0x0a, 0x36, 0x29, 0x34,
-	0x07, 0x29, 0x73, 0x29, 0xe2, 0xb4, 0x16, 0xe6, 0x36, 0xa3, 0xf5, 0xcc, 0x5c, 0xcc, 0xbe, 0xc5,
-	0xe9, 0x42, 0x09, 0x5c, 0x3c, 0x28, 0xc9, 0x4e, 0x19, 0x5b, 0x72, 0x41, 0x8b, 0x58, 0x29, 0x6d,
-	0x22, 0x14, 0xc1, 0x6c, 0x02, 0xd9, 0x80, 0x12, 0xf5, 0xb8, 0x6c, 0x40, 0x56, 0x84, 0xd3, 0x06,
-	0x6c, 0x51, 0x2c, 0x14, 0xcb, 0xc5, 0x8d, 0x1c, 0xbf, 0x4a, 0x38, 0xf4, 0x22, 0xa9, 0x91, 0xd2,
-	0x22, 0xac, 0x06, 0x6e, 0x7c, 0x1d, 0x97, 0x18, 0x8e, 0x38, 0xd4, 0xc5, 0x1b, 0x0e, 0xe8, 0xca,
-	0xa5, 0x4c, 0x49, 0x52, 0x0e, 0xb3, 0x5f, 0x8a, 0xb5, 0x01, 0x94, 0x43, 0x9d, 0x4c, 0x4e, 0x3c,
-	0x92, 0x63, 0xbc, 0xf0, 0x48, 0x8e, 0xf1, 0xc1, 0x23, 0x39, 0xc6, 0x09, 0x8f, 0xe5, 0x18, 0x2e,
-	0x3c, 0x96, 0x63, 0xb8, 0xf1, 0x58, 0x8e, 0x21, 0x4a, 0x0a, 0x6b, 0x06, 0x2d, 0xa9, 0x2c, 0x48,
-	0x2d, 0x4e, 0x62, 0x03, 0x97, 0x30, 0xc6, 0x80, 0x00, 0x00, 0x00, 0xff, 0xff, 0x64, 0x7c, 0x71,
-	0x54, 0x12, 0x05, 0x00, 0x00,
+	0xe4, 0x4e, 0x98, 0x26, 0xa8, 0xe5, 0xc8, 0x36, 0xa0, 0x59, 0x1e, 0x94, 0x9a, 0x9b, 0x5f, 0x46,
+	0x53, 0xcb, 0x91, 0x6d, 0x80, 0x5b, 0x5e, 0xce, 0x25, 0x09, 0x0f, 0x14, 0xe7, 0xfc, 0xdc, 0xdc,
+	0xcc, 0x92, 0x92, 0xd4, 0x54, 0xa8, 0x29, 0x78, 0x9c, 0x61, 0xc4, 0x25, 0x9a, 0x97, 0x5a, 0x1e,
+	0x9f, 0x0c, 0xd3, 0x81, 0xe6, 0x1a, 0xe1, 0xbc, 0xd4, 0x72, 0x74, 0xd3, 0xd0, 0xdc, 0xa4, 0xcc,
+	0xa5, 0x88, 0xd3, 0x62, 0x98, 0xeb, 0x8c, 0x36, 0x31, 0x73, 0x31, 0xfb, 0x16, 0xa7, 0x0b, 0x25,
+	0x70, 0xf1, 0xa0, 0x24, 0x3d, 0x65, 0x6c, 0x49, 0x06, 0x2d, 0x72, 0xa5, 0xb4, 0x89, 0x50, 0x04,
+	0xb3, 0x09, 0x64, 0x03, 0x4a, 0xf4, 0xe3, 0xb2, 0x01, 0x59, 0x11, 0x4e, 0x1b, 0xb0, 0x45, 0x33,
+	0xc8, 0x06, 0x94, 0x38, 0xc6, 0x65, 0x03, 0xb2, 0x22, 0x9c, 0x36, 0x60, 0x8b, 0x4b, 0xa1, 0x3a,
+	0x2e, 0x31, 0x1c, 0x11, 0xa9, 0x8b, 0x37, 0x28, 0xd0, 0x95, 0x4b, 0x99, 0x92, 0xa4, 0x1c, 0x66,
+	0xbf, 0x14, 0x6b, 0x03, 0x28, 0xa3, 0x3a, 0x99, 0x9c, 0x78, 0x24, 0xc7, 0x78, 0xe1, 0x91, 0x1c,
+	0xe3, 0x83, 0x47, 0x72, 0x8c, 0x13, 0x1e, 0xcb, 0x31, 0x5c, 0x78, 0x2c, 0xc7, 0x70, 0xe3, 0xb1,
+	0x1c, 0x43, 0x94, 0x14, 0xd6, 0x7c, 0x5a, 0x52, 0x59, 0x90, 0x5a, 0x9c, 0xc4, 0x06, 0x2e, 0x68,
+	0x8c, 0x01, 0x01, 0x00, 0x00, 0xff, 0xff, 0xa3, 0x3c, 0x1c, 0x7c, 0x19, 0x05, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -454,7 +452,7 @@ type MsgClient interface {
 	// parameters. The authority defaults to the x/gov module account.
 	UpdateParams(ctx context.Context, in *MsgUpdateParams, opts ...grpc.CallOption) (*MsgUpdateParamsResponse, error)
 	CreateStaker(ctx context.Context, in *MsgCreateStaker, opts ...grpc.CallOption) (*MsgCreateStakerResponse, error)
-	SlashStaker(ctx context.Context, in *MsgSlashStaker, opts ...grpc.CallOption) (*MsgSlashStakerResponse, error)
+	RemoveStaker(ctx context.Context, in *MsgRemoveStaker, opts ...grpc.CallOption) (*MsgRemoveStakerResponse, error)
 	UpdateCommitteeAddress(ctx context.Context, in *MsgUpdateCommitteeAddress, opts ...grpc.CallOption) (*MsgUpdateCommitteeAddressResponse, error)
 }
 
@@ -484,9 +482,9 @@ func (c *msgClient) CreateStaker(ctx context.Context, in *MsgCreateStaker, opts 
 	return out, nil
 }
 
-func (c *msgClient) SlashStaker(ctx context.Context, in *MsgSlashStaker, opts ...grpc.CallOption) (*MsgSlashStakerResponse, error) {
-	out := new(MsgSlashStakerResponse)
-	err := c.cc.Invoke(ctx, "/fiamma.bitvmstaker.Msg/SlashStaker", in, out, opts...)
+func (c *msgClient) RemoveStaker(ctx context.Context, in *MsgRemoveStaker, opts ...grpc.CallOption) (*MsgRemoveStakerResponse, error) {
+	out := new(MsgRemoveStakerResponse)
+	err := c.cc.Invoke(ctx, "/fiamma.bitvmstaker.Msg/RemoveStaker", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -508,7 +506,7 @@ type MsgServer interface {
 	// parameters. The authority defaults to the x/gov module account.
 	UpdateParams(context.Context, *MsgUpdateParams) (*MsgUpdateParamsResponse, error)
 	CreateStaker(context.Context, *MsgCreateStaker) (*MsgCreateStakerResponse, error)
-	SlashStaker(context.Context, *MsgSlashStaker) (*MsgSlashStakerResponse, error)
+	RemoveStaker(context.Context, *MsgRemoveStaker) (*MsgRemoveStakerResponse, error)
 	UpdateCommitteeAddress(context.Context, *MsgUpdateCommitteeAddress) (*MsgUpdateCommitteeAddressResponse, error)
 }
 
@@ -522,8 +520,8 @@ func (*UnimplementedMsgServer) UpdateParams(ctx context.Context, req *MsgUpdateP
 func (*UnimplementedMsgServer) CreateStaker(ctx context.Context, req *MsgCreateStaker) (*MsgCreateStakerResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateStaker not implemented")
 }
-func (*UnimplementedMsgServer) SlashStaker(ctx context.Context, req *MsgSlashStaker) (*MsgSlashStakerResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SlashStaker not implemented")
+func (*UnimplementedMsgServer) RemoveStaker(ctx context.Context, req *MsgRemoveStaker) (*MsgRemoveStakerResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RemoveStaker not implemented")
 }
 func (*UnimplementedMsgServer) UpdateCommitteeAddress(ctx context.Context, req *MsgUpdateCommitteeAddress) (*MsgUpdateCommitteeAddressResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateCommitteeAddress not implemented")
@@ -569,20 +567,20 @@ func _Msg_CreateStaker_Handler(srv interface{}, ctx context.Context, dec func(in
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Msg_SlashStaker_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(MsgSlashStaker)
+func _Msg_RemoveStaker_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgRemoveStaker)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(MsgServer).SlashStaker(ctx, in)
+		return srv.(MsgServer).RemoveStaker(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/fiamma.bitvmstaker.Msg/SlashStaker",
+		FullMethod: "/fiamma.bitvmstaker.Msg/RemoveStaker",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MsgServer).SlashStaker(ctx, req.(*MsgSlashStaker))
+		return srv.(MsgServer).RemoveStaker(ctx, req.(*MsgRemoveStaker))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -618,8 +616,8 @@ var _Msg_serviceDesc = grpc.ServiceDesc{
 			Handler:    _Msg_CreateStaker_Handler,
 		},
 		{
-			MethodName: "SlashStaker",
-			Handler:    _Msg_SlashStaker_Handler,
+			MethodName: "RemoveStaker",
+			Handler:    _Msg_RemoveStaker_Handler,
 		},
 		{
 			MethodName: "UpdateCommitteeAddress",
@@ -753,7 +751,7 @@ func (m *MsgCreateStakerResponse) MarshalToSizedBuffer(dAtA []byte) (int, error)
 	return len(dAtA) - i, nil
 }
 
-func (m *MsgSlashStaker) Marshal() (dAtA []byte, err error) {
+func (m *MsgRemoveStaker) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -763,12 +761,12 @@ func (m *MsgSlashStaker) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *MsgSlashStaker) MarshalTo(dAtA []byte) (int, error) {
+func (m *MsgRemoveStaker) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *MsgSlashStaker) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *MsgRemoveStaker) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -790,7 +788,7 @@ func (m *MsgSlashStaker) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
-func (m *MsgSlashStakerResponse) Marshal() (dAtA []byte, err error) {
+func (m *MsgRemoveStakerResponse) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -800,12 +798,12 @@ func (m *MsgSlashStakerResponse) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *MsgSlashStakerResponse) MarshalTo(dAtA []byte) (int, error) {
+func (m *MsgRemoveStakerResponse) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *MsgSlashStakerResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *MsgRemoveStakerResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -934,7 +932,7 @@ func (m *MsgCreateStakerResponse) Size() (n int) {
 	return n
 }
 
-func (m *MsgSlashStaker) Size() (n int) {
+func (m *MsgRemoveStaker) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -951,7 +949,7 @@ func (m *MsgSlashStaker) Size() (n int) {
 	return n
 }
 
-func (m *MsgSlashStakerResponse) Size() (n int) {
+func (m *MsgRemoveStakerResponse) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -1321,7 +1319,7 @@ func (m *MsgCreateStakerResponse) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *MsgSlashStaker) Unmarshal(dAtA []byte) error {
+func (m *MsgRemoveStaker) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -1344,10 +1342,10 @@ func (m *MsgSlashStaker) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: MsgSlashStaker: wiretype end group for non-group")
+			return fmt.Errorf("proto: MsgRemoveStaker: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: MsgSlashStaker: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: MsgRemoveStaker: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
@@ -1435,7 +1433,7 @@ func (m *MsgSlashStaker) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *MsgSlashStakerResponse) Unmarshal(dAtA []byte) error {
+func (m *MsgRemoveStakerResponse) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -1458,10 +1456,10 @@ func (m *MsgSlashStakerResponse) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: MsgSlashStakerResponse: wiretype end group for non-group")
+			return fmt.Errorf("proto: MsgRemoveStakerResponse: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: MsgSlashStakerResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: MsgRemoveStakerResponse: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		default:

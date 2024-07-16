@@ -10,15 +10,13 @@ import (
 	"google.golang.org/grpc/status"
 )
 
-func (k Keeper) ListStakerAddresses(goCtx context.Context, req *types.QueryListStakerAddressesRequest) (*types.QueryListStakerAddressesResponse, error) {
+func (k Keeper) AllStakerInfo(goCtx context.Context, req *types.QueryAllStakerInfoRequest) (*types.QueryAllStakerInfoResponse, error) {
 	if req == nil {
 		return nil, status.Error(codes.InvalidArgument, "invalid request")
 	}
 
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
-	// TODO: Process the query
-	_ = ctx
+	return k.GetAllStakerInfo(ctx, req)
 
-	return &types.QueryListStakerAddressesResponse{}, nil
 }

@@ -8,7 +8,6 @@ package bitvmstaker
 
 import (
 	context "context"
-
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -22,7 +21,7 @@ const _ = grpc.SupportPackageIsVersion7
 const (
 	Msg_UpdateParams_FullMethodName           = "/fiamma.bitvmstaker.Msg/UpdateParams"
 	Msg_CreateStaker_FullMethodName           = "/fiamma.bitvmstaker.Msg/CreateStaker"
-	Msg_SlashStaker_FullMethodName            = "/fiamma.bitvmstaker.Msg/SlashStaker"
+	Msg_RemoveStaker_FullMethodName           = "/fiamma.bitvmstaker.Msg/RemoveStaker"
 	Msg_UpdateCommitteeAddress_FullMethodName = "/fiamma.bitvmstaker.Msg/UpdateCommitteeAddress"
 )
 
@@ -34,7 +33,7 @@ type MsgClient interface {
 	// parameters. The authority defaults to the x/gov module account.
 	UpdateParams(ctx context.Context, in *MsgUpdateParams, opts ...grpc.CallOption) (*MsgUpdateParamsResponse, error)
 	CreateStaker(ctx context.Context, in *MsgCreateStaker, opts ...grpc.CallOption) (*MsgCreateStakerResponse, error)
-	SlashStaker(ctx context.Context, in *MsgSlashStaker, opts ...grpc.CallOption) (*MsgSlashStakerResponse, error)
+	RemoveStaker(ctx context.Context, in *MsgRemoveStaker, opts ...grpc.CallOption) (*MsgRemoveStakerResponse, error)
 	UpdateCommitteeAddress(ctx context.Context, in *MsgUpdateCommitteeAddress, opts ...grpc.CallOption) (*MsgUpdateCommitteeAddressResponse, error)
 }
 
@@ -64,9 +63,9 @@ func (c *msgClient) CreateStaker(ctx context.Context, in *MsgCreateStaker, opts 
 	return out, nil
 }
 
-func (c *msgClient) SlashStaker(ctx context.Context, in *MsgSlashStaker, opts ...grpc.CallOption) (*MsgSlashStakerResponse, error) {
-	out := new(MsgSlashStakerResponse)
-	err := c.cc.Invoke(ctx, Msg_SlashStaker_FullMethodName, in, out, opts...)
+func (c *msgClient) RemoveStaker(ctx context.Context, in *MsgRemoveStaker, opts ...grpc.CallOption) (*MsgRemoveStakerResponse, error) {
+	out := new(MsgRemoveStakerResponse)
+	err := c.cc.Invoke(ctx, Msg_RemoveStaker_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -90,7 +89,7 @@ type MsgServer interface {
 	// parameters. The authority defaults to the x/gov module account.
 	UpdateParams(context.Context, *MsgUpdateParams) (*MsgUpdateParamsResponse, error)
 	CreateStaker(context.Context, *MsgCreateStaker) (*MsgCreateStakerResponse, error)
-	SlashStaker(context.Context, *MsgSlashStaker) (*MsgSlashStakerResponse, error)
+	RemoveStaker(context.Context, *MsgRemoveStaker) (*MsgRemoveStakerResponse, error)
 	UpdateCommitteeAddress(context.Context, *MsgUpdateCommitteeAddress) (*MsgUpdateCommitteeAddressResponse, error)
 	mustEmbedUnimplementedMsgServer()
 }
@@ -105,8 +104,8 @@ func (UnimplementedMsgServer) UpdateParams(context.Context, *MsgUpdateParams) (*
 func (UnimplementedMsgServer) CreateStaker(context.Context, *MsgCreateStaker) (*MsgCreateStakerResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateStaker not implemented")
 }
-func (UnimplementedMsgServer) SlashStaker(context.Context, *MsgSlashStaker) (*MsgSlashStakerResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SlashStaker not implemented")
+func (UnimplementedMsgServer) RemoveStaker(context.Context, *MsgRemoveStaker) (*MsgRemoveStakerResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RemoveStaker not implemented")
 }
 func (UnimplementedMsgServer) UpdateCommitteeAddress(context.Context, *MsgUpdateCommitteeAddress) (*MsgUpdateCommitteeAddressResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateCommitteeAddress not implemented")
@@ -160,20 +159,20 @@ func _Msg_CreateStaker_Handler(srv interface{}, ctx context.Context, dec func(in
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Msg_SlashStaker_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(MsgSlashStaker)
+func _Msg_RemoveStaker_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgRemoveStaker)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(MsgServer).SlashStaker(ctx, in)
+		return srv.(MsgServer).RemoveStaker(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Msg_SlashStaker_FullMethodName,
+		FullMethod: Msg_RemoveStaker_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MsgServer).SlashStaker(ctx, req.(*MsgSlashStaker))
+		return srv.(MsgServer).RemoveStaker(ctx, req.(*MsgRemoveStaker))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -212,8 +211,8 @@ var Msg_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Msg_CreateStaker_Handler,
 		},
 		{
-			MethodName: "SlashStaker",
-			Handler:    _Msg_SlashStaker_Handler,
+			MethodName: "RemoveStaker",
+			Handler:    _Msg_RemoveStaker_Handler,
 		},
 		{
 			MethodName: "UpdateCommitteeAddress",

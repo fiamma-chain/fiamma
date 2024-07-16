@@ -17,8 +17,7 @@ func (k Keeper) CommitteeAddress(goCtx context.Context, req *types.QueryCommitte
 
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
-	// TODO: Process the query
-	_ = ctx
+	committeeAddress := k.GetCommitteeAddress(ctx)
 
-	return &types.QueryCommitteeAddressResponse{}, nil
+	return &types.QueryCommitteeAddressResponse{CommitteeAddress: committeeAddress}, nil
 }

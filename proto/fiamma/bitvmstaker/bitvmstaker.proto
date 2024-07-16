@@ -1,0 +1,13 @@
+syntax = "proto3";
+package fiamma.bitvmstaker;
+
+import "gogoproto/gogo.proto";
+
+option go_package = "fiamma/x/bitvmstaker/types";
+
+
+// StakerInfo is the data structure for the BitVM staker information
+message StakerInfo {
+  uint64 staker_index = 1;
+  string staker_address = 2;
+}

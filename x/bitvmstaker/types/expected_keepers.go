@@ -12,7 +12,12 @@ import (
 type StakingKeeper interface {
 	ConsensusAddressCodec() address.Codec
 	ValidatorByConsAddr(context.Context, sdk.ConsAddress) (stakingtypes.ValidatorI, error)
-	// Methods imported from account should be defined here
+	RemoveValidator(context.Context, sdk.ValAddress) error
+}
+
+// StakingHooks event hooks for staking validator object (noalias)
+type StakingHooks interface {
+	AfterValidatorCreated(ctx context.Context, valAddr sdk.ValAddress) error // Must be called when a validator is created
 }
 
 // AccountKeeper defines the expected interface for the Account module.

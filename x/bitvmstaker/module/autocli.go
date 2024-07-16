@@ -18,9 +18,9 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					Short:     "Shows the parameters of the module",
 				},
 				{
-					RpcMethod:      "ListStakerAddresses",
-					Use:            "list-staker-addresses",
-					Short:          "Query list-staker-addresses",
+					RpcMethod:      "AllStakerInfo",
+					Use:            "all-staker-info",
+					Short:          "Query all-staker-info",
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{},
 				},
 
@@ -46,19 +46,19 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					RpcMethod:      "CreateStaker",
 					Use:            "create-staker [staker-address]",
 					Short:          "Send a create-staker tx",
-					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "stakerAddress"}},
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "staker_address"}},
 				},
 				{
-					RpcMethod:      "SlashStaker",
-					Use:            "slash-staker [staker-address]",
-					Short:          "Send a slash-staker tx",
-					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "stakerAddress"}},
+					RpcMethod:      "RemoveStaker",
+					Use:            "remove-staker [remove-address]",
+					Short:          "Send a remove-staker tx",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "staker_address"}},
 				},
 				{
 					RpcMethod:      "UpdateCommitteeAddress",
 					Use:            "update-committee-address [new-committee-address]",
 					Short:          "Send a update-committee-address tx",
-					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "newCommitteeAddress"}},
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "new_committee_address"}},
 				},
 				// this line is used by ignite scaffolding # autocli/tx
 			},

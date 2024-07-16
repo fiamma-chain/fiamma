@@ -9,21 +9,21 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func TestMsgSlashStaker_ValidateBasic(t *testing.T) {
+func TestMsgRemoveStaker_ValidateBasic(t *testing.T) {
 	tests := []struct {
 		name string
-		msg  MsgSlashStaker
+		msg  MsgRemoveStaker
 		err  error
 	}{
 		{
 			name: "invalid address",
-			msg: MsgSlashStaker{
+			msg: MsgRemoveStaker{
 				Creator: "invalid_address",
 			},
 			err: sdkerrors.ErrInvalidAddress,
 		}, {
 			name: "valid address",
-			msg: MsgSlashStaker{
+			msg: MsgRemoveStaker{
 				Creator: sample.AccAddress(),
 			},
 		},

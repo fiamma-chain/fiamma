@@ -11,8 +11,13 @@ import (
 func (k msgServer) CreateStaker(goCtx context.Context, msg *types.MsgCreateStaker) (*types.MsgCreateStakerResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
-	// TODO: Handling the message
-	_ = ctx
+	if msg.Creator != k.GetCommitteeAddress(ctx) {
+		return nil, types.ErrUnauthorized
+	}
+	stakerInfo := types.StakerInfo{
+		StakerAddress: msg.StakerAddress,
+	}
+	k.AppendStaker(ctx, stakerInfo)
 
 	return &types.MsgCreateStakerResponse{}, nil
 }

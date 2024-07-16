@@ -6,10 +6,6 @@ package types
 import (
 	context "context"
 	fmt "fmt"
-	io "io"
-	math "math"
-	math_bits "math/bits"
-
 	query "github.com/cosmos/cosmos-sdk/types/query"
 	_ "github.com/cosmos/cosmos-sdk/types/tx/amino"
 	_ "github.com/cosmos/gogoproto/gogoproto"
@@ -19,6 +15,9 @@ import (
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
+	io "io"
+	math "math"
+	math_bits "math/bits"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -115,22 +114,22 @@ func (m *QueryParamsResponse) GetParams() Params {
 	return Params{}
 }
 
-type QueryListStakerAddressesRequest struct {
+type QueryAllStakerInfoRequest struct {
 	Pagination *query.PageRequest `protobuf:"bytes,1,opt,name=pagination,proto3" json:"pagination,omitempty"`
 }
 
-func (m *QueryListStakerAddressesRequest) Reset()         { *m = QueryListStakerAddressesRequest{} }
-func (m *QueryListStakerAddressesRequest) String() string { return proto.CompactTextString(m) }
-func (*QueryListStakerAddressesRequest) ProtoMessage()    {}
-func (*QueryListStakerAddressesRequest) Descriptor() ([]byte, []int) {
+func (m *QueryAllStakerInfoRequest) Reset()         { *m = QueryAllStakerInfoRequest{} }
+func (m *QueryAllStakerInfoRequest) String() string { return proto.CompactTextString(m) }
+func (*QueryAllStakerInfoRequest) ProtoMessage()    {}
+func (*QueryAllStakerInfoRequest) Descriptor() ([]byte, []int) {
 	return fileDescriptor_684fd52f1c274172, []int{2}
 }
-func (m *QueryListStakerAddressesRequest) XXX_Unmarshal(b []byte) error {
+func (m *QueryAllStakerInfoRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *QueryListStakerAddressesRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *QueryAllStakerInfoRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_QueryListStakerAddressesRequest.Marshal(b, m, deterministic)
+		return xxx_messageInfo_QueryAllStakerInfoRequest.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -140,42 +139,42 @@ func (m *QueryListStakerAddressesRequest) XXX_Marshal(b []byte, deterministic bo
 		return b[:n], nil
 	}
 }
-func (m *QueryListStakerAddressesRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_QueryListStakerAddressesRequest.Merge(m, src)
+func (m *QueryAllStakerInfoRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryAllStakerInfoRequest.Merge(m, src)
 }
-func (m *QueryListStakerAddressesRequest) XXX_Size() int {
+func (m *QueryAllStakerInfoRequest) XXX_Size() int {
 	return m.Size()
 }
-func (m *QueryListStakerAddressesRequest) XXX_DiscardUnknown() {
-	xxx_messageInfo_QueryListStakerAddressesRequest.DiscardUnknown(m)
+func (m *QueryAllStakerInfoRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryAllStakerInfoRequest.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_QueryListStakerAddressesRequest proto.InternalMessageInfo
+var xxx_messageInfo_QueryAllStakerInfoRequest proto.InternalMessageInfo
 
-func (m *QueryListStakerAddressesRequest) GetPagination() *query.PageRequest {
+func (m *QueryAllStakerInfoRequest) GetPagination() *query.PageRequest {
 	if m != nil {
 		return m.Pagination
 	}
 	return nil
 }
 
-type QueryListStakerAddressesResponse struct {
-	StakerAddresses string              `protobuf:"bytes,1,opt,name=stakerAddresses,proto3" json:"stakerAddresses,omitempty"`
-	Pagination      *query.PageResponse `protobuf:"bytes,2,opt,name=pagination,proto3" json:"pagination,omitempty"`
+type QueryAllStakerInfoResponse struct {
+	AllStakerInfo []StakerInfo        `protobuf:"bytes,1,rep,name=all_staker_info,json=allStakerInfo,proto3" json:"all_staker_info"`
+	Pagination    *query.PageResponse `protobuf:"bytes,2,opt,name=pagination,proto3" json:"pagination,omitempty"`
 }
 
-func (m *QueryListStakerAddressesResponse) Reset()         { *m = QueryListStakerAddressesResponse{} }
-func (m *QueryListStakerAddressesResponse) String() string { return proto.CompactTextString(m) }
-func (*QueryListStakerAddressesResponse) ProtoMessage()    {}
-func (*QueryListStakerAddressesResponse) Descriptor() ([]byte, []int) {
+func (m *QueryAllStakerInfoResponse) Reset()         { *m = QueryAllStakerInfoResponse{} }
+func (m *QueryAllStakerInfoResponse) String() string { return proto.CompactTextString(m) }
+func (*QueryAllStakerInfoResponse) ProtoMessage()    {}
+func (*QueryAllStakerInfoResponse) Descriptor() ([]byte, []int) {
 	return fileDescriptor_684fd52f1c274172, []int{3}
 }
-func (m *QueryListStakerAddressesResponse) XXX_Unmarshal(b []byte) error {
+func (m *QueryAllStakerInfoResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *QueryListStakerAddressesResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *QueryAllStakerInfoResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_QueryListStakerAddressesResponse.Marshal(b, m, deterministic)
+		return xxx_messageInfo_QueryAllStakerInfoResponse.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -185,26 +184,26 @@ func (m *QueryListStakerAddressesResponse) XXX_Marshal(b []byte, deterministic b
 		return b[:n], nil
 	}
 }
-func (m *QueryListStakerAddressesResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_QueryListStakerAddressesResponse.Merge(m, src)
+func (m *QueryAllStakerInfoResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryAllStakerInfoResponse.Merge(m, src)
 }
-func (m *QueryListStakerAddressesResponse) XXX_Size() int {
+func (m *QueryAllStakerInfoResponse) XXX_Size() int {
 	return m.Size()
 }
-func (m *QueryListStakerAddressesResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_QueryListStakerAddressesResponse.DiscardUnknown(m)
+func (m *QueryAllStakerInfoResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryAllStakerInfoResponse.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_QueryListStakerAddressesResponse proto.InternalMessageInfo
+var xxx_messageInfo_QueryAllStakerInfoResponse proto.InternalMessageInfo
 
-func (m *QueryListStakerAddressesResponse) GetStakerAddresses() string {
+func (m *QueryAllStakerInfoResponse) GetAllStakerInfo() []StakerInfo {
 	if m != nil {
-		return m.StakerAddresses
+		return m.AllStakerInfo
 	}
-	return ""
+	return nil
 }
 
-func (m *QueryListStakerAddressesResponse) GetPagination() *query.PageResponse {
+func (m *QueryAllStakerInfoResponse) GetPagination() *query.PageResponse {
 	if m != nil {
 		return m.Pagination
 	}
@@ -294,8 +293,8 @@ func (m *QueryCommitteeAddressResponse) GetCommitteeAddress() string {
 func init() {
 	proto.RegisterType((*QueryParamsRequest)(nil), "fiamma.bitvmstaker.QueryParamsRequest")
 	proto.RegisterType((*QueryParamsResponse)(nil), "fiamma.bitvmstaker.QueryParamsResponse")
-	proto.RegisterType((*QueryListStakerAddressesRequest)(nil), "fiamma.bitvmstaker.QueryListStakerAddressesRequest")
-	proto.RegisterType((*QueryListStakerAddressesResponse)(nil), "fiamma.bitvmstaker.QueryListStakerAddressesResponse")
+	proto.RegisterType((*QueryAllStakerInfoRequest)(nil), "fiamma.bitvmstaker.QueryAllStakerInfoRequest")
+	proto.RegisterType((*QueryAllStakerInfoResponse)(nil), "fiamma.bitvmstaker.QueryAllStakerInfoResponse")
 	proto.RegisterType((*QueryCommitteeAddressRequest)(nil), "fiamma.bitvmstaker.QueryCommitteeAddressRequest")
 	proto.RegisterType((*QueryCommitteeAddressResponse)(nil), "fiamma.bitvmstaker.QueryCommitteeAddressResponse")
 }
@@ -303,38 +302,40 @@ func init() {
 func init() { proto.RegisterFile("fiamma/bitvmstaker/query.proto", fileDescriptor_684fd52f1c274172) }
 
 var fileDescriptor_684fd52f1c274172 = []byte{
-	// 496 bytes of a gzipped FileDescriptorProto
+	// 527 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x94, 0x94, 0x41, 0x6b, 0x14, 0x31,
-	0x14, 0xc7, 0x37, 0x15, 0x17, 0xfa, 0x3c, 0x58, 0xd3, 0x1e, 0x24, 0xac, 0xd9, 0x32, 0x60, 0xb7,
-	0xae, 0x98, 0xb8, 0x6d, 0xaf, 0x1e, 0xac, 0xa0, 0x07, 0x3d, 0xd4, 0xd5, 0x93, 0x97, 0x92, 0x6d,
-	0xe3, 0x10, 0x6c, 0x26, 0xd3, 0x49, 0x5a, 0xec, 0xc1, 0x8b, 0x9f, 0x40, 0x10, 0xbf, 0x82, 0x78,
-	0x14, 0xfc, 0x12, 0x3d, 0x16, 0xbc, 0x78, 0x12, 0xd9, 0x55, 0xfc, 0x1a, 0xb2, 0x49, 0xb6, 0x76,
-	0x76, 0x67, 0x28, 0x7b, 0x19, 0xc2, 0x7b, 0xef, 0xff, 0xfe, 0xbf, 0x97, 0x17, 0x06, 0xe8, 0x6b,
-	0x25, 0xb4, 0x16, 0x7c, 0xa0, 0xdc, 0xb1, 0xb6, 0x4e, 0xbc, 0x91, 0x05, 0x3f, 0x3c, 0x92, 0xc5,
-	0x09, 0xcb, 0x0b, 0xe3, 0x0c, 0xc6, 0x21, 0xcf, 0x2e, 0xe4, 0xc9, 0x0d, 0xa1, 0x55, 0x66, 0xb8,
-	0xff, 0x86, 0x32, 0xb2, 0x92, 0x9a, 0xd4, 0xf8, 0x23, 0x1f, 0x9f, 0x62, 0xb4, 0x95, 0x1a, 0x93,
-	0x1e, 0x48, 0x2e, 0x72, 0xc5, 0x45, 0x96, 0x19, 0x27, 0x9c, 0x32, 0x99, 0x8d, 0xd9, 0xee, 0x9e,
-	0xb1, 0xda, 0x58, 0x3e, 0x10, 0x56, 0x06, 0x4f, 0x7e, 0xdc, 0x1b, 0x48, 0x27, 0x7a, 0x3c, 0x17,
-	0xa9, 0xca, 0x7c, 0x71, 0xac, 0x6d, 0x57, 0x60, 0xe6, 0xa2, 0x10, 0x3a, 0x36, 0x4b, 0x56, 0x00,
-	0x3f, 0x1f, 0xb7, 0xd8, 0xf1, 0xc1, 0xbe, 0x3c, 0x3c, 0x92, 0xd6, 0x25, 0x2f, 0x61, 0xb9, 0x14,
-	0xb5, 0xb9, 0xc9, 0xac, 0xc4, 0x0f, 0xa0, 0x19, 0xc4, 0x37, 0xd1, 0x2a, 0x5a, 0xbf, 0xb6, 0x41,
-	0xd8, 0xec, 0x94, 0x2c, 0x68, 0xb6, 0x17, 0x4f, 0x7f, 0xb6, 0x1b, 0x5f, 0xfe, 0x7e, 0xed, 0xa2,
-	0x7e, 0x14, 0x25, 0x0a, 0xda, 0xbe, 0xeb, 0x33, 0x65, 0xdd, 0x0b, 0x5f, 0xfc, 0x70, 0x7f, 0xbf,
-	0x90, 0xd6, 0xca, 0x89, 0x31, 0x7e, 0x0c, 0xf0, 0x7f, 0x86, 0xe8, 0xb2, 0xc6, 0xc2, 0xc0, 0x6c,
-	0x3c, 0x30, 0x0b, 0x97, 0x1c, 0x07, 0x66, 0x3b, 0x22, 0x95, 0x51, 0xdb, 0xbf, 0xa0, 0x4c, 0x3e,
-	0x21, 0x58, 0xad, 0xf7, 0x8a, 0xe3, 0xac, 0xc3, 0x75, 0x5b, 0x4e, 0x79, 0xc7, 0xc5, 0xfe, 0x74,
-	0x18, 0x3f, 0x29, 0x61, 0x2d, 0x78, 0xac, 0xce, 0xa5, 0x58, 0xc1, 0xa6, 0xc4, 0x45, 0xa1, 0xe5,
-	0xb1, 0x1e, 0x19, 0xad, 0x95, 0x73, 0x52, 0x46, 0x8f, 0xc9, 0xc5, 0x3f, 0x85, 0x5b, 0x35, 0xf9,
-	0xc8, 0xdc, 0x85, 0xa5, 0xbd, 0xa9, 0x5c, 0x84, 0x9e, 0x89, 0x6f, 0xfc, 0xb9, 0x02, 0x57, 0x7d,
-	0x37, 0xfc, 0x0e, 0x9a, 0x61, 0x2d, 0x78, 0xad, 0x6a, 0x65, 0xb3, 0x2f, 0x80, 0x74, 0x2e, 0xad,
-	0x0b, 0x40, 0x49, 0xf2, 0xfe, 0xfb, 0xef, 0x8f, 0x0b, 0x2d, 0x4c, 0x78, 0xed, 0x53, 0xc3, 0xdf,
-	0x10, 0x2c, 0x57, 0x2c, 0x02, 0x6f, 0xd6, 0x9a, 0xd4, 0x3f, 0x11, 0xb2, 0x35, 0x9f, 0x28, 0x62,
-	0xf6, 0x3c, 0xe6, 0x5d, 0x7c, 0xa7, 0x0a, 0xf3, 0x40, 0x59, 0xb7, 0x1b, 0xce, 0xbb, 0xe2, 0x9c,
-	0xee, 0x33, 0x82, 0xa5, 0xe9, 0x3d, 0xe0, 0xfb, 0xb5, 0xee, 0x35, 0x2b, 0x25, 0xbd, 0x39, 0x14,
-	0x11, 0xf6, 0x9e, 0x87, 0xed, 0xe0, 0xdb, 0x55, 0xb0, 0xe7, 0x6b, 0x9e, 0xa0, 0x6e, 0x6f, 0x9d,
-	0x0e, 0x29, 0x3a, 0x1b, 0x52, 0xf4, 0x6b, 0x48, 0xd1, 0x87, 0x11, 0x6d, 0x9c, 0x8d, 0x68, 0xe3,
-	0xc7, 0x88, 0x36, 0x5e, 0x91, 0xa8, 0x7f, 0x5b, 0xea, 0xe0, 0x4e, 0x72, 0x69, 0x07, 0x4d, 0xff,
-	0x03, 0xd8, 0xfc, 0x17, 0x00, 0x00, 0xff, 0xff, 0x1f, 0xe1, 0xb4, 0x4f, 0xca, 0x04, 0x00, 0x00,
+	0x14, 0xc7, 0x37, 0xad, 0x2e, 0x34, 0xa5, 0x58, 0x63, 0x0f, 0x35, 0xac, 0x69, 0x19, 0xb4, 0x5b,
+	0x17, 0x9a, 0xb8, 0xab, 0x57, 0x0f, 0x5d, 0x41, 0x11, 0x3d, 0xd4, 0xd1, 0x93, 0x97, 0x25, 0xbb,
+	0xcd, 0x0e, 0x83, 0x33, 0x93, 0xe9, 0x24, 0x2d, 0xf6, 0xe0, 0xc5, 0x4f, 0x20, 0xf8, 0x01, 0xbc,
+	0x89, 0x47, 0xc1, 0x2f, 0xd1, 0x63, 0xc5, 0x8b, 0x27, 0x91, 0x5d, 0xc1, 0xaf, 0x21, 0x9b, 0xc4,
+	0x76, 0x67, 0x37, 0x43, 0xf5, 0x32, 0x84, 0xbc, 0xf7, 0xff, 0xbf, 0xdf, 0x7b, 0x2f, 0x0c, 0x24,
+	0xc3, 0x98, 0xa7, 0x29, 0x67, 0xfd, 0x58, 0x1f, 0xa5, 0x4a, 0xf3, 0x57, 0xa2, 0x60, 0x07, 0x87,
+	0xa2, 0x38, 0xa6, 0x79, 0x21, 0xb5, 0x44, 0xc8, 0xc6, 0xe9, 0x54, 0x1c, 0x5f, 0xe5, 0x69, 0x9c,
+	0x49, 0x66, 0xbe, 0x36, 0x0d, 0xaf, 0x45, 0x32, 0x92, 0xe6, 0xc8, 0x26, 0x27, 0x77, 0xdb, 0x88,
+	0xa4, 0x8c, 0x12, 0xc1, 0x78, 0x1e, 0x33, 0x9e, 0x65, 0x52, 0x73, 0x1d, 0xcb, 0x4c, 0xb9, 0x68,
+	0x6b, 0x20, 0x55, 0x2a, 0x15, 0xeb, 0x73, 0x25, 0x6c, 0x4d, 0x76, 0xd4, 0xee, 0x0b, 0xcd, 0xdb,
+	0x2c, 0xe7, 0x51, 0x9c, 0x99, 0x64, 0x97, 0xbb, 0xe1, 0xc1, 0xcc, 0x79, 0xc1, 0xd3, 0xbf, 0x66,
+	0x37, 0x3d, 0x09, 0x53, 0x67, 0x9b, 0x15, 0xac, 0x41, 0xf4, 0x6c, 0x52, 0x68, 0xcf, 0x48, 0x43,
+	0x71, 0x70, 0x28, 0x94, 0x0e, 0x5e, 0xc0, 0x6b, 0xa5, 0x5b, 0x95, 0xcb, 0x4c, 0x09, 0x74, 0x1f,
+	0xd6, 0x6d, 0x89, 0x75, 0xb0, 0x09, 0xb6, 0x97, 0x3b, 0x98, 0xce, 0xcf, 0x82, 0x5a, 0x4d, 0x77,
+	0xe9, 0xe4, 0xc7, 0x46, 0xed, 0xd3, 0xef, 0xcf, 0x2d, 0x10, 0x3a, 0x51, 0x30, 0x80, 0xd7, 0x8d,
+	0xeb, 0x6e, 0x92, 0x3c, 0x37, 0xb9, 0x8f, 0xb3, 0xa1, 0x74, 0x25, 0xd1, 0x43, 0x08, 0xcf, 0x7b,
+	0x74, 0xfe, 0x5b, 0xd4, 0x0e, 0x84, 0x4e, 0x06, 0x42, 0xed, 0x12, 0xdc, 0x40, 0xe8, 0x1e, 0x8f,
+	0x84, 0xd3, 0x86, 0x53, 0xca, 0xe0, 0x0b, 0x80, 0xd8, 0x57, 0xc5, 0xb5, 0xf0, 0x14, 0x5e, 0xe1,
+	0x49, 0xd2, 0xb3, 0xac, 0xbd, 0x38, 0x1b, 0xca, 0x75, 0xb0, 0xb9, 0xb8, 0xbd, 0xdc, 0x21, 0xbe,
+	0x5e, 0xce, 0x0d, 0xba, 0x97, 0x26, 0xfd, 0x84, 0x2b, 0x7c, 0xda, 0x15, 0x3d, 0x2a, 0x41, 0x2f,
+	0x18, 0xe8, 0xe6, 0x85, 0xd0, 0x16, 0xa5, 0x44, 0x4d, 0x60, 0xc3, 0x40, 0x3f, 0x90, 0x69, 0x1a,
+	0x6b, 0x2d, 0xc4, 0xee, 0xfe, 0x7e, 0x21, 0xd4, 0xd9, 0x42, 0x9e, 0xc0, 0x1b, 0x15, 0x71, 0xd7,
+	0x57, 0x0b, 0xae, 0x0e, 0x66, 0x62, 0x66, 0x88, 0x4b, 0xe1, 0xdc, 0x7d, 0xe7, 0xeb, 0x22, 0xbc,
+	0x6c, 0xdc, 0xd0, 0x1b, 0x58, 0xb7, 0xeb, 0x42, 0x5b, 0xbe, 0xf6, 0xe7, 0x5f, 0x06, 0x6e, 0x5e,
+	0x98, 0x67, 0x81, 0x82, 0xe0, 0xed, 0xb7, 0x5f, 0xef, 0x17, 0x1a, 0x08, 0xb3, 0xca, 0x87, 0x8a,
+	0x3e, 0x00, 0xb8, 0x52, 0x5a, 0x13, 0xda, 0xa9, 0xb4, 0xf7, 0x3d, 0x1a, 0x4c, 0xff, 0x35, 0xdd,
+	0x41, 0x31, 0x03, 0x75, 0x1b, 0x35, 0x7d, 0x50, 0x91, 0xd0, 0xbd, 0x99, 0xb7, 0x81, 0x3e, 0x02,
+	0xb8, 0x3a, 0x3b, 0x73, 0x74, 0xa7, 0xb2, 0x6a, 0xc5, 0xfa, 0x70, 0xfb, 0x3f, 0x14, 0x0e, 0x75,
+	0xc7, 0xa0, 0x36, 0xd1, 0x2d, 0x1f, 0xea, 0xd9, 0x4a, 0x7b, 0xdc, 0xca, 0xba, 0xf7, 0x4e, 0x46,
+	0x04, 0x9c, 0x8e, 0x08, 0xf8, 0x39, 0x22, 0xe0, 0xdd, 0x98, 0xd4, 0x4e, 0xc7, 0xa4, 0xf6, 0x7d,
+	0x4c, 0x6a, 0x2f, 0xb1, 0xd3, 0xbf, 0x2e, 0x39, 0xe8, 0xe3, 0x5c, 0xa8, 0x7e, 0xdd, 0xfc, 0x04,
+	0xee, 0xfe, 0x09, 0x00, 0x00, 0xff, 0xff, 0xcc, 0xa7, 0x66, 0xe8, 0xf4, 0x04, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -351,9 +352,9 @@ const _ = grpc.SupportPackageIsVersion4
 type QueryClient interface {
 	// Parameters queries the parameters of the module.
 	Params(ctx context.Context, in *QueryParamsRequest, opts ...grpc.CallOption) (*QueryParamsResponse, error)
-	// Queries a list of ListStakerAddresses items.
-	ListStakerAddresses(ctx context.Context, in *QueryListStakerAddressesRequest, opts ...grpc.CallOption) (*QueryListStakerAddressesResponse, error)
-	// Queries a list of CommitteeAddress items.
+	// QueryAllStakerInfoRequest is the request type for the Query/AllStakerInfo RPC method.
+	AllStakerInfo(ctx context.Context, in *QueryAllStakerInfoRequest, opts ...grpc.CallOption) (*QueryAllStakerInfoResponse, error)
+	// QueryCommitteeAddressRequest is the request type for the Query/CommitteeAddress RPC method.
 	CommitteeAddress(ctx context.Context, in *QueryCommitteeAddressRequest, opts ...grpc.CallOption) (*QueryCommitteeAddressResponse, error)
 }
 
@@ -374,9 +375,9 @@ func (c *queryClient) Params(ctx context.Context, in *QueryParamsRequest, opts .
 	return out, nil
 }
 
-func (c *queryClient) ListStakerAddresses(ctx context.Context, in *QueryListStakerAddressesRequest, opts ...grpc.CallOption) (*QueryListStakerAddressesResponse, error) {
-	out := new(QueryListStakerAddressesResponse)
-	err := c.cc.Invoke(ctx, "/fiamma.bitvmstaker.Query/ListStakerAddresses", in, out, opts...)
+func (c *queryClient) AllStakerInfo(ctx context.Context, in *QueryAllStakerInfoRequest, opts ...grpc.CallOption) (*QueryAllStakerInfoResponse, error) {
+	out := new(QueryAllStakerInfoResponse)
+	err := c.cc.Invoke(ctx, "/fiamma.bitvmstaker.Query/AllStakerInfo", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -396,9 +397,9 @@ func (c *queryClient) CommitteeAddress(ctx context.Context, in *QueryCommitteeAd
 type QueryServer interface {
 	// Parameters queries the parameters of the module.
 	Params(context.Context, *QueryParamsRequest) (*QueryParamsResponse, error)
-	// Queries a list of ListStakerAddresses items.
-	ListStakerAddresses(context.Context, *QueryListStakerAddressesRequest) (*QueryListStakerAddressesResponse, error)
-	// Queries a list of CommitteeAddress items.
+	// QueryAllStakerInfoRequest is the request type for the Query/AllStakerInfo RPC method.
+	AllStakerInfo(context.Context, *QueryAllStakerInfoRequest) (*QueryAllStakerInfoResponse, error)
+	// QueryCommitteeAddressRequest is the request type for the Query/CommitteeAddress RPC method.
 	CommitteeAddress(context.Context, *QueryCommitteeAddressRequest) (*QueryCommitteeAddressResponse, error)
 }
 
@@ -409,8 +410,8 @@ type UnimplementedQueryServer struct {
 func (*UnimplementedQueryServer) Params(ctx context.Context, req *QueryParamsRequest) (*QueryParamsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Params not implemented")
 }
-func (*UnimplementedQueryServer) ListStakerAddresses(ctx context.Context, req *QueryListStakerAddressesRequest) (*QueryListStakerAddressesResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListStakerAddresses not implemented")
+func (*UnimplementedQueryServer) AllStakerInfo(ctx context.Context, req *QueryAllStakerInfoRequest) (*QueryAllStakerInfoResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AllStakerInfo not implemented")
 }
 func (*UnimplementedQueryServer) CommitteeAddress(ctx context.Context, req *QueryCommitteeAddressRequest) (*QueryCommitteeAddressResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CommitteeAddress not implemented")
@@ -438,20 +439,20 @@ func _Query_Params_Handler(srv interface{}, ctx context.Context, dec func(interf
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Query_ListStakerAddresses_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(QueryListStakerAddressesRequest)
+func _Query_AllStakerInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryAllStakerInfoRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(QueryServer).ListStakerAddresses(ctx, in)
+		return srv.(QueryServer).AllStakerInfo(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/fiamma.bitvmstaker.Query/ListStakerAddresses",
+		FullMethod: "/fiamma.bitvmstaker.Query/AllStakerInfo",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(QueryServer).ListStakerAddresses(ctx, req.(*QueryListStakerAddressesRequest))
+		return srv.(QueryServer).AllStakerInfo(ctx, req.(*QueryAllStakerInfoRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -483,8 +484,8 @@ var _Query_serviceDesc = grpc.ServiceDesc{
 			Handler:    _Query_Params_Handler,
 		},
 		{
-			MethodName: "ListStakerAddresses",
-			Handler:    _Query_ListStakerAddresses_Handler,
+			MethodName: "AllStakerInfo",
+			Handler:    _Query_AllStakerInfo_Handler,
 		},
 		{
 			MethodName: "CommitteeAddress",
@@ -551,7 +552,7 @@ func (m *QueryParamsResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
-func (m *QueryListStakerAddressesRequest) Marshal() (dAtA []byte, err error) {
+func (m *QueryAllStakerInfoRequest) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -561,12 +562,12 @@ func (m *QueryListStakerAddressesRequest) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *QueryListStakerAddressesRequest) MarshalTo(dAtA []byte) (int, error) {
+func (m *QueryAllStakerInfoRequest) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *QueryListStakerAddressesRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *QueryAllStakerInfoRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -586,7 +587,7 @@ func (m *QueryListStakerAddressesRequest) MarshalToSizedBuffer(dAtA []byte) (int
 	return len(dAtA) - i, nil
 }
 
-func (m *QueryListStakerAddressesResponse) Marshal() (dAtA []byte, err error) {
+func (m *QueryAllStakerInfoResponse) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -596,12 +597,12 @@ func (m *QueryListStakerAddressesResponse) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *QueryListStakerAddressesResponse) MarshalTo(dAtA []byte) (int, error) {
+func (m *QueryAllStakerInfoResponse) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *QueryListStakerAddressesResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *QueryAllStakerInfoResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -618,12 +619,19 @@ func (m *QueryListStakerAddressesResponse) MarshalToSizedBuffer(dAtA []byte) (in
 		i--
 		dAtA[i] = 0x12
 	}
-	if len(m.StakerAddresses) > 0 {
-		i -= len(m.StakerAddresses)
-		copy(dAtA[i:], m.StakerAddresses)
-		i = encodeVarintQuery(dAtA, i, uint64(len(m.StakerAddresses)))
-		i--
-		dAtA[i] = 0xa
+	if len(m.AllStakerInfo) > 0 {
+		for iNdEx := len(m.AllStakerInfo) - 1; iNdEx >= 0; iNdEx-- {
+			{
+				size, err := m.AllStakerInfo[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintQuery(dAtA, i, uint64(size))
+			}
+			i--
+			dAtA[i] = 0xa
+		}
 	}
 	return len(dAtA) - i, nil
 }
@@ -712,7 +720,7 @@ func (m *QueryParamsResponse) Size() (n int) {
 	return n
 }
 
-func (m *QueryListStakerAddressesRequest) Size() (n int) {
+func (m *QueryAllStakerInfoRequest) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -725,15 +733,17 @@ func (m *QueryListStakerAddressesRequest) Size() (n int) {
 	return n
 }
 
-func (m *QueryListStakerAddressesResponse) Size() (n int) {
+func (m *QueryAllStakerInfoResponse) Size() (n int) {
 	if m == nil {
 		return 0
 	}
 	var l int
 	_ = l
-	l = len(m.StakerAddresses)
-	if l > 0 {
-		n += 1 + l + sovQuery(uint64(l))
+	if len(m.AllStakerInfo) > 0 {
+		for _, e := range m.AllStakerInfo {
+			l = e.Size()
+			n += 1 + l + sovQuery(uint64(l))
+		}
 	}
 	if m.Pagination != nil {
 		l = m.Pagination.Size()
@@ -903,7 +913,7 @@ func (m *QueryParamsResponse) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *QueryListStakerAddressesRequest) Unmarshal(dAtA []byte) error {
+func (m *QueryAllStakerInfoRequest) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -926,10 +936,10 @@ func (m *QueryListStakerAddressesRequest) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: QueryListStakerAddressesRequest: wiretype end group for non-group")
+			return fmt.Errorf("proto: QueryAllStakerInfoRequest: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: QueryListStakerAddressesRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: QueryAllStakerInfoRequest: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
@@ -989,7 +999,7 @@ func (m *QueryListStakerAddressesRequest) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *QueryListStakerAddressesResponse) Unmarshal(dAtA []byte) error {
+func (m *QueryAllStakerInfoResponse) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -1012,17 +1022,17 @@ func (m *QueryListStakerAddressesResponse) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: QueryListStakerAddressesResponse: wiretype end group for non-group")
+			return fmt.Errorf("proto: QueryAllStakerInfoResponse: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: QueryListStakerAddressesResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: QueryAllStakerInfoResponse: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field StakerAddresses", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field AllStakerInfo", wireType)
 			}
-			var stringLen uint64
+			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
 					return ErrIntOverflowQuery
@@ -1032,23 +1042,25 @@ func (m *QueryListStakerAddressesResponse) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
+				msglen |= int(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
+			if msglen < 0 {
 				return ErrInvalidLengthQuery
 			}
-			postIndex := iNdEx + intStringLen
+			postIndex := iNdEx + msglen
 			if postIndex < 0 {
 				return ErrInvalidLengthQuery
 			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.StakerAddresses = string(dAtA[iNdEx:postIndex])
+			m.AllStakerInfo = append(m.AllStakerInfo, StakerInfo{})
+			if err := m.AllStakerInfo[len(m.AllStakerInfo)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
 			iNdEx = postIndex
 		case 2:
 			if wireType != 2 {
