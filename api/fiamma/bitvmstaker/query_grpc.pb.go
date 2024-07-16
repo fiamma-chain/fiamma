@@ -8,7 +8,6 @@ package bitvmstaker
 
 import (
 	context "context"
-
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -20,9 +19,9 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	Query_Params_FullMethodName              = "/fiamma.bitvmstaker.Query/Params"
-	Query_ListStakerAddresses_FullMethodName = "/fiamma.bitvmstaker.Query/ListStakerAddresses"
-	Query_CommitteeAddress_FullMethodName    = "/fiamma.bitvmstaker.Query/CommitteeAddress"
+	Query_Params_FullMethodName           = "/fiamma.bitvmstaker.Query/Params"
+	Query_AllStakerInfo_FullMethodName    = "/fiamma.bitvmstaker.Query/AllStakerInfo"
+	Query_CommitteeAddress_FullMethodName = "/fiamma.bitvmstaker.Query/CommitteeAddress"
 )
 
 // QueryClient is the client API for Query service.
@@ -31,9 +30,9 @@ const (
 type QueryClient interface {
 	// Parameters queries the parameters of the module.
 	Params(ctx context.Context, in *QueryParamsRequest, opts ...grpc.CallOption) (*QueryParamsResponse, error)
-	// Queries a list of ListStakerAddresses items.
-	ListStakerAddresses(ctx context.Context, in *QueryListStakerAddressesRequest, opts ...grpc.CallOption) (*QueryListStakerAddressesResponse, error)
-	// Queries a list of CommitteeAddress items.
+	// QueryAllStakerInfoRequest is the request type for the Query/AllStakerInfo RPC method.
+	AllStakerInfo(ctx context.Context, in *QueryAllStakerInfoRequest, opts ...grpc.CallOption) (*QueryAllStakerInfoResponse, error)
+	// QueryCommitteeAddressRequest is the request type for the Query/CommitteeAddress RPC method.
 	CommitteeAddress(ctx context.Context, in *QueryCommitteeAddressRequest, opts ...grpc.CallOption) (*QueryCommitteeAddressResponse, error)
 }
 
@@ -54,9 +53,9 @@ func (c *queryClient) Params(ctx context.Context, in *QueryParamsRequest, opts .
 	return out, nil
 }
 
-func (c *queryClient) ListStakerAddresses(ctx context.Context, in *QueryListStakerAddressesRequest, opts ...grpc.CallOption) (*QueryListStakerAddressesResponse, error) {
-	out := new(QueryListStakerAddressesResponse)
-	err := c.cc.Invoke(ctx, Query_ListStakerAddresses_FullMethodName, in, out, opts...)
+func (c *queryClient) AllStakerInfo(ctx context.Context, in *QueryAllStakerInfoRequest, opts ...grpc.CallOption) (*QueryAllStakerInfoResponse, error) {
+	out := new(QueryAllStakerInfoResponse)
+	err := c.cc.Invoke(ctx, Query_AllStakerInfo_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -78,9 +77,9 @@ func (c *queryClient) CommitteeAddress(ctx context.Context, in *QueryCommitteeAd
 type QueryServer interface {
 	// Parameters queries the parameters of the module.
 	Params(context.Context, *QueryParamsRequest) (*QueryParamsResponse, error)
-	// Queries a list of ListStakerAddresses items.
-	ListStakerAddresses(context.Context, *QueryListStakerAddressesRequest) (*QueryListStakerAddressesResponse, error)
-	// Queries a list of CommitteeAddress items.
+	// QueryAllStakerInfoRequest is the request type for the Query/AllStakerInfo RPC method.
+	AllStakerInfo(context.Context, *QueryAllStakerInfoRequest) (*QueryAllStakerInfoResponse, error)
+	// QueryCommitteeAddressRequest is the request type for the Query/CommitteeAddress RPC method.
 	CommitteeAddress(context.Context, *QueryCommitteeAddressRequest) (*QueryCommitteeAddressResponse, error)
 	mustEmbedUnimplementedQueryServer()
 }
@@ -92,8 +91,8 @@ type UnimplementedQueryServer struct {
 func (UnimplementedQueryServer) Params(context.Context, *QueryParamsRequest) (*QueryParamsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Params not implemented")
 }
-func (UnimplementedQueryServer) ListStakerAddresses(context.Context, *QueryListStakerAddressesRequest) (*QueryListStakerAddressesResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListStakerAddresses not implemented")
+func (UnimplementedQueryServer) AllStakerInfo(context.Context, *QueryAllStakerInfoRequest) (*QueryAllStakerInfoResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AllStakerInfo not implemented")
 }
 func (UnimplementedQueryServer) CommitteeAddress(context.Context, *QueryCommitteeAddressRequest) (*QueryCommitteeAddressResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CommitteeAddress not implemented")
@@ -129,20 +128,20 @@ func _Query_Params_Handler(srv interface{}, ctx context.Context, dec func(interf
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Query_ListStakerAddresses_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(QueryListStakerAddressesRequest)
+func _Query_AllStakerInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryAllStakerInfoRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(QueryServer).ListStakerAddresses(ctx, in)
+		return srv.(QueryServer).AllStakerInfo(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Query_ListStakerAddresses_FullMethodName,
+		FullMethod: Query_AllStakerInfo_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(QueryServer).ListStakerAddresses(ctx, req.(*QueryListStakerAddressesRequest))
+		return srv.(QueryServer).AllStakerInfo(ctx, req.(*QueryAllStakerInfoRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -177,8 +176,8 @@ var Query_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Query_Params_Handler,
 		},
 		{
-			MethodName: "ListStakerAddresses",
-			Handler:    _Query_ListStakerAddresses_Handler,
+			MethodName: "AllStakerInfo",
+			Handler:    _Query_AllStakerInfo_Handler,
 		},
 		{
 			MethodName: "CommitteeAddress",

@@ -8,6 +8,9 @@ import (
 
 // InitGenesis initializes the module's state from a provided genesis state.
 func (k Keeper) InitGenesis(ctx context.Context, gs types.GenesisState) error {
+	if err := gs.Validate(); err != nil {
+		panic(err)
+	}
 	k.SetParams(ctx, gs.Params)
 	k.SetCommitteeAddress(ctx, gs.CommitteeAddress)
 

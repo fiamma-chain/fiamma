@@ -12,7 +12,7 @@ func RegisterInterfaces(registry cdctypes.InterfaceRegistry) {
 		&MsgCreateStaker{},
 	)
 	registry.RegisterImplementations((*sdk.Msg)(nil),
-		&MsgSlashStaker{},
+		&MsgRemoveStaker{},
 	)
 	registry.RegisterImplementations((*sdk.Msg)(nil),
 		&MsgUpdateCommitteeAddress{},

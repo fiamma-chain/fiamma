@@ -7,12 +7,16 @@ accounts:
 - name: bob
   coins:
   - 1000000000000ufia
+  mnemonic: random fresh tree moral please become practice hammer hawk spoon coyote shallow art near mention drama bag wonder talk silver thrive effort swear buffalo
 genesis:
   chain_id: fiamma-testnet-1
   app_state:
     staking:
       params:
         bond_denom: ufia
+    bitvmstaker:
+      committee_address: fiamma13k3wqnp4zcrlwtph6xk7l6feunu5ae2k6pqnaw
+  
 client:
   openapi:
     path: docs/static/openapi.yml

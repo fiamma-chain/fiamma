@@ -8437,7 +8437,9 @@ paths:
         - Msg
   /fiamma/bitvmstaker/committee_address:
     get:
-      summary: Queries a list of CommitteeAddress items.
+      summary: >-
+        QueryCommitteeAddressRequest is the request type for the
+        Query/CommitteeAddress RPC method.
       operationId: FiammaBitvmstakerQuery_CommitteeAddress
       responses:
         '200':
@@ -8467,18 +8469,31 @@ paths:
                   additionalProperties: {}
       tags:
         - Query
-  /fiamma/bitvmstaker/list_staker_addresses:
+  /fiamma/bitvmstaker/get_all_staker_info:
     get:
-      summary: Queries a list of ListStakerAddresses items.
-      operationId: FiammaBitvmstakerQuery_ListStakerAddresses
+      summary: >-
+        QueryAllStakerInfoRequest is the request type for the
+        Query/AllStakerInfo RPC method.
+      operationId: FiammaBitvmstakerQuery_AllStakerInfo
       responses:
         '200':
           description: A successful response.
           schema:
             type: object
             properties:
-              stakerAddresses:
-                type: string
+              all_staker_info:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    staker_index:
+                      type: string
+                      format: uint64
+                    staker_address:
+                      type: string
+                  title: >-
+                    StakerInfo is the data structure for the BitVM staker
+                    information
               pagination:
                 type: object
                 properties:
@@ -8659,9 +8674,9 @@ paths:
                 type: string
       tags:
         - Msg
-  /fiamma.bitvmstaker.Msg/SlashStaker:
+  /fiamma.bitvmstaker.Msg/RemoveStaker:
     post:
-      operationId: FiammaBitvmstakerMsg_SlashStaker
+      operationId: FiammaBitvmstakerMsg_RemoveStaker
       responses:
         '200':
           description: A successful response.
@@ -8733,7 +8748,7 @@ paths:
             properties:
               creator:
                 type: string
-              newCommitteeAddress:
+              new_committee_address:
                 type: string
       tags:
         - Msg
@@ -19507,16 +19522,20 @@ definitions:
   fiamma.bitvmstaker.Params:
     type: object
     description: Params defines the parameters for the module.
-  fiamma.bitvmstaker.QueryCommitteeAddressResponse:
+  fiamma.bitvmstaker.QueryAllStakerInfoResponse:
     type: object
     properties:
-      committeeAddress:
-        type: string
-  fiamma.bitvmstaker.QueryListStakerAddressesResponse:
-    type: object
-    properties:
-      stakerAddresses:
-        type: string
+      all_staker_info:
+        type: array
+        items:
+          type: object
+          properties:
+            staker_index:
+              type: string
+              format: uint64
+            staker_address:
+              type: string
+          title: StakerInfo is the data structure for the BitVM staker information
       pagination:
         type: object
         properties:
@@ -19543,6 +19562,11 @@ definitions:
                    repeated Bar results = 1;
                    PageResponse page = 2;
            }
+  fiamma.bitvmstaker.QueryCommitteeAddressResponse:
+    type: object
+    properties:
+      committeeAddress:
+        type: string
   fiamma.bitvmstaker.QueryParamsResponse:
     type: object
     properties:
@@ -19550,6 +19574,15 @@ definitions:
         description: params holds all the parameters of this module.
         type: object
     description: QueryParamsResponse is response type for the Query/Params RPC method.
+  fiamma.bitvmstaker.StakerInfo:
+    type: object
+    properties:
+      staker_index:
+        type: string
+        format: uint64
+      staker_address:
+        type: string
+    title: StakerInfo is the data structure for the BitVM staker information
   fiamma.bitvmstaker.MsgCreateStaker:
     type: object
     properties:
@@ -19559,21 +19592,21 @@ definitions:
         type: string
   fiamma.bitvmstaker.MsgCreateStakerResponse:
     type: object
-  fiamma.bitvmstaker.MsgSlashStaker:
+  fiamma.bitvmstaker.MsgRemoveStaker:
     type: object
     properties:
       creator:
         type: string
       staker_address:
         type: string
-  fiamma.bitvmstaker.MsgSlashStakerResponse:
+  fiamma.bitvmstaker.MsgRemoveStakerResponse:
     type: object
   fiamma.bitvmstaker.MsgUpdateCommitteeAddress:
     type: object
     properties:
       creator:
         type: string
-      newCommitteeAddress:
+      new_committee_address:
         type: string
   fiamma.bitvmstaker.MsgUpdateCommitteeAddressResponse:
     type: object

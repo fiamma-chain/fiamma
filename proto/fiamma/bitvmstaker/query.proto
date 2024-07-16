@@ -7,6 +7,7 @@ import "gogoproto/gogo.proto";
 import "google/api/annotations.proto";
 import "cosmos/base/query/v1beta1/pagination.proto";
 import "fiamma/bitvmstaker/params.proto";
+import "fiamma/bitvmstaker/bitvmstaker.proto";
 
 option go_package = "fiamma/x/bitvmstaker/types";
 
@@ -19,13 +20,13 @@ service Query {
   
   }
   
-  // Queries a list of ListStakerAddresses items.
-  rpc ListStakerAddresses (QueryListStakerAddressesRequest) returns (QueryListStakerAddressesResponse) {
-    option (google.api.http).get = "/fiamma/bitvmstaker/list_staker_addresses";
+  // QueryAllStakerInfoRequest is the request type for the Query/AllStakerInfo RPC method.
+  rpc AllStakerInfo (QueryAllStakerInfoRequest) returns (QueryAllStakerInfoResponse) {
+    option (google.api.http).get = "/fiamma/bitvmstaker/get_all_staker_info";
   
   }
   
-  // Queries a list of CommitteeAddress items.
+  // QueryCommitteeAddressRequest is the request type for the Query/CommitteeAddress RPC method.
   rpc CommitteeAddress (QueryCommitteeAddressRequest) returns (QueryCommitteeAddressResponse) {
     option (google.api.http).get = "/fiamma/bitvmstaker/committee_address";
   
@@ -41,12 +42,12 @@ message QueryParamsResponse {
   Params params = 1 [(gogoproto.nullable) = false, (amino.dont_omitempty) = true];
 }
 
-message QueryListStakerAddressesRequest {
+message QueryAllStakerInfoRequest {
   cosmos.base.query.v1beta1.PageRequest pagination = 1;
 }
 
-message QueryListStakerAddressesResponse {
-  string                                 stakerAddresses = 1;
+message QueryAllStakerInfoResponse {
+  repeated fiamma.bitvmstaker.StakerInfo all_staker_info = 1 [(gogoproto.nullable) = false];
   cosmos.base.query.v1beta1.PageResponse pagination      = 2;
 }
 

@@ -6,16 +6,16 @@ import (
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 )
 
-var _ sdk.Msg = &MsgSlashStaker{}
+var _ sdk.Msg = &MsgRemoveStaker{}
 
-func NewMsgSlashStaker(creator string, stakerAddress string) *MsgSlashStaker {
-	return &MsgSlashStaker{
+func NewMsgRemoveStaker(creator string, stakerAddress string) *MsgRemoveStaker {
+	return &MsgRemoveStaker{
 		Creator:       creator,
 		StakerAddress: stakerAddress,
 	}
 }
 
-func (msg *MsgSlashStaker) ValidateBasic() error {
+func (msg *MsgRemoveStaker) ValidateBasic() error {
 	_, err := sdk.AccAddressFromBech32(msg.Creator)
 	if err != nil {
 		return errorsmod.Wrapf(sdkerrors.ErrInvalidAddress, "invalid creator address (%s)", err)

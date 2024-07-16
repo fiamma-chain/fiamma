@@ -1,5 +1,7 @@
 package types
 
+import fmt "fmt"
+
 // this line is used by starport scaffolding # genesis/types/import
 
 // DefaultIndex is the default global index
@@ -17,6 +19,8 @@ func DefaultGenesis() *GenesisState {
 // failure.
 func (gs GenesisState) Validate() error {
 	// this line is used by starport scaffolding # genesis/types/validate
-
+	if gs.CommitteeAddress == "" {
+		return fmt.Errorf("committee_address: cannot be empty in genesis file")
+	}
 	return gs.Params.Validate()
 }

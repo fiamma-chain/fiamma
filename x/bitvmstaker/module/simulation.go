@@ -27,9 +27,9 @@ const (
 	// TODO: Determine the simulation weight value
 	defaultWeightMsgCreateStaker int = 100
 
-	opWeightMsgSlashStaker = "op_weight_msg_slash_staker"
+	opWeightMsgRemoveStaker = "op_weight_msg_slash_staker"
 	// TODO: Determine the simulation weight value
-	defaultWeightMsgSlashStaker int = 100
+	defaultWeightMsgRemoveStaker int = 100
 
 	opWeightMsgUpdateCommitteeAddress = "op_weight_msg_update_committee_address"
 	// TODO: Determine the simulation weight value
@@ -69,15 +69,15 @@ func (am AppModule) WeightedOperations(simState module.SimulationState) []simtyp
 		bitvmstakersimulation.SimulateMsgCreateStaker(am.accountKeeper, am.bankKeeper, am.keeper),
 	))
 
-	var weightMsgSlashStaker int
-	simState.AppParams.GetOrGenerate(opWeightMsgSlashStaker, &weightMsgSlashStaker, nil,
+	var weightMsgRemoveStaker int
+	simState.AppParams.GetOrGenerate(opWeightMsgRemoveStaker, &weightMsgRemoveStaker, nil,
 		func(_ *rand.Rand) {
-			weightMsgSlashStaker = defaultWeightMsgSlashStaker
+			weightMsgRemoveStaker = defaultWeightMsgRemoveStaker
 		},
 	)
 	operations = append(operations, simulation.NewWeightedOperation(
-		weightMsgSlashStaker,
-		bitvmstakersimulation.SimulateMsgSlashStaker(am.accountKeeper, am.bankKeeper, am.keeper),
+		weightMsgRemoveStaker,
+		bitvmstakersimulation.SimulateMsgRemoveStaker(am.accountKeeper, am.bankKeeper, am.keeper),
 	))
 
 	var weightMsgUpdateCommitteeAddress int
@@ -108,10 +108,10 @@ func (am AppModule) ProposalMsgs(simState module.SimulationState) []simtypes.Wei
 			},
 		),
 		simulation.NewWeightedProposalMsg(
-			opWeightMsgSlashStaker,
-			defaultWeightMsgSlashStaker,
+			opWeightMsgRemoveStaker,
+			defaultWeightMsgRemoveStaker,
 			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
-				bitvmstakersimulation.SimulateMsgSlashStaker(am.accountKeeper, am.bankKeeper, am.keeper)
+				bitvmstakersimulation.SimulateMsgRemoveStaker(am.accountKeeper, am.bankKeeper, am.keeper)
 				return nil
 			},
 		),
