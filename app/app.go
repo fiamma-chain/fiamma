@@ -346,6 +346,7 @@ func New(
 
 	app.App = appBuilder.Build(db, traceStore, baseAppOptions...)
 
+	//app.StakingKeeper.SetHooks(stakingkeepertypes.NewMultiStakingHooks(app.BitvmstakerKeeper.Hooks()))
 	// Register legacy modules
 	if err := app.registerIBCModules(appOpts); err != nil {
 		return nil, err
