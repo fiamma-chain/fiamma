@@ -2,19 +2,18 @@ package types
 
 import (
 	"context"
+	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
 
 	"cosmossdk.io/core/address"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
 )
 
 // StakingKeeper defines the expected interface for the Staking module.
 type StakingKeeper interface {
 	ConsensusAddressCodec() address.Codec
-	GetValidator(context.Context, sdk.ValAddress) (stakingtypes.ValidatorI, error)
-	ValidatorByConsAddr(context.Context, sdk.ConsAddress) (stakingtypes.ValidatorI, error)
 	Jail(context.Context, sdk.ConsAddress) error
-	GetAllValidators(context.Context) (validators []stakingtypes.ValidatorI)
+	ValidatorByConsAddr(context.Context, sdk.ConsAddress) (stakingtypes.ValidatorI, error)
+	GetAllValidators(ctx context.Context) ([]stakingtypes.Validator, error)
 }
 
 // AccountKeeper defines the expected interface for the Account module.

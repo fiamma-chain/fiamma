@@ -16,7 +16,6 @@ type Hooks struct {
 	k Keeper
 }
 
-// Return the oracle hooks
 func (k Keeper) Hooks() Hooks {
 	return Hooks{k}
 }
