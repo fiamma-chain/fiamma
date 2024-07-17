@@ -9,12 +9,12 @@ import (
 	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
 )
 
-var _ stakingtypes.StakingHooks = Hooks{}
-
-// Hooks wrapper struct for whitelisting module
+// Hooks wrapper struct
 type Hooks struct {
 	k Keeper
 }
+
+var _ stakingtypes.StakingHooks = Hooks{}
 
 func (k Keeper) Hooks() Hooks {
 	return Hooks{k}

@@ -16,6 +16,7 @@ import (
 	"github.com/cosmos/cosmos-sdk/types/module"
 	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
 	govtypes "github.com/cosmos/cosmos-sdk/x/gov/types"
+	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
 	"github.com/grpc-ecosystem/grpc-gateway/runtime"
 
 	// this line is used by starport scaffolding # 1
@@ -190,6 +191,7 @@ type ModuleOutputs struct {
 
 	BitvmstakerKeeper keeper.Keeper
 	Module            appmodule.AppModule
+	Hooks             stakingtypes.StakingHooksWrapper
 }
 
 func ProvideModule(in ModuleInputs) ModuleOutputs {
@@ -212,5 +214,5 @@ func ProvideModule(in ModuleInputs) ModuleOutputs {
 		in.BankKeeper,
 	)
 
-	return ModuleOutputs{BitvmstakerKeeper: k, Module: m}
+	return ModuleOutputs{BitvmstakerKeeper: k, Module: m, Hooks: stakingtypes.StakingHooksWrapper{StakingHooks: k.Hooks()}}
 }
