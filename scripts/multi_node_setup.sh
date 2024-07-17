@@ -9,6 +9,7 @@ initial_balance=10000000000000
 initial_faucet_balance=10000000000
 initial_stake=10000000
 minimum_gas_price=0
+committee_address=fiamma1jqjv9ztp0jfh645ntuxksur05cvrjpng4zv2pr
 
 # nubit da rpc url and authkey
 
@@ -45,6 +46,11 @@ for node in "$@"; do
 
     echo "Node ID for $node: $node_id"
 done
+
+
+echo "Setting committe address in genesis..."
+jq '.app_state.bitvmstaker.committee_address = "'$committee_address'"' $(pwd)/testnet-nodes/$1/config/genesis.json > $(pwd)/testnet-nodes/$1/config/genesis.json.tmp
+mv $(pwd)/testnet-nodes/$1/config/genesis.json.tmp $(pwd)/testnet-nodes/$1/config/genesis.json
 
 
 for (( i=1; i <= "$#"; i++ )); do
