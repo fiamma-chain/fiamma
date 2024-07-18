@@ -44,12 +44,10 @@ func (k Keeper) GetAllStakerInfo(ctx context.Context, req *types.QueryAllStakerI
 		stakerInfos = append(stakerInfos, stakerInfo)
 		return nil
 	})
-
 	if err != nil {
 		return nil, err
 	}
 	return &types.QueryAllStakerInfoResponse{AllStakerInfo: stakerInfos, Pagination: pageRes}, nil
-
 }
 
 // GetCommitteeAddress gets the committee address from KVStore

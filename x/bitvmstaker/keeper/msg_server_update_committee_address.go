@@ -13,6 +13,10 @@ func (k msgServer) UpdateCommitteeAddress(goCtx context.Context, msg *types.MsgU
 
 	committeeAddress := k.GetCommitteeAddress(ctx)
 
+	if err := msg.ValidateBasic(); err != nil {
+		return &types.MsgUpdateCommitteeAddressResponse{}, err
+	}
+
 	if msg.Creator != committeeAddress {
 		return nil, types.ErrUnauthorized
 	}

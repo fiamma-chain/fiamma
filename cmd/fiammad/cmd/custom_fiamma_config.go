@@ -61,7 +61,6 @@ func ParseDAOptionsFromConfig(opts servertypes.AppOptions) *DAConfig {
 	}
 
 	nubitRPC, err := cast.ToStringE(rpcInterface)
-
 	if err != nil {
 		panic("Nubit data available rpc config should be valid string")
 	}
@@ -73,7 +72,6 @@ func ParseDAOptionsFromConfig(opts servertypes.AppOptions) *DAConfig {
 	}
 
 	nubitAuthKey, err := cast.ToStringE(authKeyInterface)
-
 	if err != nil {
 		panic("Nubit data available authkey config should be valid string")
 	}

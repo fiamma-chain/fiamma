@@ -2,6 +2,7 @@ package keeper
 
 import (
 	"context"
+
 	"fiamma/x/bitvmstaker/types"
 
 	"cosmossdk.io/math"

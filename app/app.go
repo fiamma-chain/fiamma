@@ -93,10 +93,8 @@ const (
 	Name                 = "fiamma"
 )
 
-var (
-	// DefaultNodeHome default home directories for the application daemon
-	DefaultNodeHome string
-)
+// DefaultNodeHome default home directories for the application daemon
+var DefaultNodeHome string
 
 var (
 	_ runtime.AppI            = (*App)(nil)
@@ -208,7 +206,6 @@ func New(
 	appOpts servertypes.AppOptions,
 	baseAppOptions ...func(*baseapp.BaseApp),
 ) (*App, error) {
-
 	config := nubitda.ParseDAOptionsFromConfig(appOpts)
 	// Initialize the DA backend
 	nubitDA, err := nubitda.NewNubitDA(config)
@@ -386,7 +383,6 @@ func New(
 
 	return app, app.WasmKeeper.
 		InitializePinnedCodes(app.NewUncachedContext(true, tmproto.Header{}))
-
 }
 
 // LegacyAmino returns App's amino codec.

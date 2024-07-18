@@ -50,7 +50,6 @@ func main() {
 	outputDir := "example/"
 	var myCircuit Circuit
 	ccs, err := frontend.Compile(ecc.BN254.ScalarField(), r1cs.NewBuilder, &myCircuit)
-
 	if err != nil {
 		panic("circuit compilation error")
 	}
@@ -70,7 +69,6 @@ func main() {
 	serialize(proof, outputDir+"proof")
 	serialize(publicWitness, outputDir+"public_input")
 	serialize(vk, outputDir+"vk")
-
 }
 
 func serialize[w io.WriterTo](src w, name string) {
@@ -82,5 +80,5 @@ func serialize[w io.WriterTo](src w, name string) {
 	encoded := make([]byte, hex.EncodedLen(len(inner)))
 	hex.Encode(encoded, inner)
 
-	_ = os.WriteFile(name, encoded, 0644)
+	_ = os.WriteFile(name, encoded, 0o644)
 }

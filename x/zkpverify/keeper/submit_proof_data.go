@@ -23,11 +23,9 @@ func (k Keeper) SubmitProofData(ctx context.Context, proofId []byte, proofData t
 	// If submission to DA fails, we store the data on our own chain
 	k.SetProofData(sdkCtx, proofId[:], proofData)
 	return "", types.DataLocation_FIAMMA, nil
-
 }
 
 func (k Keeper) SubmitProofDataToDA(ctx context.Context, proofId []byte, proofData types.ProofData) ([][]byte, error) {
-
 	// Create a new array to store the proof data
 	// This array will be used to store the proof data that is submitted to the Nubit chain
 	submitData := [][]byte{}

@@ -55,13 +55,11 @@ func initRootCmd(
 	wasmcli.ExtendUnsafeResetAllCmd(
 		rootCmd,
 	)
-
 }
 
 func addModuleInitFlags(startCmd *cobra.Command) {
 	crisis.AddModuleInitFlags(startCmd)
 	wasm.AddModuleInitFlags(startCmd)
-
 }
 
 // genesisCommand builds genesis-related `fiammad genesis` command. Users may provide application specific commands as a parameter

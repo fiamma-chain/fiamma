@@ -18,5 +18,4 @@ func (k Keeper) AllStakerInfo(goCtx context.Context, req *types.QueryAllStakerIn
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
 	return k.GetAllStakerInfo(ctx, req)
-
 }
