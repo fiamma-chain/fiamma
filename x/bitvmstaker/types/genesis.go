@@ -17,6 +17,7 @@ const DefaultIndex uint64 = 1
 func DefaultGenesis() *GenesisState {
 	return &GenesisState{
 		CommitteeAddress: "",
+		StakerAddresses:  []string{},
 		// this line is used by starport scaffolding # genesis/types/default
 		Params: DefaultParams(),
 	}
@@ -33,5 +34,17 @@ func (gs GenesisState) Validate() error {
 	if err != nil {
 		return errorsmod.Wrapf(sdkerrors.ErrInvalidAddress, "invalid address (%s)", err)
 	}
+
+	if len(gs.StakerAddresses) == 0 {
+		return fmt.Errorf("staker_addresses: cannot be empty in genesis file")
+	}
+
+	for _, sa := range gs.StakerAddresses {
+		_, err := sdk.ValAddressFromBech32(sa)
+		if err != nil {
+			return errorsmod.Wrapf(sdkerrors.ErrInvalidAddress, "invalid validator address (%s)", err)
+		}
+	}
+
 	return gs.Params.Validate()
 }

@@ -16,7 +16,7 @@ func TestGenesisState_Validate(t *testing.T) {
 		valid    bool
 	}{
 		{
-			desc:     "default is valid",
+			desc:     "default is Invalid",
 			genState: types.DefaultGenesis(),
 			valid:    false,
 		},
@@ -24,6 +24,7 @@ func TestGenesisState_Validate(t *testing.T) {
 			desc: "valid genesis state",
 			genState: &types.GenesisState{
 				CommitteeAddress: sample.AccAddress(),
+				StakerAddresses:  []string{sample.ValAddress()},
 				Params:           types.DefaultParams(),
 
 				// this line is used by starport scaffolding # types/genesis/validField

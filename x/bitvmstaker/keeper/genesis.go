@@ -17,6 +17,10 @@ func (k Keeper) InitGenesis(ctx context.Context, gs types.GenesisState) error {
 	}
 	k.SetCommitteeAddress(ctx, gs.CommitteeAddress)
 
+	for _, staker := range gs.StakerAddresses {
+		k.AppendStaker(ctx, types.StakerInfo{StakerAddress: staker})
+	}
+
 	return nil
 }
 
