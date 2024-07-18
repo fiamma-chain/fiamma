@@ -22,12 +22,12 @@ func (k Keeper) Hooks() Hooks {
 
 // AfterValidatorCreated checks if the validator's operator address is whitelisted
 func (h Hooks) AfterValidatorCreated(ctx context.Context, valAddr sdk.ValAddress) error {
-	// val, err := h.k.stakingKeeper.GetValidator(ctx, valAddr)
-	// if err != nil {
-	// 	return err
-	// }
-	// delAddr := sdk.AccAddress(val.GetOperator())
-	_, found := h.k.GetStaker(ctx, string(valAddr))
+	sdkCtx := sdk.UnwrapSDKContext(ctx)
+	if sdkCtx.BlockHeight() == 0 {
+		return nil
+	}
+
+	_, found := h.k.GetStaker(ctx, valAddr.String())
 	if !found {
 		return types.ErrVaildatorNotStaker
 	}
