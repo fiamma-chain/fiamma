@@ -38,8 +38,7 @@ echo "Sending directories to servers..."
 for i in "${!servers[@]}"; do  
 
     ## Config Cosmovisor for chain upgrade
-    ssh ${servers[$i]} "mkdir -p ~/.fiamma/cosmovisor/upgrades/$2/bin/"
-    ssh ${servers[$i]} "cp /home/ubuntu/go/bin/fiammad /home/ubuntu/.fiamma/cosmovisor/upgrades/$2/bin/fiammad"
+    ssh ${servers[$i]} "cp /home/ubuntu/go/bin/fiammad /home/ubuntu/.fiamma/cosmovisor/genesis/bin/fiammad"
 done
 
 

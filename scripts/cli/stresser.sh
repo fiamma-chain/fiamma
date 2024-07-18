@@ -14,7 +14,7 @@ fi
 
 : ${CHAIN_ID:="fiamma-testnet-1"}
 : ${NODE_RPC:="https://testnet-rpc.fiammachain.io"}
-: ${NODE_API:="http://127.0.0.1:1317"}
+: ${NODE_API:="https://testnet-api.fiammachain.io"}
 
 # New elements can be added to the array to send more transactions
 PROOFS=(
@@ -50,7 +50,7 @@ do
     --account-number $ACCOUNT_NUMBER \
     --node $NODE_RPC \
     --yes \
-    PlonkBn254 \
+    PLONK_BN254 \
     $(cat ../../prover_examples/gnark_plonk/example/proof) \
 	  $(cat ../../prover_examples/gnark_plonk/example/public_input) \
 	  $(cat ../../prover_examples/gnark_plonk/example/vk)
