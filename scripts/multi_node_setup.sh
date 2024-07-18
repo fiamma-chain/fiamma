@@ -2,13 +2,15 @@
 
 set -e
 
-: "${CHAIN_ID:=fiamma-testnet-1}"
+: "${CHAIN_ID:=fiamma-testnet-2}"
 : "${PASSWORD:=password}"
 token="ufia"
 initial_balance=10000000000000
 initial_faucet_balance=10000000000
 initial_stake=10000000
 minimum_gas_price=0
+committee_address=fiamma1jqjv9ztp0jfh645ntuxksur05cvrjpng4zv2pr
+staker_addresses=()
 
 # nubit da rpc url and authkey
 
@@ -47,6 +49,11 @@ for node in "$@"; do
 done
 
 
+echo "Setting committe address in genesis..."
+jq '.app_state.bitvmstaker.committee_address = "'$committee_address'"' $(pwd)/testnet-nodes/$1/config/genesis.json > $(pwd)/testnet-nodes/$1/config/genesis.json.tmp
+mv $(pwd)/testnet-nodes/$1/config/genesis.json.tmp $(pwd)/testnet-nodes/$1/config/genesis.json
+
+
 for (( i=1; i <= "$#"; i++ )); do
     echo "Creating key for ${!i} user..."
     printf "$PASSWORD\n$PASSWORD\n" | docker run --rm -i -v $(pwd)/testnet-nodes/${!i}:/root/.fiamma ghcr.io/fiamma-chain/fiamma keys --keyring-backend file --keyring-dir /root/.fiamma/keys add val_${!i} > /dev/null 2> $(pwd)/testnet-nodes/${!i}/mnemonic.txt
@@ -54,6 +61,10 @@ for (( i=1; i <= "$#"; i++ )); do
     val_address=$(echo $PASSWORD | docker run --rm -i -v $(pwd)/testnet-nodes/${!i}:/root/.fiamma ghcr.io/fiamma-chain/fiamma keys --keyring-backend file --keyring-dir /root/.fiamma/keys show val_${!i} --address)
     echo "val_${!i} address: $val_address"
     echo "val_${!i} mnemonic: $(cat $(pwd)/testnet-nodes/${!i}/mnemonic.txt)"
+
+    echo "Adding val_operator_${!i} to genesis staker_addresses..."
+    val_operator=$(echo $PASSWORD | docker run --rm -i -v $(pwd)/testnet-nodes/${!i}:/root/.fiamma ghcr.io/fiamma-chain/fiamma keys --keyring-backend file --keyring-dir /root/.fiamma/keys show val_${!i} -a --bech val)
+    staker_addresses+=($val_operator)
 
     echo "Giving val_${!i} some tokens..."
     if [ $i -eq 1 ]; then
@@ -71,7 +82,9 @@ for (( i=1; i <= "$#"; i++ )); do
     fi
 done
 
-
+echo "Adding initial staker addresses to genesis..."
+jq --argjson staker_addresses "$(printf '%s\n' "${staker_addresses[@]}" | jq -R . | jq -s .)" '.app_state.bitvmstaker.staker_addresses = $staker_addresses' $(pwd)/testnet-nodes/$1/config/genesis.json > $(pwd)/testnet-nodes/$1/config/genesis.json.tmp
+mv $(pwd)/testnet-nodes/$1/config/genesis.json.tmp $(pwd)/testnet-nodes/$1/config/genesis.json
 
 for (( i=1; i <= "$#"; i++ )); do
     echo "Giving val_${!i} some stake..."

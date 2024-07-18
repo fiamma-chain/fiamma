@@ -4,6 +4,7 @@ accounts:
 - name: alice
   coins:
   - 2000000000000ufia
+  mnemonic: random fresh tree moral please become practice hammer hawk spoon coyote shallow art near mention drama bag wonder talk silver thrive effort swear buffalo
 - name: bob
   coins:
   - 1000000000000ufia
@@ -13,6 +14,10 @@ genesis:
     staking:
       params:
         bond_denom: ufia
+    bitvmstaker:
+      committee_address: fiamma13k3wqnp4zcrlwtph6xk7l6feunu5ae2k6pqnaw
+      staker_addresses: [fiammavaloper13k3wqnp4zcrlwtph6xk7l6feunu5ae2k4lsqwf]
+  
 client:
   openapi:
     path: docs/static/openapi.yml

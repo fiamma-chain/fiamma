@@ -13,7 +13,7 @@ NODE_HOME=$HOME/.fiamma
 CHAIN_BINARY=fiammad
 : ${CHAIN_ID:="fiamma-testnet-1"}
 
-: ${PEER_ADDR:="18.182.20.173"}
+: ${PEER_ADDR:="35.74.250.156"}
 
 VALIDATOR_KEY=$($CHAIN_BINARY tendermint show-validator)
 MONIKER=$($CHAIN_BINARY config get config moniker)

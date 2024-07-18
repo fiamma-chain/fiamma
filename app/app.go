@@ -82,6 +82,7 @@ import (
 	wasmkeeper "github.com/CosmWasm/wasmd/x/wasm/keeper"
 	tmproto "github.com/cometbft/cometbft/proto/tendermint/types"
 
+	bitvmstakermodulekeeper "fiamma/x/bitvmstaker/keeper"
 	// this line is used by starport scaffolding # stargate/app/moduleImport
 
 	"fiamma/docs"
@@ -92,10 +93,8 @@ const (
 	Name                 = "fiamma"
 )
 
-var (
-	// DefaultNodeHome default home directories for the application daemon
-	DefaultNodeHome string
-)
+// DefaultNodeHome default home directories for the application daemon
+var DefaultNodeHome string
 
 var (
 	_ runtime.AppI            = (*App)(nil)
@@ -152,6 +151,7 @@ type App struct {
 	WasmKeeper       wasmkeeper.Keeper
 	ScopedWasmKeeper capabilitykeeper.ScopedKeeper
 
+	BitvmstakerKeeper bitvmstakermodulekeeper.Keeper
 	// this line is used by starport scaffolding # stargate/app/keeperDeclaration
 
 	// simulation manager
@@ -206,7 +206,6 @@ func New(
 	appOpts servertypes.AppOptions,
 	baseAppOptions ...func(*baseapp.BaseApp),
 ) (*App, error) {
-
 	config := nubitda.ParseDAOptionsFromConfig(appOpts)
 	// Initialize the DA backend
 	nubitDA, err := nubitda.NewNubitDA(config)
@@ -304,6 +303,7 @@ func New(
 		&app.GroupKeeper,
 		&app.CircuitBreakerKeeper,
 		&app.ZkpVerifyKeeper,
+		&app.BitvmstakerKeeper,
 		// this line is used by starport scaffolding # stargate/app/keeperDefinition
 	); err != nil {
 		panic(err)
@@ -383,7 +383,6 @@ func New(
 
 	return app, app.WasmKeeper.
 		InitializePinnedCodes(app.NewUncachedContext(true, tmproto.Header{}))
-
 }
 
 // LegacyAmino returns App's amino codec.
