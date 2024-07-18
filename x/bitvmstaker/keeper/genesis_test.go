@@ -14,6 +14,7 @@ func TestGenesis(t *testing.T) {
 	genesis := types.GenesisState{
 		Params:           types.Params{},
 		CommitteeAddress: sample.AccAddress(),
+		StakerAddresses:  []string{sample.ValAddress()},
 	}
 	k, ctx := keppertest.BitvmstakerKeeper(t)
 	err := k.InitGenesis(ctx, genesis)

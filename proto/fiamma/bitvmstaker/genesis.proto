@@ -15,4 +15,5 @@ message GenesisState {
     (amino.dont_omitempty) = true
   ];
   string committee_address = 2;
+  repeated string staker_addresses = 3;
 }
