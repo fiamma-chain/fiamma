@@ -1358,7 +1358,7 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// VerificationStatus is the verification status for the proof verification
+// VerificationStatus is the verification status enum for the proof verification
 type VerificationStatus int32
 
 const (
@@ -1408,7 +1408,7 @@ func (VerificationStatus) EnumDescriptor() ([]byte, []int) {
 	return file_fiamma_zkpverify_zkpverify_proto_rawDescGZIP(), []int{0}
 }
 
-// DataLocation is the proof data location for the proof verification
+// DataLocation is the proof data location enum for the proof verification
 type DataLocation int32
 
 const (
@@ -1458,7 +1458,7 @@ func (DataLocation) EnumDescriptor() ([]byte, []int) {
 	return file_fiamma_zkpverify_zkpverify_proto_rawDescGZIP(), []int{1}
 }
 
-// ProofSystem is the proof system for the proof verification
+// ProofSystem is the proof system enum for the proof verification
 type ProofSystem int32
 
 const (

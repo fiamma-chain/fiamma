@@ -23,7 +23,7 @@ var _ = math.Inf
 // proto package needs to be updated.
 const _ = proto.GoGoProtoPackageIsVersion3 // please upgrade the proto package
 
-// VerificationStatus is the verification status for the proof verification
+// VerificationStatus is the verification status enum for the proof verification
 type VerificationStatus int32
 
 const (
@@ -52,7 +52,7 @@ func (VerificationStatus) EnumDescriptor() ([]byte, []int) {
 	return fileDescriptor_5d31b59671d261aa, []int{0}
 }
 
-// DataLocation is the proof data location for the proof verification
+// DataLocation is the proof data location enum for the proof verification
 type DataLocation int32
 
 const (
@@ -81,7 +81,7 @@ func (DataLocation) EnumDescriptor() ([]byte, []int) {
 	return fileDescriptor_5d31b59671d261aa, []int{1}
 }
 
-// ProofSystem is the proof system for the proof verification
+// ProofSystem is the proof system enum for the proof verification
 type ProofSystem int32
 
 const (

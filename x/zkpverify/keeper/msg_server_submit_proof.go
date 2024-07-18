@@ -12,7 +12,10 @@ import (
 
 func (k msgServer) SubmitProof(goCtx context.Context, msg *types.MsgSubmitProof) (*types.MsgSubmitProofResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
-
+	// check if the proof system is valid
+	if _, ok := types.ProofSystem_value[msg.ProofSystem]; !ok {
+		return nil, types.ErrInvalidProofSystem
+	}
 	proofData := types.ProofData{
 		ProofSystem: types.ProofSystem(types.ProofSystem_value[msg.ProofSystem]),
 		Proof:       msg.Proof,
