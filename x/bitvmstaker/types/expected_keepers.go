@@ -2,6 +2,7 @@ package types
 
 import (
 	"context"
+
 	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
 
 	"cosmossdk.io/core/address"

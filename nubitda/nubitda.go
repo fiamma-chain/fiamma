@@ -50,7 +50,6 @@ func (a *NubitDA) SubmitBlobs(ctx context.Context, batchesData [][]byte) ([][]by
 
 // GetBlob gets the data from the Nubit chain
 func (a *NubitDA) GetBlobs(ctx context.Context, id [][]byte) ([][]byte, error) {
-
 	blob, err := a.client.Get(context.TODO(), id, a.ns)
 	if err != nil {
 		return nil, err

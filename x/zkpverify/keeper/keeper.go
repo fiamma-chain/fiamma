@@ -148,7 +148,6 @@ func (k Keeper) GetPendingProofs(ctx context.Context, req *types.QueryPendingPro
 		}
 		return nil
 	})
-
 	if err != nil {
 		return nil, err
 	}

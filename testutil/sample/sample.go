@@ -11,3 +11,10 @@ func AccAddress() string {
 	addr := pk.Address()
 	return sdk.AccAddress(addr).String()
 }
+
+// ValAddress returns a sample validator address
+func ValAddress() string {
+	pk := ed25519.GenPrivKey().PubKey()
+	addr := pk.Address()
+	return sdk.ValAddress(addr).String()
+}

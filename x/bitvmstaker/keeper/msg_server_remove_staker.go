@@ -11,6 +11,10 @@ import (
 func (k msgServer) RemoveStaker(goCtx context.Context, msg *types.MsgRemoveStaker) (*types.MsgRemoveStakerResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
+	if err := msg.ValidateBasic(); err != nil {
+		return &types.MsgRemoveStakerResponse{}, err
+	}
+
 	if msg.Creator != k.GetCommitteeAddress(ctx) {
 		return nil, types.ErrUnauthorized
 	}

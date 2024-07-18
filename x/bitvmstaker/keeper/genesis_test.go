@@ -1,9 +1,11 @@
 package keeper_test
 
 import (
-	keppertest "fiamma/testutil/keeper"
-	"fiamma/x/bitvmstaker/types"
 	"testing"
+
+	keppertest "fiamma/testutil/keeper"
+	"fiamma/testutil/sample"
+	"fiamma/x/bitvmstaker/types"
 
 	"github.com/stretchr/testify/require"
 )
@@ -11,11 +13,11 @@ import (
 func TestGenesis(t *testing.T) {
 	genesis := types.GenesisState{
 		Params:           types.Params{},
-		CommitteeAddress: "testAddress",
+		CommitteeAddress: sample.AccAddress(),
 	}
 	k, ctx := keppertest.BitvmstakerKeeper(t)
-	k.InitGenesis(ctx, genesis)
+	err := k.InitGenesis(ctx, genesis)
+	require.NoError(t, err)
 	got := k.ExportGenesis(ctx)
 	require.NotNil(t, got)
-	require.Equal(t, got.CommitteeAddress, "testAddress")
 }

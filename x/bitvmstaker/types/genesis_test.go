@@ -3,6 +3,7 @@ package types_test
 import (
 	"testing"
 
+	"fiamma/testutil/sample"
 	"fiamma/x/bitvmstaker/types"
 
 	"github.com/stretchr/testify/require"
@@ -17,11 +18,13 @@ func TestGenesisState_Validate(t *testing.T) {
 		{
 			desc:     "default is valid",
 			genState: types.DefaultGenesis(),
-			valid:    true,
+			valid:    false,
 		},
 		{
-			desc:     "valid genesis state",
+			desc: "valid genesis state",
 			genState: &types.GenesisState{
+				CommitteeAddress: sample.AccAddress(),
+				Params:           types.DefaultParams(),
 
 				// this line is used by starport scaffolding # types/genesis/validField
 			},

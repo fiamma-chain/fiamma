@@ -5,6 +5,7 @@ import (
 
 	keepertest "fiamma/testutil/keeper"
 	"fiamma/testutil/nullify"
+	"fiamma/testutil/sample"
 	bitvmstaker "fiamma/x/bitvmstaker/module"
 	"fiamma/x/bitvmstaker/types"
 
@@ -13,7 +14,8 @@ import (
 
 func TestGenesis(t *testing.T) {
 	genesisState := types.GenesisState{
-		Params: types.DefaultParams(),
+		Params:           types.DefaultParams(),
+		CommitteeAddress: sample.AccAddress(),
 
 		// this line is used by starport scaffolding # genesis/test/state
 	}

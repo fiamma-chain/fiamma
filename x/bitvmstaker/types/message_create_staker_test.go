@@ -24,7 +24,7 @@ func TestMsgCreateStaker_ValidateBasic(t *testing.T) {
 		}, {
 			name: "valid address",
 			msg: MsgCreateStaker{
-				Creator: sample.AccAddress(),
+				Creator: sample.ValAddress(),
 			},
 		},
 	}

@@ -24,7 +24,7 @@ func TestMsgRemoveStaker_ValidateBasic(t *testing.T) {
 		}, {
 			name: "valid address",
 			msg: MsgRemoveStaker{
-				Creator: sample.AccAddress(),
+				Creator: sample.ValAddress(),
 			},
 		},
 	}
