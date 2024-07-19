@@ -39,7 +39,7 @@ func NewNubitDATest(url string, authKey string, namespace []byte) (*NubitDA, err
 	}, nil
 }
 
-// SubmitBlob submits the data to the Nubit chain
+// SubmitBlobs submits the data to the Nubit chain
 func (a *NubitDA) SubmitBlobs(ctx context.Context, batchesData [][]byte) ([][]byte, error) {
 	id, err := a.client.Submit(ctx, batchesData, -1, a.ns)
 	if err != nil {
@@ -48,9 +48,9 @@ func (a *NubitDA) SubmitBlobs(ctx context.Context, batchesData [][]byte) ([][]by
 	return id, nil
 }
 
-// GetBlob gets the data from the Nubit chain
+// GetBlobs gets the data from the Nubit chain
 func (a *NubitDA) GetBlobs(ctx context.Context, id [][]byte) ([][]byte, error) {
-	blob, err := a.client.Get(context.TODO(), id, a.ns)
+	blob, err := a.client.Get(ctx, id, a.ns)
 	if err != nil {
 		return nil, err
 	}
@@ -60,7 +60,7 @@ func (a *NubitDA) GetBlobs(ctx context.Context, id [][]byte) ([][]byte, error) {
 // GetBlobProof gets the data proofs from the Nubit chain
 
 func (a *NubitDA) GetBlobProofs(ctx context.Context, id [][]byte) ([][]byte, error) {
-	blob, err := a.client.GetProofs(context.TODO(), id, a.ns)
+	blob, err := a.client.GetProofs(ctx, id, a.ns)
 	if err != nil {
 		return nil, err
 	}

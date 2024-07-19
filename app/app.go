@@ -206,9 +206,9 @@ func New(
 	appOpts servertypes.AppOptions,
 	baseAppOptions ...func(*baseapp.BaseApp),
 ) (*App, error) {
-	config := nubitda.ParseDAOptionsFromConfig(appOpts)
+	daConfig := nubitda.ParseDAOptionsFromConfig(appOpts)
 	// Initialize the DA backend
-	nubitDA, err := nubitda.NewNubitDA(config)
+	nubitDA, err := nubitda.NewNubitDA(daConfig)
 	if err != nil {
 		panic(err)
 	}
