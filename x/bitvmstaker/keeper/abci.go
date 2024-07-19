@@ -2,8 +2,6 @@ package keeper
 
 import (
 	"context"
-
-	"github.com/cosmos/cosmos-sdk/types"
 )
 
 // BeginBlocker will persist the current header and validator set as a historical entry
@@ -11,7 +9,7 @@ import (
 func (k *Keeper) BeginBlocker(ctx context.Context) {
 }
 
-// Called every block, update validator set
+// EndBlocker Called every block, update validator set
 func (k *Keeper) EndBlocker(ctx context.Context) error {
 	allValidators, err := k.stakingKeeper.GetAllValidators(ctx)
 	if err != nil {
@@ -25,7 +23,7 @@ func (k *Keeper) EndBlocker(ctx context.Context) error {
 			if err != nil {
 				return err
 			}
-			return k.stakingKeeper.Jail(ctx, types.ConsAddress(conAddress))
+			return k.stakingKeeper.Jail(ctx, conAddress)
 		}
 	}
 	return nil
