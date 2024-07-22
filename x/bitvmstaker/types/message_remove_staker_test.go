@@ -18,13 +18,13 @@ func TestMsgRemoveStaker_ValidateBasic(t *testing.T) {
 		{
 			name: "invalid address",
 			msg: MsgRemoveStaker{
-				Creator: "invalid_address",
+				StakerAddress: "invalid_address",
 			},
 			err: sdkerrors.ErrInvalidAddress,
 		}, {
 			name: "valid address",
 			msg: MsgRemoveStaker{
-				Creator: sample.ValAddress(),
+				StakerAddress: sample.ValAddress(),
 			},
 		},
 	}

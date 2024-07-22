@@ -18,13 +18,13 @@ func TestMsgUpdateCommitteeAddress_ValidateBasic(t *testing.T) {
 		{
 			name: "invalid address",
 			msg: MsgUpdateCommitteeAddress{
-				Creator: "invalid_address",
+				NewCommitteeAddress: "invalid_address",
 			},
 			err: sdkerrors.ErrInvalidAddress,
 		}, {
 			name: "valid address",
 			msg: MsgUpdateCommitteeAddress{
-				Creator: sample.AccAddress(),
+				NewCommitteeAddress: sample.AccAddress(),
 			},
 		},
 	}

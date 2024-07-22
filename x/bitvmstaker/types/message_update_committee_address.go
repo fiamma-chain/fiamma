@@ -16,7 +16,7 @@ func NewMsgUpdateCommitteeAddress(creator string, newCommitteeAddress string) *M
 }
 
 func (msg *MsgUpdateCommitteeAddress) ValidateBasic() error {
-	_, err := sdk.AccAddressFromBech32(msg.Creator)
+	_, err := sdk.AccAddressFromBech32(msg.NewCommitteeAddress)
 	if err != nil {
 		return errorsmod.Wrapf(sdkerrors.ErrInvalidAddress, "invalid creator address (%s)", err)
 	}

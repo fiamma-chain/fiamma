@@ -16,7 +16,7 @@ func NewMsgRemoveStaker(creator string, stakerAddress string) *MsgRemoveStaker {
 }
 
 func (msg *MsgRemoveStaker) ValidateBasic() error {
-	_, err := sdk.ValAddressFromBech32(msg.Creator)
+	_, err := sdk.ValAddressFromBech32(msg.StakerAddress)
 	if err != nil {
 		return errorsmod.Wrapf(sdkerrors.ErrInvalidAddress, "invalid validator address (%s)", err)
 	}
