@@ -8,10 +8,11 @@ import (
 
 var _ sdk.Msg = &MsgCreateStaker{}
 
-func NewMsgCreateStaker(creator string, stakerAddress string) *MsgCreateStaker {
+func NewMsgCreateStaker(creator string, stakerAddress string, registerId uint64) *MsgCreateStaker {
 	return &MsgCreateStaker{
 		Creator:       creator,
 		StakerAddress: stakerAddress,
+		RegisterId:    registerId,
 	}
 }
 
