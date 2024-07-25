@@ -9195,6 +9195,179 @@ paths:
               Since: cosmos-sdk 0.47
       tags:
         - Msg
+  /fiamma.bitvmstaker.Msg/CreateStaker:
+    post:
+      operationId: FiammaBitvmstakerMsg_CreateStaker
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              creator:
+                type: string
+              staker_address:
+                type: string
+              staker_register_id:
+                type: string
+                format: uint64
+      tags:
+        - Msg
+  /fiamma.bitvmstaker.Msg/RemoveStaker:
+    post:
+      operationId: FiammaBitvmstakerMsg_RemoveStaker
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              creator:
+                type: string
+              staker_address:
+                type: string
+      tags:
+        - Msg
+  /fiamma.bitvmstaker.Msg/UpdateCommitteeAddress:
+    post:
+      operationId: FiammaBitvmstakerMsg_UpdateCommitteeAddress
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              creator:
+                type: string
+              new_committee_address:
+                type: string
+      tags:
+        - Msg
+  /fiamma.bitvmstaker.Msg/UpdateParams:
+    post:
+      summary: |-
+        UpdateParams defines a (governance) operation for updating the module
+        parameters. The authority defaults to the x/gov module account.
+      operationId: FiammaBitvmstakerMsg_UpdateParams
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            description: >-
+              MsgUpdateParamsResponse defines the response structure for
+              executing a
+
+              MsgUpdateParams message.
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: body
+          description: MsgUpdateParams is the Msg/UpdateParams request type.
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              authority:
+                type: string
+                description: >-
+                  authority is the address that controls the module (defaults to
+                  x/gov unless overwritten).
+              params:
+                description: 'NOTE: All parameters must be supplied.'
+                type: object
+            description: MsgUpdateParams is the Msg/UpdateParams request type.
+      tags:
+        - Msg
   /fiamma/bitvmstaker/committee_address:
     get:
       summary: >-
@@ -9398,179 +9571,6 @@ paths:
                   additionalProperties: {}
       tags:
         - Query
-  /fiamma.bitvmstaker.Msg/CreateStaker:
-    post:
-      operationId: FiammaBitvmstakerMsg_CreateStaker
-      responses:
-        '200':
-          description: A successful response.
-          schema:
-            type: object
-        default:
-          description: An unexpected error response.
-          schema:
-            type: object
-            properties:
-              code:
-                type: integer
-                format: int32
-              message:
-                type: string
-              details:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    '@type':
-                      type: string
-                  additionalProperties: {}
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            type: object
-            properties:
-              creator:
-                type: string
-              staker_address:
-                type: string
-              register_id:
-                type: string
-                format: uint64
-      tags:
-        - Msg
-  /fiamma.bitvmstaker.Msg/RemoveStaker:
-    post:
-      operationId: FiammaBitvmstakerMsg_RemoveStaker
-      responses:
-        '200':
-          description: A successful response.
-          schema:
-            type: object
-        default:
-          description: An unexpected error response.
-          schema:
-            type: object
-            properties:
-              code:
-                type: integer
-                format: int32
-              message:
-                type: string
-              details:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    '@type':
-                      type: string
-                  additionalProperties: {}
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            type: object
-            properties:
-              creator:
-                type: string
-              staker_address:
-                type: string
-      tags:
-        - Msg
-  /fiamma.bitvmstaker.Msg/UpdateCommitteeAddress:
-    post:
-      operationId: FiammaBitvmstakerMsg_UpdateCommitteeAddress
-      responses:
-        '200':
-          description: A successful response.
-          schema:
-            type: object
-        default:
-          description: An unexpected error response.
-          schema:
-            type: object
-            properties:
-              code:
-                type: integer
-                format: int32
-              message:
-                type: string
-              details:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    '@type':
-                      type: string
-                  additionalProperties: {}
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            type: object
-            properties:
-              creator:
-                type: string
-              new_committee_address:
-                type: string
-      tags:
-        - Msg
-  /fiamma.bitvmstaker.Msg/UpdateParams:
-    post:
-      summary: |-
-        UpdateParams defines a (governance) operation for updating the module
-        parameters. The authority defaults to the x/gov module account.
-      operationId: FiammaBitvmstakerMsg_UpdateParams
-      responses:
-        '200':
-          description: A successful response.
-          schema:
-            type: object
-            description: >-
-              MsgUpdateParamsResponse defines the response structure for
-              executing a
-
-              MsgUpdateParams message.
-        default:
-          description: An unexpected error response.
-          schema:
-            type: object
-            properties:
-              code:
-                type: integer
-                format: int32
-              message:
-                type: string
-              details:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    '@type':
-                      type: string
-                  additionalProperties: {}
-      parameters:
-        - name: body
-          description: MsgUpdateParams is the Msg/UpdateParams request type.
-          in: body
-          required: true
-          schema:
-            type: object
-            properties:
-              authority:
-                type: string
-                description: >-
-                  authority is the address that controls the module (defaults to
-                  x/gov unless overwritten).
-              params:
-                description: 'NOTE: All parameters must be supplied.'
-                type: object
-            description: MsgUpdateParams is the Msg/UpdateParams request type.
-      tags:
-        - Msg
   /ibc.applications.fee.v1.Msg/PayPacketFee:
     post:
       summary: >-
@@ -20326,6 +20326,56 @@ definitions:
           min_commission_rate is the chain-wide minimum commission rate that a
           validator can charge their delegators
     description: Params defines the parameters for the x/staking module.
+  fiamma.bitvmstaker.MsgCreateStaker:
+    type: object
+    properties:
+      creator:
+        type: string
+      staker_address:
+        type: string
+      staker_register_id:
+        type: string
+        format: uint64
+  fiamma.bitvmstaker.MsgCreateStakerResponse:
+    type: object
+  fiamma.bitvmstaker.MsgRemoveStaker:
+    type: object
+    properties:
+      creator:
+        type: string
+      staker_address:
+        type: string
+  fiamma.bitvmstaker.MsgRemoveStakerResponse:
+    type: object
+  fiamma.bitvmstaker.MsgUpdateCommitteeAddress:
+    type: object
+    properties:
+      creator:
+        type: string
+      new_committee_address:
+        type: string
+  fiamma.bitvmstaker.MsgUpdateCommitteeAddressResponse:
+    type: object
+  fiamma.bitvmstaker.MsgUpdateParams:
+    type: object
+    properties:
+      authority:
+        type: string
+        description: >-
+          authority is the address that controls the module (defaults to x/gov
+          unless overwritten).
+      params:
+        description: 'NOTE: All parameters must be supplied.'
+        type: object
+    description: MsgUpdateParams is the Msg/UpdateParams request type.
+  fiamma.bitvmstaker.MsgUpdateParamsResponse:
+    type: object
+    description: |-
+      MsgUpdateParamsResponse defines the response structure for executing a
+      MsgUpdateParams message.
+  fiamma.bitvmstaker.Params:
+    type: object
+    description: Params defines the parameters for the module.
   cosmos.base.query.v1beta1.PageRequest:
     type: object
     properties:
@@ -20403,9 +20453,6 @@ definitions:
                repeated Bar results = 1;
                PageResponse page = 2;
        }
-  fiamma.bitvmstaker.Params:
-    type: object
-    description: Params defines the parameters for the module.
   fiamma.bitvmstaker.QueryAllStakerInfoResponse:
     type: object
     properties:
@@ -20473,53 +20520,6 @@ definitions:
         type: string
         format: uint64
     title: StakerInfo is the data structure for the BitVM staker information
-  fiamma.bitvmstaker.MsgCreateStaker:
-    type: object
-    properties:
-      creator:
-        type: string
-      staker_address:
-        type: string
-      register_id:
-        type: string
-        format: uint64
-  fiamma.bitvmstaker.MsgCreateStakerResponse:
-    type: object
-  fiamma.bitvmstaker.MsgRemoveStaker:
-    type: object
-    properties:
-      creator:
-        type: string
-      staker_address:
-        type: string
-  fiamma.bitvmstaker.MsgRemoveStakerResponse:
-    type: object
-  fiamma.bitvmstaker.MsgUpdateCommitteeAddress:
-    type: object
-    properties:
-      creator:
-        type: string
-      new_committee_address:
-        type: string
-  fiamma.bitvmstaker.MsgUpdateCommitteeAddressResponse:
-    type: object
-  fiamma.bitvmstaker.MsgUpdateParams:
-    type: object
-    properties:
-      authority:
-        type: string
-        description: >-
-          authority is the address that controls the module (defaults to x/gov
-          unless overwritten).
-      params:
-        description: 'NOTE: All parameters must be supplied.'
-        type: object
-    description: MsgUpdateParams is the Msg/UpdateParams request type.
-  fiamma.bitvmstaker.MsgUpdateParamsResponse:
-    type: object
-    description: |-
-      MsgUpdateParamsResponse defines the response structure for executing a
-      MsgUpdateParams message.
   ibc.applications.fee.v1.Fee:
     type: object
     properties:

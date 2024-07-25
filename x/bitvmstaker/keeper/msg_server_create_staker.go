@@ -20,7 +20,7 @@ func (k msgServer) CreateStaker(goCtx context.Context, msg *types.MsgCreateStake
 	}
 	stakerInfo := types.StakerInfo{
 		StakerAddress:    msg.StakerAddress,
-		StakerRegisterId: msg.RegisterId,
+		StakerRegisterId: msg.StakerRegisterId,
 	}
 	k.AppendStaker(ctx, stakerInfo)
 
