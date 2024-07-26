@@ -10,4 +10,5 @@ option go_package = "fiamma/x/bitvmstaker/types";
 message StakerInfo {
   uint64 staker_index = 1;
   string staker_address = 2;
+  uint64 staker_register_id = 3;
 }

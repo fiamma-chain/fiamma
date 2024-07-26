@@ -43,6 +43,7 @@ message MsgCreateStaker {
   option (cosmos.msg.v1.signer) = "creator";
   string creator        = 1;
   string staker_address = 2;
+  uint64 staker_register_id = 3;
 }
 
 message MsgCreateStakerResponse {}
