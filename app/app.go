@@ -83,6 +83,11 @@ import (
 	tmproto "github.com/cometbft/cometbft/proto/tendermint/types"
 
 	bitvmstakermodulekeeper "fiamma/x/bitvmstaker/keeper"
+
+	babylon "github.com/babylonchain/babylon-sdk/x/babylon"
+	bbnkeeper "github.com/babylonchain/babylon-sdk/x/babylon/keeper"
+	bbntypes "github.com/babylonchain/babylon-sdk/x/babylon/types"
+
 	// this line is used by starport scaffolding # stargate/app/moduleImport
 
 	"fiamma/docs"
