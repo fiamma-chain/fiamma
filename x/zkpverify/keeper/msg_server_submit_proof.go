@@ -51,11 +51,11 @@ func (k msgServer) SubmitProof(goCtx context.Context, msg *types.MsgSubmitProof)
 	// store witness if the proof system is BitVM
 	if proofData.ProofSystem == types.ProofSystem_GROTH16_BN254_BITVM {
 		bitvmChallengeData := types.BitVMChallengeData{
-			VerifyResult:       result,
-			Witness:            witness,
-			Vk:                 msg.Vk,
-			PublicInput:        msg.PublicInput,
-			ProposerRegisterId: proposerValAddress.String(),
+			VerifyResult: result,
+			Witness:      witness,
+			Vk:           msg.Vk,
+			PublicInput:  msg.PublicInput,
+			Proposer:     proposerValAddress.String(),
 		}
 		k.SetBitVMChallengeData(ctx, proofId[:], bitvmChallengeData)
 	}

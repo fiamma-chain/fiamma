@@ -54,5 +54,5 @@ message BitVMChallengeData {
   bytes witness = 2;
   bytes vk = 3;
   bytes public_input = 4;
-  string proposer_register_id = 5;
+  string proposer = 5;
 }
