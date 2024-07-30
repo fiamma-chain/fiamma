@@ -44,6 +44,7 @@ func (k msgServer) SubmitCommunityVerification(goCtx context.Context, msg *types
 	verifyResult.CommunityVerificationCount++
 	if verifyResult.CommunityVerificationCount < VerificationCountLimit {
 		verifyResult.Status = types.VerificationStatus_COMMUNITY_VALIDATION
+		k.SetPendingProof(ctx, proofId[:], verifyResult)
 	} else {
 		verifyResult.Status = types.VerificationStatus_DEFINITIVE_VALIDATION
 		k.DeletePendingProof(ctx, proofId[:])

@@ -176,6 +176,7 @@ func (k Keeper) GetPendingProofs(ctx context.Context, req *types.QueryPendingPro
 		if err := k.cdc.Unmarshal(value, &verifyResult); err != nil {
 			return err
 		}
+		verifyResults = append(verifyResults, &verifyResult)
 		return nil
 	})
 	if err != nil {
