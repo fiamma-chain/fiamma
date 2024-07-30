@@ -123,16 +123,58 @@ func (k Keeper) GetBitVMChallengeData(ctx sdk.Context, proofId []byte) (types.Bi
 	return challengeData, true
 }
 
+// SetPendingProof stores pending proof verification information
+func (k Keeper) SetPendingProof(ctx sdk.Context, proofId []byte, verifyResult types.VerifyResult) {
+	store := k.pendingProofsStore(ctx)
+	bz := k.cdc.MustMarshal(&verifyResult)
+	store.Set(proofId, bz)
+}
+
+// GetPendingProof retrieves pending proof verification information
+func (k Keeper) GetPendingProof(ctx sdk.Context, proofId []byte) (types.VerifyResult, bool) {
+	store := k.pendingProofsStore(ctx)
+	bz := store.Get(proofId)
+	if bz == nil {
+		return types.VerifyResult{}, false
+	}
+	var verifyResult types.VerifyResult
+	k.cdc.MustUnmarshal(bz, &verifyResult)
+	return verifyResult, true
+}
+
+// DeletePendingProof deletes pending proof verification information
+func (k Keeper) DeletePendingProof(ctx sdk.Context, proofId []byte) {
+	store := k.pendingProofsStore(ctx)
+	store.Delete(proofId)
+}
+
+func (k Keeper) proofDataStore(ctx context.Context) prefix.Store {
+	storeAdapter := runtime.KVStoreAdapter(k.storeService.OpenKVStore(ctx))
+	return prefix.NewStore(storeAdapter, types.ProofDataKey)
+}
+
+func (k Keeper) verifyResultStore(ctx context.Context) prefix.Store {
+	storeAdapter := runtime.KVStoreAdapter(k.storeService.OpenKVStore(ctx))
+	return prefix.NewStore(storeAdapter, types.VerifyResultKey)
+}
+
+func (k Keeper) pendingProofsStore(ctx context.Context) prefix.Store {
+	storeAdapter := runtime.KVStoreAdapter(k.storeService.OpenKVStore(ctx))
+	return prefix.NewStore(storeAdapter, types.PendingProofsKey)
+}
+
+func (k Keeper) bitVMWitnessStore(ctx context.Context) prefix.Store {
+	storeAdapter := runtime.KVStoreAdapter(k.storeService.OpenKVStore(ctx))
+	return prefix.NewStore(storeAdapter, types.BitVMWitnessKey)
+}
+
 func (k Keeper) GetPendingProofs(ctx context.Context, req *types.QueryPendingProofRequest) (*types.QueryPendingProofResponse, error) {
-	store := k.verifyResultStore(ctx)
+	store := k.pendingProofsStore(ctx)
 	var verifyResults []*types.VerifyResult
 	pageRes, err := query.Paginate(store, req.Pagination, func(key []byte, value []byte) error {
 		var verifyResult types.VerifyResult
 		if err := k.cdc.Unmarshal(value, &verifyResult); err != nil {
 			return err
-		}
-		if verifyResult.Status != types.VerificationStatus_DEFINITIVE_VALIDATION {
-			verifyResults = append(verifyResults, &verifyResult)
 		}
 		return nil
 	})
