@@ -3526,25 +3526,25 @@ func (x *fastReflection_QueryVerifyResultResponse) ProtoMethods() *protoiface.Me
 }
 
 var (
-	md_QueryBitVMWitnessRequest          protoreflect.MessageDescriptor
-	fd_QueryBitVMWitnessRequest_proof_id protoreflect.FieldDescriptor
+	md_QueryBitVMChallengeDataRequest          protoreflect.MessageDescriptor
+	fd_QueryBitVMChallengeDataRequest_proof_id protoreflect.FieldDescriptor
 )
 
 func init() {
 	file_fiamma_zkpverify_query_proto_init()
-	md_QueryBitVMWitnessRequest = File_fiamma_zkpverify_query_proto.Messages().ByName("QueryBitVMWitnessRequest")
-	fd_QueryBitVMWitnessRequest_proof_id = md_QueryBitVMWitnessRequest.Fields().ByName("proof_id")
+	md_QueryBitVMChallengeDataRequest = File_fiamma_zkpverify_query_proto.Messages().ByName("QueryBitVMChallengeDataRequest")
+	fd_QueryBitVMChallengeDataRequest_proof_id = md_QueryBitVMChallengeDataRequest.Fields().ByName("proof_id")
 }
 
-var _ protoreflect.Message = (*fastReflection_QueryBitVMWitnessRequest)(nil)
+var _ protoreflect.Message = (*fastReflection_QueryBitVMChallengeDataRequest)(nil)
 
-type fastReflection_QueryBitVMWitnessRequest QueryBitVMWitnessRequest
+type fastReflection_QueryBitVMChallengeDataRequest QueryBitVMChallengeDataRequest
 
-func (x *QueryBitVMWitnessRequest) ProtoReflect() protoreflect.Message {
-	return (*fastReflection_QueryBitVMWitnessRequest)(x)
+func (x *QueryBitVMChallengeDataRequest) ProtoReflect() protoreflect.Message {
+	return (*fastReflection_QueryBitVMChallengeDataRequest)(x)
 }
 
-func (x *QueryBitVMWitnessRequest) slowProtoReflect() protoreflect.Message {
+func (x *QueryBitVMChallengeDataRequest) slowProtoReflect() protoreflect.Message {
 	mi := &file_fiamma_zkpverify_query_proto_msgTypes[8]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -3556,43 +3556,43 @@ func (x *QueryBitVMWitnessRequest) slowProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-var _fastReflection_QueryBitVMWitnessRequest_messageType fastReflection_QueryBitVMWitnessRequest_messageType
-var _ protoreflect.MessageType = fastReflection_QueryBitVMWitnessRequest_messageType{}
+var _fastReflection_QueryBitVMChallengeDataRequest_messageType fastReflection_QueryBitVMChallengeDataRequest_messageType
+var _ protoreflect.MessageType = fastReflection_QueryBitVMChallengeDataRequest_messageType{}
 
-type fastReflection_QueryBitVMWitnessRequest_messageType struct{}
+type fastReflection_QueryBitVMChallengeDataRequest_messageType struct{}
 
-func (x fastReflection_QueryBitVMWitnessRequest_messageType) Zero() protoreflect.Message {
-	return (*fastReflection_QueryBitVMWitnessRequest)(nil)
+func (x fastReflection_QueryBitVMChallengeDataRequest_messageType) Zero() protoreflect.Message {
+	return (*fastReflection_QueryBitVMChallengeDataRequest)(nil)
 }
-func (x fastReflection_QueryBitVMWitnessRequest_messageType) New() protoreflect.Message {
-	return new(fastReflection_QueryBitVMWitnessRequest)
+func (x fastReflection_QueryBitVMChallengeDataRequest_messageType) New() protoreflect.Message {
+	return new(fastReflection_QueryBitVMChallengeDataRequest)
 }
-func (x fastReflection_QueryBitVMWitnessRequest_messageType) Descriptor() protoreflect.MessageDescriptor {
-	return md_QueryBitVMWitnessRequest
+func (x fastReflection_QueryBitVMChallengeDataRequest_messageType) Descriptor() protoreflect.MessageDescriptor {
+	return md_QueryBitVMChallengeDataRequest
 }
 
 // Descriptor returns message descriptor, which contains only the protobuf
 // type information for the message.
-func (x *fastReflection_QueryBitVMWitnessRequest) Descriptor() protoreflect.MessageDescriptor {
-	return md_QueryBitVMWitnessRequest
+func (x *fastReflection_QueryBitVMChallengeDataRequest) Descriptor() protoreflect.MessageDescriptor {
+	return md_QueryBitVMChallengeDataRequest
 }
 
 // Type returns the message type, which encapsulates both Go and protobuf
 // type information. If the Go type information is not needed,
 // it is recommended that the message descriptor be used instead.
-func (x *fastReflection_QueryBitVMWitnessRequest) Type() protoreflect.MessageType {
-	return _fastReflection_QueryBitVMWitnessRequest_messageType
+func (x *fastReflection_QueryBitVMChallengeDataRequest) Type() protoreflect.MessageType {
+	return _fastReflection_QueryBitVMChallengeDataRequest_messageType
 }
 
 // New returns a newly allocated and mutable empty message.
-func (x *fastReflection_QueryBitVMWitnessRequest) New() protoreflect.Message {
-	return new(fastReflection_QueryBitVMWitnessRequest)
+func (x *fastReflection_QueryBitVMChallengeDataRequest) New() protoreflect.Message {
+	return new(fastReflection_QueryBitVMChallengeDataRequest)
 }
 
 // Interface unwraps the message reflection interface and
 // returns the underlying ProtoMessage interface.
-func (x *fastReflection_QueryBitVMWitnessRequest) Interface() protoreflect.ProtoMessage {
-	return (*QueryBitVMWitnessRequest)(x)
+func (x *fastReflection_QueryBitVMChallengeDataRequest) Interface() protoreflect.ProtoMessage {
+	return (*QueryBitVMChallengeDataRequest)(x)
 }
 
 // Range iterates over every populated field in an undefined order,
@@ -3600,10 +3600,10 @@ func (x *fastReflection_QueryBitVMWitnessRequest) Interface() protoreflect.Proto
 // Range returns immediately if f returns false.
 // While iterating, mutating operations may only be performed
 // on the current field descriptor.
-func (x *fastReflection_QueryBitVMWitnessRequest) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
+func (x *fastReflection_QueryBitVMChallengeDataRequest) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
 	if x.ProofId != "" {
 		value := protoreflect.ValueOfString(x.ProofId)
-		if !f(fd_QueryBitVMWitnessRequest_proof_id, value) {
+		if !f(fd_QueryBitVMChallengeDataRequest_proof_id, value) {
 			return
 		}
 	}
@@ -3620,15 +3620,15 @@ func (x *fastReflection_QueryBitVMWitnessRequest) Range(f func(protoreflect.Fiel
 // In other cases (aside from the nullable cases above),
 // a proto3 scalar field is populated if it contains a non-zero value, and
 // a repeated field is populated if it is non-empty.
-func (x *fastReflection_QueryBitVMWitnessRequest) Has(fd protoreflect.FieldDescriptor) bool {
+func (x *fastReflection_QueryBitVMChallengeDataRequest) Has(fd protoreflect.FieldDescriptor) bool {
 	switch fd.FullName() {
-	case "fiamma.zkpverify.QueryBitVMWitnessRequest.proof_id":
+	case "fiamma.zkpverify.QueryBitVMChallengeDataRequest.proof_id":
 		return x.ProofId != ""
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.zkpverify.QueryBitVMWitnessRequest"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.zkpverify.QueryBitVMChallengeDataRequest"))
 		}
-		panic(fmt.Errorf("message fiamma.zkpverify.QueryBitVMWitnessRequest does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message fiamma.zkpverify.QueryBitVMChallengeDataRequest does not contain field %s", fd.FullName()))
 	}
 }
 
@@ -3638,15 +3638,15 @@ func (x *fastReflection_QueryBitVMWitnessRequest) Has(fd protoreflect.FieldDescr
 // associated with the given field number.
 //
 // Clear is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_QueryBitVMWitnessRequest) Clear(fd protoreflect.FieldDescriptor) {
+func (x *fastReflection_QueryBitVMChallengeDataRequest) Clear(fd protoreflect.FieldDescriptor) {
 	switch fd.FullName() {
-	case "fiamma.zkpverify.QueryBitVMWitnessRequest.proof_id":
+	case "fiamma.zkpverify.QueryBitVMChallengeDataRequest.proof_id":
 		x.ProofId = ""
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.zkpverify.QueryBitVMWitnessRequest"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.zkpverify.QueryBitVMChallengeDataRequest"))
 		}
-		panic(fmt.Errorf("message fiamma.zkpverify.QueryBitVMWitnessRequest does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message fiamma.zkpverify.QueryBitVMChallengeDataRequest does not contain field %s", fd.FullName()))
 	}
 }
 
@@ -3656,16 +3656,16 @@ func (x *fastReflection_QueryBitVMWitnessRequest) Clear(fd protoreflect.FieldDes
 // the default value of a bytes scalar is guaranteed to be a copy.
 // For unpopulated composite types, it returns an empty, read-only view
 // of the value; to obtain a mutable reference, use Mutable.
-func (x *fastReflection_QueryBitVMWitnessRequest) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
+func (x *fastReflection_QueryBitVMChallengeDataRequest) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
 	switch descriptor.FullName() {
-	case "fiamma.zkpverify.QueryBitVMWitnessRequest.proof_id":
+	case "fiamma.zkpverify.QueryBitVMChallengeDataRequest.proof_id":
 		value := x.ProofId
 		return protoreflect.ValueOfString(value)
 	default:
 		if descriptor.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.zkpverify.QueryBitVMWitnessRequest"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.zkpverify.QueryBitVMChallengeDataRequest"))
 		}
-		panic(fmt.Errorf("message fiamma.zkpverify.QueryBitVMWitnessRequest does not contain field %s", descriptor.FullName()))
+		panic(fmt.Errorf("message fiamma.zkpverify.QueryBitVMChallengeDataRequest does not contain field %s", descriptor.FullName()))
 	}
 }
 
@@ -3679,15 +3679,15 @@ func (x *fastReflection_QueryBitVMWitnessRequest) Get(descriptor protoreflect.Fi
 // empty, read-only value, then it panics.
 //
 // Set is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_QueryBitVMWitnessRequest) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
+func (x *fastReflection_QueryBitVMChallengeDataRequest) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
 	switch fd.FullName() {
-	case "fiamma.zkpverify.QueryBitVMWitnessRequest.proof_id":
+	case "fiamma.zkpverify.QueryBitVMChallengeDataRequest.proof_id":
 		x.ProofId = value.Interface().(string)
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.zkpverify.QueryBitVMWitnessRequest"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.zkpverify.QueryBitVMChallengeDataRequest"))
 		}
-		panic(fmt.Errorf("message fiamma.zkpverify.QueryBitVMWitnessRequest does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message fiamma.zkpverify.QueryBitVMChallengeDataRequest does not contain field %s", fd.FullName()))
 	}
 }
 
@@ -3701,40 +3701,40 @@ func (x *fastReflection_QueryBitVMWitnessRequest) Set(fd protoreflect.FieldDescr
 // It panics if the field does not contain a composite type.
 //
 // Mutable is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_QueryBitVMWitnessRequest) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
+func (x *fastReflection_QueryBitVMChallengeDataRequest) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "fiamma.zkpverify.QueryBitVMWitnessRequest.proof_id":
-		panic(fmt.Errorf("field proof_id of message fiamma.zkpverify.QueryBitVMWitnessRequest is not mutable"))
+	case "fiamma.zkpverify.QueryBitVMChallengeDataRequest.proof_id":
+		panic(fmt.Errorf("field proof_id of message fiamma.zkpverify.QueryBitVMChallengeDataRequest is not mutable"))
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.zkpverify.QueryBitVMWitnessRequest"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.zkpverify.QueryBitVMChallengeDataRequest"))
 		}
-		panic(fmt.Errorf("message fiamma.zkpverify.QueryBitVMWitnessRequest does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message fiamma.zkpverify.QueryBitVMChallengeDataRequest does not contain field %s", fd.FullName()))
 	}
 }
 
 // NewField returns a new value that is assignable to the field
 // for the given descriptor. For scalars, this returns the default value.
 // For lists, maps, and messages, this returns a new, empty, mutable value.
-func (x *fastReflection_QueryBitVMWitnessRequest) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
+func (x *fastReflection_QueryBitVMChallengeDataRequest) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "fiamma.zkpverify.QueryBitVMWitnessRequest.proof_id":
+	case "fiamma.zkpverify.QueryBitVMChallengeDataRequest.proof_id":
 		return protoreflect.ValueOfString("")
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.zkpverify.QueryBitVMWitnessRequest"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.zkpverify.QueryBitVMChallengeDataRequest"))
 		}
-		panic(fmt.Errorf("message fiamma.zkpverify.QueryBitVMWitnessRequest does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message fiamma.zkpverify.QueryBitVMChallengeDataRequest does not contain field %s", fd.FullName()))
 	}
 }
 
 // WhichOneof reports which field within the oneof is populated,
 // returning nil if none are populated.
 // It panics if the oneof descriptor does not belong to this message.
-func (x *fastReflection_QueryBitVMWitnessRequest) WhichOneof(d protoreflect.OneofDescriptor) protoreflect.FieldDescriptor {
+func (x *fastReflection_QueryBitVMChallengeDataRequest) WhichOneof(d protoreflect.OneofDescriptor) protoreflect.FieldDescriptor {
 	switch d.FullName() {
 	default:
-		panic(fmt.Errorf("%s is not a oneof field in fiamma.zkpverify.QueryBitVMWitnessRequest", d.FullName()))
+		panic(fmt.Errorf("%s is not a oneof field in fiamma.zkpverify.QueryBitVMChallengeDataRequest", d.FullName()))
 	}
 	panic("unreachable")
 }
@@ -3742,7 +3742,7 @@ func (x *fastReflection_QueryBitVMWitnessRequest) WhichOneof(d protoreflect.Oneo
 // GetUnknown retrieves the entire list of unknown fields.
 // The caller may only mutate the contents of the RawFields
 // if the mutated bytes are stored back into the message with SetUnknown.
-func (x *fastReflection_QueryBitVMWitnessRequest) GetUnknown() protoreflect.RawFields {
+func (x *fastReflection_QueryBitVMChallengeDataRequest) GetUnknown() protoreflect.RawFields {
 	return x.unknownFields
 }
 
@@ -3753,7 +3753,7 @@ func (x *fastReflection_QueryBitVMWitnessRequest) GetUnknown() protoreflect.RawF
 // An empty RawFields may be passed to clear the fields.
 //
 // SetUnknown is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_QueryBitVMWitnessRequest) SetUnknown(fields protoreflect.RawFields) {
+func (x *fastReflection_QueryBitVMChallengeDataRequest) SetUnknown(fields protoreflect.RawFields) {
 	x.unknownFields = fields
 }
 
@@ -3765,7 +3765,7 @@ func (x *fastReflection_QueryBitVMWitnessRequest) SetUnknown(fields protoreflect
 // message type, but the details are implementation dependent.
 // Validity is not part of the protobuf data model, and may not
 // be preserved in marshaling or other operations.
-func (x *fastReflection_QueryBitVMWitnessRequest) IsValid() bool {
+func (x *fastReflection_QueryBitVMChallengeDataRequest) IsValid() bool {
 	return x != nil
 }
 
@@ -3775,9 +3775,9 @@ func (x *fastReflection_QueryBitVMWitnessRequest) IsValid() bool {
 // The returned methods type is identical to
 // "google.golang.org/protobuf/runtime/protoiface".Methods.
 // Consult the protoiface package documentation for details.
-func (x *fastReflection_QueryBitVMWitnessRequest) ProtoMethods() *protoiface.Methods {
+func (x *fastReflection_QueryBitVMChallengeDataRequest) ProtoMethods() *protoiface.Methods {
 	size := func(input protoiface.SizeInput) protoiface.SizeOutput {
-		x := input.Message.Interface().(*QueryBitVMWitnessRequest)
+		x := input.Message.Interface().(*QueryBitVMChallengeDataRequest)
 		if x == nil {
 			return protoiface.SizeOutput{
 				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
@@ -3803,7 +3803,7 @@ func (x *fastReflection_QueryBitVMWitnessRequest) ProtoMethods() *protoiface.Met
 	}
 
 	marshal := func(input protoiface.MarshalInput) (protoiface.MarshalOutput, error) {
-		x := input.Message.Interface().(*QueryBitVMWitnessRequest)
+		x := input.Message.Interface().(*QueryBitVMChallengeDataRequest)
 		if x == nil {
 			return protoiface.MarshalOutput{
 				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
@@ -3840,7 +3840,7 @@ func (x *fastReflection_QueryBitVMWitnessRequest) ProtoMethods() *protoiface.Met
 		}, nil
 	}
 	unmarshal := func(input protoiface.UnmarshalInput) (protoiface.UnmarshalOutput, error) {
-		x := input.Message.Interface().(*QueryBitVMWitnessRequest)
+		x := input.Message.Interface().(*QueryBitVMChallengeDataRequest)
 		if x == nil {
 			return protoiface.UnmarshalOutput{
 				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
@@ -3872,10 +3872,10 @@ func (x *fastReflection_QueryBitVMWitnessRequest) ProtoMethods() *protoiface.Met
 			fieldNum := int32(wire >> 3)
 			wireType := int(wire & 0x7)
 			if wireType == 4 {
-				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: QueryBitVMWitnessRequest: wiretype end group for non-group")
+				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: QueryBitVMChallengeDataRequest: wiretype end group for non-group")
 			}
 			if fieldNum <= 0 {
-				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: QueryBitVMWitnessRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: QueryBitVMChallengeDataRequest: illegal tag %d (wire type %d)", fieldNum, wire)
 			}
 			switch fieldNum {
 			case 1:
@@ -3946,25 +3946,25 @@ func (x *fastReflection_QueryBitVMWitnessRequest) ProtoMethods() *protoiface.Met
 }
 
 var (
-	md_QueryBitVMWitnessResponse         protoreflect.MessageDescriptor
-	fd_QueryBitVMWitnessResponse_witness protoreflect.FieldDescriptor
+	md_QueryBitVMChallengeDataResponse                      protoreflect.MessageDescriptor
+	fd_QueryBitVMChallengeDataResponse_bitvm_challenge_data protoreflect.FieldDescriptor
 )
 
 func init() {
 	file_fiamma_zkpverify_query_proto_init()
-	md_QueryBitVMWitnessResponse = File_fiamma_zkpverify_query_proto.Messages().ByName("QueryBitVMWitnessResponse")
-	fd_QueryBitVMWitnessResponse_witness = md_QueryBitVMWitnessResponse.Fields().ByName("witness")
+	md_QueryBitVMChallengeDataResponse = File_fiamma_zkpverify_query_proto.Messages().ByName("QueryBitVMChallengeDataResponse")
+	fd_QueryBitVMChallengeDataResponse_bitvm_challenge_data = md_QueryBitVMChallengeDataResponse.Fields().ByName("bitvm_challenge_data")
 }
 
-var _ protoreflect.Message = (*fastReflection_QueryBitVMWitnessResponse)(nil)
+var _ protoreflect.Message = (*fastReflection_QueryBitVMChallengeDataResponse)(nil)
 
-type fastReflection_QueryBitVMWitnessResponse QueryBitVMWitnessResponse
+type fastReflection_QueryBitVMChallengeDataResponse QueryBitVMChallengeDataResponse
 
-func (x *QueryBitVMWitnessResponse) ProtoReflect() protoreflect.Message {
-	return (*fastReflection_QueryBitVMWitnessResponse)(x)
+func (x *QueryBitVMChallengeDataResponse) ProtoReflect() protoreflect.Message {
+	return (*fastReflection_QueryBitVMChallengeDataResponse)(x)
 }
 
-func (x *QueryBitVMWitnessResponse) slowProtoReflect() protoreflect.Message {
+func (x *QueryBitVMChallengeDataResponse) slowProtoReflect() protoreflect.Message {
 	mi := &file_fiamma_zkpverify_query_proto_msgTypes[9]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -3976,43 +3976,43 @@ func (x *QueryBitVMWitnessResponse) slowProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-var _fastReflection_QueryBitVMWitnessResponse_messageType fastReflection_QueryBitVMWitnessResponse_messageType
-var _ protoreflect.MessageType = fastReflection_QueryBitVMWitnessResponse_messageType{}
+var _fastReflection_QueryBitVMChallengeDataResponse_messageType fastReflection_QueryBitVMChallengeDataResponse_messageType
+var _ protoreflect.MessageType = fastReflection_QueryBitVMChallengeDataResponse_messageType{}
 
-type fastReflection_QueryBitVMWitnessResponse_messageType struct{}
+type fastReflection_QueryBitVMChallengeDataResponse_messageType struct{}
 
-func (x fastReflection_QueryBitVMWitnessResponse_messageType) Zero() protoreflect.Message {
-	return (*fastReflection_QueryBitVMWitnessResponse)(nil)
+func (x fastReflection_QueryBitVMChallengeDataResponse_messageType) Zero() protoreflect.Message {
+	return (*fastReflection_QueryBitVMChallengeDataResponse)(nil)
 }
-func (x fastReflection_QueryBitVMWitnessResponse_messageType) New() protoreflect.Message {
-	return new(fastReflection_QueryBitVMWitnessResponse)
+func (x fastReflection_QueryBitVMChallengeDataResponse_messageType) New() protoreflect.Message {
+	return new(fastReflection_QueryBitVMChallengeDataResponse)
 }
-func (x fastReflection_QueryBitVMWitnessResponse_messageType) Descriptor() protoreflect.MessageDescriptor {
-	return md_QueryBitVMWitnessResponse
+func (x fastReflection_QueryBitVMChallengeDataResponse_messageType) Descriptor() protoreflect.MessageDescriptor {
+	return md_QueryBitVMChallengeDataResponse
 }
 
 // Descriptor returns message descriptor, which contains only the protobuf
 // type information for the message.
-func (x *fastReflection_QueryBitVMWitnessResponse) Descriptor() protoreflect.MessageDescriptor {
-	return md_QueryBitVMWitnessResponse
+func (x *fastReflection_QueryBitVMChallengeDataResponse) Descriptor() protoreflect.MessageDescriptor {
+	return md_QueryBitVMChallengeDataResponse
 }
 
 // Type returns the message type, which encapsulates both Go and protobuf
 // type information. If the Go type information is not needed,
 // it is recommended that the message descriptor be used instead.
-func (x *fastReflection_QueryBitVMWitnessResponse) Type() protoreflect.MessageType {
-	return _fastReflection_QueryBitVMWitnessResponse_messageType
+func (x *fastReflection_QueryBitVMChallengeDataResponse) Type() protoreflect.MessageType {
+	return _fastReflection_QueryBitVMChallengeDataResponse_messageType
 }
 
 // New returns a newly allocated and mutable empty message.
-func (x *fastReflection_QueryBitVMWitnessResponse) New() protoreflect.Message {
-	return new(fastReflection_QueryBitVMWitnessResponse)
+func (x *fastReflection_QueryBitVMChallengeDataResponse) New() protoreflect.Message {
+	return new(fastReflection_QueryBitVMChallengeDataResponse)
 }
 
 // Interface unwraps the message reflection interface and
 // returns the underlying ProtoMessage interface.
-func (x *fastReflection_QueryBitVMWitnessResponse) Interface() protoreflect.ProtoMessage {
-	return (*QueryBitVMWitnessResponse)(x)
+func (x *fastReflection_QueryBitVMChallengeDataResponse) Interface() protoreflect.ProtoMessage {
+	return (*QueryBitVMChallengeDataResponse)(x)
 }
 
 // Range iterates over every populated field in an undefined order,
@@ -4020,10 +4020,10 @@ func (x *fastReflection_QueryBitVMWitnessResponse) Interface() protoreflect.Prot
 // Range returns immediately if f returns false.
 // While iterating, mutating operations may only be performed
 // on the current field descriptor.
-func (x *fastReflection_QueryBitVMWitnessResponse) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
-	if x.Witness != "" {
-		value := protoreflect.ValueOfString(x.Witness)
-		if !f(fd_QueryBitVMWitnessResponse_witness, value) {
+func (x *fastReflection_QueryBitVMChallengeDataResponse) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
+	if x.BitvmChallengeData != nil {
+		value := protoreflect.ValueOfMessage(x.BitvmChallengeData.ProtoReflect())
+		if !f(fd_QueryBitVMChallengeDataResponse_bitvm_challenge_data, value) {
 			return
 		}
 	}
@@ -4040,15 +4040,15 @@ func (x *fastReflection_QueryBitVMWitnessResponse) Range(f func(protoreflect.Fie
 // In other cases (aside from the nullable cases above),
 // a proto3 scalar field is populated if it contains a non-zero value, and
 // a repeated field is populated if it is non-empty.
-func (x *fastReflection_QueryBitVMWitnessResponse) Has(fd protoreflect.FieldDescriptor) bool {
+func (x *fastReflection_QueryBitVMChallengeDataResponse) Has(fd protoreflect.FieldDescriptor) bool {
 	switch fd.FullName() {
-	case "fiamma.zkpverify.QueryBitVMWitnessResponse.witness":
-		return x.Witness != ""
+	case "fiamma.zkpverify.QueryBitVMChallengeDataResponse.bitvm_challenge_data":
+		return x.BitvmChallengeData != nil
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.zkpverify.QueryBitVMWitnessResponse"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.zkpverify.QueryBitVMChallengeDataResponse"))
 		}
-		panic(fmt.Errorf("message fiamma.zkpverify.QueryBitVMWitnessResponse does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message fiamma.zkpverify.QueryBitVMChallengeDataResponse does not contain field %s", fd.FullName()))
 	}
 }
 
@@ -4058,15 +4058,15 @@ func (x *fastReflection_QueryBitVMWitnessResponse) Has(fd protoreflect.FieldDesc
 // associated with the given field number.
 //
 // Clear is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_QueryBitVMWitnessResponse) Clear(fd protoreflect.FieldDescriptor) {
+func (x *fastReflection_QueryBitVMChallengeDataResponse) Clear(fd protoreflect.FieldDescriptor) {
 	switch fd.FullName() {
-	case "fiamma.zkpverify.QueryBitVMWitnessResponse.witness":
-		x.Witness = ""
+	case "fiamma.zkpverify.QueryBitVMChallengeDataResponse.bitvm_challenge_data":
+		x.BitvmChallengeData = nil
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.zkpverify.QueryBitVMWitnessResponse"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.zkpverify.QueryBitVMChallengeDataResponse"))
 		}
-		panic(fmt.Errorf("message fiamma.zkpverify.QueryBitVMWitnessResponse does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message fiamma.zkpverify.QueryBitVMChallengeDataResponse does not contain field %s", fd.FullName()))
 	}
 }
 
@@ -4076,16 +4076,16 @@ func (x *fastReflection_QueryBitVMWitnessResponse) Clear(fd protoreflect.FieldDe
 // the default value of a bytes scalar is guaranteed to be a copy.
 // For unpopulated composite types, it returns an empty, read-only view
 // of the value; to obtain a mutable reference, use Mutable.
-func (x *fastReflection_QueryBitVMWitnessResponse) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
+func (x *fastReflection_QueryBitVMChallengeDataResponse) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
 	switch descriptor.FullName() {
-	case "fiamma.zkpverify.QueryBitVMWitnessResponse.witness":
-		value := x.Witness
-		return protoreflect.ValueOfString(value)
+	case "fiamma.zkpverify.QueryBitVMChallengeDataResponse.bitvm_challenge_data":
+		value := x.BitvmChallengeData
+		return protoreflect.ValueOfMessage(value.ProtoReflect())
 	default:
 		if descriptor.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.zkpverify.QueryBitVMWitnessResponse"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.zkpverify.QueryBitVMChallengeDataResponse"))
 		}
-		panic(fmt.Errorf("message fiamma.zkpverify.QueryBitVMWitnessResponse does not contain field %s", descriptor.FullName()))
+		panic(fmt.Errorf("message fiamma.zkpverify.QueryBitVMChallengeDataResponse does not contain field %s", descriptor.FullName()))
 	}
 }
 
@@ -4099,15 +4099,15 @@ func (x *fastReflection_QueryBitVMWitnessResponse) Get(descriptor protoreflect.F
 // empty, read-only value, then it panics.
 //
 // Set is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_QueryBitVMWitnessResponse) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
+func (x *fastReflection_QueryBitVMChallengeDataResponse) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
 	switch fd.FullName() {
-	case "fiamma.zkpverify.QueryBitVMWitnessResponse.witness":
-		x.Witness = value.Interface().(string)
+	case "fiamma.zkpverify.QueryBitVMChallengeDataResponse.bitvm_challenge_data":
+		x.BitvmChallengeData = value.Message().Interface().(*BitVMChallengeData)
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.zkpverify.QueryBitVMWitnessResponse"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.zkpverify.QueryBitVMChallengeDataResponse"))
 		}
-		panic(fmt.Errorf("message fiamma.zkpverify.QueryBitVMWitnessResponse does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message fiamma.zkpverify.QueryBitVMChallengeDataResponse does not contain field %s", fd.FullName()))
 	}
 }
 
@@ -4121,40 +4121,44 @@ func (x *fastReflection_QueryBitVMWitnessResponse) Set(fd protoreflect.FieldDesc
 // It panics if the field does not contain a composite type.
 //
 // Mutable is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_QueryBitVMWitnessResponse) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
+func (x *fastReflection_QueryBitVMChallengeDataResponse) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "fiamma.zkpverify.QueryBitVMWitnessResponse.witness":
-		panic(fmt.Errorf("field witness of message fiamma.zkpverify.QueryBitVMWitnessResponse is not mutable"))
+	case "fiamma.zkpverify.QueryBitVMChallengeDataResponse.bitvm_challenge_data":
+		if x.BitvmChallengeData == nil {
+			x.BitvmChallengeData = new(BitVMChallengeData)
+		}
+		return protoreflect.ValueOfMessage(x.BitvmChallengeData.ProtoReflect())
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.zkpverify.QueryBitVMWitnessResponse"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.zkpverify.QueryBitVMChallengeDataResponse"))
 		}
-		panic(fmt.Errorf("message fiamma.zkpverify.QueryBitVMWitnessResponse does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message fiamma.zkpverify.QueryBitVMChallengeDataResponse does not contain field %s", fd.FullName()))
 	}
 }
 
 // NewField returns a new value that is assignable to the field
 // for the given descriptor. For scalars, this returns the default value.
 // For lists, maps, and messages, this returns a new, empty, mutable value.
-func (x *fastReflection_QueryBitVMWitnessResponse) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
+func (x *fastReflection_QueryBitVMChallengeDataResponse) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "fiamma.zkpverify.QueryBitVMWitnessResponse.witness":
-		return protoreflect.ValueOfString("")
+	case "fiamma.zkpverify.QueryBitVMChallengeDataResponse.bitvm_challenge_data":
+		m := new(BitVMChallengeData)
+		return protoreflect.ValueOfMessage(m.ProtoReflect())
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.zkpverify.QueryBitVMWitnessResponse"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: fiamma.zkpverify.QueryBitVMChallengeDataResponse"))
 		}
-		panic(fmt.Errorf("message fiamma.zkpverify.QueryBitVMWitnessResponse does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message fiamma.zkpverify.QueryBitVMChallengeDataResponse does not contain field %s", fd.FullName()))
 	}
 }
 
 // WhichOneof reports which field within the oneof is populated,
 // returning nil if none are populated.
 // It panics if the oneof descriptor does not belong to this message.
-func (x *fastReflection_QueryBitVMWitnessResponse) WhichOneof(d protoreflect.OneofDescriptor) protoreflect.FieldDescriptor {
+func (x *fastReflection_QueryBitVMChallengeDataResponse) WhichOneof(d protoreflect.OneofDescriptor) protoreflect.FieldDescriptor {
 	switch d.FullName() {
 	default:
-		panic(fmt.Errorf("%s is not a oneof field in fiamma.zkpverify.QueryBitVMWitnessResponse", d.FullName()))
+		panic(fmt.Errorf("%s is not a oneof field in fiamma.zkpverify.QueryBitVMChallengeDataResponse", d.FullName()))
 	}
 	panic("unreachable")
 }
@@ -4162,7 +4166,7 @@ func (x *fastReflection_QueryBitVMWitnessResponse) WhichOneof(d protoreflect.One
 // GetUnknown retrieves the entire list of unknown fields.
 // The caller may only mutate the contents of the RawFields
 // if the mutated bytes are stored back into the message with SetUnknown.
-func (x *fastReflection_QueryBitVMWitnessResponse) GetUnknown() protoreflect.RawFields {
+func (x *fastReflection_QueryBitVMChallengeDataResponse) GetUnknown() protoreflect.RawFields {
 	return x.unknownFields
 }
 
@@ -4173,7 +4177,7 @@ func (x *fastReflection_QueryBitVMWitnessResponse) GetUnknown() protoreflect.Raw
 // An empty RawFields may be passed to clear the fields.
 //
 // SetUnknown is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_QueryBitVMWitnessResponse) SetUnknown(fields protoreflect.RawFields) {
+func (x *fastReflection_QueryBitVMChallengeDataResponse) SetUnknown(fields protoreflect.RawFields) {
 	x.unknownFields = fields
 }
 
@@ -4185,7 +4189,7 @@ func (x *fastReflection_QueryBitVMWitnessResponse) SetUnknown(fields protoreflec
 // message type, but the details are implementation dependent.
 // Validity is not part of the protobuf data model, and may not
 // be preserved in marshaling or other operations.
-func (x *fastReflection_QueryBitVMWitnessResponse) IsValid() bool {
+func (x *fastReflection_QueryBitVMChallengeDataResponse) IsValid() bool {
 	return x != nil
 }
 
@@ -4195,9 +4199,9 @@ func (x *fastReflection_QueryBitVMWitnessResponse) IsValid() bool {
 // The returned methods type is identical to
 // "google.golang.org/protobuf/runtime/protoiface".Methods.
 // Consult the protoiface package documentation for details.
-func (x *fastReflection_QueryBitVMWitnessResponse) ProtoMethods() *protoiface.Methods {
+func (x *fastReflection_QueryBitVMChallengeDataResponse) ProtoMethods() *protoiface.Methods {
 	size := func(input protoiface.SizeInput) protoiface.SizeOutput {
-		x := input.Message.Interface().(*QueryBitVMWitnessResponse)
+		x := input.Message.Interface().(*QueryBitVMChallengeDataResponse)
 		if x == nil {
 			return protoiface.SizeOutput{
 				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
@@ -4209,8 +4213,8 @@ func (x *fastReflection_QueryBitVMWitnessResponse) ProtoMethods() *protoiface.Me
 		var n int
 		var l int
 		_ = l
-		l = len(x.Witness)
-		if l > 0 {
+		if x.BitvmChallengeData != nil {
+			l = options.Size(x.BitvmChallengeData)
 			n += 1 + l + runtime.Sov(uint64(l))
 		}
 		if x.unknownFields != nil {
@@ -4223,7 +4227,7 @@ func (x *fastReflection_QueryBitVMWitnessResponse) ProtoMethods() *protoiface.Me
 	}
 
 	marshal := func(input protoiface.MarshalInput) (protoiface.MarshalOutput, error) {
-		x := input.Message.Interface().(*QueryBitVMWitnessResponse)
+		x := input.Message.Interface().(*QueryBitVMChallengeDataResponse)
 		if x == nil {
 			return protoiface.MarshalOutput{
 				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
@@ -4242,10 +4246,17 @@ func (x *fastReflection_QueryBitVMWitnessResponse) ProtoMethods() *protoiface.Me
 			i -= len(x.unknownFields)
 			copy(dAtA[i:], x.unknownFields)
 		}
-		if len(x.Witness) > 0 {
-			i -= len(x.Witness)
-			copy(dAtA[i:], x.Witness)
-			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.Witness)))
+		if x.BitvmChallengeData != nil {
+			encoded, err := options.Marshal(x.BitvmChallengeData)
+			if err != nil {
+				return protoiface.MarshalOutput{
+					NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+					Buf:               input.Buf,
+				}, err
+			}
+			i -= len(encoded)
+			copy(dAtA[i:], encoded)
+			i = runtime.EncodeVarint(dAtA, i, uint64(len(encoded)))
 			i--
 			dAtA[i] = 0xa
 		}
@@ -4260,7 +4271,7 @@ func (x *fastReflection_QueryBitVMWitnessResponse) ProtoMethods() *protoiface.Me
 		}, nil
 	}
 	unmarshal := func(input protoiface.UnmarshalInput) (protoiface.UnmarshalOutput, error) {
-		x := input.Message.Interface().(*QueryBitVMWitnessResponse)
+		x := input.Message.Interface().(*QueryBitVMChallengeDataResponse)
 		if x == nil {
 			return protoiface.UnmarshalOutput{
 				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
@@ -4292,17 +4303,17 @@ func (x *fastReflection_QueryBitVMWitnessResponse) ProtoMethods() *protoiface.Me
 			fieldNum := int32(wire >> 3)
 			wireType := int(wire & 0x7)
 			if wireType == 4 {
-				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: QueryBitVMWitnessResponse: wiretype end group for non-group")
+				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: QueryBitVMChallengeDataResponse: wiretype end group for non-group")
 			}
 			if fieldNum <= 0 {
-				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: QueryBitVMWitnessResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: QueryBitVMChallengeDataResponse: illegal tag %d (wire type %d)", fieldNum, wire)
 			}
 			switch fieldNum {
 			case 1:
 				if wireType != 2 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Witness", wireType)
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field BitvmChallengeData", wireType)
 				}
-				var stringLen uint64
+				var msglen int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
 						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
@@ -4312,23 +4323,27 @@ func (x *fastReflection_QueryBitVMWitnessResponse) ProtoMethods() *protoiface.Me
 					}
 					b := dAtA[iNdEx]
 					iNdEx++
-					stringLen |= uint64(b&0x7F) << shift
+					msglen |= int(b&0x7F) << shift
 					if b < 0x80 {
 						break
 					}
 				}
-				intStringLen := int(stringLen)
-				if intStringLen < 0 {
+				if msglen < 0 {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
 				}
-				postIndex := iNdEx + intStringLen
+				postIndex := iNdEx + msglen
 				if postIndex < 0 {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
 				}
 				if postIndex > l {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
 				}
-				x.Witness = string(dAtA[iNdEx:postIndex])
+				if x.BitvmChallengeData == nil {
+					x.BitvmChallengeData = &BitVMChallengeData{}
+				}
+				if err := options.Unmarshal(dAtA[iNdEx:postIndex], x.BitvmChallengeData); err != nil {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, err
+				}
 				iNdEx = postIndex
 			default:
 				iNdEx = preIndex
@@ -4670,9 +4685,9 @@ func (x *QueryVerifyResultResponse) GetVerifyResult() *VerifyResult {
 	return nil
 }
 
-// QueryBitVMWitnessRequest is request type for the Query/BitVMWitness RPC
+// QueryBitVMChallengeDataRequest is request type for the Query/BitVMChallengeData RPC
 // method.
-type QueryBitVMWitnessRequest struct {
+type QueryBitVMChallengeDataRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -4680,8 +4695,8 @@ type QueryBitVMWitnessRequest struct {
 	ProofId string `protobuf:"bytes,1,opt,name=proof_id,json=proofId,proto3" json:"proof_id,omitempty"`
 }
 
-func (x *QueryBitVMWitnessRequest) Reset() {
-	*x = QueryBitVMWitnessRequest{}
+func (x *QueryBitVMChallengeDataRequest) Reset() {
+	*x = QueryBitVMChallengeDataRequest{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_fiamma_zkpverify_query_proto_msgTypes[8]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -4689,36 +4704,36 @@ func (x *QueryBitVMWitnessRequest) Reset() {
 	}
 }
 
-func (x *QueryBitVMWitnessRequest) String() string {
+func (x *QueryBitVMChallengeDataRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*QueryBitVMWitnessRequest) ProtoMessage() {}
+func (*QueryBitVMChallengeDataRequest) ProtoMessage() {}
 
-// Deprecated: Use QueryBitVMWitnessRequest.ProtoReflect.Descriptor instead.
-func (*QueryBitVMWitnessRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use QueryBitVMChallengeDataRequest.ProtoReflect.Descriptor instead.
+func (*QueryBitVMChallengeDataRequest) Descriptor() ([]byte, []int) {
 	return file_fiamma_zkpverify_query_proto_rawDescGZIP(), []int{8}
 }
 
-func (x *QueryBitVMWitnessRequest) GetProofId() string {
+func (x *QueryBitVMChallengeDataRequest) GetProofId() string {
 	if x != nil {
 		return x.ProofId
 	}
 	return ""
 }
 
-// QueryBitVMWitnessResponse is response type for the Query/BitVMWitness RPC
+// QueryBitVMChallengeDataResponse is response type for the Query/BitVMChallengeData RPC
 // method.
-type QueryBitVMWitnessResponse struct {
+type QueryBitVMChallengeDataResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Witness string `protobuf:"bytes,1,opt,name=witness,proto3" json:"witness,omitempty"`
+	BitvmChallengeData *BitVMChallengeData `protobuf:"bytes,1,opt,name=bitvm_challenge_data,json=bitvmChallengeData,proto3" json:"bitvm_challenge_data,omitempty"`
 }
 
-func (x *QueryBitVMWitnessResponse) Reset() {
-	*x = QueryBitVMWitnessResponse{}
+func (x *QueryBitVMChallengeDataResponse) Reset() {
+	*x = QueryBitVMChallengeDataResponse{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_fiamma_zkpverify_query_proto_msgTypes[9]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -4726,22 +4741,22 @@ func (x *QueryBitVMWitnessResponse) Reset() {
 	}
 }
 
-func (x *QueryBitVMWitnessResponse) String() string {
+func (x *QueryBitVMChallengeDataResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*QueryBitVMWitnessResponse) ProtoMessage() {}
+func (*QueryBitVMChallengeDataResponse) ProtoMessage() {}
 
-// Deprecated: Use QueryBitVMWitnessResponse.ProtoReflect.Descriptor instead.
-func (*QueryBitVMWitnessResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use QueryBitVMChallengeDataResponse.ProtoReflect.Descriptor instead.
+func (*QueryBitVMChallengeDataResponse) Descriptor() ([]byte, []int) {
 	return file_fiamma_zkpverify_query_proto_rawDescGZIP(), []int{9}
 }
 
-func (x *QueryBitVMWitnessResponse) GetWitness() string {
+func (x *QueryBitVMChallengeDataResponse) GetBitvmChallengeData() *BitVMChallengeData {
 	if x != nil {
-		return x.Witness
+		return x.BitvmChallengeData
 	}
-	return ""
+	return nil
 }
 
 var File_fiamma_zkpverify_query_proto protoreflect.FileDescriptor
@@ -4803,70 +4818,76 @@ var file_fiamma_zkpverify_query_proto_rawDesc = []byte{
 	0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1e, 0x2e, 0x66, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x2e, 0x7a,
 	0x6b, 0x70, 0x76, 0x65, 0x72, 0x69, 0x66, 0x79, 0x2e, 0x56, 0x65, 0x72, 0x69, 0x66, 0x79, 0x52,
 	0x65, 0x73, 0x75, 0x6c, 0x74, 0x52, 0x0c, 0x76, 0x65, 0x72, 0x69, 0x66, 0x79, 0x52, 0x65, 0x73,
-	0x75, 0x6c, 0x74, 0x22, 0x35, 0x0a, 0x18, 0x51, 0x75, 0x65, 0x72, 0x79, 0x42, 0x69, 0x74, 0x56,
-	0x4d, 0x57, 0x69, 0x74, 0x6e, 0x65, 0x73, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12,
-	0x19, 0x0a, 0x08, 0x70, 0x72, 0x6f, 0x6f, 0x66, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28,
-	0x09, 0x52, 0x07, 0x70, 0x72, 0x6f, 0x6f, 0x66, 0x49, 0x64, 0x22, 0x35, 0x0a, 0x19, 0x51, 0x75,
-	0x65, 0x72, 0x79, 0x42, 0x69, 0x74, 0x56, 0x4d, 0x57, 0x69, 0x74, 0x6e, 0x65, 0x73, 0x73, 0x52,
-	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x77, 0x69, 0x74, 0x6e, 0x65,
-	0x73, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x77, 0x69, 0x74, 0x6e, 0x65, 0x73,
-	0x73, 0x32, 0xcc, 0x05, 0x0a, 0x05, 0x51, 0x75, 0x65, 0x72, 0x79, 0x12, 0x77, 0x0a, 0x06, 0x50,
-	0x61, 0x72, 0x61, 0x6d, 0x73, 0x12, 0x24, 0x2e, 0x66, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x2e, 0x7a,
+	0x75, 0x6c, 0x74, 0x22, 0x3b, 0x0a, 0x1e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x42, 0x69, 0x74, 0x56,
+	0x4d, 0x43, 0x68, 0x61, 0x6c, 0x6c, 0x65, 0x6e, 0x67, 0x65, 0x44, 0x61, 0x74, 0x61, 0x52, 0x65,
+	0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x19, 0x0a, 0x08, 0x70, 0x72, 0x6f, 0x6f, 0x66, 0x5f, 0x69,
+	0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x70, 0x72, 0x6f, 0x6f, 0x66, 0x49, 0x64,
+	0x22, 0x79, 0x0a, 0x1f, 0x51, 0x75, 0x65, 0x72, 0x79, 0x42, 0x69, 0x74, 0x56, 0x4d, 0x43, 0x68,
+	0x61, 0x6c, 0x6c, 0x65, 0x6e, 0x67, 0x65, 0x44, 0x61, 0x74, 0x61, 0x52, 0x65, 0x73, 0x70, 0x6f,
+	0x6e, 0x73, 0x65, 0x12, 0x56, 0x0a, 0x14, 0x62, 0x69, 0x74, 0x76, 0x6d, 0x5f, 0x63, 0x68, 0x61,
+	0x6c, 0x6c, 0x65, 0x6e, 0x67, 0x65, 0x5f, 0x64, 0x61, 0x74, 0x61, 0x18, 0x01, 0x20, 0x01, 0x28,
+	0x0b, 0x32, 0x24, 0x2e, 0x66, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x2e, 0x7a, 0x6b, 0x70, 0x76, 0x65,
+	0x72, 0x69, 0x66, 0x79, 0x2e, 0x42, 0x69, 0x74, 0x56, 0x4d, 0x43, 0x68, 0x61, 0x6c, 0x6c, 0x65,
+	0x6e, 0x67, 0x65, 0x44, 0x61, 0x74, 0x61, 0x52, 0x12, 0x62, 0x69, 0x74, 0x76, 0x6d, 0x43, 0x68,
+	0x61, 0x6c, 0x6c, 0x65, 0x6e, 0x67, 0x65, 0x44, 0x61, 0x74, 0x61, 0x32, 0xe5, 0x05, 0x0a, 0x05,
+	0x51, 0x75, 0x65, 0x72, 0x79, 0x12, 0x77, 0x0a, 0x06, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x12,
+	0x24, 0x2e, 0x66, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x2e, 0x7a, 0x6b, 0x70, 0x76, 0x65, 0x72, 0x69,
+	0x66, 0x79, 0x2e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x52, 0x65,
+	0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x25, 0x2e, 0x66, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x2e, 0x7a,
 	0x6b, 0x70, 0x76, 0x65, 0x72, 0x69, 0x66, 0x79, 0x2e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x50, 0x61,
-	0x72, 0x61, 0x6d, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x25, 0x2e, 0x66, 0x69,
+	0x72, 0x61, 0x6d, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x20, 0x82, 0xd3,
+	0xe4, 0x93, 0x02, 0x1a, 0x12, 0x18, 0x2f, 0x66, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x2f, 0x7a, 0x6b,
+	0x70, 0x76, 0x65, 0x72, 0x69, 0x66, 0x79, 0x2f, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x12, 0x90,
+	0x01, 0x0a, 0x0c, 0x50, 0x65, 0x6e, 0x64, 0x69, 0x6e, 0x67, 0x50, 0x72, 0x6f, 0x6f, 0x66, 0x12,
+	0x2a, 0x2e, 0x66, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x2e, 0x7a, 0x6b, 0x70, 0x76, 0x65, 0x72, 0x69,
+	0x66, 0x79, 0x2e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x50, 0x65, 0x6e, 0x64, 0x69, 0x6e, 0x67, 0x50,
+	0x72, 0x6f, 0x6f, 0x66, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x2b, 0x2e, 0x66, 0x69,
 	0x61, 0x6d, 0x6d, 0x61, 0x2e, 0x7a, 0x6b, 0x70, 0x76, 0x65, 0x72, 0x69, 0x66, 0x79, 0x2e, 0x51,
-	0x75, 0x65, 0x72, 0x79, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e,
-	0x73, 0x65, 0x22, 0x20, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x1a, 0x12, 0x18, 0x2f, 0x66, 0x69, 0x61,
-	0x6d, 0x6d, 0x61, 0x2f, 0x7a, 0x6b, 0x70, 0x76, 0x65, 0x72, 0x69, 0x66, 0x79, 0x2f, 0x70, 0x61,
-	0x72, 0x61, 0x6d, 0x73, 0x12, 0x90, 0x01, 0x0a, 0x0c, 0x50, 0x65, 0x6e, 0x64, 0x69, 0x6e, 0x67,
-	0x50, 0x72, 0x6f, 0x6f, 0x66, 0x12, 0x2a, 0x2e, 0x66, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x2e, 0x7a,
-	0x6b, 0x70, 0x76, 0x65, 0x72, 0x69, 0x66, 0x79, 0x2e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x50, 0x65,
-	0x6e, 0x64, 0x69, 0x6e, 0x67, 0x50, 0x72, 0x6f, 0x6f, 0x66, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
-	0x74, 0x1a, 0x2b, 0x2e, 0x66, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x2e, 0x7a, 0x6b, 0x70, 0x76, 0x65,
-	0x72, 0x69, 0x66, 0x79, 0x2e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x50, 0x65, 0x6e, 0x64, 0x69, 0x6e,
-	0x67, 0x50, 0x72, 0x6f, 0x6f, 0x66, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x27,
-	0x82, 0xd3, 0xe4, 0x93, 0x02, 0x21, 0x12, 0x1f, 0x2f, 0x66, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x2f,
-	0x7a, 0x6b, 0x70, 0x76, 0x65, 0x72, 0x69, 0x66, 0x79, 0x2f, 0x70, 0x65, 0x6e, 0x64, 0x69, 0x6e,
-	0x67, 0x5f, 0x70, 0x72, 0x6f, 0x6f, 0x66, 0x12, 0x88, 0x01, 0x0a, 0x09, 0x50, 0x72, 0x6f, 0x6f,
-	0x66, 0x44, 0x61, 0x74, 0x61, 0x12, 0x27, 0x2e, 0x66, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x2e, 0x7a,
-	0x6b, 0x70, 0x76, 0x65, 0x72, 0x69, 0x66, 0x79, 0x2e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x50, 0x72,
-	0x6f, 0x6f, 0x66, 0x44, 0x61, 0x74, 0x61, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x28,
-	0x2e, 0x66, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x2e, 0x7a, 0x6b, 0x70, 0x76, 0x65, 0x72, 0x69, 0x66,
-	0x79, 0x2e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x50, 0x72, 0x6f, 0x6f, 0x66, 0x44, 0x61, 0x74, 0x61,
-	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x28, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x22,
-	0x12, 0x20, 0x2f, 0x66, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x2f, 0x7a, 0x6b, 0x70, 0x76, 0x65, 0x72,
-	0x69, 0x66, 0x79, 0x2f, 0x67, 0x65, 0x74, 0x5f, 0x70, 0x72, 0x6f, 0x6f, 0x66, 0x5f, 0x64, 0x61,
-	0x74, 0x61, 0x12, 0x94, 0x01, 0x0a, 0x0c, 0x56, 0x65, 0x72, 0x69, 0x66, 0x79, 0x52, 0x65, 0x73,
-	0x75, 0x6c, 0x74, 0x12, 0x2a, 0x2e, 0x66, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x2e, 0x7a, 0x6b, 0x70,
-	0x76, 0x65, 0x72, 0x69, 0x66, 0x79, 0x2e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x56, 0x65, 0x72, 0x69,
-	0x66, 0x79, 0x52, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a,
-	0x2b, 0x2e, 0x66, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x2e, 0x7a, 0x6b, 0x70, 0x76, 0x65, 0x72, 0x69,
-	0x66, 0x79, 0x2e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x56, 0x65, 0x72, 0x69, 0x66, 0x79, 0x52, 0x65,
-	0x73, 0x75, 0x6c, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x2b, 0x82, 0xd3,
-	0xe4, 0x93, 0x02, 0x25, 0x12, 0x23, 0x2f, 0x66, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x2f, 0x7a, 0x6b,
-	0x70, 0x76, 0x65, 0x72, 0x69, 0x66, 0x79, 0x2f, 0x67, 0x65, 0x74, 0x5f, 0x76, 0x65, 0x72, 0x69,
-	0x66, 0x79, 0x5f, 0x72, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x12, 0x94, 0x01, 0x0a, 0x0c, 0x42, 0x69,
-	0x74, 0x56, 0x4d, 0x57, 0x69, 0x74, 0x6e, 0x65, 0x73, 0x73, 0x12, 0x2a, 0x2e, 0x66, 0x69, 0x61,
+	0x75, 0x65, 0x72, 0x79, 0x50, 0x65, 0x6e, 0x64, 0x69, 0x6e, 0x67, 0x50, 0x72, 0x6f, 0x6f, 0x66,
+	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x27, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x21,
+	0x12, 0x1f, 0x2f, 0x66, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x2f, 0x7a, 0x6b, 0x70, 0x76, 0x65, 0x72,
+	0x69, 0x66, 0x79, 0x2f, 0x70, 0x65, 0x6e, 0x64, 0x69, 0x6e, 0x67, 0x5f, 0x70, 0x72, 0x6f, 0x6f,
+	0x66, 0x12, 0x88, 0x01, 0x0a, 0x09, 0x50, 0x72, 0x6f, 0x6f, 0x66, 0x44, 0x61, 0x74, 0x61, 0x12,
+	0x27, 0x2e, 0x66, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x2e, 0x7a, 0x6b, 0x70, 0x76, 0x65, 0x72, 0x69,
+	0x66, 0x79, 0x2e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x50, 0x72, 0x6f, 0x6f, 0x66, 0x44, 0x61, 0x74,
+	0x61, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x28, 0x2e, 0x66, 0x69, 0x61, 0x6d, 0x6d,
+	0x61, 0x2e, 0x7a, 0x6b, 0x70, 0x76, 0x65, 0x72, 0x69, 0x66, 0x79, 0x2e, 0x51, 0x75, 0x65, 0x72,
+	0x79, 0x50, 0x72, 0x6f, 0x6f, 0x66, 0x44, 0x61, 0x74, 0x61, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e,
+	0x73, 0x65, 0x22, 0x28, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x22, 0x12, 0x20, 0x2f, 0x66, 0x69, 0x61,
+	0x6d, 0x6d, 0x61, 0x2f, 0x7a, 0x6b, 0x70, 0x76, 0x65, 0x72, 0x69, 0x66, 0x79, 0x2f, 0x67, 0x65,
+	0x74, 0x5f, 0x70, 0x72, 0x6f, 0x6f, 0x66, 0x5f, 0x64, 0x61, 0x74, 0x61, 0x12, 0x94, 0x01, 0x0a,
+	0x0c, 0x56, 0x65, 0x72, 0x69, 0x66, 0x79, 0x52, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x12, 0x2a, 0x2e,
+	0x66, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x2e, 0x7a, 0x6b, 0x70, 0x76, 0x65, 0x72, 0x69, 0x66, 0x79,
+	0x2e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x56, 0x65, 0x72, 0x69, 0x66, 0x79, 0x52, 0x65, 0x73, 0x75,
+	0x6c, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x2b, 0x2e, 0x66, 0x69, 0x61, 0x6d,
+	0x6d, 0x61, 0x2e, 0x7a, 0x6b, 0x70, 0x76, 0x65, 0x72, 0x69, 0x66, 0x79, 0x2e, 0x51, 0x75, 0x65,
+	0x72, 0x79, 0x56, 0x65, 0x72, 0x69, 0x66, 0x79, 0x52, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x52, 0x65,
+	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x2b, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x25, 0x12, 0x23,
+	0x2f, 0x66, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x2f, 0x7a, 0x6b, 0x70, 0x76, 0x65, 0x72, 0x69, 0x66,
+	0x79, 0x2f, 0x67, 0x65, 0x74, 0x5f, 0x76, 0x65, 0x72, 0x69, 0x66, 0x79, 0x5f, 0x72, 0x65, 0x73,
+	0x75, 0x6c, 0x74, 0x12, 0xad, 0x01, 0x0a, 0x12, 0x42, 0x69, 0x74, 0x56, 0x4d, 0x43, 0x68, 0x61,
+	0x6c, 0x6c, 0x65, 0x6e, 0x67, 0x65, 0x44, 0x61, 0x74, 0x61, 0x12, 0x30, 0x2e, 0x66, 0x69, 0x61,
 	0x6d, 0x6d, 0x61, 0x2e, 0x7a, 0x6b, 0x70, 0x76, 0x65, 0x72, 0x69, 0x66, 0x79, 0x2e, 0x51, 0x75,
-	0x65, 0x72, 0x79, 0x42, 0x69, 0x74, 0x56, 0x4d, 0x57, 0x69, 0x74, 0x6e, 0x65, 0x73, 0x73, 0x52,
-	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x2b, 0x2e, 0x66, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x2e,
-	0x7a, 0x6b, 0x70, 0x76, 0x65, 0x72, 0x69, 0x66, 0x79, 0x2e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x42,
-	0x69, 0x74, 0x56, 0x4d, 0x57, 0x69, 0x74, 0x6e, 0x65, 0x73, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f,
-	0x6e, 0x73, 0x65, 0x22, 0x2b, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x25, 0x12, 0x23, 0x2f, 0x66, 0x69,
-	0x61, 0x6d, 0x6d, 0x61, 0x2f, 0x7a, 0x6b, 0x70, 0x76, 0x65, 0x72, 0x69, 0x66, 0x79, 0x2f, 0x67,
-	0x65, 0x74, 0x5f, 0x62, 0x69, 0x74, 0x76, 0x6d, 0x5f, 0x77, 0x69, 0x74, 0x6e, 0x65, 0x73, 0x73,
-	0x42, 0xa6, 0x01, 0x0a, 0x14, 0x63, 0x6f, 0x6d, 0x2e, 0x66, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x2e,
-	0x7a, 0x6b, 0x70, 0x76, 0x65, 0x72, 0x69, 0x66, 0x79, 0x42, 0x0a, 0x51, 0x75, 0x65, 0x72, 0x79,
-	0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x21, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x73,
-	0x64, 0x6b, 0x2e, 0x69, 0x6f, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x66, 0x69, 0x61, 0x6d, 0x6d, 0x61,
-	0x2f, 0x7a, 0x6b, 0x70, 0x76, 0x65, 0x72, 0x69, 0x66, 0x79, 0xa2, 0x02, 0x03, 0x46, 0x5a, 0x58,
-	0xaa, 0x02, 0x10, 0x46, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x2e, 0x5a, 0x6b, 0x70, 0x76, 0x65, 0x72,
-	0x69, 0x66, 0x79, 0xca, 0x02, 0x10, 0x46, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x5c, 0x5a, 0x6b, 0x70,
-	0x76, 0x65, 0x72, 0x69, 0x66, 0x79, 0xe2, 0x02, 0x1c, 0x46, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x5c,
-	0x5a, 0x6b, 0x70, 0x76, 0x65, 0x72, 0x69, 0x66, 0x79, 0x5c, 0x47, 0x50, 0x42, 0x4d, 0x65, 0x74,
-	0x61, 0x64, 0x61, 0x74, 0x61, 0xea, 0x02, 0x11, 0x46, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x3a, 0x3a,
-	0x5a, 0x6b, 0x70, 0x76, 0x65, 0x72, 0x69, 0x66, 0x79, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f,
-	0x33,
+	0x65, 0x72, 0x79, 0x42, 0x69, 0x74, 0x56, 0x4d, 0x43, 0x68, 0x61, 0x6c, 0x6c, 0x65, 0x6e, 0x67,
+	0x65, 0x44, 0x61, 0x74, 0x61, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x31, 0x2e, 0x66,
+	0x69, 0x61, 0x6d, 0x6d, 0x61, 0x2e, 0x7a, 0x6b, 0x70, 0x76, 0x65, 0x72, 0x69, 0x66, 0x79, 0x2e,
+	0x51, 0x75, 0x65, 0x72, 0x79, 0x42, 0x69, 0x74, 0x56, 0x4d, 0x43, 0x68, 0x61, 0x6c, 0x6c, 0x65,
+	0x6e, 0x67, 0x65, 0x44, 0x61, 0x74, 0x61, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22,
+	0x32, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x2c, 0x12, 0x2a, 0x2f, 0x66, 0x69, 0x61, 0x6d, 0x6d, 0x61,
+	0x2f, 0x7a, 0x6b, 0x70, 0x76, 0x65, 0x72, 0x69, 0x66, 0x79, 0x2f, 0x67, 0x65, 0x74, 0x5f, 0x62,
+	0x69, 0x74, 0x76, 0x6d, 0x5f, 0x63, 0x68, 0x61, 0x6c, 0x6c, 0x65, 0x6e, 0x67, 0x65, 0x5f, 0x64,
+	0x61, 0x74, 0x61, 0x42, 0xa6, 0x01, 0x0a, 0x14, 0x63, 0x6f, 0x6d, 0x2e, 0x66, 0x69, 0x61, 0x6d,
+	0x6d, 0x61, 0x2e, 0x7a, 0x6b, 0x70, 0x76, 0x65, 0x72, 0x69, 0x66, 0x79, 0x42, 0x0a, 0x51, 0x75,
+	0x65, 0x72, 0x79, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x21, 0x63, 0x6f, 0x73, 0x6d,
+	0x6f, 0x73, 0x73, 0x64, 0x6b, 0x2e, 0x69, 0x6f, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x66, 0x69, 0x61,
+	0x6d, 0x6d, 0x61, 0x2f, 0x7a, 0x6b, 0x70, 0x76, 0x65, 0x72, 0x69, 0x66, 0x79, 0xa2, 0x02, 0x03,
+	0x46, 0x5a, 0x58, 0xaa, 0x02, 0x10, 0x46, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x2e, 0x5a, 0x6b, 0x70,
+	0x76, 0x65, 0x72, 0x69, 0x66, 0x79, 0xca, 0x02, 0x10, 0x46, 0x69, 0x61, 0x6d, 0x6d, 0x61, 0x5c,
+	0x5a, 0x6b, 0x70, 0x76, 0x65, 0x72, 0x69, 0x66, 0x79, 0xe2, 0x02, 0x1c, 0x46, 0x69, 0x61, 0x6d,
+	0x6d, 0x61, 0x5c, 0x5a, 0x6b, 0x70, 0x76, 0x65, 0x72, 0x69, 0x66, 0x79, 0x5c, 0x47, 0x50, 0x42,
+	0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0xea, 0x02, 0x11, 0x46, 0x69, 0x61, 0x6d, 0x6d,
+	0x61, 0x3a, 0x3a, 0x5a, 0x6b, 0x70, 0x76, 0x65, 0x72, 0x69, 0x66, 0x79, 0x62, 0x06, 0x70, 0x72,
+	0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -4883,21 +4904,22 @@ func file_fiamma_zkpverify_query_proto_rawDescGZIP() []byte {
 
 var file_fiamma_zkpverify_query_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
 var file_fiamma_zkpverify_query_proto_goTypes = []interface{}{
-	(*QueryParamsRequest)(nil),        // 0: fiamma.zkpverify.QueryParamsRequest
-	(*QueryParamsResponse)(nil),       // 1: fiamma.zkpverify.QueryParamsResponse
-	(*QueryPendingProofRequest)(nil),  // 2: fiamma.zkpverify.QueryPendingProofRequest
-	(*QueryPendingProofResponse)(nil), // 3: fiamma.zkpverify.QueryPendingProofResponse
-	(*QueryProofDataRequest)(nil),     // 4: fiamma.zkpverify.QueryProofDataRequest
-	(*QueryProofDataResponse)(nil),    // 5: fiamma.zkpverify.QueryProofDataResponse
-	(*QueryVerifyResultRequest)(nil),  // 6: fiamma.zkpverify.QueryVerifyResultRequest
-	(*QueryVerifyResultResponse)(nil), // 7: fiamma.zkpverify.QueryVerifyResultResponse
-	(*QueryBitVMWitnessRequest)(nil),  // 8: fiamma.zkpverify.QueryBitVMWitnessRequest
-	(*QueryBitVMWitnessResponse)(nil), // 9: fiamma.zkpverify.QueryBitVMWitnessResponse
-	(*Params)(nil),                    // 10: fiamma.zkpverify.Params
-	(*v1beta1.PageRequest)(nil),       // 11: cosmos.base.query.v1beta1.PageRequest
-	(*VerifyResult)(nil),              // 12: fiamma.zkpverify.VerifyResult
-	(*v1beta1.PageResponse)(nil),      // 13: cosmos.base.query.v1beta1.PageResponse
-	(*ProofData)(nil),                 // 14: fiamma.zkpverify.ProofData
+	(*QueryParamsRequest)(nil),              // 0: fiamma.zkpverify.QueryParamsRequest
+	(*QueryParamsResponse)(nil),             // 1: fiamma.zkpverify.QueryParamsResponse
+	(*QueryPendingProofRequest)(nil),        // 2: fiamma.zkpverify.QueryPendingProofRequest
+	(*QueryPendingProofResponse)(nil),       // 3: fiamma.zkpverify.QueryPendingProofResponse
+	(*QueryProofDataRequest)(nil),           // 4: fiamma.zkpverify.QueryProofDataRequest
+	(*QueryProofDataResponse)(nil),          // 5: fiamma.zkpverify.QueryProofDataResponse
+	(*QueryVerifyResultRequest)(nil),        // 6: fiamma.zkpverify.QueryVerifyResultRequest
+	(*QueryVerifyResultResponse)(nil),       // 7: fiamma.zkpverify.QueryVerifyResultResponse
+	(*QueryBitVMChallengeDataRequest)(nil),  // 8: fiamma.zkpverify.QueryBitVMChallengeDataRequest
+	(*QueryBitVMChallengeDataResponse)(nil), // 9: fiamma.zkpverify.QueryBitVMChallengeDataResponse
+	(*Params)(nil),                          // 10: fiamma.zkpverify.Params
+	(*v1beta1.PageRequest)(nil),             // 11: cosmos.base.query.v1beta1.PageRequest
+	(*VerifyResult)(nil),                    // 12: fiamma.zkpverify.VerifyResult
+	(*v1beta1.PageResponse)(nil),            // 13: cosmos.base.query.v1beta1.PageResponse
+	(*ProofData)(nil),                       // 14: fiamma.zkpverify.ProofData
+	(*BitVMChallengeData)(nil),              // 15: fiamma.zkpverify.BitVMChallengeData
 }
 var file_fiamma_zkpverify_query_proto_depIdxs = []int32{
 	10, // 0: fiamma.zkpverify.QueryParamsResponse.params:type_name -> fiamma.zkpverify.Params
@@ -4906,21 +4928,22 @@ var file_fiamma_zkpverify_query_proto_depIdxs = []int32{
 	13, // 3: fiamma.zkpverify.QueryPendingProofResponse.pagination:type_name -> cosmos.base.query.v1beta1.PageResponse
 	14, // 4: fiamma.zkpverify.QueryProofDataResponse.proof_data:type_name -> fiamma.zkpverify.ProofData
 	12, // 5: fiamma.zkpverify.QueryVerifyResultResponse.verify_result:type_name -> fiamma.zkpverify.VerifyResult
-	0,  // 6: fiamma.zkpverify.Query.Params:input_type -> fiamma.zkpverify.QueryParamsRequest
-	2,  // 7: fiamma.zkpverify.Query.PendingProof:input_type -> fiamma.zkpverify.QueryPendingProofRequest
-	4,  // 8: fiamma.zkpverify.Query.ProofData:input_type -> fiamma.zkpverify.QueryProofDataRequest
-	6,  // 9: fiamma.zkpverify.Query.VerifyResult:input_type -> fiamma.zkpverify.QueryVerifyResultRequest
-	8,  // 10: fiamma.zkpverify.Query.BitVMWitness:input_type -> fiamma.zkpverify.QueryBitVMWitnessRequest
-	1,  // 11: fiamma.zkpverify.Query.Params:output_type -> fiamma.zkpverify.QueryParamsResponse
-	3,  // 12: fiamma.zkpverify.Query.PendingProof:output_type -> fiamma.zkpverify.QueryPendingProofResponse
-	5,  // 13: fiamma.zkpverify.Query.ProofData:output_type -> fiamma.zkpverify.QueryProofDataResponse
-	7,  // 14: fiamma.zkpverify.Query.VerifyResult:output_type -> fiamma.zkpverify.QueryVerifyResultResponse
-	9,  // 15: fiamma.zkpverify.Query.BitVMWitness:output_type -> fiamma.zkpverify.QueryBitVMWitnessResponse
-	11, // [11:16] is the sub-list for method output_type
-	6,  // [6:11] is the sub-list for method input_type
-	6,  // [6:6] is the sub-list for extension type_name
-	6,  // [6:6] is the sub-list for extension extendee
-	0,  // [0:6] is the sub-list for field type_name
+	15, // 6: fiamma.zkpverify.QueryBitVMChallengeDataResponse.bitvm_challenge_data:type_name -> fiamma.zkpverify.BitVMChallengeData
+	0,  // 7: fiamma.zkpverify.Query.Params:input_type -> fiamma.zkpverify.QueryParamsRequest
+	2,  // 8: fiamma.zkpverify.Query.PendingProof:input_type -> fiamma.zkpverify.QueryPendingProofRequest
+	4,  // 9: fiamma.zkpverify.Query.ProofData:input_type -> fiamma.zkpverify.QueryProofDataRequest
+	6,  // 10: fiamma.zkpverify.Query.VerifyResult:input_type -> fiamma.zkpverify.QueryVerifyResultRequest
+	8,  // 11: fiamma.zkpverify.Query.BitVMChallengeData:input_type -> fiamma.zkpverify.QueryBitVMChallengeDataRequest
+	1,  // 12: fiamma.zkpverify.Query.Params:output_type -> fiamma.zkpverify.QueryParamsResponse
+	3,  // 13: fiamma.zkpverify.Query.PendingProof:output_type -> fiamma.zkpverify.QueryPendingProofResponse
+	5,  // 14: fiamma.zkpverify.Query.ProofData:output_type -> fiamma.zkpverify.QueryProofDataResponse
+	7,  // 15: fiamma.zkpverify.Query.VerifyResult:output_type -> fiamma.zkpverify.QueryVerifyResultResponse
+	9,  // 16: fiamma.zkpverify.Query.BitVMChallengeData:output_type -> fiamma.zkpverify.QueryBitVMChallengeDataResponse
+	12, // [12:17] is the sub-list for method output_type
+	7,  // [7:12] is the sub-list for method input_type
+	7,  // [7:7] is the sub-list for extension type_name
+	7,  // [7:7] is the sub-list for extension extendee
+	0,  // [0:7] is the sub-list for field type_name
 }
 
 func init() { file_fiamma_zkpverify_query_proto_init() }
@@ -5028,7 +5051,7 @@ func file_fiamma_zkpverify_query_proto_init() {
 			}
 		}
 		file_fiamma_zkpverify_query_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*QueryBitVMWitnessRequest); i {
+			switch v := v.(*QueryBitVMChallengeDataRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -5040,7 +5063,7 @@ func file_fiamma_zkpverify_query_proto_init() {
 			}
 		}
 		file_fiamma_zkpverify_query_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*QueryBitVMWitnessResponse); i {
+			switch v := v.(*QueryBitVMChallengeDataResponse); i {
 			case 0:
 				return &v.state
 			case 1:

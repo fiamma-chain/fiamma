@@ -37,9 +37,9 @@ service Query {
   }
 
   // Queries bitvm witness by proof id
-  rpc BitVMWitness(QueryBitVMWitnessRequest)
-      returns (QueryBitVMWitnessResponse) {
-    option (google.api.http).get = "/fiamma/zkpverify/get_bitvm_witness";
+  rpc BitVMChallengeData(QueryBitVMChallengeDataRequest)
+      returns (QueryBitVMChallengeDataResponse) {
+    option (google.api.http).get = "/fiamma/zkpverify/get_bitvm_challenge_data";
   }
 }
 // QueryParamsRequest is request type for the Query/Params RPC method.
@@ -91,14 +91,14 @@ message QueryVerifyResultResponse {
 }
 
 
-// QueryBitVMWitnessRequest is request type for the Query/BitVMWitness RPC 
+// QueryBitVMChallengeDataRequest is request type for the Query/BitVMChallengeData RPC 
 // method.
-message QueryBitVMWitnessRequest {
+message QueryBitVMChallengeDataRequest {
   string proof_id = 1;
 }
 
-// QueryBitVMWitnessResponse is response type for the Query/BitVMWitness RPC
+// QueryBitVMChallengeDataResponse is response type for the Query/BitVMChallengeData RPC
 // method.
-message QueryBitVMWitnessResponse {
-  string witness = 1;
+message QueryBitVMChallengeDataResponse {
+  fiamma.zkpverify.BitVMChallengeData bitvm_challenge_data = 1;
 }

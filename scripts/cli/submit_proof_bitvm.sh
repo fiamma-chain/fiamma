@@ -11,7 +11,7 @@ else
 fi
 
 : ${CHAIN_ID:="fiamma-testnet-1"}
-: ${NODE:="https://testnet-rpc.fiammachain.io"}
+: ${NODE:="http://localhost:26657"}
 : ${FEES:=2000ufia}
 : ${GAS:=80000000}
 : ${PROOF_FILE:=../../prover_examples/bitvm/proof.bitvm}

@@ -104,35 +104,23 @@ func (k Keeper) GetProofData(ctx sdk.Context, proofId []byte) (types.ProofData, 
 	return proofData, true
 }
 
-// SetBitVMWitness stores witness data
-func (k Keeper) SetBitVMWitness(ctx sdk.Context, proofId []byte, witnessData []byte) {
-	store := k.bitVMWitnessStore(ctx)
-	store.Set(proofId, witnessData)
+// SetBitVMChallengeData stores witness data
+func (k Keeper) SetBitVMChallengeData(ctx sdk.Context, proofId []byte, challengeData types.BitVMChallengeData) {
+	store := k.BitVMChallengeDataStore(ctx)
+	bz := k.cdc.MustMarshal(&challengeData)
+	store.Set(proofId, bz)
 }
 
-// GetBitVMWitness retrieves witness data from the chain
-func (k Keeper) GetBitVMWitness(ctx sdk.Context, proofId []byte) ([]byte, bool) {
-	store := k.bitVMWitnessStore(ctx)
+// GetBitVMChallengeData retrieves witness data from the chain
+func (k Keeper) GetBitVMChallengeData(ctx sdk.Context, proofId []byte) (types.BitVMChallengeData, bool) {
+	store := k.BitVMChallengeDataStore(ctx)
 	bz := store.Get(proofId)
 	if bz == nil {
-		return nil, false
+		return types.BitVMChallengeData{}, false
 	}
-	return bz, true
-}
-
-func (k Keeper) proofDataStore(ctx context.Context) prefix.Store {
-	storeAdapter := runtime.KVStoreAdapter(k.storeService.OpenKVStore(ctx))
-	return prefix.NewStore(storeAdapter, types.ProofDataKey)
-}
-
-func (k Keeper) verifyResultStore(ctx context.Context) prefix.Store {
-	storeAdapter := runtime.KVStoreAdapter(k.storeService.OpenKVStore(ctx))
-	return prefix.NewStore(storeAdapter, types.VerifyResultKey)
-}
-
-func (k Keeper) bitVMWitnessStore(ctx context.Context) prefix.Store {
-	storeAdapter := runtime.KVStoreAdapter(k.storeService.OpenKVStore(ctx))
-	return prefix.NewStore(storeAdapter, types.BitVMWitnessKey)
+	var challengeData types.BitVMChallengeData
+	k.cdc.MustUnmarshal(bz, &challengeData)
+	return challengeData, true
 }
 
 func (k Keeper) GetPendingProofs(ctx context.Context, req *types.QueryPendingProofRequest) (*types.QueryPendingProofResponse, error) {
@@ -153,4 +141,35 @@ func (k Keeper) GetPendingProofs(ctx context.Context, req *types.QueryPendingPro
 	}
 
 	return &types.QueryPendingProofResponse{PendingProofs: verifyResults, Pagination: pageRes}, nil
+}
+
+func (k Keeper) SetBlockProposer(ctx context.Context, height int64, proposer []byte) {
+	store := k.blockProposerStore(ctx)
+	store.Set(sdk.Uint64ToBigEndian(uint64(height)), proposer)
+}
+
+func (k Keeper) GetBlockProposer(ctx context.Context, height int64) []byte {
+	store := k.blockProposerStore(ctx)
+	bz := store.Get(sdk.Uint64ToBigEndian(uint64(height)))
+	return bz
+}
+
+func (k Keeper) proofDataStore(ctx context.Context) prefix.Store {
+	storeAdapter := runtime.KVStoreAdapter(k.storeService.OpenKVStore(ctx))
+	return prefix.NewStore(storeAdapter, types.ProofDataKey)
+}
+
+func (k Keeper) verifyResultStore(ctx context.Context) prefix.Store {
+	storeAdapter := runtime.KVStoreAdapter(k.storeService.OpenKVStore(ctx))
+	return prefix.NewStore(storeAdapter, types.VerifyResultKey)
+}
+
+func (k Keeper) BitVMChallengeDataStore(ctx context.Context) prefix.Store {
+	storeAdapter := runtime.KVStoreAdapter(k.storeService.OpenKVStore(ctx))
+	return prefix.NewStore(storeAdapter, types.BitVMChallengeDataKey)
+}
+
+func (k Keeper) blockProposerStore(ctx context.Context) prefix.Store {
+	storeAdapter := runtime.KVStoreAdapter(k.storeService.OpenKVStore(ctx))
+	return prefix.NewStore(storeAdapter, types.BlockProposerKey)
 }

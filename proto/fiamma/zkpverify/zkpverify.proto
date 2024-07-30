@@ -47,3 +47,12 @@ message VerifyResult {
   VerificationStatus status = 6;
   uint64 community_verification_count = 7;
 }
+
+
+message BitVMChallengeData {
+  bool verify_result = 1;
+  bytes witness = 2;
+  bytes vk = 3;
+  bytes public_input = 4;
+  string proposer_register_id = 5;
+}

@@ -12,6 +12,11 @@ import (
 
 func (k msgServer) SubmitProof(goCtx context.Context, msg *types.MsgSubmitProof) (*types.MsgSubmitProofResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
+
+	currentHeight := ctx.BlockHeight()
+	proposerAddress := k.GetBlockProposer(ctx, currentHeight)
+	proposerValAddress := sdk.ValAddress(proposerAddress)
+
 	// check if the proof system is valid
 	if _, ok := types.ProofSystem_value[msg.ProofSystem]; !ok {
 		return nil, types.ErrInvalidProofSystem
@@ -45,10 +50,15 @@ func (k msgServer) SubmitProof(goCtx context.Context, msg *types.MsgSubmitProof)
 
 	// store witness if the proof system is BitVM
 	if proofData.ProofSystem == types.ProofSystem_GROTH16_BN254_BITVM {
-		k.SetBitVMWitness(ctx, proofId[:], witness)
+		bitvmChallengeData := types.BitVMChallengeData{
+			VerifyResult:       result,
+			Witness:            witness,
+			Vk:                 msg.Vk,
+			PublicInput:        msg.PublicInput,
+			ProposerRegisterId: proposerValAddress.String(),
+		}
+		k.SetBitVMChallengeData(ctx, proofId[:], bitvmChallengeData)
 	}
-
-	k.Logger().Info("Proof verification:", "result", result)
 
 	// store verify data in the store
 	verifyResult := types.VerifyResult{
@@ -68,7 +78,8 @@ func (k msgServer) SubmitProof(goCtx context.Context, msg *types.MsgSubmitProof)
 		sdk.NewAttribute("proofId", proofIdStr),
 		sdk.NewAttribute("dataCommitment", dataCommitmentStr),
 		sdk.NewAttribute("dataLocation", dataLocation.String()),
-		sdk.NewAttribute("verifyResult", strconv.FormatBool(result)))
+		sdk.NewAttribute("verifyResult", strconv.FormatBool(result)),
+		sdk.NewAttribute("proposer", proposerValAddress.String()))
 
 	ctx.EventManager().EmitEvent(event)
 

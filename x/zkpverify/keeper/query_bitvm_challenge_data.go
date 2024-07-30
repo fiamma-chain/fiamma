@@ -11,7 +11,7 @@ import (
 	"google.golang.org/grpc/status"
 )
 
-func (k Keeper) BitVMWitness(goCtx context.Context, req *types.QueryBitVMWitnessRequest) (*types.QueryBitVMWitnessResponse, error) {
+func (k Keeper) BitVMChallengeData(goCtx context.Context, req *types.QueryBitVMChallengeDataRequest) (*types.QueryBitVMChallengeDataResponse, error) {
 	if req == nil {
 		return nil, status.Error(codes.InvalidArgument, "invalid request")
 	}
@@ -23,10 +23,10 @@ func (k Keeper) BitVMWitness(goCtx context.Context, req *types.QueryBitVMWitness
 		return nil, types.ErrInvalidProofId
 	}
 
-	witness, found := k.GetBitVMWitness(ctx, proofId)
+	chanllengeData, found := k.GetBitVMChallengeData(ctx, proofId)
 	if !found {
-		return nil, types.ErrBitVMWitnessNotFound
+		return nil, types.ErrBitVMChallengeDataNotFound
 	}
 
-	return &types.QueryBitVMWitnessResponse{Witness: hex.EncodeToString(witness)}, nil
+	return &types.QueryBitVMChallengeDataResponse{BitvmChallengeData: &chanllengeData}, nil
 }
