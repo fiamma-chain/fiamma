@@ -84,7 +84,6 @@ import (
 
 	bitvmstakermodulekeeper "fiamma/x/bitvmstaker/keeper"
 
-	babylon "github.com/babylonchain/babylon-sdk/x/babylon"
 	bbnkeeper "github.com/babylonchain/babylon-sdk/x/babylon/keeper"
 	bbntypes "github.com/babylonchain/babylon-sdk/x/babylon/types"
 
@@ -157,6 +156,8 @@ type App struct {
 	ScopedWasmKeeper capabilitykeeper.ScopedKeeper
 
 	BitvmstakerKeeper bitvmstakermodulekeeper.Keeper
+
+	BabylonKeeper *bbnkeeper.Keeper
 	// this line is used by starport scaffolding # stargate/app/keeperDeclaration
 
 	// simulation manager
@@ -313,6 +314,16 @@ func New(
 	); err != nil {
 		panic(err)
 	}
+
+	app.BabylonKeeper = bbnkeeper.NewKeeper(
+		app.appCodec,
+		storetypes.NewKVStoreKey(bbntypes.StoreKey),
+		storetypes.NewMemoryStoreKey(bbntypes.MemStoreKey),
+		app.BankKeeper,
+		app.StakingKeeper,
+		&app.WasmKeeper, // ensure this is a pointer as we instantiate the keeper a bit later
+		authtypes.NewModuleAddress(govtypes.ModuleName).String(),
+	)
 
 	// Below we could construct and set an application specific mempool and
 	// ABCI 1.0 PrepareProposal and ProcessProposal handlers. These defaults are
