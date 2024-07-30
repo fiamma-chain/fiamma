@@ -2,7 +2,7 @@
 
 set -e
 
-: "${CHAIN_ID:=fiamma-testnet-2}"
+: "${CHAIN_ID:=fiamma-testnet-1}"
 : "${PASSWORD:=password}"
 token="ufia"
 initial_balance=10000000000000
