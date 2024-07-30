@@ -19,8 +19,7 @@ func (k msgServer) CreateStaker(goCtx context.Context, msg *types.MsgCreateStake
 		return nil, types.ErrUnauthorized
 	}
 	stakerInfo := types.StakerInfo{
-		StakerAddress:    msg.StakerAddress,
-		StakerRegisterId: msg.StakerRegisterId,
+		StakerAddress: msg.StakerAddress,
 	}
 	k.AppendStaker(ctx, stakerInfo)
 

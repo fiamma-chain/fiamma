@@ -44,9 +44,9 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 				},
 				{
 					RpcMethod:      "CreateStaker",
-					Use:            "create-staker [staker-address] [staker-register-id]",
+					Use:            "create-staker [staker-address]",
 					Short:          "Send a create-staker tx",
-					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "staker_address"}, {ProtoField: "staker_register_id"}},
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "staker_address"}},
 				},
 				{
 					RpcMethod:      "RemoveStaker",
