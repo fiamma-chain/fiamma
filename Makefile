@@ -225,3 +225,16 @@ docker-rmi:
 	docker rmi ghcr.io/fiamma-chain/fiamma 2>/dev/null; true
 
 .PHONY: build-docker docker-rmi
+
+###############################################################################
+###                                Local NetWork                            ###
+###############################################################################
+# Run a local network 
+localnet-start:
+	@echo "Starting a local network..."
+	./scripts/run_localnet.sh fiamma-test
+
+.PHONY: localnet-start
+
+
+.PHONY: localnet-start
