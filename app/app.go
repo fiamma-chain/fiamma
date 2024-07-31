@@ -85,7 +85,6 @@ import (
 	bitvmstakermodulekeeper "fiamma/x/bitvmstaker/keeper"
 
 	bbnkeeper "github.com/babylonchain/babylon-sdk/x/babylon/keeper"
-	bbntypes "github.com/babylonchain/babylon-sdk/x/babylon/types"
 
 	// this line is used by starport scaffolding # stargate/app/moduleImport
 
@@ -315,16 +314,6 @@ func New(
 		panic(err)
 	}
 
-	app.BabylonKeeper = bbnkeeper.NewKeeper(
-		app.appCodec,
-		storetypes.NewKVStoreKey(bbntypes.StoreKey),
-		storetypes.NewMemoryStoreKey(bbntypes.MemStoreKey),
-		app.BankKeeper,
-		app.StakingKeeper,
-		&app.WasmKeeper, // ensure this is a pointer as we instantiate the keeper a bit later
-		authtypes.NewModuleAddress(govtypes.ModuleName).String(),
-	)
-
 	// Below we could construct and set an application specific mempool and
 	// ABCI 1.0 PrepareProposal and ProcessProposal handlers. These defaults are
 	// already set in the SDK's BaseApp, this shows an example of how to override
@@ -361,6 +350,11 @@ func New(
 
 	// Register legacy modules
 	if err := app.registerIBCModules(appOpts); err != nil {
+		return nil, err
+	}
+
+	// Register babylon modules
+	if err := app.registerBabylonModules(); err != nil {
 		return nil, err
 	}
 
