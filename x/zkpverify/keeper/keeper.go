@@ -148,26 +148,6 @@ func (k Keeper) DeletePendingProof(ctx sdk.Context, proofId []byte) {
 	store.Delete(proofId)
 }
 
-func (k Keeper) proofDataStore(ctx context.Context) prefix.Store {
-	storeAdapter := runtime.KVStoreAdapter(k.storeService.OpenKVStore(ctx))
-	return prefix.NewStore(storeAdapter, types.ProofDataKey)
-}
-
-func (k Keeper) verifyResultStore(ctx context.Context) prefix.Store {
-	storeAdapter := runtime.KVStoreAdapter(k.storeService.OpenKVStore(ctx))
-	return prefix.NewStore(storeAdapter, types.VerifyResultKey)
-}
-
-func (k Keeper) pendingProofsStore(ctx context.Context) prefix.Store {
-	storeAdapter := runtime.KVStoreAdapter(k.storeService.OpenKVStore(ctx))
-	return prefix.NewStore(storeAdapter, types.PendingProofsKey)
-}
-
-func (k Keeper) bitVMWitnessStore(ctx context.Context) prefix.Store {
-	storeAdapter := runtime.KVStoreAdapter(k.storeService.OpenKVStore(ctx))
-	return prefix.NewStore(storeAdapter, types.BitVMWitnessKey)
-}
-
 func (k Keeper) GetPendingProofs(ctx context.Context, req *types.QueryPendingProofRequest) (*types.QueryPendingProofResponse, error) {
 	store := k.pendingProofsStore(ctx)
 	var verifyResults []*types.VerifyResult
@@ -210,6 +190,11 @@ func (k Keeper) verifyResultStore(ctx context.Context) prefix.Store {
 func (k Keeper) BitVMChallengeDataStore(ctx context.Context) prefix.Store {
 	storeAdapter := runtime.KVStoreAdapter(k.storeService.OpenKVStore(ctx))
 	return prefix.NewStore(storeAdapter, types.BitVMChallengeDataKey)
+}
+
+func (k Keeper) pendingProofsStore(ctx context.Context) prefix.Store {
+	storeAdapter := runtime.KVStoreAdapter(k.storeService.OpenKVStore(ctx))
+	return prefix.NewStore(storeAdapter, types.PendingProofsKey)
 }
 
 func (k Keeper) blockProposerStore(ctx context.Context) prefix.Store {
