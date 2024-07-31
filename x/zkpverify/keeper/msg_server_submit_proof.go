@@ -71,7 +71,7 @@ func (k msgServer) SubmitProof(goCtx context.Context, msg *types.MsgSubmitProof)
 		CommunityVerificationCount: uint64(0),
 	}
 
-	k.SetVerifyResult(ctx, proofId[:], verifyResult)
+	k.SetPendingProof(ctx, proofId[:], verifyResult)
 
 	event := sdk.NewEvent("SubmitProof",
 		sdk.NewAttribute("proofSystem", msg.ProofSystem),
