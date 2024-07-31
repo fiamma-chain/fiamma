@@ -9,10 +9,11 @@ const (
 )
 
 var (
-	ParamsKey       = []byte{0x01} // key prefix for the parameters
-	ProofDataKey    = []byte{0x02} // key prefix for the proof data
-	VerifyResultKey = []byte{0x03} // key prefix for the verify result
-	BitVMWitnessKey = []byte{0x04} // key prefix for the bit vm witness
+	ParamsKey             = []byte{0x01} // key prefix for the parameters
+	ProofDataKey          = []byte{0x02} // key prefix for the proof data
+	VerifyResultKey       = []byte{0x03} // key prefix for the verify result
+	BitVMChallengeDataKey = []byte{0x04} // key prefix for the bit vm witness
+	BlockProposerKey      = []byte{0x05} // key prefix for the block proposer
 
 )
 

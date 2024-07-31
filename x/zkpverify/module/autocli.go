@@ -39,9 +39,9 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 				},
 
 				{
-					RpcMethod:      "BitVMWitness",
-					Use:            "get-bitvm-witness [proof_id]",
-					Short:          "Query bitvm witness stored in the fiamma by proof_id",
+					RpcMethod:      "BitVMChallengeData",
+					Use:            "get-bitvm-challenge-data [proof_id]",
+					Short:          "Query bitvm chanllenge data stored in the fiamma by proof_id",
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "proof_id"}},
 				},
 

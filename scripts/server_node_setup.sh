@@ -17,7 +17,7 @@ if [ "$1" = "prod" ]; then
     fi
 elif [ "$1" = "test" ]; then
     nodes=("node1" )
-    nodes_ips=("172.31.31.110") 
+    nodes_ips=("13.231.104.23") 
     servers=("ubuntu@13.231.104.23")
 else
     echo "Usage: $0 [prod|test] binary_release_tag"
