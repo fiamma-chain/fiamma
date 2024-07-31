@@ -38,7 +38,7 @@ echo "Initializing $node..."
 fiammad init $node --chain-id $CHAIN_ID > /dev/null
 
 # Configuration adjustments
-sed -i '' 's/"stake"/"'$token'"/g' $DATA_DIR/config/genesis.json
+perl -pi -e 's/"stake"/"'$token'"/g' "$DATA_DIR/config/genesis.json"
 fiammad config set app minimum-gas-prices "$minimum_gas_price$token"
 fiammad config set app pruning "nothing"
 fiammad config set app da-config.rpc "$rpc"
