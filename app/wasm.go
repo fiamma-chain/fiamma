@@ -8,6 +8,7 @@ import (
 	wasmkeeper "github.com/CosmWasm/wasmd/x/wasm/keeper"
 
 	wasmtypes "github.com/CosmWasm/wasmd/x/wasm/types"
+	bbnkeeper "github.com/babylonchain/babylon-sdk/x/babylon/keeper"
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/runtime"
 	servertypes "github.com/cosmos/cosmos-sdk/server/types"
@@ -57,6 +58,20 @@ func (app *App) registerWasmModules(
 	if err != nil {
 		return nil, fmt.Errorf("error while reading wasm config: %s", err)
 	}
+
+	messageHandler := wasmkeeper.WithMessageHandlerDecorator(func(nested wasmkeeper.Messenger) wasmkeeper.Messenger {
+		return wasmkeeper.NewMessageHandlerChain(
+			// security layer for system integrity, should always be first in chain
+			bbnkeeper.NewIntegrityHandler(app.BabylonKeeper),
+			nested,
+			// append our custom message handler
+			bbnkeeper.NewDefaultCustomMsgHandler(app.BabylonKeeper),
+		)
+	})
+	wasmOpts = append(wasmOpts, messageHandler,
+		// add support for the custom queries
+		wasmkeeper.WithQueryHandlerDecorator(bbnkeeper.NewQueryDecorator(app.BabylonKeeper)),
+	)
 
 	// The last arguments can contain custom message handlers, and custom query handlers,
 	// if we want to allow any custom callbacks
