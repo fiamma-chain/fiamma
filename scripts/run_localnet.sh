@@ -28,11 +28,30 @@ node=$1
 # Default data directory for fiammad
 DATA_DIR="$HOME/.fiamma"
 
-# Check if the data directory already exists and remove it
+# Check if the data directory already exists
 if [ -d "$DATA_DIR" ]; then
-    echo "Removing existing data directory..."
-    rm -rf "$DATA_DIR"
+    echo "An existing data directory was found at '$DATA_DIR'."
+    # Prompt user for confirmation
+    read -p "Do you want to remove this directory and all of its contents? (y/n) " user_confirm
+
+    # Check user input
+    case $user_confirm in
+        [Yy]* ) 
+            echo "Removing existing data directory..."
+            rm -rf "$DATA_DIR"
+            echo "Directory removed."
+            ;;
+        [Nn]* )
+            echo "Operation aborted by the user."
+            exit 1
+            ;;
+        * ) 
+            echo "Invalid input. Please answer 'yes' or 'no'."
+            exit 1
+            ;;
+    esac
 fi
+
 
 echo "Initializing $node..."
 fiammad init $node --chain-id $CHAIN_ID > /dev/null
@@ -77,6 +96,17 @@ if ! fiammad genesis validate-genesis; then
     echo "Invalid genesis"
     exit 1
 fi
+
+echo "Setting node address in config..."
+fiammad config set config p2p.persistent_peers "$other_addresses" --skip-validate
+#RPC configuration
+fiammad config set config rpc.laddr "tcp://0.0.0.0:26657" --skip-validate
+#Explorer configuration
+fiammad config set config rpc.cors_allowed_origins '["*"]' --skip-validate 
+fiammad config set app api.enable true --skip-validate 
+fiammad config set app api.enabled-unsafe-cors true --skip-validate 
+fiammad config set app api.address "tcp://0.0.0.0:1317" --skip-validate
+fiammad config set app grpc.address "0.0.0.0:9090" --skip-validate
 
 echo "Node $node is set up and ready to start..."
 
