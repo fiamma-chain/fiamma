@@ -11,7 +11,12 @@ import (
 func (k *Keeper) BeginBlocker(ctx context.Context) error {
 	sdkCtx := sdk.UnwrapSDKContext(ctx)
 	proposer := sdkCtx.BlockHeader().ProposerAddress
-	k.SetBlockProposer(ctx, sdkCtx.BlockHeight(), proposer)
+	validator, err := k.stakingKeeper.ValidatorByConsAddr(sdkCtx, proposer)
+	if err != nil {
+		return err
+	}
+	operatorAddr := validator.GetOperator()
+	k.SetBlockProposer(ctx, sdkCtx.BlockHeight(), operatorAddr)
 	return nil
 }
 

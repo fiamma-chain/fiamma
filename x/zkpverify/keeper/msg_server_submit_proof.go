@@ -15,7 +15,6 @@ func (k msgServer) SubmitProof(goCtx context.Context, msg *types.MsgSubmitProof)
 
 	currentHeight := ctx.BlockHeight()
 	proposerAddress := k.GetBlockProposer(ctx, currentHeight)
-	proposerValAddress := sdk.ValAddress(proposerAddress)
 
 	// check if the proof system is valid
 	if _, ok := types.ProofSystem_value[msg.ProofSystem]; !ok {
@@ -55,7 +54,7 @@ func (k msgServer) SubmitProof(goCtx context.Context, msg *types.MsgSubmitProof)
 			Witness:      witness,
 			Vk:           msg.Vk,
 			PublicInput:  msg.PublicInput,
-			Proposer:     proposerValAddress.String(),
+			Proposer:     proposerAddress,
 		}
 		k.SetBitVMChallengeData(ctx, proofId[:], bitvmChallengeData)
 	}
@@ -79,7 +78,7 @@ func (k msgServer) SubmitProof(goCtx context.Context, msg *types.MsgSubmitProof)
 		sdk.NewAttribute("dataCommitment", dataCommitmentStr),
 		sdk.NewAttribute("dataLocation", dataLocation.String()),
 		sdk.NewAttribute("verifyResult", strconv.FormatBool(result)),
-		sdk.NewAttribute("proposer", proposerValAddress.String()))
+		sdk.NewAttribute("proposer", proposerAddress))
 
 	ctx.EventManager().EmitEvent(event)
 

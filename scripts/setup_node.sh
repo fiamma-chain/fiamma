@@ -13,9 +13,37 @@ CHAIN_BINARY=fiammad
 : ${CHAIN_ID:="fiamma-testnet-1"}
 : ${MINIMUM_GAS_PRICES="0ufia"}
 
-: ${PEER_ADDR="35.74.250.156"}
+: ${PEER_ADDR="13.231.104.23"}
 
 PEER_ARRAY=(${PEER_ADDR//,/ })
+
+
+# Default data directory for fiammad
+DATA_DIR="$HOME/.fiamma"
+
+# Check if the data directory already exists
+if [ -d "$DATA_DIR" ]; then
+    echo "An existing data directory was found at '$DATA_DIR'."
+    # Prompt user for confirmation
+    read -p "Do you want to remove this directory and all of its contents? (y/n) " user_confirm
+
+    # Check user input
+    case $user_confirm in
+        [Yy]* ) 
+            echo "Removing existing data directory..."
+            rm -rf "$DATA_DIR"
+            echo "Directory removed."
+            ;;
+        [Nn]* )
+            echo "Operation aborted by the user."
+            exit 1
+            ;;
+        * ) 
+            echo "Invalid input. Please answer 'yes' or 'no'."
+            exit 1
+            ;;
+    esac
+fi
 
 # You should ensure that the fiammad binary files have been correctly installed.
 

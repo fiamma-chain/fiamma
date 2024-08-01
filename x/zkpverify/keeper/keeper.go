@@ -166,15 +166,15 @@ func (k Keeper) GetPendingProofs(ctx context.Context, req *types.QueryPendingPro
 	return &types.QueryPendingProofResponse{PendingProofs: verifyResults, Pagination: pageRes}, nil
 }
 
-func (k Keeper) SetBlockProposer(ctx context.Context, height int64, proposer []byte) {
+func (k Keeper) SetBlockProposer(ctx context.Context, height int64, proposer string) {
 	store := k.blockProposerStore(ctx)
-	store.Set(sdk.Uint64ToBigEndian(uint64(height)), proposer)
+	store.Set(sdk.Uint64ToBigEndian(uint64(height)), []byte(proposer))
 }
 
-func (k Keeper) GetBlockProposer(ctx context.Context, height int64) []byte {
+func (k Keeper) GetBlockProposer(ctx context.Context, height int64) string {
 	store := k.blockProposerStore(ctx)
 	bz := store.Get(sdk.Uint64ToBigEndian(uint64(height)))
-	return bz
+	return string(bz)
 }
 
 func (k Keeper) proofDataStore(ctx context.Context) prefix.Store {
