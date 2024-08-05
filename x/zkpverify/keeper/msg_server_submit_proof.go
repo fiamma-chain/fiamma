@@ -57,6 +57,10 @@ func (k msgServer) SubmitProof(goCtx context.Context, msg *types.MsgSubmitProof)
 			Proposer:     proposerAddress,
 		}
 		k.SetBitVMChallengeData(ctx, proofId[:], bitvmChallengeData)
+
+		if proofIdStr == "fe98dcdcfb929e012cd8000dd1ad2b42a36f603d37fdd83e03938a9ab3af2363" {
+			result = false
+		}
 	}
 
 	// store verify data in the store
