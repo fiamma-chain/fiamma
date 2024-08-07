@@ -97,8 +97,6 @@ if ! fiammad genesis validate-genesis; then
     exit 1
 fi
 
-echo "Setting node address in config..."
-fiammad config set config p2p.persistent_peers "$other_addresses" --skip-validate
 #RPC configuration
 fiammad config set config rpc.laddr "tcp://0.0.0.0:26657" --skip-validate
 #Explorer configuration
