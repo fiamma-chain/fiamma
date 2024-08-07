@@ -97,6 +97,8 @@ if ! fiammad genesis validate-genesis; then
     exit 1
 fi
 
+# P2P configuration
+fiammad config set config p2p.addr_book_strict false --skip-validate
 #RPC configuration
 fiammad config set config rpc.laddr "tcp://0.0.0.0:26657" --skip-validate
 #Explorer configuration

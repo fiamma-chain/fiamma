@@ -130,6 +130,8 @@ for (( i=1; i <= "$#"; i++ )); do
     docker run --rm -v $(pwd)/testnet-nodes/${!i}:/root/.fiamma -it ghcr.io/fiamma-chain/fiamma config set config p2p.persistent_peers "$other_addresses" --skip-validate
     #RPC configuration
     docker run --rm -v $(pwd)/testnet-nodes/${!i}:/root/.fiamma -it ghcr.io/fiamma-chain/fiamma config set config rpc.laddr "tcp://0.0.0.0:26657" --skip-validate
+    #P2P configuration
+    docker run --rm -v $(pwd)/testnet-nodes/${!i}:/root/.fiamma -it ghcr.io/fiamma-chain/fiamma config set config p2p.addr_book_strict false --skip-validate
     #Explorer configuration
     docker run --rm -v $(pwd)/testnet-nodes/${!i}:/root/.fiamma -it ghcr.io/fiamma-chain/fiamma config set config rpc.cors_allowed_origins '["*"]' --skip-validate 
     docker run --rm -v $(pwd)/testnet-nodes/${!i}:/root/.fiamma -it ghcr.io/fiamma-chain/fiamma config set app api.enable true --skip-validate 
@@ -145,7 +147,7 @@ printf "version: '3.7'\nnetworks:\n  net-public:\nservices:\n" > $(pwd)/testnet-
 for node in "$@"; do
     printf "  fiammad-$node:\n    command: start\n    image: ghcr.io/fiamma-chain/fiamma\n    container_name: $node\n    volumes:\n      - ./$node:/root/.fiamma\n    networks:\n      - net-public\n" >> $(pwd)/testnet-nodes/docker-compose.yml
     if [ $node == "$1" ]; then
-        printf "    ports:\n      - 0.0.0.0:26657:26657\n" >> $(pwd)/testnet-nodes/docker-compose.yml
+        printf "    ports:\n      - 0.0.0.0:26657:26657\n      - 0.0.0.0:1317:1317\n      - 0.0.0.0:9090:9090\n      - 0.0.0.0:26656:26656\n" >> $(pwd)/testnet-nodes/docker-compose.yml
     fi
     printf "\n" >> $(pwd)/testnet-nodes/docker-compose.yml
 done
