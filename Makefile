@@ -219,7 +219,7 @@ build-docker:
 	--build-arg GIT_VERSION=$(VERSION) \
 	--build-arg GIT_COMMIT=$(COMMIT) \
 	-f Dockerfile .
-	docker rmi $$(docker images -f "dangling=true" -q) 2>/dev/null; true
+	docker rmi -f $$(docker images -f "dangling=true" -q) 2>/dev/null; true
 
 docker-rmi: 
 	docker rmi ghcr.io/fiamma-chain/fiamma 2>/dev/null; true

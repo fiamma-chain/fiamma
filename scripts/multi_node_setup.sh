@@ -9,7 +9,7 @@ initial_balance=10000000000000
 initial_faucet_balance=10000000000
 initial_stake=10000000
 minimum_gas_price=0
-committee_address=fiamma13k3wqnp4zcrlwtph6xk7l6feunu5ae2k6pqnaw
+committee_address=""
 staker_addresses=()
 
 # nubit da rpc url and authkey
