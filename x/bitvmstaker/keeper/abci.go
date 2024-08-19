@@ -23,7 +23,9 @@ func (k *Keeper) EndBlocker(ctx context.Context) error {
 			if err != nil {
 				return err
 			}
-			return k.stakingKeeper.Jail(ctx, conAddress)
+			if !validator.IsJailed() {
+				return k.stakingKeeper.Jail(ctx, conAddress)
+			}
 		}
 	}
 	return nil
