@@ -22,8 +22,8 @@ func (k msgServer) SubmitCommunityVerification(goCtx context.Context, msg *types
 		return nil, types.ErrInvalidProofId
 	}
 
-	verifyResult, foundPending := k.GetPendingProof(ctx, proofId[:])
-	if !foundPending {
+	verifyResult, found := k.GetPendingProof(ctx, proofId[:])
+	if !found {
 		k.Logger().Info("Error finding proof id:", "error", msg.ProofId)
 		return nil, types.ErrGetProofId
 	}
@@ -32,8 +32,6 @@ func (k msgServer) SubmitCommunityVerification(goCtx context.Context, msg *types
 		k.Logger().Info("Inconsistent with verification result:", "error", msg.ProofId)
 		return nil, types.ErrVerifyResult
 	}
-
-	k.Logger().Info("Proof verification result for community:", "result", msg.VerifyResult)
 
 	verifyResult.CommunityVerificationCount++
 	if verifyResult.CommunityVerificationCount < VerificationCountLimit {
