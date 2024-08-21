@@ -4,10 +4,10 @@ set -e
 
 
 : ${CHAIN_ID:="fiamma-testnet-1"}
-: ${NODE:="https://testnet-rpc.fiammachain.io"}
-: ${PROOF_FILE:=../../prover_examples/bitvm/proof.bitvm}
-: ${PUBLIC_INPUT_FILE:=../../prover_examples/bitvm/public_input.bitvm}
-: ${VK_FILE:=../../prover_examples/bitvm/vk.bitvm}
+: ${NODE:="http://54.65.137.66:26657"}
+: ${PROOF_FILE:=../../prover_examples/bitvm_challenge/proof.bitvm}
+: ${PUBLIC_INPUT_FILE:=../../prover_examples/bitvm_challenge/public_input.bitvm}
+: ${VK_FILE:=../../prover_examples/bitvm_challenge/vk.bitvm}
 : ${PROOF_SYSTEM:="GROTH16_BN254_BITVM"}
 
 

@@ -23,8 +23,7 @@ func (k msgServer) SubmitCommunityVerification(goCtx context.Context, msg *types
 	}
 
 	verifyResult, foundPending := k.GetPendingProof(ctx, proofId[:])
-	_, foundDefinitive := k.GetVerifyResult(ctx, proofId[:])
-	if !foundPending && !foundDefinitive {
+	if !foundPending {
 		k.Logger().Info("Error finding proof id:", "error", msg.ProofId)
 		return nil, types.ErrGetProofId
 	}
@@ -34,22 +33,17 @@ func (k msgServer) SubmitCommunityVerification(goCtx context.Context, msg *types
 		return nil, types.ErrVerifyResult
 	}
 
-	if foundDefinitive {
-		k.Logger().Info("Error exceeding verification period:", "error", msg.ProofId)
-		return nil, types.ErrVerifyPeriod
-	}
-
 	k.Logger().Info("Proof verification result for community:", "result", msg.VerifyResult)
 
 	verifyResult.CommunityVerificationCount++
 	if verifyResult.CommunityVerificationCount < VerificationCountLimit {
 		verifyResult.Status = types.VerificationStatus_COMMUNITY_VALIDATION
-		k.SetPendingProof(ctx, proofId[:], verifyResult)
+		k.SetPendingProof(ctx, proofId, verifyResult)
 	} else {
 		verifyResult.Status = types.VerificationStatus_DEFINITIVE_VALIDATION
-		k.DeletePendingProof(ctx, proofId[:])
-		k.SetVerifyResult(ctx, proofId[:], verifyResult)
+		k.DeletePendingProof(ctx, proofId)
 	}
+	k.SetVerifyResult(ctx, proofId, verifyResult)
 	k.Logger().Info("Proof verification status for community:", "status", verifyResult.Status)
 
 	event := sdk.NewEvent("SubmitCommunityVerification",
