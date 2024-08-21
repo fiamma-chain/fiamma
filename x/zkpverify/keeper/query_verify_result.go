@@ -23,14 +23,9 @@ func (k Keeper) VerifyResult(goCtx context.Context, req *types.QueryVerifyResult
 		return nil, types.ErrInvalidProofId
 	}
 
-	verifyResultPending, foundPending := k.GetPendingProof(ctx, proofId[:])
-	if foundPending {
-		return &types.QueryVerifyResultResponse{VerifyResult: &verifyResultPending}, nil
-	}
-
-	verifyResultDefinitive, foundDefinitive := k.GetVerifyResult(ctx, proofId[:])
-	if foundDefinitive {
-		return &types.QueryVerifyResultResponse{VerifyResult: &verifyResultDefinitive}, nil
+	verifyResult, found := k.GetVerifyResult(ctx, proofId[:])
+	if found {
+		return &types.QueryVerifyResultResponse{VerifyResult: &verifyResult}, nil
 	}
 
 	return nil, types.ErrVerifyResultNotFound

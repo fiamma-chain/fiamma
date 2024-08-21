@@ -75,6 +75,7 @@ func (k msgServer) SubmitProof(goCtx context.Context, msg *types.MsgSubmitProof)
 	}
 
 	k.SetPendingProof(ctx, proofId[:], verifyResult)
+	k.SetVerifyResult(ctx, proofId[:], verifyResult)
 
 	event := sdk.NewEvent("SubmitProof",
 		sdk.NewAttribute("proofSystem", msg.ProofSystem),
