@@ -7,7 +7,7 @@ services:
       context: ../../
       dockerfile: ../../Dockerfile
     volumes:
-      - ../testnet-nodes/${NODE_NAME}:/root/.fiamma
+      - ../testnet-nodes/${NODE_NAME}:/root/.fiamma:Z
       - ../setup_node.sh:/entrypoint.sh
     entrypoint: /entrypoint.sh ${NODE_NAME}
 
@@ -16,7 +16,7 @@ services:
     build:
       dockerfile: ../../Dockerfile
     volumes:
-      - ../testnet-nodes/${NODE_NAME}:/root/.fiamma
+      - ../testnet-nodes/${NODE_NAME}:/root/.fiamma:Z
     command: start
     depends_on:
       node-setup:

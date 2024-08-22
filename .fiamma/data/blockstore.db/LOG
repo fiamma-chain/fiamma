@@ -1,0 +1,13 @@
+=============== Aug 21, 2024 (CST) ===============
+12:17:43.564733 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+12:17:43.649172 db@open opening
+12:17:43.650039 version@stat F·[] S·0B[] Sc·[]
+12:17:43.670146 db@janitor F·2 G·0
+12:17:43.670218 db@open done T·20.94723ms
+13:55:53.087322 memdb@flush N·9252 S·3MiB
+13:55:53.241523 memdb@flush created L0@3 N·9252 S·2MiB "BH:..dfe,v8409":"blo..ore,v6"
+13:55:53.241641 version@stat F·[1] S·2MiB[2MiB] Sc·[0.25]
+13:55:53.260584 memdb@flush committed F·1 T·172.444603ms
+13:55:53.264414 journal@remove removed @1
+14:48:30.158467 db@close closing
+14:48:30.159239 db@close done T·769.85µs

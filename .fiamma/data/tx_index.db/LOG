@@ -1,0 +1,16 @@
+=============== Aug 21, 2024 (CST) ===============
+12:17:43.780467 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+12:17:43.839085 db@open opening
+12:17:43.840064 version@stat F·[] S·0B[] Sc·[]
+12:17:43.860526 db@janitor F·2 G·0
+12:17:43.860584 db@open done T·21.409111ms
+12:53:56.019094 memdb@flush N·54948 S·3MiB
+12:53:56.073692 memdb@flush created L0@3 N·54948 S·863KiB "\x02\xed]..\xeb'8,v6618":"\xffo\xe0..\xce]q,v28689"
+12:53:56.073730 version@stat F·[1] S·863KiB[863KiB] Sc·[0.25]
+12:53:56.093124 memdb@flush committed F·1 T·73.667729ms
+12:53:56.098349 journal@remove removed @1
+14:14:36.999959 memdb@flush N·57486 S·3MiB
+14:14:37.086804 memdb@flush created L0@5 N·57486 S·745KiB "blo..\x01\xc3j,v54949":"blo..\xe0\x88v,v112383"
+14:14:37.086848 version@stat F·[2] S·1MiB[1MiB] Sc·[0.50]
+14:14:37.106182 memdb@flush committed F·1 T·105.873847ms
+14:14:37.117779 journal@remove removed @2
