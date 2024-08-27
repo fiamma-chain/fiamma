@@ -14,6 +14,21 @@ genesis:
     staking:
       params:
         bond_denom: ufia
+    gov:
+      params:
+        min_deposit:
+        - amount: "10000000"
+          denom: ufia
+        expedited_min_deposit:
+        - amount: "50000000"
+          denom: ufia
+    mint:
+      params:
+        mint_denom: ufia
+    crisis:
+      constant_fee:
+        denom: ufia
+        amount: "1000"
     bitvmstaker:
       committee_address: fiamma13k3wqnp4zcrlwtph6xk7l6feunu5ae2k6pqnaw
       staker_addresses: [fiammavaloper13k3wqnp4zcrlwtph6xk7l6feunu5ae2k4lsqwf]
