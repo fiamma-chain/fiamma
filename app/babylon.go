@@ -1,10 +1,13 @@
 package app
 
 import (
+	"cosmossdk.io/core/appmodule"
 	storetypes "cosmossdk.io/store/types"
 	"github.com/babylonchain/babylon-sdk/x/babylon"
 	bbnkeeper "github.com/babylonchain/babylon-sdk/x/babylon/keeper"
 	bbntypes "github.com/babylonchain/babylon-sdk/x/babylon/types"
+	cdctypes "github.com/cosmos/cosmos-sdk/codec/types"
+	"github.com/cosmos/cosmos-sdk/types/module"
 	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
 	govtypes "github.com/cosmos/cosmos-sdk/x/gov/types"
 )
@@ -36,4 +39,17 @@ func (app *App) registerBabylonModules() error {
 	}
 
 	return nil
+}
+
+// RegisterBabylon registers the Babylon module and its interfaces with the provided
+// interface registry. It returns a map of module names to their corresponding
+// AppModule implementations.
+func RegisterBabylon(registry cdctypes.InterfaceRegistry) map[string]appmodule.AppModule {
+	modules := map[string]appmodule.AppModule{
+		bbntypes.ModuleName: babylon.AppModule{},
+	}
+	for name, m := range modules {
+		module.CoreAppModuleBasicAdaptor(name, m).RegisterInterfaces(registry)
+	}
+	return modules
 }

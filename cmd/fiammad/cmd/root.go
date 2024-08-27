@@ -112,6 +112,14 @@ func NewRootCmd() *cobra.Command {
 		autoCliOpts.Modules[name] = mod
 	}
 
+	// Since the babylon modules don't support dependency injection, we need to
+	// manually register the modules on the client side.
+	bbnModules := app.RegisterBabylon(clientCtx.InterfaceRegistry)
+	for name, mod := range bbnModules {
+		moduleBasicManager[name] = module.CoreAppModuleBasicAdaptor(name, mod)
+		autoCliOpts.Modules[name] = mod
+	}
+
 	initRootCmd(rootCmd, clientCtx.TxConfig, moduleBasicManager)
 
 	overwriteFlagDefaults(rootCmd, map[string]string{
