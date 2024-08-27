@@ -12,6 +12,9 @@ minimum_gas_price=0
 committee_address=""
 staker_addresses=()
 
+babylonContractAddr=fiamma14hj2tavq8fpesdwxxcu44rty3hh90vhujrvcmstl4zr3txmfvw9sgx3jav
+btcStakingContractAddr=fiamma1nc5tatafv6eyq7llkr2gv50ff9e22mnf70qgjlv737ktmt4eswrqyn5sl2
+
 # nubit da rpc url and authkey
 
 rpc="http://127.0.0.1:26658"
@@ -35,7 +38,10 @@ for node in "$@"; do
     echo "Initializing $node..."
     docker run --rm -v $(pwd)/testnet-nodes/$node:/root/.fiamma -it ghcr.io/fiamma-chain/fiamma init fiamma_$node --chain-id $CHAIN_ID  > /dev/null
     
-    docker run --rm -it -v $(pwd)/testnet-nodes/$node:/root/.fiamma --entrypoint sed ghcr.io/fiamma-chain/fiamma -i 's/"stake"/"'$token'"/g' /root/.fiamma/config/genesis.json 
+    docker run --rm -it -v $(pwd)/testnet-nodes/$node:/root/.fiamma --entrypoint sed ghcr.io/fiamma-chain/fiamma -i 's/"stake"/"'$token'"/g' /root/.fiamma/config/genesis.json
+
+    docker run --rm -it -v $(pwd)/testnet-nodes/$node:/root/.fiamma --entrypoint sed ghcr.io/fiamma-chain/fiamma -i 's/"babylon_contract_address": ""/"babylon_contract_address": "'"$babylonContractAddr"'"/g' /root/.fiamma/config/genesis.json
+    docker run --rm -it -v $(pwd)/testnet-nodes/$node:/root/.fiamma --entrypoint sed ghcr.io/fiamma-chain/fiamma -i 's/"btc_staking_contract_address": ""/"btc_staking_contract_address": "'"$btcStakingContractAddr"'"/g' /root/.fiamma/config/genesis.json
     docker run --rm -v $(pwd)/testnet-nodes/$node:/root/.fiamma -it ghcr.io/fiamma-chain/fiamma config set app minimum-gas-prices "$minimum_gas_price$token"
     docker run --rm -v $(pwd)/testnet-nodes/$node:/root/.fiamma -it ghcr.io/fiamma-chain/fiamma config set app pruning "nothing" 
 

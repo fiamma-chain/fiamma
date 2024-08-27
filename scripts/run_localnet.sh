@@ -13,6 +13,9 @@ minimum_gas_price="0"
 committee_address=""
 staker_addresses=()
 
+babylonContractAddr=fiamma14hj2tavq8fpesdwxxcu44rty3hh90vhujrvcmstl4zr3txmfvw9sgx3jav
+btcStakingContractAddr=fiamma1nc5tatafv6eyq7llkr2gv50ff9e22mnf70qgjlv737ktmt4eswrqyn5sl2
+
 # RPC and Auth Key settings
 rpc="http://127.0.0.1:26658"
 authkey=""
@@ -58,6 +61,9 @@ fiammad init $node --chain-id $CHAIN_ID > /dev/null
 
 # Configuration adjustments
 perl -pi -e 's/"stake"/"'$token'"/g' "$DATA_DIR/config/genesis.json"
+sed -i '' 's/"babylon_contract_address": ""/"babylon_contract_address": "'"$babylonContractAddr"'"/g' "$DATA_DIR/config/genesis.json"
+sed -i '' 's/"btc_staking_contract_address": ""/"btc_staking_contract_address": "'"$btcStakingContractAddr"'"/g' "$DATA_DIR/config/genesis.json"
+
 fiammad config set app minimum-gas-prices "$minimum_gas_price$token"
 fiammad config set app pruning "nothing"
 fiammad config set app da-config.rpc "$rpc"

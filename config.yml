@@ -32,7 +32,11 @@ genesis:
     bitvmstaker:
       committee_address: fiamma13k3wqnp4zcrlwtph6xk7l6feunu5ae2k6pqnaw
       staker_addresses: [fiammavaloper13k3wqnp4zcrlwtph6xk7l6feunu5ae2k4lsqwf]
-  
+    babylon:
+      params:
+        babylon_contract_address: fiamma14hj2tavq8fpesdwxxcu44rty3hh90vhujrvcmstl4zr3txmfvw9sgx3jav
+        btc_staking_contract_address: fiamma1nc5tatafv6eyq7llkr2gv50ff9e22mnf70qgjlv737ktmt4eswrqyn5sl2
+        max_gas_begin_blocker: 500000
 client:
   openapi:
     path: docs/static/openapi.yml
