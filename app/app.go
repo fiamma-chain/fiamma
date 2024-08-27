@@ -84,7 +84,7 @@ import (
 
 	bitvmstakermodulekeeper "fiamma/x/bitvmstaker/keeper"
 
-	bbnkeeper "github.com/babylonchain/babylon-sdk/x/babylon/keeper"
+	bbnkeeper "github.com/babylonlabs-io/babylon-sdk/x/babylon/keeper"
 
 	// this line is used by starport scaffolding # stargate/app/moduleImport
 

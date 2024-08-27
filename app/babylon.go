@@ -3,9 +3,9 @@ package app
 import (
 	"cosmossdk.io/core/appmodule"
 	storetypes "cosmossdk.io/store/types"
-	"github.com/babylonchain/babylon-sdk/x/babylon"
-	bbnkeeper "github.com/babylonchain/babylon-sdk/x/babylon/keeper"
-	bbntypes "github.com/babylonchain/babylon-sdk/x/babylon/types"
+	"github.com/babylonlabs-io/babylon-sdk/x/babylon"
+	bbnkeeper "github.com/babylonlabs-io/babylon-sdk/x/babylon/keeper"
+	bbntypes "github.com/babylonlabs-io/babylon-sdk/x/babylon/types"
 	cdctypes "github.com/cosmos/cosmos-sdk/codec/types"
 	"github.com/cosmos/cosmos-sdk/types/module"
 	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"

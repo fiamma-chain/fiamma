@@ -8,7 +8,7 @@ import (
 	wasmkeeper "github.com/CosmWasm/wasmd/x/wasm/keeper"
 
 	wasmtypes "github.com/CosmWasm/wasmd/x/wasm/types"
-	bbnkeeper "github.com/babylonchain/babylon-sdk/x/babylon/keeper"
+	bbnkeeper "github.com/babylonlabs-io/babylon-sdk/x/babylon/keeper"
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/runtime"
 	servertypes "github.com/cosmos/cosmos-sdk/server/types"
