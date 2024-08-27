@@ -567,6 +567,7 @@ func _Msg_SubmitCommunityVerification_Handler(srv interface{}, ctx context.Conte
 	return interceptor(ctx, in, info, handler)
 }
 
+var Msg_serviceDesc = _Msg_serviceDesc
 var _Msg_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "fiamma.zkpverify.Msg",
 	HandlerType: (*MsgServer)(nil),

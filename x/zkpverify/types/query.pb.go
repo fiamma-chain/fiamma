@@ -752,6 +752,7 @@ func _Query_BitVMChallengeData_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
+var Query_serviceDesc = _Query_serviceDesc
 var _Query_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "fiamma.zkpverify.Query",
 	HandlerType: (*QueryServer)(nil),
