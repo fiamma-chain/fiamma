@@ -60,7 +60,7 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					RpcMethod:      "SubmitProof",
 					Use:            "submit-proof [proof_system] [proof] [public_input] [vk]",
 					Short:          "Send a zkp proof verify tx" + "\n" + "Currently supported proof systems: " + "[PLONK_BN254, PLONK_BLS12_381, GROTH16_BN254, GROTH16_BN254_BITVM, SP1]",
-					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "proof_system"}, {ProtoField: "proof"}, {ProtoField: "public_input"}, {ProtoField: "vk"}},
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "namespace"}, {ProtoField: "proof_system"}, {ProtoField: "proof"}, {ProtoField: "public_input"}, {ProtoField: "vk"}},
 				},
 				{
 					RpcMethod:      "SubmitCommunityVerification",

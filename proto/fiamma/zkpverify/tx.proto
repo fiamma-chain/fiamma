@@ -52,6 +52,7 @@ message MsgSubmitProof {
   bytes proof = 3;
   bytes public_input = 4;
   bytes vk = 5;
+  string namespace = 6;
 }
 
 // MsgSubmitProofResponse defines the response structure for executing MsgSubmitProof

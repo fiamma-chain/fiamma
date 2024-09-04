@@ -74,7 +74,7 @@ func (k Keeper) SetVerifyResult(ctx sdk.Context, proofId []byte, verifyResult ty
 }
 
 // GetVerifyResult retrieves proof verification information
-func (k Keeper) GetVerifyResult(ctx sdk.Context, proofId []byte) (types.VerifyResult, bool) {
+func (k Keeper) GetVerifyResult(ctx context.Context, proofId []byte) (types.VerifyResult, bool) {
 	store := k.verifyResultStore(ctx)
 	bz := store.Get(proofId)
 	if bz == nil {
@@ -86,14 +86,14 @@ func (k Keeper) GetVerifyResult(ctx sdk.Context, proofId []byte) (types.VerifyRe
 }
 
 // SetProofData stores proof information
-func (k Keeper) SetProofData(ctx sdk.Context, proofId []byte, proofData types.ProofData) {
+func (k Keeper) SetProofData(ctx context.Context, proofId []byte, proofData types.ProofData) {
 	store := k.proofDataStore(ctx)
 	bz := k.cdc.MustMarshal(&proofData)
 	store.Set(proofId, bz)
 }
 
 // GetProofData retrieves proof information
-func (k Keeper) GetProofData(ctx sdk.Context, proofId []byte) (types.ProofData, bool) {
+func (k Keeper) GetProofData(ctx context.Context, proofId []byte) (types.ProofData, bool) {
 	store := k.proofDataStore(ctx)
 	bz := store.Get(proofId)
 	if bz == nil {
@@ -105,15 +105,15 @@ func (k Keeper) GetProofData(ctx sdk.Context, proofId []byte) (types.ProofData, 
 }
 
 // SetBitVMChallengeData stores witness data
-func (k Keeper) SetBitVMChallengeData(ctx sdk.Context, proofId []byte, challengeData types.BitVMChallengeData) {
-	store := k.BitVMChallengeDataStore(ctx)
+func (k Keeper) SetBitVMChallengeData(ctx context.Context, proofId []byte, challengeData types.BitVMChallengeData) {
+	store := k.bitVMChallengeDataStore(ctx)
 	bz := k.cdc.MustMarshal(&challengeData)
 	store.Set(proofId, bz)
 }
 
 // GetBitVMChallengeData retrieves witness data from the chain
-func (k Keeper) GetBitVMChallengeData(ctx sdk.Context, proofId []byte) (types.BitVMChallengeData, bool) {
-	store := k.BitVMChallengeDataStore(ctx)
+func (k Keeper) GetBitVMChallengeData(ctx context.Context, proofId []byte) (types.BitVMChallengeData, bool) {
+	store := k.bitVMChallengeDataStore(ctx)
 	bz := store.Get(proofId)
 	if bz == nil {
 		return types.BitVMChallengeData{}, false
@@ -123,38 +123,31 @@ func (k Keeper) GetBitVMChallengeData(ctx sdk.Context, proofId []byte) (types.Bi
 	return challengeData, true
 }
 
-// SetPendingProof stores pending proof verification information
-func (k Keeper) SetPendingProof(ctx sdk.Context, proofId []byte, verifyResult types.VerifyResult) {
-	store := k.pendingProofsStore(ctx)
-	bz := k.cdc.MustMarshal(&verifyResult)
-	store.Set(proofId, bz)
+// IsPendingProof checks if a proof ID is in the pending proofs index
+func (k Keeper) IsPendingProof(ctx context.Context, proofId []byte) bool {
+	store := k.pendingProofsIndexStore(ctx)
+	return store.Has(proofId)
 }
 
-// GetPendingProof retrieves pending proof verification information
-func (k Keeper) GetPendingProof(ctx sdk.Context, proofId []byte) (types.VerifyResult, bool) {
-	store := k.pendingProofsStore(ctx)
-	bz := store.Get(proofId)
-	if bz == nil {
-		return types.VerifyResult{}, false
-	}
-	var verifyResult types.VerifyResult
-	k.cdc.MustUnmarshal(bz, &verifyResult)
-	return verifyResult, true
+// AddPendingProofIndex adds a proof ID to the pending proofs index
+func (k Keeper) AddPendingProofIndex(ctx context.Context, proofId []byte) {
+	store := k.pendingProofsIndexStore(ctx)
+	store.Set(proofId, []byte{1}) // We only need to store the key, value can be a dummy byte
 }
 
-// DeletePendingProof deletes pending proof verification information
-func (k Keeper) DeletePendingProof(ctx sdk.Context, proofId []byte) {
-	store := k.pendingProofsStore(ctx)
+// RemovePendingProofIndex removes a proof ID from the pending proofs index
+func (k Keeper) RemovePendingProofIndex(ctx context.Context, proofId []byte) {
+	store := k.pendingProofsIndexStore(ctx)
 	store.Delete(proofId)
 }
 
 func (k Keeper) GetPendingProofs(ctx context.Context, req *types.QueryPendingProofRequest) (*types.QueryPendingProofResponse, error) {
-	store := k.pendingProofsStore(ctx)
+	indexStore := k.pendingProofsIndexStore(ctx)
 	var verifyResults []*types.VerifyResult
-	pageRes, err := query.Paginate(store, req.Pagination, func(key []byte, value []byte) error {
-		var verifyResult types.VerifyResult
-		if err := k.cdc.Unmarshal(value, &verifyResult); err != nil {
-			return err
+	pageRes, err := query.Paginate(indexStore, req.Pagination, func(key []byte, _ []byte) error {
+		verifyResult, found := k.GetVerifyResult(ctx, key)
+		if !found {
+			return fmt.Errorf("verify result not found for proof ID %x", key)
 		}
 		verifyResults = append(verifyResults, &verifyResult)
 		return nil
@@ -187,17 +180,18 @@ func (k Keeper) verifyResultStore(ctx context.Context) prefix.Store {
 	return prefix.NewStore(storeAdapter, types.VerifyResultKey)
 }
 
-func (k Keeper) BitVMChallengeDataStore(ctx context.Context) prefix.Store {
+func (k Keeper) bitVMChallengeDataStore(ctx context.Context) prefix.Store {
 	storeAdapter := runtime.KVStoreAdapter(k.storeService.OpenKVStore(ctx))
 	return prefix.NewStore(storeAdapter, types.BitVMChallengeDataKey)
-}
-
-func (k Keeper) pendingProofsStore(ctx context.Context) prefix.Store {
-	storeAdapter := runtime.KVStoreAdapter(k.storeService.OpenKVStore(ctx))
-	return prefix.NewStore(storeAdapter, types.PendingProofsKey)
 }
 
 func (k Keeper) blockProposerStore(ctx context.Context) prefix.Store {
 	storeAdapter := runtime.KVStoreAdapter(k.storeService.OpenKVStore(ctx))
 	return prefix.NewStore(storeAdapter, types.BlockProposerKey)
+}
+
+// pendingProofsIndexStore returns a prefix store for the pending proofs index
+func (k Keeper) pendingProofsIndexStore(ctx context.Context) prefix.Store {
+	storeAdapter := runtime.KVStoreAdapter(k.storeService.OpenKVStore(ctx))
+	return prefix.NewStore(storeAdapter, types.PendingProofsIndexKey)
 }

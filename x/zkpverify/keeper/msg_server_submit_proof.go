@@ -16,11 +16,12 @@ func (k msgServer) SubmitProof(goCtx context.Context, msg *types.MsgSubmitProof)
 	currentHeight := ctx.BlockHeight()
 	proposerAddress := k.GetBlockProposer(ctx, currentHeight)
 
-	// check if the proof system is valid
-	if _, ok := types.ProofSystem_value[msg.ProofSystem]; !ok {
-		return nil, types.ErrInvalidProofSystem
+	if err := msg.ValidateBasic(); err != nil {
+		return &types.MsgSubmitProofResponse{}, err
 	}
+
 	proofData := types.ProofData{
+		Namespace:   msg.Namespace,
 		ProofSystem: types.ProofSystem(types.ProofSystem_value[msg.ProofSystem]),
 		Proof:       msg.Proof,
 		PublicInput: msg.PublicInput,
@@ -72,18 +73,21 @@ func (k msgServer) SubmitProof(goCtx context.Context, msg *types.MsgSubmitProof)
 		Result:                     result,
 		Status:                     types.VerificationStatus_INITIAL_VALIDATION,
 		CommunityVerificationCount: uint64(0),
+		Namespace:                  proofData.Namespace,
 	}
 
-	k.SetPendingProof(ctx, proofId[:], verifyResult)
+	k.AddPendingProofIndex(ctx, proofId[:])
 	k.SetVerifyResult(ctx, proofId[:], verifyResult)
 
 	event := sdk.NewEvent("SubmitProof",
+		sdk.NewAttribute("namespace", proofData.Namespace),
 		sdk.NewAttribute("proofSystem", msg.ProofSystem),
 		sdk.NewAttribute("proofId", proofIdStr),
 		sdk.NewAttribute("dataCommitment", dataCommitmentStr),
 		sdk.NewAttribute("dataLocation", dataLocation.String()),
 		sdk.NewAttribute("verifyResult", strconv.FormatBool(result)),
-		sdk.NewAttribute("proposer", proposerAddress))
+		sdk.NewAttribute("proposer", proposerAddress),
+	)
 
 	ctx.EventManager().EmitEvent(event)
 
