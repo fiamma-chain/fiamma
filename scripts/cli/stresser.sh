@@ -50,6 +50,7 @@ do
     --account-number $ACCOUNT_NUMBER \
     --node $NODE_RPC \
     --yes \
+    "Fiamma" \
     PLONK_BN254 \
     $(cat ../../prover_examples/gnark_plonk/example/proof) \
 	  $(cat ../../prover_examples/gnark_plonk/example/public_input) \

@@ -19,18 +19,13 @@ fi
 : ${VK_FILE:=../../prover_examples/bitvm/vk.bitvm}
 : ${PROOF_SYSTEM:="GROTH16_BN254_BITVM"}
 
-NEW_PROOF=$(xxd -p -c 256 $PROOF_FILE | tr -d '\n')
-
-NEW_PUBLIC_INPUT=$(xxd -p -c 256 $PUBLIC_INPUT_FILE | tr -d '\n')
-
-NEW_VK=$(xxd -p -c 256 $VK_FILE | tr -d '\n')
-
 
 fiammad tx zkpverify submit-proof \
   --from $ACCOUNT --chain-id $CHAIN_ID  \
   --gas $GAS --fees $FEES \
   --node $NODE \
   --keyring-backend test \
+  "ZULU" \
   $PROOF_SYSTEM \
   $NEW_PROOF \
 	$NEW_PUBLIC_INPUT \

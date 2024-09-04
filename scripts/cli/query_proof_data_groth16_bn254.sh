@@ -8,8 +8,10 @@ set -e
 : ${PROOF_FILE:=../../prover_examples/gnark_groth16/example/proof}
 : ${PUBLIC_INPUT_FILE:=../../prover_examples/gnark_groth16/example/public_input}
 : ${VK_FILE:=../../prover_examples/gnark_groth16/example/vk}
+: ${NAMESPACE:="ZULU"}
 : ${PROOF_SYSTEM:="GROTH16_BN254"}
 
+NEW_NAMESPACE=$(echo -n $NAMESPACE | xxd -p)
 
 NEW_PROOF_SYSTEM=$(echo -n $PROOF_SYSTEM | xxd -p)
 
@@ -20,7 +22,7 @@ NEW_PUBLIC_INPUT=$(cat $PUBLIC_INPUT_FILE)
 NEW_VK=$(cat $VK_FILE)
 
 # Concatenate the proof, public input, and vk
-allDataHex="${NEW_PROOF_SYSTEM}${NEW_PROOF}${NEW_PUBLIC_INPUT}${NEW_VK}"
+allDataHex="${NEW_NAMESPACE}${NEW_PROOF_SYSTEM}${NEW_PROOF}${NEW_PUBLIC_INPUT}${NEW_VK}"
 
 proof_id=$(echo -n "$allDataHex" | xxd -r -p | sha256sum | awk '{print $1}')
 

@@ -18,17 +18,11 @@ fi
 : ${PUBLIC_INPUT_FILE:=../../prover_examples/bitvm_challenge/public_input.bitvm}
 : ${VK_FILE:=../../prover_examples/bitvm_challenge/vk.bitvm}
 : ${PROOF_SYSTEM:="GROTH16_BN254_BITVM"}
+: ${NAMESPACE:="ZULU"}
 
-NEW_PROOF=$(xxd -p -c 256 $PROOF_FILE | tr -d '\n')
-
-NEW_PUBLIC_INPUT=$(xxd -p -c 256 $PUBLIC_INPUT_FILE | tr -d '\n')
-
-NEW_VK=$(xxd -p -c 256 $VK_FILE | tr -d '\n')
-
-NEW_PROOF_SYSTEM=$(echo -n $PROOF_SYSTEM | xxd -p)
-
+NEW_NAMESPACE=$(echo -n $NAMESPACE | xxd -p)
 # Concatenate the proof, public input, and vk
-allDataHex="${NEW_PROOF_SYSTEM}${NEW_PROOF}${NEW_PUBLIC_INPUT}${NEW_VK}"
+allDataHex="${NEW_NAMESPACE}${NEW_PROOF_SYSTEM}${NEW_PROOF}${NEW_PUBLIC_INPUT}${NEW_VK}"
 
 proof_id=$(echo -n "$allDataHex" | xxd -r -p | sha256sum | awk '{print $1}')
 
@@ -38,7 +32,8 @@ fiammad tx zkpverify submit-proof \
   --gas $GAS --fees $FEES \
   --node $NODE \
   --keyring-backend test \
+  $NAMESPACE \
   $PROOF_SYSTEM \
-  $NEW_PROOF \
-	$NEW_PUBLIC_INPUT \
-	$NEW_VK
+  $PROOF_FILE \
+	$PUBLIC_INPUT_FILE \
+	$VK_FILE
