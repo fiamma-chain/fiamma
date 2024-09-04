@@ -19,11 +19,13 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	Query_Params_FullMethodName             = "/fiamma.zkpverify.Query/Params"
-	Query_PendingProof_FullMethodName       = "/fiamma.zkpverify.Query/PendingProof"
-	Query_ProofData_FullMethodName          = "/fiamma.zkpverify.Query/ProofData"
-	Query_VerifyResult_FullMethodName       = "/fiamma.zkpverify.Query/VerifyResult"
-	Query_BitVMChallengeData_FullMethodName = "/fiamma.zkpverify.Query/BitVMChallengeData"
+	Query_Params_FullMethodName                   = "/fiamma.zkpverify.Query/Params"
+	Query_PendingProof_FullMethodName             = "/fiamma.zkpverify.Query/PendingProof"
+	Query_ProofData_FullMethodName                = "/fiamma.zkpverify.Query/ProofData"
+	Query_VerifyResult_FullMethodName             = "/fiamma.zkpverify.Query/VerifyResult"
+	Query_BitVMChallengeData_FullMethodName       = "/fiamma.zkpverify.Query/BitVMChallengeData"
+	Query_VerifyResultsByNamespace_FullMethodName = "/fiamma.zkpverify.Query/VerifyResultsByNamespace"
+	Query_PendingProofByNamespace_FullMethodName  = "/fiamma.zkpverify.Query/PendingProofByNamespace"
 )
 
 // QueryClient is the client API for Query service.
@@ -39,6 +41,10 @@ type QueryClient interface {
 	VerifyResult(ctx context.Context, in *QueryVerifyResultRequest, opts ...grpc.CallOption) (*QueryVerifyResultResponse, error)
 	// Queries bitvm witness by proof id
 	BitVMChallengeData(ctx context.Context, in *QueryBitVMChallengeDataRequest, opts ...grpc.CallOption) (*QueryBitVMChallengeDataResponse, error)
+	// Queries a list of VerifyResult items by namespace.
+	VerifyResultsByNamespace(ctx context.Context, in *QueryVerifyResultsByNamespaceRequest, opts ...grpc.CallOption) (*QueryVerifyResultsByNamespaceResponse, error)
+	// Queries a list of PendingProofByNamespace items.
+	PendingProofByNamespace(ctx context.Context, in *QueryPendingProofByNamespaceRequest, opts ...grpc.CallOption) (*QueryPendingProofByNamespaceResponse, error)
 }
 
 type queryClient struct {
@@ -94,6 +100,24 @@ func (c *queryClient) BitVMChallengeData(ctx context.Context, in *QueryBitVMChal
 	return out, nil
 }
 
+func (c *queryClient) VerifyResultsByNamespace(ctx context.Context, in *QueryVerifyResultsByNamespaceRequest, opts ...grpc.CallOption) (*QueryVerifyResultsByNamespaceResponse, error) {
+	out := new(QueryVerifyResultsByNamespaceResponse)
+	err := c.cc.Invoke(ctx, Query_VerifyResultsByNamespace_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *queryClient) PendingProofByNamespace(ctx context.Context, in *QueryPendingProofByNamespaceRequest, opts ...grpc.CallOption) (*QueryPendingProofByNamespaceResponse, error) {
+	out := new(QueryPendingProofByNamespaceResponse)
+	err := c.cc.Invoke(ctx, Query_PendingProofByNamespace_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // QueryServer is the server API for Query service.
 // All implementations must embed UnimplementedQueryServer
 // for forward compatibility
@@ -107,6 +131,10 @@ type QueryServer interface {
 	VerifyResult(context.Context, *QueryVerifyResultRequest) (*QueryVerifyResultResponse, error)
 	// Queries bitvm witness by proof id
 	BitVMChallengeData(context.Context, *QueryBitVMChallengeDataRequest) (*QueryBitVMChallengeDataResponse, error)
+	// Queries a list of VerifyResult items by namespace.
+	VerifyResultsByNamespace(context.Context, *QueryVerifyResultsByNamespaceRequest) (*QueryVerifyResultsByNamespaceResponse, error)
+	// Queries a list of PendingProofByNamespace items.
+	PendingProofByNamespace(context.Context, *QueryPendingProofByNamespaceRequest) (*QueryPendingProofByNamespaceResponse, error)
 	mustEmbedUnimplementedQueryServer()
 }
 
@@ -128,6 +156,12 @@ func (UnimplementedQueryServer) VerifyResult(context.Context, *QueryVerifyResult
 }
 func (UnimplementedQueryServer) BitVMChallengeData(context.Context, *QueryBitVMChallengeDataRequest) (*QueryBitVMChallengeDataResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method BitVMChallengeData not implemented")
+}
+func (UnimplementedQueryServer) VerifyResultsByNamespace(context.Context, *QueryVerifyResultsByNamespaceRequest) (*QueryVerifyResultsByNamespaceResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method VerifyResultsByNamespace not implemented")
+}
+func (UnimplementedQueryServer) PendingProofByNamespace(context.Context, *QueryPendingProofByNamespaceRequest) (*QueryPendingProofByNamespaceResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PendingProofByNamespace not implemented")
 }
 func (UnimplementedQueryServer) mustEmbedUnimplementedQueryServer() {}
 
@@ -232,6 +266,42 @@ func _Query_BitVMChallengeData_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Query_VerifyResultsByNamespace_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryVerifyResultsByNamespaceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QueryServer).VerifyResultsByNamespace(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Query_VerifyResultsByNamespace_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QueryServer).VerifyResultsByNamespace(ctx, req.(*QueryVerifyResultsByNamespaceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Query_PendingProofByNamespace_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryPendingProofByNamespaceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QueryServer).PendingProofByNamespace(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Query_PendingProofByNamespace_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QueryServer).PendingProofByNamespace(ctx, req.(*QueryPendingProofByNamespaceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Query_ServiceDesc is the grpc.ServiceDesc for Query service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -258,6 +328,14 @@ var Query_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "BitVMChallengeData",
 			Handler:    _Query_BitVMChallengeData_Handler,
+		},
+		{
+			MethodName: "VerifyResultsByNamespace",
+			Handler:    _Query_VerifyResultsByNamespace_Handler,
+		},
+		{
+			MethodName: "PendingProofByNamespace",
+			Handler:    _Query_PendingProofByNamespace_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

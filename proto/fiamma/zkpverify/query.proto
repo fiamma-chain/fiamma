@@ -41,6 +41,17 @@ service Query {
       returns (QueryBitVMChallengeDataResponse) {
     option (google.api.http).get = "/fiamma/zkpverify/get_bitvm_challenge_data";
   }
+
+  // Queries a list of VerifyResult items by namespace.
+  rpc VerifyResultsByNamespace(QueryVerifyResultsByNamespaceRequest) returns (QueryVerifyResultsByNamespaceResponse) {
+    option (google.api.http).get = "/fiamma/zkpverify/verify_results_by_namespace";
+  }
+
+  // Queries a list of PendingProofByNamespace items.
+  rpc PendingProofByNamespace(QueryPendingProofByNamespaceRequest) returns (QueryPendingProofByNamespaceResponse) {
+    option (google.api.http).get = "/fiamma/zkpverify/pending_proof_by_namespace";
+  }
+
 }
 // QueryParamsRequest is request type for the Query/Params RPC method.
 message QueryParamsRequest {}
@@ -101,4 +112,29 @@ message QueryBitVMChallengeDataRequest {
 // method.
 message QueryBitVMChallengeDataResponse {
   fiamma.zkpverify.BitVMChallengeData bitvm_challenge_data = 1;
+}
+
+
+// QueryVerifyResultsByNamespaceRequest is the request type for the Query/VerifyResultsByNamespace RPC method.
+message QueryVerifyResultsByNamespaceRequest {
+  string namespace = 1;
+  cosmos.base.query.v1beta1.PageRequest pagination = 2;
+}
+
+// QueryVerifyResultsByNamespaceResponse is the response type for the Query/VerifyResultsByNamespace RPC method.
+message QueryVerifyResultsByNamespaceResponse {
+  repeated VerifyResult verify_results = 1;
+  cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
+// QueryPendingProofByNamespaceRequest is request type for the Query/PendingProofByNamespace RPC method.
+message QueryPendingProofByNamespaceRequest {
+  string namespace = 1;
+  cosmos.base.query.v1beta1.PageRequest pagination = 2;
+}
+
+// QueryPendingProofByNamespaceResponse is response type for the Query/PendingProofByNamespace RPC method.
+message QueryPendingProofByNamespaceResponse {
+  repeated fiamma.zkpverify.VerifyResult pending_proofs = 1;
+  cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }
