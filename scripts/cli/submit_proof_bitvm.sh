@@ -27,6 +27,6 @@ fiammad tx zkpverify submit-proof \
   --keyring-backend test \
   "ZULU" \
   $PROOF_SYSTEM \
-  $NEW_PROOF \
-	$NEW_PUBLIC_INPUT \
-	$NEW_VK
+  $PROOF_FILE \
+	$PUBLIC_INPUT_FILE \
+	$VK_FILE
