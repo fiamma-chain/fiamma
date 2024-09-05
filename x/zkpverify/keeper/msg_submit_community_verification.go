@@ -16,16 +16,29 @@ const (
 
 func (k msgServer) SubmitCommunityVerification(goCtx context.Context, msg *types.MsgSubmitCommunityVerification) (*types.MsgSubmitCommunityVerificationResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
+
+	// check if the proof id is valid
+	if len(msg.ProofId) == 0 {
+		return nil, types.ErrInvalidProofId
+	}
+
 	proofId, err := hex.DecodeString(msg.ProofId)
 	if err != nil {
 		k.Logger().Info("Error decoding proof id:", "error", err)
 		return nil, types.ErrInvalidProofId
 	}
 
-	verifyResult, found := k.GetPendingProof(ctx, proofId[:])
+	verifyResult, found := k.GetVerifyResult(ctx, proofId[:])
 	if !found {
 		k.Logger().Info("Error finding proof id:", "error", msg.ProofId)
 		return nil, types.ErrGetProofId
+	}
+
+	// Check if the proof is still pending
+	if verifyResult.Status != types.VerificationStatus_INITIAL_VALIDATION &&
+		verifyResult.Status != types.VerificationStatus_COMMUNITY_VALIDATION {
+		k.Logger().Info("Proof is not in pending status:", "proofId", msg.ProofId, "status", verifyResult.Status)
+		return nil, types.ErrProofNotPending
 	}
 
 	if verifyResult.Result != msg.VerifyResult {
@@ -36,10 +49,9 @@ func (k msgServer) SubmitCommunityVerification(goCtx context.Context, msg *types
 	verifyResult.CommunityVerificationCount++
 	if verifyResult.CommunityVerificationCount < VerificationCountLimit {
 		verifyResult.Status = types.VerificationStatus_COMMUNITY_VALIDATION
-		k.SetPendingProof(ctx, proofId, verifyResult)
 	} else {
 		verifyResult.Status = types.VerificationStatus_DEFINITIVE_VALIDATION
-		k.DeletePendingProof(ctx, proofId)
+		k.RemovePendingProofIndex(ctx, proofId)
 	}
 	k.SetVerifyResult(ctx, proofId, verifyResult)
 	k.Logger().Info("Proof verification status for community:", "status", verifyResult.Status)

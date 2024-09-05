@@ -35,6 +35,7 @@ message ProofData {
   bytes proof = 2;
   bytes public_input = 3;
   bytes vk = 4;
+  string namespace = 5;
 }
 
 // VerifyResult is the data structure for the proof verification result
@@ -46,6 +47,7 @@ message VerifyResult {
   bool result = 5;
   VerificationStatus status = 6;
   uint64 community_verification_count = 7;
+  string namespace = 8;
 }
 
 

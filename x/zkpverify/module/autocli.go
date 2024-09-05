@@ -23,6 +23,12 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					Short:          "Query pending-proof",
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{},
 				},
+				{
+					RpcMethod:      "PendingProofByNamespace",
+					Use:            "pending-proof-by-namespace [namespace]",
+					Short:          "Query pending-proof by namespace",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "namespace"}},
+				},
 
 				{
 					RpcMethod:      "ProofData",
@@ -36,6 +42,13 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					Use:            "get-verify-result [proof_id]",
 					Short:          "Query Proof verified result by proof_id",
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "proof_id"}},
+				},
+
+				{
+					RpcMethod:      "VerifyResultsByNamespace",
+					Use:            "get-verify-results-by-namespace [namespace]",
+					Short:          "Query Proof verified results by namespace",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "namespace"}},
 				},
 
 				{
@@ -58,9 +71,9 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 				},
 				{
 					RpcMethod:      "SubmitProof",
-					Use:            "submit-proof [proof_system] [proof] [public_input] [vk]",
+					Use:            "submit-proof [namespace] [proof_system] [proof] [public_input] [vk]",
 					Short:          "Send a zkp proof verify tx" + "\n" + "Currently supported proof systems: " + "[PLONK_BN254, PLONK_BLS12_381, GROTH16_BN254, GROTH16_BN254_BITVM, SP1]",
-					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "proof_system"}, {ProtoField: "proof"}, {ProtoField: "public_input"}, {ProtoField: "vk"}},
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "namespace"}, {ProtoField: "proof_system"}, {ProtoField: "proof"}, {ProtoField: "public_input"}, {ProtoField: "vk"}},
 				},
 				{
 					RpcMethod:      "SubmitCommunityVerification",

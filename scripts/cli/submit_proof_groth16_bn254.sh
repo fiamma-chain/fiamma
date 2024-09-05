@@ -20,6 +20,7 @@ fiammad tx zkpverify submit-proof \
   --gas $GAS --fees $FEES \
   --node $NODE \
   --keyring-backend test \
+  "ZULU" \
   "GROTH16_BN254" \
   $(cat ../../prover_examples/gnark_groth16/example/proof) \
 	$(cat ../../prover_examples/gnark_groth16/example/public_input) \

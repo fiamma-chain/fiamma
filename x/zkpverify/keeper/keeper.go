@@ -10,7 +10,6 @@ import (
 	"github.com/cosmos/cosmos-sdk/codec"
 	"github.com/cosmos/cosmos-sdk/runtime"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/cosmos/cosmos-sdk/types/query"
 
 	"fiamma/nubitda"
 	"fiamma/x/zkpverify/types"
@@ -68,14 +67,14 @@ func (k Keeper) Logger() log.Logger {
 
 // SetVerifyResult stores proof verification information
 func (k Keeper) SetVerifyResult(ctx sdk.Context, proofId []byte, verifyResult types.VerifyResult) {
-	store := k.verifyResultStore(ctx)
+	store := k.VerifyResultStore(ctx)
 	bz := k.cdc.MustMarshal(&verifyResult)
 	store.Set(proofId, bz)
 }
 
 // GetVerifyResult retrieves proof verification information
-func (k Keeper) GetVerifyResult(ctx sdk.Context, proofId []byte) (types.VerifyResult, bool) {
-	store := k.verifyResultStore(ctx)
+func (k Keeper) GetVerifyResult(ctx context.Context, proofId []byte) (types.VerifyResult, bool) {
+	store := k.VerifyResultStore(ctx)
 	bz := store.Get(proofId)
 	if bz == nil {
 		return types.VerifyResult{}, false
@@ -86,14 +85,14 @@ func (k Keeper) GetVerifyResult(ctx sdk.Context, proofId []byte) (types.VerifyRe
 }
 
 // SetProofData stores proof information
-func (k Keeper) SetProofData(ctx sdk.Context, proofId []byte, proofData types.ProofData) {
+func (k Keeper) SetProofData(ctx context.Context, proofId []byte, proofData types.ProofData) {
 	store := k.proofDataStore(ctx)
 	bz := k.cdc.MustMarshal(&proofData)
 	store.Set(proofId, bz)
 }
 
 // GetProofData retrieves proof information
-func (k Keeper) GetProofData(ctx sdk.Context, proofId []byte) (types.ProofData, bool) {
+func (k Keeper) GetProofData(ctx context.Context, proofId []byte) (types.ProofData, bool) {
 	store := k.proofDataStore(ctx)
 	bz := store.Get(proofId)
 	if bz == nil {
@@ -105,15 +104,15 @@ func (k Keeper) GetProofData(ctx sdk.Context, proofId []byte) (types.ProofData, 
 }
 
 // SetBitVMChallengeData stores witness data
-func (k Keeper) SetBitVMChallengeData(ctx sdk.Context, proofId []byte, challengeData types.BitVMChallengeData) {
-	store := k.BitVMChallengeDataStore(ctx)
+func (k Keeper) SetBitVMChallengeData(ctx context.Context, proofId []byte, challengeData types.BitVMChallengeData) {
+	store := k.bitVMChallengeDataStore(ctx)
 	bz := k.cdc.MustMarshal(&challengeData)
 	store.Set(proofId, bz)
 }
 
 // GetBitVMChallengeData retrieves witness data from the chain
-func (k Keeper) GetBitVMChallengeData(ctx sdk.Context, proofId []byte) (types.BitVMChallengeData, bool) {
-	store := k.BitVMChallengeDataStore(ctx)
+func (k Keeper) GetBitVMChallengeData(ctx context.Context, proofId []byte) (types.BitVMChallengeData, bool) {
+	store := k.bitVMChallengeDataStore(ctx)
 	bz := store.Get(proofId)
 	if bz == nil {
 		return types.BitVMChallengeData{}, false
@@ -123,47 +122,22 @@ func (k Keeper) GetBitVMChallengeData(ctx sdk.Context, proofId []byte) (types.Bi
 	return challengeData, true
 }
 
-// SetPendingProof stores pending proof verification information
-func (k Keeper) SetPendingProof(ctx sdk.Context, proofId []byte, verifyResult types.VerifyResult) {
-	store := k.pendingProofsStore(ctx)
-	bz := k.cdc.MustMarshal(&verifyResult)
-	store.Set(proofId, bz)
+// IsPendingProof checks if a proof ID is in the pending proofs index
+func (k Keeper) IsPendingProof(ctx context.Context, proofId []byte) bool {
+	store := k.PendingProofsIndexStore(ctx)
+	return store.Has(proofId)
 }
 
-// GetPendingProof retrieves pending proof verification information
-func (k Keeper) GetPendingProof(ctx sdk.Context, proofId []byte) (types.VerifyResult, bool) {
-	store := k.pendingProofsStore(ctx)
-	bz := store.Get(proofId)
-	if bz == nil {
-		return types.VerifyResult{}, false
-	}
-	var verifyResult types.VerifyResult
-	k.cdc.MustUnmarshal(bz, &verifyResult)
-	return verifyResult, true
+// AddPendingProofIndex adds a proof ID to the pending proofs index
+func (k Keeper) AddPendingProofIndex(ctx context.Context, proofId []byte) {
+	store := k.PendingProofsIndexStore(ctx)
+	store.Set(proofId, []byte{1}) // We only need to store the key, value can be a dummy byte
 }
 
-// DeletePendingProof deletes pending proof verification information
-func (k Keeper) DeletePendingProof(ctx sdk.Context, proofId []byte) {
-	store := k.pendingProofsStore(ctx)
+// RemovePendingProofIndex removes a proof ID from the pending proofs index
+func (k Keeper) RemovePendingProofIndex(ctx context.Context, proofId []byte) {
+	store := k.PendingProofsIndexStore(ctx)
 	store.Delete(proofId)
-}
-
-func (k Keeper) GetPendingProofs(ctx context.Context, req *types.QueryPendingProofRequest) (*types.QueryPendingProofResponse, error) {
-	store := k.pendingProofsStore(ctx)
-	var verifyResults []*types.VerifyResult
-	pageRes, err := query.Paginate(store, req.Pagination, func(key []byte, value []byte) error {
-		var verifyResult types.VerifyResult
-		if err := k.cdc.Unmarshal(value, &verifyResult); err != nil {
-			return err
-		}
-		verifyResults = append(verifyResults, &verifyResult)
-		return nil
-	})
-	if err != nil {
-		return nil, err
-	}
-
-	return &types.QueryPendingProofResponse{PendingProofs: verifyResults, Pagination: pageRes}, nil
 }
 
 func (k Keeper) SetBlockProposer(ctx context.Context, height int64, proposer string) {
@@ -182,22 +156,23 @@ func (k Keeper) proofDataStore(ctx context.Context) prefix.Store {
 	return prefix.NewStore(storeAdapter, types.ProofDataKey)
 }
 
-func (k Keeper) verifyResultStore(ctx context.Context) prefix.Store {
+func (k Keeper) VerifyResultStore(ctx context.Context) prefix.Store {
 	storeAdapter := runtime.KVStoreAdapter(k.storeService.OpenKVStore(ctx))
 	return prefix.NewStore(storeAdapter, types.VerifyResultKey)
 }
 
-func (k Keeper) BitVMChallengeDataStore(ctx context.Context) prefix.Store {
+func (k Keeper) bitVMChallengeDataStore(ctx context.Context) prefix.Store {
 	storeAdapter := runtime.KVStoreAdapter(k.storeService.OpenKVStore(ctx))
 	return prefix.NewStore(storeAdapter, types.BitVMChallengeDataKey)
-}
-
-func (k Keeper) pendingProofsStore(ctx context.Context) prefix.Store {
-	storeAdapter := runtime.KVStoreAdapter(k.storeService.OpenKVStore(ctx))
-	return prefix.NewStore(storeAdapter, types.PendingProofsKey)
 }
 
 func (k Keeper) blockProposerStore(ctx context.Context) prefix.Store {
 	storeAdapter := runtime.KVStoreAdapter(k.storeService.OpenKVStore(ctx))
 	return prefix.NewStore(storeAdapter, types.BlockProposerKey)
+}
+
+// PendingProofsIndexStore returns a prefix store for the pending proofs index
+func (k Keeper) PendingProofsIndexStore(ctx context.Context) prefix.Store {
+	storeAdapter := runtime.KVStoreAdapter(k.storeService.OpenKVStore(ctx))
+	return prefix.NewStore(storeAdapter, types.PendingProofsIndexKey)
 }

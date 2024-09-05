@@ -16,6 +16,7 @@ import (
 // GetProofId returns the proof id
 func (k Keeper) GetProofId(proofData types.ProofData) ([32]byte, error) {
 	var buf bytes.Buffer
+	buf.Write([]byte(proofData.Namespace))
 	buf.Write([]byte(proofData.ProofSystem.String()))
 	buf.Write(proofData.Proof)
 	buf.Write(proofData.PublicInput)
