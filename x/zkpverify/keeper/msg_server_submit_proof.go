@@ -50,7 +50,9 @@ func (k msgServer) SubmitProof(goCtx context.Context, msg *types.MsgSubmitProof)
 
 	// store witness if the proof system is BitVM
 	if proofData.ProofSystem == types.ProofSystem_GROTH16_BN254_BITVM {
-		if proofIdStr == "fe98dcdcfb929e012cd8000dd1ad2b42a36f603d37fdd83e03938a9ab3af2363" {
+		// TODO: remove this
+		// This is a buggy proofId for testing the bitvm challenge process
+		if proofIdStr == "d14058dd7a41147beb577014cb2a356d52500f300c35b5f5ae8da89e47c4ec59" {
 			result = false
 		}
 		bitvmChallengeData := types.BitVMChallengeData{
