@@ -33,6 +33,11 @@ ACCOUNT=$(jq -r '.account.address' account_info.json)
 ACCOUNT_NUMBER=$(jq -r '.account.account_number' account_info.json)
 SEQUENCE=$(jq -r '.account.sequence' account_info.json)
 
+: ${PROOF_FILE:=../../prover_examples/bitvm/proof.bitvm}
+: ${PUBLIC_INPUT_FILE:=../../prover_examples/bitvm/public_input.bitvm}
+: ${VK_FILE:=../../prover_examples/bitvm/vk.bitvm}
+: ${PROOF_SYSTEM:="GROTH16_BN254_BITVM"}
+
 rm account_info.json
 echo "Account: $ACCOUNT"
 echo "Account Number: $ACCOUNT_NUMBER"
@@ -51,9 +56,9 @@ do
     --node $NODE_RPC \
     --yes \
     "Fiamma" \
-    PLONK_BN254 \
-    $(cat ../../prover_examples/gnark_plonk/example/proof) \
-	  $(cat ../../prover_examples/gnark_plonk/example/public_input) \
-	  $(cat ../../prover_examples/gnark_plonk/example/vk)
+    $PROOF_SYSTEM \
+    $PROOF_FILE \
+    $PUBLIC_INPUT_FILE \
+    $VK_FILE
   let SEQUENCE++
 done

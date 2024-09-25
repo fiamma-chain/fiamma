@@ -1,8 +1,6 @@
 syntax = "proto3";
 package fiamma.zkpverify;
 
-import "gogoproto/gogo.proto";
-
 option go_package = "fiamma/x/zkpverify/types";
 
 // VerificationStatus is the verification status enum for the proof verification
@@ -22,10 +20,7 @@ enum DataLocation {
 // ProofSystem is the proof system enum for the proof verification
 enum ProofSystem {
   GROTH16_BN254_BITVM = 0; 
-  PLONK_BN254 = 1;
-  PLONK_BLS12_381 = 2; 
-  GROTH16_BN254 = 3; 
-  SP1 = 4; 
+  FFPLONK_BN254_BITVM = 1;
 }
 
 

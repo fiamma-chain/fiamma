@@ -13,13 +13,6 @@ import (
 */
 import "C"
 
-func VerifySp1Proof(proofBuffer []byte, proofLen uint32, elfBuffer []byte, elfLen uint32) bool {
-	proofPtr := (*C.uchar)(unsafe.Pointer(&proofBuffer[0]))
-	elfPtr := (*C.uchar)(unsafe.Pointer(&elfBuffer[0]))
-
-	return (bool)(C.verify_sp1_proof_ffi(proofPtr, (C.uint32_t)(proofLen), elfPtr, (C.uint32_t)(elfLen)))
-}
-
 func VerifyBitvmProof(vkBuffer []byte, vkLen uint32, proofBuffer []byte, proofLen uint32, publicInputBuffer []byte, publicInputLen uint32) (bool, []byte) {
 	vkPtr := (*C.uchar)(unsafe.Pointer(&vkBuffer[0]))
 	proofPtr := (*C.uchar)(unsafe.Pointer(&proofBuffer[0]))
