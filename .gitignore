@@ -32,3 +32,4 @@ build
 *.code-workspace
 scripts/testnet-nodes/*
 scripts/server-setup/*
+scripts/testnet-nodes.tar.gz
