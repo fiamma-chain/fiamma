@@ -15,6 +15,10 @@ type StakingKeeper interface {
 	// Methods imported from account should be defined here
 }
 
+type BitvmstakerKeeper interface {
+	IsVKRegistered(ctx context.Context, vk []byte) bool
+}
+
 // AccountKeeper defines the expected interface for the Account module.
 type AccountKeeper interface {
 	GetAccount(context.Context, sdk.AccAddress) sdk.AccountI // only used for simulation

@@ -16,6 +16,7 @@ import (
 func TestSubmitProof(t *testing.T) {
 	k, ctx := keepertest.ZkpVerifyKeeper(t)
 	srv := keeper.NewMsgServerImpl(k)
+
 	wctx := ctx.WithContext(context.Background())
 
 	tests := []struct {
@@ -31,7 +32,7 @@ func TestSubmitProof(t *testing.T) {
 				Proof:       []byte("valid proof"),
 				ProofSystem: "GROTH16_BN254_BITVM",
 				PublicInput: []byte("valid public input"),
-				Vk:          []byte("valid vk"),
+				Vk:          []byte("valid_vk"),
 				Namespace:   "test",
 			},
 			want:    &types.MsgSubmitProofResponse{},
@@ -97,7 +98,7 @@ func TestSubmitProofConcurrency(t *testing.T) {
 		Proof:       []byte("valid proof"),
 		ProofSystem: "GROTH16_BN254_BITVM",
 		PublicInput: []byte("valid public input"),
-		Vk:          []byte("valid vk"),
+		Vk:          []byte("valid_vk"),
 		Namespace:   "test",
 	}
 

@@ -29,6 +29,8 @@ type (
 
 		// Nubit Data Availability
 		nubitDA *nubitda.NubitDA
+
+		bitvmstakerKeeper types.BitvmstakerKeeper
 	}
 )
 
@@ -40,18 +42,20 @@ func NewKeeper(
 
 	stakingKeeper types.StakingKeeper,
 	nubitDA *nubitda.NubitDA,
+	bitvmstakerKeeper types.BitvmstakerKeeper,
 ) Keeper {
 	if _, err := sdk.AccAddressFromBech32(authority); err != nil {
 		panic(fmt.Sprintf("invalid authority address: %s", authority))
 	}
 
 	return Keeper{
-		cdc:           cdc,
-		storeService:  storeService,
-		authority:     authority,
-		logger:        logger,
-		nubitDA:       nubitDA,
-		stakingKeeper: stakingKeeper,
+		cdc:               cdc,
+		storeService:      storeService,
+		authority:         authority,
+		logger:            logger,
+		nubitDA:           nubitDA,
+		stakingKeeper:     stakingKeeper,
+		bitvmstakerKeeper: bitvmstakerKeeper,
 	}
 }
 

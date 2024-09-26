@@ -181,10 +181,11 @@ type ModuleInputs struct {
 	Config       *modulev1.Module
 	Logger       log.Logger
 
-	AccountKeeper types.AccountKeeper
-	BankKeeper    types.BankKeeper
-	StakingKeeper types.StakingKeeper
-	NubitDA       *nubitda.NubitDA
+	AccountKeeper     types.AccountKeeper
+	BankKeeper        types.BankKeeper
+	StakingKeeper     types.StakingKeeper
+	NubitDA           *nubitda.NubitDA
+	BitvmstakerKeeper types.BitvmstakerKeeper
 }
 
 type ModuleOutputs struct {
@@ -207,6 +208,7 @@ func ProvideModule(in ModuleInputs) ModuleOutputs {
 		authority.String(),
 		in.StakingKeeper,
 		in.NubitDA,
+		in.BitvmstakerKeeper,
 	)
 	m := NewAppModule(
 		in.Cdc,

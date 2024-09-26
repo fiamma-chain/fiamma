@@ -148,13 +148,13 @@ type App struct {
 	ScopedICAControllerKeeper capabilitykeeper.ScopedKeeper
 	ScopedICAHostKeeper       capabilitykeeper.ScopedKeeper
 
+	BitvmstakerKeeper bitvmstakermodulekeeper.Keeper
+
 	ZkpVerifyKeeper zkpverifymodulekeeper.Keeper
 
 	// CosmWasm
 	WasmKeeper       wasmkeeper.Keeper
 	ScopedWasmKeeper capabilitykeeper.ScopedKeeper
-
-	BitvmstakerKeeper bitvmstakermodulekeeper.Keeper
 
 	BabylonKeeper *bbnkeeper.Keeper
 	// this line is used by starport scaffolding # stargate/app/keeperDeclaration
@@ -307,8 +307,8 @@ func New(
 		&app.NFTKeeper,
 		&app.GroupKeeper,
 		&app.CircuitBreakerKeeper,
-		&app.ZkpVerifyKeeper,
 		&app.BitvmstakerKeeper,
+		&app.ZkpVerifyKeeper,
 		// this line is used by starport scaffolding # stargate/app/keeperDefinition
 	); err != nil {
 		panic(err)

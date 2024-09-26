@@ -99,9 +99,9 @@ var (
 		consensustypes.ModuleName,
 		circuittypes.ModuleName,
 		// chain modules
+		bitvmstakermoduletypes.ModuleName,
 		zkpverifymoduletypes.ModuleName,
 		wasmtypes.ModuleName,
-		bitvmstakermoduletypes.ModuleName,
 		bbntypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/initGenesis
 	}
@@ -127,9 +127,9 @@ var (
 		icatypes.ModuleName,
 		ibcfeetypes.ModuleName,
 		// chain modules
-		zkpverifymoduletypes.ModuleName,
 		wasmtypes.ModuleName,
 		bitvmstakermoduletypes.ModuleName,
+		zkpverifymoduletypes.ModuleName,
 		bbntypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/beginBlockers
 	}
@@ -149,9 +149,9 @@ var (
 		icatypes.ModuleName,
 		ibcfeetypes.ModuleName,
 		// chain modules
+		bitvmstakermoduletypes.ModuleName,
 		zkpverifymoduletypes.ModuleName,
 		wasmtypes.ModuleName,
-		bitvmstakermoduletypes.ModuleName,
 		bbntypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/endBlockers
 	}
@@ -311,13 +311,14 @@ var (
 				Config: appconfig.WrapAny(&circuitmodulev1.Module{}),
 			},
 			{
-				Name:   zkpverifymoduletypes.ModuleName,
-				Config: appconfig.WrapAny(&zkpverifymodulev1.Module{}),
-			},
-			{
 				Name:   bitvmstakermoduletypes.ModuleName,
 				Config: appconfig.WrapAny(&bitvmstakermodulev1.Module{}),
 			},
+			{
+				Name:   zkpverifymoduletypes.ModuleName,
+				Config: appconfig.WrapAny(&zkpverifymodulev1.Module{}),
+			},
+
 			// this line is used by starport scaffolding # stargate/app/moduleConfig
 		},
 	})
