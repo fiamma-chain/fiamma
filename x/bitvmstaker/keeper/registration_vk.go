@@ -2,6 +2,7 @@ package keeper
 
 import (
 	"context"
+
 	"fiamma/x/bitvmstaker/types"
 
 	"cosmossdk.io/store/prefix"
@@ -38,7 +39,6 @@ func (k Keeper) GetRegisteredVKList(ctx context.Context, pagination *query.PageR
 		vkList = append(vkList, key)
 		return nil
 	})
-
 	if err != nil {
 		return nil, nil, err
 	}

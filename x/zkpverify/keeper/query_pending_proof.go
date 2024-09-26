@@ -33,7 +33,6 @@ func (k Keeper) PendingProof(goCtx context.Context, req *types.QueryPendingProof
 		return nil, err
 	}
 	return &types.QueryPendingProofResponse{PendingProofs: verifyResults, Pagination: pageRes}, nil
-
 }
 
 func (k Keeper) PendingProofByNamespace(goCtx context.Context, req *types.QueryPendingProofByNamespaceRequest) (*types.QueryPendingProofByNamespaceResponse, error) {

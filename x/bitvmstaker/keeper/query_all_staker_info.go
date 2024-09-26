@@ -18,7 +18,6 @@ func (k Keeper) AllStakerInfo(goCtx context.Context, req *types.QueryAllStakerIn
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
 	stakerInfos, pageRes, err := k.GetAllStakerInfo(ctx, req.Pagination)
-
 	if err != nil {
 		return nil, status.Error(codes.Internal, err.Error())
 	}

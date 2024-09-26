@@ -8,7 +8,6 @@ var _ sdk.Msg = &MsgSubmitProof{}
 
 // ValidateBasic does a sanity check on the provided data.
 func (msg *MsgSubmitProof) ValidateBasic() error {
-
 	// check if the namespace is valid
 	if len(msg.Namespace) == 0 {
 		return ErrInvalidNamespace

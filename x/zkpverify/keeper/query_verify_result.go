@@ -54,7 +54,6 @@ func (k Keeper) VerifyResultsByNamespace(goCtx context.Context, req *types.Query
 
 		return nil
 	})
-
 	if err != nil {
 		return nil, status.Error(codes.Internal, err.Error())
 	}
