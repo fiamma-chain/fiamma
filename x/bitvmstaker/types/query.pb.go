@@ -290,6 +290,102 @@ func (m *QueryCommitteeAddressResponse) GetCommitteeAddress() string {
 	return ""
 }
 
+type QueryRegisteredVKListRequest struct {
+	Pagination *query.PageRequest `protobuf:"bytes,1,opt,name=pagination,proto3" json:"pagination,omitempty"`
+}
+
+func (m *QueryRegisteredVKListRequest) Reset()         { *m = QueryRegisteredVKListRequest{} }
+func (m *QueryRegisteredVKListRequest) String() string { return proto.CompactTextString(m) }
+func (*QueryRegisteredVKListRequest) ProtoMessage()    {}
+func (*QueryRegisteredVKListRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_684fd52f1c274172, []int{6}
+}
+func (m *QueryRegisteredVKListRequest) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *QueryRegisteredVKListRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_QueryRegisteredVKListRequest.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *QueryRegisteredVKListRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryRegisteredVKListRequest.Merge(m, src)
+}
+func (m *QueryRegisteredVKListRequest) XXX_Size() int {
+	return m.Size()
+}
+func (m *QueryRegisteredVKListRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryRegisteredVKListRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QueryRegisteredVKListRequest proto.InternalMessageInfo
+
+func (m *QueryRegisteredVKListRequest) GetPagination() *query.PageRequest {
+	if m != nil {
+		return m.Pagination
+	}
+	return nil
+}
+
+type QueryRegisteredVKListResponse struct {
+	RegisteredVkList [][]byte            `protobuf:"bytes,1,rep,name=registered_vk_list,json=registeredVkList,proto3" json:"registered_vk_list,omitempty"`
+	Pagination       *query.PageResponse `protobuf:"bytes,2,opt,name=pagination,proto3" json:"pagination,omitempty"`
+}
+
+func (m *QueryRegisteredVKListResponse) Reset()         { *m = QueryRegisteredVKListResponse{} }
+func (m *QueryRegisteredVKListResponse) String() string { return proto.CompactTextString(m) }
+func (*QueryRegisteredVKListResponse) ProtoMessage()    {}
+func (*QueryRegisteredVKListResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_684fd52f1c274172, []int{7}
+}
+func (m *QueryRegisteredVKListResponse) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *QueryRegisteredVKListResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_QueryRegisteredVKListResponse.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *QueryRegisteredVKListResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryRegisteredVKListResponse.Merge(m, src)
+}
+func (m *QueryRegisteredVKListResponse) XXX_Size() int {
+	return m.Size()
+}
+func (m *QueryRegisteredVKListResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryRegisteredVKListResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QueryRegisteredVKListResponse proto.InternalMessageInfo
+
+func (m *QueryRegisteredVKListResponse) GetRegisteredVkList() [][]byte {
+	if m != nil {
+		return m.RegisteredVkList
+	}
+	return nil
+}
+
+func (m *QueryRegisteredVKListResponse) GetPagination() *query.PageResponse {
+	if m != nil {
+		return m.Pagination
+	}
+	return nil
+}
+
 func init() {
 	proto.RegisterType((*QueryParamsRequest)(nil), "fiamma.bitvmstaker.QueryParamsRequest")
 	proto.RegisterType((*QueryParamsResponse)(nil), "fiamma.bitvmstaker.QueryParamsResponse")
@@ -297,45 +393,52 @@ func init() {
 	proto.RegisterType((*QueryAllStakerInfoResponse)(nil), "fiamma.bitvmstaker.QueryAllStakerInfoResponse")
 	proto.RegisterType((*QueryCommitteeAddressRequest)(nil), "fiamma.bitvmstaker.QueryCommitteeAddressRequest")
 	proto.RegisterType((*QueryCommitteeAddressResponse)(nil), "fiamma.bitvmstaker.QueryCommitteeAddressResponse")
+	proto.RegisterType((*QueryRegisteredVKListRequest)(nil), "fiamma.bitvmstaker.QueryRegisteredVKListRequest")
+	proto.RegisterType((*QueryRegisteredVKListResponse)(nil), "fiamma.bitvmstaker.QueryRegisteredVKListResponse")
 }
 
 func init() { proto.RegisterFile("fiamma/bitvmstaker/query.proto", fileDescriptor_684fd52f1c274172) }
 
 var fileDescriptor_684fd52f1c274172 = []byte{
-	// 527 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x94, 0x94, 0x41, 0x6b, 0x14, 0x31,
-	0x14, 0xc7, 0x37, 0xad, 0x2e, 0x34, 0xa5, 0x58, 0x63, 0x0f, 0x35, 0xac, 0x69, 0x19, 0xb4, 0x5b,
-	0x17, 0x9a, 0xb8, 0xab, 0x57, 0x0f, 0x5d, 0x41, 0x11, 0x3d, 0xd4, 0xd1, 0x93, 0x97, 0x25, 0xbb,
-	0xcd, 0x0e, 0x83, 0x33, 0x93, 0xe9, 0x24, 0x2d, 0xf6, 0xe0, 0xc5, 0x4f, 0x20, 0xf8, 0x01, 0xbc,
-	0x89, 0x47, 0xc1, 0x2f, 0xd1, 0x63, 0xc5, 0x8b, 0x27, 0x91, 0x5d, 0xc1, 0xaf, 0x21, 0x9b, 0xc4,
-	0x76, 0x67, 0x37, 0x43, 0xf5, 0x32, 0x84, 0xbc, 0xf7, 0xff, 0xbf, 0xdf, 0x7b, 0x2f, 0x0c, 0x24,
-	0xc3, 0x98, 0xa7, 0x29, 0x67, 0xfd, 0x58, 0x1f, 0xa5, 0x4a, 0xf3, 0x57, 0xa2, 0x60, 0x07, 0x87,
-	0xa2, 0x38, 0xa6, 0x79, 0x21, 0xb5, 0x44, 0xc8, 0xc6, 0xe9, 0x54, 0x1c, 0x5f, 0xe5, 0x69, 0x9c,
-	0x49, 0x66, 0xbe, 0x36, 0x0d, 0xaf, 0x45, 0x32, 0x92, 0xe6, 0xc8, 0x26, 0x27, 0x77, 0xdb, 0x88,
-	0xa4, 0x8c, 0x12, 0xc1, 0x78, 0x1e, 0x33, 0x9e, 0x65, 0x52, 0x73, 0x1d, 0xcb, 0x4c, 0xb9, 0x68,
-	0x6b, 0x20, 0x55, 0x2a, 0x15, 0xeb, 0x73, 0x25, 0x6c, 0x4d, 0x76, 0xd4, 0xee, 0x0b, 0xcd, 0xdb,
-	0x2c, 0xe7, 0x51, 0x9c, 0x99, 0x64, 0x97, 0xbb, 0xe1, 0xc1, 0xcc, 0x79, 0xc1, 0xd3, 0xbf, 0x66,
-	0x37, 0x3d, 0x09, 0x53, 0x67, 0x9b, 0x15, 0xac, 0x41, 0xf4, 0x6c, 0x52, 0x68, 0xcf, 0x48, 0x43,
-	0x71, 0x70, 0x28, 0x94, 0x0e, 0x5e, 0xc0, 0x6b, 0xa5, 0x5b, 0x95, 0xcb, 0x4c, 0x09, 0x74, 0x1f,
-	0xd6, 0x6d, 0x89, 0x75, 0xb0, 0x09, 0xb6, 0x97, 0x3b, 0x98, 0xce, 0xcf, 0x82, 0x5a, 0x4d, 0x77,
-	0xe9, 0xe4, 0xc7, 0x46, 0xed, 0xd3, 0xef, 0xcf, 0x2d, 0x10, 0x3a, 0x51, 0x30, 0x80, 0xd7, 0x8d,
-	0xeb, 0x6e, 0x92, 0x3c, 0x37, 0xb9, 0x8f, 0xb3, 0xa1, 0x74, 0x25, 0xd1, 0x43, 0x08, 0xcf, 0x7b,
-	0x74, 0xfe, 0x5b, 0xd4, 0x0e, 0x84, 0x4e, 0x06, 0x42, 0xed, 0x12, 0xdc, 0x40, 0xe8, 0x1e, 0x8f,
-	0x84, 0xd3, 0x86, 0x53, 0xca, 0xe0, 0x0b, 0x80, 0xd8, 0x57, 0xc5, 0xb5, 0xf0, 0x14, 0x5e, 0xe1,
-	0x49, 0xd2, 0xb3, 0xac, 0xbd, 0x38, 0x1b, 0xca, 0x75, 0xb0, 0xb9, 0xb8, 0xbd, 0xdc, 0x21, 0xbe,
-	0x5e, 0xce, 0x0d, 0xba, 0x97, 0x26, 0xfd, 0x84, 0x2b, 0x7c, 0xda, 0x15, 0x3d, 0x2a, 0x41, 0x2f,
-	0x18, 0xe8, 0xe6, 0x85, 0xd0, 0x16, 0xa5, 0x44, 0x4d, 0x60, 0xc3, 0x40, 0x3f, 0x90, 0x69, 0x1a,
-	0x6b, 0x2d, 0xc4, 0xee, 0xfe, 0x7e, 0x21, 0xd4, 0xd9, 0x42, 0x9e, 0xc0, 0x1b, 0x15, 0x71, 0xd7,
-	0x57, 0x0b, 0xae, 0x0e, 0x66, 0x62, 0x66, 0x88, 0x4b, 0xe1, 0xdc, 0x7d, 0xe7, 0xeb, 0x22, 0xbc,
-	0x6c, 0xdc, 0xd0, 0x1b, 0x58, 0xb7, 0xeb, 0x42, 0x5b, 0xbe, 0xf6, 0xe7, 0x5f, 0x06, 0x6e, 0x5e,
-	0x98, 0x67, 0x81, 0x82, 0xe0, 0xed, 0xb7, 0x5f, 0xef, 0x17, 0x1a, 0x08, 0xb3, 0xca, 0x87, 0x8a,
-	0x3e, 0x00, 0xb8, 0x52, 0x5a, 0x13, 0xda, 0xa9, 0xb4, 0xf7, 0x3d, 0x1a, 0x4c, 0xff, 0x35, 0xdd,
-	0x41, 0x31, 0x03, 0x75, 0x1b, 0x35, 0x7d, 0x50, 0x91, 0xd0, 0xbd, 0x99, 0xb7, 0x81, 0x3e, 0x02,
-	0xb8, 0x3a, 0x3b, 0x73, 0x74, 0xa7, 0xb2, 0x6a, 0xc5, 0xfa, 0x70, 0xfb, 0x3f, 0x14, 0x0e, 0x75,
-	0xc7, 0xa0, 0x36, 0xd1, 0x2d, 0x1f, 0xea, 0xd9, 0x4a, 0x7b, 0xdc, 0xca, 0xba, 0xf7, 0x4e, 0x46,
-	0x04, 0x9c, 0x8e, 0x08, 0xf8, 0x39, 0x22, 0xe0, 0xdd, 0x98, 0xd4, 0x4e, 0xc7, 0xa4, 0xf6, 0x7d,
-	0x4c, 0x6a, 0x2f, 0xb1, 0xd3, 0xbf, 0x2e, 0x39, 0xe8, 0xe3, 0x5c, 0xa8, 0x7e, 0xdd, 0xfc, 0x04,
-	0xee, 0xfe, 0x09, 0x00, 0x00, 0xff, 0xff, 0xcc, 0xa7, 0x66, 0xe8, 0xf4, 0x04, 0x00, 0x00,
+	// 608 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xac, 0x94, 0x4f, 0x6b, 0x13, 0x4f,
+	0x18, 0xc7, 0x33, 0xfd, 0xf5, 0x57, 0xe8, 0xd4, 0x62, 0x1c, 0x7b, 0xa8, 0x4b, 0xdd, 0x96, 0x45,
+	0x93, 0x18, 0xec, 0x8e, 0x89, 0x5e, 0x3d, 0x34, 0x82, 0x22, 0xed, 0xa1, 0xae, 0xd2, 0x83, 0x97,
+	0x65, 0x92, 0x4c, 0x96, 0x21, 0xbb, 0x3b, 0xdb, 0x9d, 0x69, 0xb0, 0x07, 0x2f, 0xbe, 0x02, 0x41,
+	0xf0, 0xea, 0x4d, 0x3d, 0x0a, 0xbe, 0x89, 0x1e, 0x0b, 0x5e, 0x3c, 0x89, 0x24, 0x82, 0x2f, 0xc2,
+	0x8b, 0x64, 0x66, 0xcc, 0xdf, 0xdd, 0x56, 0xa1, 0x97, 0x65, 0x98, 0xe7, 0xdf, 0xe7, 0x79, 0x9e,
+	0xef, 0x2c, 0xb4, 0x3b, 0x8c, 0x44, 0x11, 0xc1, 0x4d, 0x26, 0x7b, 0x91, 0x90, 0xa4, 0x4b, 0x53,
+	0x7c, 0x78, 0x44, 0xd3, 0x63, 0x37, 0x49, 0xb9, 0xe4, 0x08, 0x69, 0xbb, 0x3b, 0x61, 0xb7, 0xae,
+	0x90, 0x88, 0xc5, 0x1c, 0xab, 0xaf, 0x76, 0xb3, 0xd6, 0x02, 0x1e, 0x70, 0x75, 0xc4, 0xc3, 0x93,
+	0xb9, 0xdd, 0x08, 0x38, 0x0f, 0x42, 0x8a, 0x49, 0xc2, 0x30, 0x89, 0x63, 0x2e, 0x89, 0x64, 0x3c,
+	0x16, 0xc6, 0x5a, 0x6d, 0x71, 0x11, 0x71, 0x81, 0x9b, 0x44, 0x50, 0x5d, 0x13, 0xf7, 0x6a, 0x4d,
+	0x2a, 0x49, 0x0d, 0x27, 0x24, 0x60, 0xb1, 0x72, 0x36, 0xbe, 0x9b, 0x19, 0x98, 0x09, 0x49, 0x49,
+	0xf4, 0x27, 0xd9, 0x8d, 0x0c, 0x87, 0x89, 0xb3, 0xf6, 0x72, 0xd6, 0x20, 0x7a, 0x32, 0x2c, 0xb4,
+	0xaf, 0x42, 0x3d, 0x7a, 0x78, 0x44, 0x85, 0x74, 0x9e, 0xc1, 0xab, 0x53, 0xb7, 0x22, 0xe1, 0xb1,
+	0xa0, 0xe8, 0x3e, 0x5c, 0xd2, 0x25, 0xd6, 0xc1, 0x16, 0xa8, 0xac, 0xd4, 0x2d, 0x77, 0x7e, 0x16,
+	0xae, 0x8e, 0x69, 0x2c, 0x9f, 0x7c, 0xdb, 0x2c, 0x7c, 0xfc, 0xf9, 0xa9, 0x0a, 0x3c, 0x13, 0xe4,
+	0xb4, 0xe0, 0x35, 0x95, 0x75, 0x27, 0x0c, 0x9f, 0x2a, 0xdf, 0xc7, 0x71, 0x87, 0x9b, 0x92, 0xe8,
+	0x21, 0x84, 0xe3, 0x1e, 0x4d, 0xfe, 0x92, 0xab, 0x07, 0xe2, 0x0e, 0x07, 0xe2, 0xea, 0x25, 0x98,
+	0x81, 0xb8, 0xfb, 0x24, 0xa0, 0x26, 0xd6, 0x9b, 0x88, 0x74, 0x3e, 0x03, 0x68, 0x65, 0x55, 0x31,
+	0x2d, 0xec, 0xc1, 0xcb, 0x24, 0x0c, 0x7d, 0xcd, 0xea, 0xb3, 0xb8, 0xc3, 0xd7, 0xc1, 0xd6, 0x7f,
+	0x95, 0x95, 0xba, 0x9d, 0xd5, 0xcb, 0x38, 0x41, 0x63, 0x71, 0xd8, 0x8f, 0xb7, 0x4a, 0x26, 0xb3,
+	0xa2, 0x47, 0x53, 0xd0, 0x0b, 0x0a, 0xba, 0x7c, 0x2e, 0xb4, 0x46, 0x99, 0xa2, 0xb6, 0xe1, 0x86,
+	0x82, 0x7e, 0xc0, 0xa3, 0x88, 0x49, 0x49, 0xe9, 0x4e, 0xbb, 0x9d, 0x52, 0x31, 0x5a, 0xc8, 0x2e,
+	0xbc, 0x9e, 0x63, 0x37, 0x7d, 0x55, 0x61, 0xb1, 0x35, 0x63, 0x53, 0x43, 0x5c, 0xf6, 0xe6, 0xee,
+	0x9d, 0x8e, 0x29, 0xe6, 0xd1, 0x80, 0x09, 0x49, 0x53, 0xda, 0x3e, 0xd8, 0xdd, 0x63, 0x42, 0x5e,
+	0xf4, 0x2a, 0xde, 0x02, 0x43, 0x3d, 0x5f, 0xc8, 0x50, 0xdf, 0x86, 0x28, 0x1d, 0xd9, 0xfc, 0x5e,
+	0xd7, 0x0f, 0x99, 0x90, 0x6a, 0x21, 0x97, 0xbc, 0xe2, 0xd8, 0x72, 0xd0, 0x1d, 0x46, 0x5d, 0xd8,
+	0xb4, 0xeb, 0xbf, 0x16, 0xe1, 0xff, 0x0a, 0x0c, 0xbd, 0x84, 0x4b, 0x5a, 0xaf, 0xa8, 0x94, 0xb5,
+	0xff, 0xf9, 0xa7, 0x61, 0x95, 0xcf, 0xf5, 0xd3, 0x05, 0x1d, 0xe7, 0xd5, 0x97, 0x1f, 0x6f, 0x16,
+	0x36, 0x90, 0x85, 0x73, 0x5f, 0x2a, 0x7a, 0x07, 0xe0, 0xea, 0x94, 0x4e, 0xd1, 0x76, 0x6e, 0xfa,
+	0xac, 0x57, 0x63, 0xb9, 0x7f, 0xeb, 0x6e, 0xa0, 0xb0, 0x82, 0xba, 0x85, 0xca, 0x59, 0x50, 0x01,
+	0x95, 0xfe, 0xcc, 0xe3, 0x40, 0xef, 0x01, 0x2c, 0xce, 0x8a, 0x0e, 0xdd, 0xc9, 0xad, 0x9a, 0xa3,
+	0x5f, 0xab, 0xf6, 0x0f, 0x11, 0x06, 0x75, 0x5b, 0xa1, 0x96, 0xd1, 0xcd, 0x2c, 0xd4, 0x91, 0xa6,
+	0x7d, 0x62, 0x98, 0x3e, 0x00, 0x58, 0x9c, 0xd5, 0xd9, 0x19, 0xa0, 0x39, 0xda, 0x3f, 0x03, 0x34,
+	0x4f, 0xc4, 0x8e, 0xab, 0x40, 0x2b, 0xa8, 0x94, 0x05, 0x3a, 0x2f, 0xef, 0xc6, 0xbd, 0x93, 0xbe,
+	0x0d, 0x4e, 0xfb, 0x36, 0xf8, 0xde, 0xb7, 0xc1, 0xeb, 0x81, 0x5d, 0x38, 0x1d, 0xd8, 0x85, 0xaf,
+	0x03, 0xbb, 0xf0, 0xdc, 0x32, 0x09, 0x5e, 0x4c, 0xa5, 0x90, 0xc7, 0x09, 0x15, 0xcd, 0x25, 0xf5,
+	0xbf, 0xbe, 0xfb, 0x3b, 0x00, 0x00, 0xff, 0xff, 0xbe, 0x9d, 0xb6, 0xb7, 0x9f, 0x06, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -356,6 +459,8 @@ type QueryClient interface {
 	AllStakerInfo(ctx context.Context, in *QueryAllStakerInfoRequest, opts ...grpc.CallOption) (*QueryAllStakerInfoResponse, error)
 	// QueryCommitteeAddressRequest is the request type for the Query/CommitteeAddress RPC method.
 	CommitteeAddress(ctx context.Context, in *QueryCommitteeAddressRequest, opts ...grpc.CallOption) (*QueryCommitteeAddressResponse, error)
+	// QueryRegisteredVKListRequest is the request type for the Query/RegisteredVKList RPC method.
+	RegisteredVKList(ctx context.Context, in *QueryRegisteredVKListRequest, opts ...grpc.CallOption) (*QueryRegisteredVKListResponse, error)
 }
 
 type queryClient struct {
@@ -393,6 +498,15 @@ func (c *queryClient) CommitteeAddress(ctx context.Context, in *QueryCommitteeAd
 	return out, nil
 }
 
+func (c *queryClient) RegisteredVKList(ctx context.Context, in *QueryRegisteredVKListRequest, opts ...grpc.CallOption) (*QueryRegisteredVKListResponse, error) {
+	out := new(QueryRegisteredVKListResponse)
+	err := c.cc.Invoke(ctx, "/fiamma.bitvmstaker.Query/RegisteredVKList", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // QueryServer is the server API for Query service.
 type QueryServer interface {
 	// Parameters queries the parameters of the module.
@@ -401,6 +515,8 @@ type QueryServer interface {
 	AllStakerInfo(context.Context, *QueryAllStakerInfoRequest) (*QueryAllStakerInfoResponse, error)
 	// QueryCommitteeAddressRequest is the request type for the Query/CommitteeAddress RPC method.
 	CommitteeAddress(context.Context, *QueryCommitteeAddressRequest) (*QueryCommitteeAddressResponse, error)
+	// QueryRegisteredVKListRequest is the request type for the Query/RegisteredVKList RPC method.
+	RegisteredVKList(context.Context, *QueryRegisteredVKListRequest) (*QueryRegisteredVKListResponse, error)
 }
 
 // UnimplementedQueryServer can be embedded to have forward compatible implementations.
@@ -415,6 +531,9 @@ func (*UnimplementedQueryServer) AllStakerInfo(ctx context.Context, req *QueryAl
 }
 func (*UnimplementedQueryServer) CommitteeAddress(ctx context.Context, req *QueryCommitteeAddressRequest) (*QueryCommitteeAddressResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CommitteeAddress not implemented")
+}
+func (*UnimplementedQueryServer) RegisteredVKList(ctx context.Context, req *QueryRegisteredVKListRequest) (*QueryRegisteredVKListResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RegisteredVKList not implemented")
 }
 
 func RegisterQueryServer(s grpc1.Server, srv QueryServer) {
@@ -475,6 +594,24 @@ func _Query_CommitteeAddress_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Query_RegisteredVKList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryRegisteredVKListRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QueryServer).RegisteredVKList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/fiamma.bitvmstaker.Query/RegisteredVKList",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QueryServer).RegisteredVKList(ctx, req.(*QueryRegisteredVKListRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var Query_serviceDesc = _Query_serviceDesc
 var _Query_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "fiamma.bitvmstaker.Query",
@@ -491,6 +628,10 @@ var _Query_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CommitteeAddress",
 			Handler:    _Query_CommitteeAddress_Handler,
+		},
+		{
+			MethodName: "RegisteredVKList",
+			Handler:    _Query_RegisteredVKList_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
@@ -690,6 +831,85 @@ func (m *QueryCommitteeAddressResponse) MarshalToSizedBuffer(dAtA []byte) (int, 
 	return len(dAtA) - i, nil
 }
 
+func (m *QueryRegisteredVKListRequest) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *QueryRegisteredVKListRequest) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *QueryRegisteredVKListRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.Pagination != nil {
+		{
+			size, err := m.Pagination.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintQuery(dAtA, i, uint64(size))
+		}
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *QueryRegisteredVKListResponse) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *QueryRegisteredVKListResponse) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *QueryRegisteredVKListResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.Pagination != nil {
+		{
+			size, err := m.Pagination.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintQuery(dAtA, i, uint64(size))
+		}
+		i--
+		dAtA[i] = 0x12
+	}
+	if len(m.RegisteredVkList) > 0 {
+		for iNdEx := len(m.RegisteredVkList) - 1; iNdEx >= 0; iNdEx-- {
+			i -= len(m.RegisteredVkList[iNdEx])
+			copy(dAtA[i:], m.RegisteredVkList[iNdEx])
+			i = encodeVarintQuery(dAtA, i, uint64(len(m.RegisteredVkList[iNdEx])))
+			i--
+			dAtA[i] = 0xa
+		}
+	}
+	return len(dAtA) - i, nil
+}
+
 func encodeVarintQuery(dAtA []byte, offset int, v uint64) int {
 	offset -= sovQuery(v)
 	base := offset
@@ -770,6 +990,38 @@ func (m *QueryCommitteeAddressResponse) Size() (n int) {
 	_ = l
 	l = len(m.CommitteeAddress)
 	if l > 0 {
+		n += 1 + l + sovQuery(uint64(l))
+	}
+	return n
+}
+
+func (m *QueryRegisteredVKListRequest) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.Pagination != nil {
+		l = m.Pagination.Size()
+		n += 1 + l + sovQuery(uint64(l))
+	}
+	return n
+}
+
+func (m *QueryRegisteredVKListResponse) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if len(m.RegisteredVkList) > 0 {
+		for _, b := range m.RegisteredVkList {
+			l = len(b)
+			n += 1 + l + sovQuery(uint64(l))
+		}
+	}
+	if m.Pagination != nil {
+		l = m.Pagination.Size()
 		n += 1 + l + sovQuery(uint64(l))
 	}
 	return n
@@ -1230,6 +1482,210 @@ func (m *QueryCommitteeAddressResponse) Unmarshal(dAtA []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			m.CommitteeAddress = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipQuery(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *QueryRegisteredVKListRequest) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowQuery
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: QueryRegisteredVKListRequest: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: QueryRegisteredVKListRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Pagination", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.Pagination == nil {
+				m.Pagination = &query.PageRequest{}
+			}
+			if err := m.Pagination.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipQuery(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *QueryRegisteredVKListResponse) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowQuery
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: QueryRegisteredVKListResponse: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: QueryRegisteredVKListResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field RegisteredVkList", wireType)
+			}
+			var byteLen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				byteLen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if byteLen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + byteLen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.RegisteredVkList = append(m.RegisteredVkList, make([]byte, postIndex-iNdEx))
+			copy(m.RegisteredVkList[len(m.RegisteredVkList)-1], dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Pagination", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.Pagination == nil {
+				m.Pagination = &query.PageResponse{}
+			}
+			if err := m.Pagination.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex

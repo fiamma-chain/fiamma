@@ -23,6 +23,8 @@ const (
 	Msg_CreateStaker_FullMethodName           = "/fiamma.bitvmstaker.Msg/CreateStaker"
 	Msg_RemoveStaker_FullMethodName           = "/fiamma.bitvmstaker.Msg/RemoveStaker"
 	Msg_UpdateCommitteeAddress_FullMethodName = "/fiamma.bitvmstaker.Msg/UpdateCommitteeAddress"
+	Msg_RegisterVK_FullMethodName             = "/fiamma.bitvmstaker.Msg/RegisterVK"
+	Msg_RemoveVK_FullMethodName               = "/fiamma.bitvmstaker.Msg/RemoveVK"
 )
 
 // MsgClient is the client API for Msg service.
@@ -35,6 +37,8 @@ type MsgClient interface {
 	CreateStaker(ctx context.Context, in *MsgCreateStaker, opts ...grpc.CallOption) (*MsgCreateStakerResponse, error)
 	RemoveStaker(ctx context.Context, in *MsgRemoveStaker, opts ...grpc.CallOption) (*MsgRemoveStakerResponse, error)
 	UpdateCommitteeAddress(ctx context.Context, in *MsgUpdateCommitteeAddress, opts ...grpc.CallOption) (*MsgUpdateCommitteeAddressResponse, error)
+	RegisterVK(ctx context.Context, in *MsgRegisterVK, opts ...grpc.CallOption) (*MsgRegisterVKResponse, error)
+	RemoveVK(ctx context.Context, in *MsgRemoveVK, opts ...grpc.CallOption) (*MsgRemoveVKResponse, error)
 }
 
 type msgClient struct {
@@ -81,6 +85,24 @@ func (c *msgClient) UpdateCommitteeAddress(ctx context.Context, in *MsgUpdateCom
 	return out, nil
 }
 
+func (c *msgClient) RegisterVK(ctx context.Context, in *MsgRegisterVK, opts ...grpc.CallOption) (*MsgRegisterVKResponse, error) {
+	out := new(MsgRegisterVKResponse)
+	err := c.cc.Invoke(ctx, Msg_RegisterVK_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *msgClient) RemoveVK(ctx context.Context, in *MsgRemoveVK, opts ...grpc.CallOption) (*MsgRemoveVKResponse, error) {
+	out := new(MsgRemoveVKResponse)
+	err := c.cc.Invoke(ctx, Msg_RemoveVK_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // MsgServer is the server API for Msg service.
 // All implementations must embed UnimplementedMsgServer
 // for forward compatibility
@@ -91,6 +113,8 @@ type MsgServer interface {
 	CreateStaker(context.Context, *MsgCreateStaker) (*MsgCreateStakerResponse, error)
 	RemoveStaker(context.Context, *MsgRemoveStaker) (*MsgRemoveStakerResponse, error)
 	UpdateCommitteeAddress(context.Context, *MsgUpdateCommitteeAddress) (*MsgUpdateCommitteeAddressResponse, error)
+	RegisterVK(context.Context, *MsgRegisterVK) (*MsgRegisterVKResponse, error)
+	RemoveVK(context.Context, *MsgRemoveVK) (*MsgRemoveVKResponse, error)
 	mustEmbedUnimplementedMsgServer()
 }
 
@@ -109,6 +133,12 @@ func (UnimplementedMsgServer) RemoveStaker(context.Context, *MsgRemoveStaker) (*
 }
 func (UnimplementedMsgServer) UpdateCommitteeAddress(context.Context, *MsgUpdateCommitteeAddress) (*MsgUpdateCommitteeAddressResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateCommitteeAddress not implemented")
+}
+func (UnimplementedMsgServer) RegisterVK(context.Context, *MsgRegisterVK) (*MsgRegisterVKResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RegisterVK not implemented")
+}
+func (UnimplementedMsgServer) RemoveVK(context.Context, *MsgRemoveVK) (*MsgRemoveVKResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RemoveVK not implemented")
 }
 func (UnimplementedMsgServer) mustEmbedUnimplementedMsgServer() {}
 
@@ -195,6 +225,42 @@ func _Msg_UpdateCommitteeAddress_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Msg_RegisterVK_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgRegisterVK)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MsgServer).RegisterVK(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Msg_RegisterVK_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MsgServer).RegisterVK(ctx, req.(*MsgRegisterVK))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Msg_RemoveVK_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgRemoveVK)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MsgServer).RemoveVK(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Msg_RemoveVK_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MsgServer).RemoveVK(ctx, req.(*MsgRemoveVK))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Msg_ServiceDesc is the grpc.ServiceDesc for Msg service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -217,6 +283,14 @@ var Msg_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateCommitteeAddress",
 			Handler:    _Msg_UpdateCommitteeAddress_Handler,
+		},
+		{
+			MethodName: "RegisterVK",
+			Handler:    _Msg_RegisterVK_Handler,
+		},
+		{
+			MethodName: "RemoveVK",
+			Handler:    _Msg_RemoveVK_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

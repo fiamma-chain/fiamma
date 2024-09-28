@@ -1,6 +1,7 @@
 package keeper
 
 import (
+	"context"
 	"testing"
 
 	"cosmossdk.io/log"
@@ -22,6 +23,20 @@ import (
 	"fiamma/x/zkpverify/types"
 )
 
+type mockBitvmstakerKeeper struct {
+	registeredVKs map[string]bool
+}
+
+func (m *mockBitvmstakerKeeper) IsVKRegistered(ctx context.Context, vk []byte) bool {
+	return m.registeredVKs[string(vk)]
+}
+
+func newMockBitvmstakerKeeper() *mockBitvmstakerKeeper {
+	return &mockBitvmstakerKeeper{
+		registeredVKs: make(map[string]bool),
+	}
+}
+
 func ZkpVerifyKeeper(t testing.TB) (keeper.Keeper, sdk.Context) {
 	storeKey := storetypes.NewKVStoreKey(types.StoreKey)
 
@@ -34,6 +49,12 @@ func ZkpVerifyKeeper(t testing.TB) (keeper.Keeper, sdk.Context) {
 	cdc := codec.NewProtoCodec(registry)
 	authority := authtypes.NewModuleAddress(govtypes.ModuleName)
 
+	mockBitvmstakerKeeper := newMockBitvmstakerKeeper()
+
+	// Register a valid VK
+	validVK := "valid_vk"
+	mockBitvmstakerKeeper.registeredVKs[validVK] = true
+
 	k := keeper.NewKeeper(
 		cdc,
 		runtime.NewKVStoreService(storeKey),
@@ -41,6 +62,7 @@ func ZkpVerifyKeeper(t testing.TB) (keeper.Keeper, sdk.Context) {
 		authority.String(),
 		nil,
 		&nubitda.NewMockNubitDA().NubitDA,
+		mockBitvmstakerKeeper,
 	)
 
 	ctx := sdk.NewContext(stateStore, cmtproto.Header{}, false, log.NewNopLogger())

@@ -30,6 +30,12 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					Short:          "Query committee-address",
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{},
 				},
+				{
+					RpcMethod:      "RegisteredVKList",
+					Use:            "registered-vk-list",
+					Short:          "Query registered-vk-list",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{},
+				},
 
 				// this line is used by ignite scaffolding # autocli/query
 			},
@@ -59,6 +65,18 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					Use:            "update-committee-address [new-committee-address]",
 					Short:          "Send a update-committee-address tx",
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "new_committee_address"}},
+				},
+				{
+					RpcMethod:      "RegisterVK",
+					Use:            "register-vk [vk]",
+					Short:          "Send a register-vk tx",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "vk"}},
+				},
+				{
+					RpcMethod:      "RemoveVK",
+					Use:            "remove-vk [vk]",
+					Short:          "Send a remove-vk tx",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "vk"}},
 				},
 				// this line is used by ignite scaffolding # autocli/tx
 			},

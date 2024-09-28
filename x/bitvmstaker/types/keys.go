@@ -13,6 +13,7 @@ var (
 	CommitteeAddressKey = []byte{0x02} // key prefix for the committee address
 	StakerCountKey      = []byte{0x03} // key prefix for the staker count
 	StakerKey           = []byte{0x04} // key prefix for the staker
+	VkKey               = []byte{0x05} // key prefix for the vk
 
 )
 

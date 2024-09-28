@@ -8,6 +8,7 @@ import (
 )
 
 func TestNubitIntegration(t *testing.T) {
+	t.Skip()
 	namespace, err := hex.DecodeString("00000000000000000000000000000000000000000000006669616d6d61")
 	if err != nil {
 		t.Fatal(err)

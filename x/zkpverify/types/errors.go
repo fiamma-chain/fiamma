@@ -25,4 +25,5 @@ var (
 	ErrVerifyResultNotFound       = sdkerrors.Register(ModuleName, 1114, "verify result not found")
 	ErrInvalidVerifyResult        = sdkerrors.Register(ModuleName, 1115, "invalid verify result")
 	ErrProofNotPending            = sdkerrors.Register(ModuleName, 1116, "proof not pending")
+	ErrVKNotRegistered            = sdkerrors.Register(ModuleName, 1117, "vk in the proof system has not been registered in the committee.")
 )

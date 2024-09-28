@@ -22,6 +22,7 @@ const (
 	Query_Params_FullMethodName           = "/fiamma.bitvmstaker.Query/Params"
 	Query_AllStakerInfo_FullMethodName    = "/fiamma.bitvmstaker.Query/AllStakerInfo"
 	Query_CommitteeAddress_FullMethodName = "/fiamma.bitvmstaker.Query/CommitteeAddress"
+	Query_RegisteredVKList_FullMethodName = "/fiamma.bitvmstaker.Query/RegisteredVKList"
 )
 
 // QueryClient is the client API for Query service.
@@ -34,6 +35,8 @@ type QueryClient interface {
 	AllStakerInfo(ctx context.Context, in *QueryAllStakerInfoRequest, opts ...grpc.CallOption) (*QueryAllStakerInfoResponse, error)
 	// QueryCommitteeAddressRequest is the request type for the Query/CommitteeAddress RPC method.
 	CommitteeAddress(ctx context.Context, in *QueryCommitteeAddressRequest, opts ...grpc.CallOption) (*QueryCommitteeAddressResponse, error)
+	// QueryRegisteredVKListRequest is the request type for the Query/RegisteredVKList RPC method.
+	RegisteredVKList(ctx context.Context, in *QueryRegisteredVKListRequest, opts ...grpc.CallOption) (*QueryRegisteredVKListResponse, error)
 }
 
 type queryClient struct {
@@ -71,6 +74,15 @@ func (c *queryClient) CommitteeAddress(ctx context.Context, in *QueryCommitteeAd
 	return out, nil
 }
 
+func (c *queryClient) RegisteredVKList(ctx context.Context, in *QueryRegisteredVKListRequest, opts ...grpc.CallOption) (*QueryRegisteredVKListResponse, error) {
+	out := new(QueryRegisteredVKListResponse)
+	err := c.cc.Invoke(ctx, Query_RegisteredVKList_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // QueryServer is the server API for Query service.
 // All implementations must embed UnimplementedQueryServer
 // for forward compatibility
@@ -81,6 +93,8 @@ type QueryServer interface {
 	AllStakerInfo(context.Context, *QueryAllStakerInfoRequest) (*QueryAllStakerInfoResponse, error)
 	// QueryCommitteeAddressRequest is the request type for the Query/CommitteeAddress RPC method.
 	CommitteeAddress(context.Context, *QueryCommitteeAddressRequest) (*QueryCommitteeAddressResponse, error)
+	// QueryRegisteredVKListRequest is the request type for the Query/RegisteredVKList RPC method.
+	RegisteredVKList(context.Context, *QueryRegisteredVKListRequest) (*QueryRegisteredVKListResponse, error)
 	mustEmbedUnimplementedQueryServer()
 }
 
@@ -96,6 +110,9 @@ func (UnimplementedQueryServer) AllStakerInfo(context.Context, *QueryAllStakerIn
 }
 func (UnimplementedQueryServer) CommitteeAddress(context.Context, *QueryCommitteeAddressRequest) (*QueryCommitteeAddressResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CommitteeAddress not implemented")
+}
+func (UnimplementedQueryServer) RegisteredVKList(context.Context, *QueryRegisteredVKListRequest) (*QueryRegisteredVKListResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RegisteredVKList not implemented")
 }
 func (UnimplementedQueryServer) mustEmbedUnimplementedQueryServer() {}
 
@@ -164,6 +181,24 @@ func _Query_CommitteeAddress_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Query_RegisteredVKList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryRegisteredVKListRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QueryServer).RegisteredVKList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Query_RegisteredVKList_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QueryServer).RegisteredVKList(ctx, req.(*QueryRegisteredVKListRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Query_ServiceDesc is the grpc.ServiceDesc for Query service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -182,6 +217,10 @@ var Query_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CommitteeAddress",
 			Handler:    _Query_CommitteeAddress_Handler,
+		},
+		{
+			MethodName: "RegisteredVKList",
+			Handler:    _Query_RegisteredVKList_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

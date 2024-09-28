@@ -20,6 +20,11 @@ func (k msgServer) SubmitProof(goCtx context.Context, msg *types.MsgSubmitProof)
 		return &types.MsgSubmitProofResponse{}, err
 	}
 
+	// check if the vk is registered
+	if !k.bitvmstakerKeeper.IsVKRegistered(ctx, msg.Vk) {
+		return nil, types.ErrVKNotRegistered
+	}
+
 	proofData := types.ProofData{
 		Namespace:   msg.Namespace,
 		ProofSystem: types.ProofSystem(types.ProofSystem_value[msg.ProofSystem]),

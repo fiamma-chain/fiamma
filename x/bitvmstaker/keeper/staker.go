@@ -32,10 +32,10 @@ func (k Keeper) GetStaker(ctx context.Context, stakerAddress string) (types.Stak
 	return stakerInfo, true
 }
 
-func (k Keeper) GetAllStakerInfo(ctx context.Context, req *types.QueryAllStakerInfoRequest) (*types.QueryAllStakerInfoResponse, error) {
+func (k Keeper) GetAllStakerInfo(ctx context.Context, pagination *query.PageRequest) ([]types.StakerInfo, *query.PageResponse, error) {
 	store := k.stakerStore(ctx)
 	var stakerInfos []types.StakerInfo
-	pageRes, err := query.Paginate(store, req.Pagination, func(key []byte, value []byte) error {
+	pageRes, err := query.Paginate(store, pagination, func(key []byte, value []byte) error {
 		var stakerInfo types.StakerInfo
 		if err := k.cdc.Unmarshal(value, &stakerInfo); err != nil {
 			return err
@@ -44,10 +44,7 @@ func (k Keeper) GetAllStakerInfo(ctx context.Context, req *types.QueryAllStakerI
 		stakerInfos = append(stakerInfos, stakerInfo)
 		return nil
 	})
-	if err != nil {
-		return nil, err
-	}
-	return &types.QueryAllStakerInfoResponse{AllStakerInfo: stakerInfos, Pagination: pageRes}, nil
+	return stakerInfos, pageRes, err
 }
 
 // GetCommitteeAddress gets the committee address from KVStore
