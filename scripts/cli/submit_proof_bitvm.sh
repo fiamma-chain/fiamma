@@ -25,7 +25,7 @@ fiammad tx zkpverify submit-proof \
   --gas $GAS --fees $FEES \
   --node $NODE \
   --keyring-backend test \
-  "ZULU" \
+  "TEST" \
   $PROOF_SYSTEM \
   $PROOF_FILE \
 	$PUBLIC_INPUT_FILE \

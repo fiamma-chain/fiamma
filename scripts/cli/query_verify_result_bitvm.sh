@@ -8,7 +8,7 @@ set -e
 : ${PROOF_FILE:=../../prover_examples/bitvm/proof.bitvm}
 : ${PUBLIC_INPUT_FILE:=../../prover_examples/bitvm/public_input.bitvm}
 : ${VK_FILE:=../../prover_examples/bitvm/vk.bitvm}
-: ${NAMESPACE:="ZULU"}
+: ${NAMESPACE:="TEST"}
 : ${PROOF_SYSTEM:="GROTH16_BN254_BITVM"}
 
 NEW_NAMESPACE=$(echo -n $NAMESPACE | xxd -p)
