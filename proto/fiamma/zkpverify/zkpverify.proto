@@ -6,8 +6,8 @@ option go_package = "fiamma/x/zkpverify/types";
 // VerificationStatus is the verification status enum for the proof verification
 enum VerificationStatus { 
   INITIAL_VALIDATION = 0;
-  COMMUNITY_VALIDATION = 1;
-  DEFINITIVE_VALIDATION = 2;
+  SOFT_FINALITY = 1;
+  HARD_FINALITY = 2;
 }
 
 // DataLocation is the proof data location enum for the proof verification

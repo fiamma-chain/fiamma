@@ -36,7 +36,7 @@ func (k msgServer) SubmitCommunityVerification(goCtx context.Context, msg *types
 
 	// Check if the proof is still pending
 	if verifyResult.Status != types.VerificationStatus_INITIAL_VALIDATION &&
-		verifyResult.Status != types.VerificationStatus_COMMUNITY_VALIDATION {
+		verifyResult.Status != types.VerificationStatus_SOFT_FINALITY {
 		k.Logger().Info("Proof is not in pending status:", "proofId", msg.ProofId, "status", verifyResult.Status)
 		return nil, types.ErrProofNotPending
 	}
@@ -48,9 +48,9 @@ func (k msgServer) SubmitCommunityVerification(goCtx context.Context, msg *types
 
 	verifyResult.CommunityVerificationCount++
 	if verifyResult.CommunityVerificationCount < VerificationCountLimit {
-		verifyResult.Status = types.VerificationStatus_COMMUNITY_VALIDATION
+		verifyResult.Status = types.VerificationStatus_SOFT_FINALITY
 	} else {
-		verifyResult.Status = types.VerificationStatus_DEFINITIVE_VALIDATION
+		verifyResult.Status = types.VerificationStatus_HARD_FINALITY
 		k.RemovePendingProofIndex(ctx, proofId)
 	}
 	k.SetVerifyResult(ctx, proofId, verifyResult)
