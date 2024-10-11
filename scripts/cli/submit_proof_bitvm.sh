@@ -11,7 +11,7 @@ else
 fi
 
 : ${CHAIN_ID:="fiamma-testnet-1"}
-: ${NODE:="http://54.65.137.66:26657"}
+: ${NODE:="http://54.65.75.57:26657"}
 : ${FEES:=2000ufia}
 : ${GAS:=80000000}
 : ${PROOF_FILE:=../../prover_examples/bitvm/proof.bitvm}
