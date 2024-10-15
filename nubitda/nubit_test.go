@@ -8,26 +8,53 @@ import (
 )
 
 func TestNubitIntegration(t *testing.T) {
-	t.Skip()
-	namespace, err := hex.DecodeString("00000000000000000000000000000000000000000000006669616d6d61")
-	if err != nil {
-		t.Fatal(err)
-	}
-	nubit, err := NewNubitDATest("http://127.0.0.1:26658", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBbGxvdyI6WyJwdWJsaWMiLCJyZWFkIiwid3JpdGUiLCJhZG1pbiJdfQ.cs2Y8oL1JNGhSTn29Khe_vEmQUB9_JeqI_LnQ2isWS8", namespace)
-	if err != nil {
-		t.Fatal(err)
-	}
-	txs := []byte("fiamma-testdata")
+	// Test parameters
+	const (
+		nubitURL      = "http://127.0.0.1:26658"
+		authToken     = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBbGxvdyI6WyJwdWJsaWMiLCJyZWFkIiwid3JpdGUiLCJhZG1pbiJdfQ.PsZV2O2vUZ5BBluCDMTcnzt1hGGFXOVSNZTfGEXw6DY"
+		namespaceHex  = "00000000000000000000000000000000000000000000006669616d6d61"
+		testData      = "fiamma-testdata"
+		submitTimeout = time.Minute
+		getTimeout    = 2 * time.Minute
+		waitTime      = 10 * time.Second
+	)
 
-	id, err := nubit.SubmitBlobs(context.TODO(), [][]byte{txs})
+	// Decode namespace
+	namespace, err := hex.DecodeString(namespaceHex)
 	if err != nil {
-		t.Fatal(err)
+		t.Fatalf("Failed to decode namespace: %v", err)
 	}
-	t.Logf("id: %#x", id)
-	time.Sleep(600 * time.Microsecond)
-	returdata, err := nubit.GetBlobs(context.TODO(), id)
+
+	// Create NubitDA instance
+	nubit, err := NewNubitDATest(nubitURL, authToken, namespace)
 	if err != nil {
-		t.Fatal(err)
+		t.Fatalf("Failed to create NubitDA instance: %v", err)
 	}
-	t.Logf("returdata: %v", returdata)
+
+	// Submit data
+	ctx, cancel := context.WithTimeout(context.Background(), submitTimeout)
+	defer cancel()
+	id, err := nubit.SubmitBlobs(ctx, [][]byte{[]byte(testData)})
+	if err != nil {
+		t.Fatalf("Failed to submit data: %v\nURL: %s\nNamespace: %x", err, nubitURL, namespace)
+	}
+	t.Logf("Submitted data ID: %#x", id)
+
+	// Wait for data processing
+	time.Sleep(waitTime)
+
+	// Retrieve data
+	ctx, cancel = context.WithTimeout(context.Background(), getTimeout)
+	defer cancel()
+	returnedData, err := nubit.GetBlobs(ctx, id)
+	if err != nil {
+		t.Fatalf("Failed to retrieve data: %v", err)
+	}
+
+	// Validate returned data
+	if len(returnedData) != 1 || string(returnedData[0]) != testData {
+		t.Errorf("Returned data mismatch. Expected %q, got %q", testData, returnedData)
+	} else {
+		t.Logf("Successfully retrieved data: %q", returnedData[0])
+	}
 }
