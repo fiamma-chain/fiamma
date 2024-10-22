@@ -53,7 +53,7 @@ func (k msgServer) SubmitCommunityVerification(goCtx context.Context, msg *types
 		verifyResult.Status = types.VerificationStatus_HARD_FINALITY
 		k.RemovePendingProofIndex(ctx, proofId)
 	}
-	k.SetVerifyResult(ctx, proofId, verifyResult)
+	k.SetVerifyResult(ctx, verifyResult)
 	k.Logger().Info("Proof verification status for community:", "status", verifyResult.Status)
 
 	event := sdk.NewEvent("SubmitCommunityVerification",

@@ -116,8 +116,8 @@ func (x *fastReflection_DASubmissionResult) Range(f func(protoreflect.FieldDescr
 			return
 		}
 	}
-	if x.BlockHeight != "" {
-		value := protoreflect.ValueOfString(x.BlockHeight)
+	if x.BlockHeight != uint64(0) {
+		value := protoreflect.ValueOfUint64(x.BlockHeight)
 		if !f(fd_DASubmissionResult_block_height, value) {
 			return
 		}
@@ -156,7 +156,7 @@ func (x *fastReflection_DASubmissionResult) Has(fd protoreflect.FieldDescriptor)
 	case "fiamma.zkpverify.DASubmissionResult.block_hash":
 		return x.BlockHash != ""
 	case "fiamma.zkpverify.DASubmissionResult.block_height":
-		return x.BlockHeight != ""
+		return x.BlockHeight != uint64(0)
 	case "fiamma.zkpverify.DASubmissionResult.tx_hash":
 		return x.TxHash != ""
 	case "fiamma.zkpverify.DASubmissionResult.namespace":
@@ -184,7 +184,7 @@ func (x *fastReflection_DASubmissionResult) Clear(fd protoreflect.FieldDescripto
 	case "fiamma.zkpverify.DASubmissionResult.block_hash":
 		x.BlockHash = ""
 	case "fiamma.zkpverify.DASubmissionResult.block_height":
-		x.BlockHeight = ""
+		x.BlockHeight = uint64(0)
 	case "fiamma.zkpverify.DASubmissionResult.tx_hash":
 		x.TxHash = ""
 	case "fiamma.zkpverify.DASubmissionResult.namespace":
@@ -216,7 +216,7 @@ func (x *fastReflection_DASubmissionResult) Get(descriptor protoreflect.FieldDes
 		return protoreflect.ValueOfString(value)
 	case "fiamma.zkpverify.DASubmissionResult.block_height":
 		value := x.BlockHeight
-		return protoreflect.ValueOfString(value)
+		return protoreflect.ValueOfUint64(value)
 	case "fiamma.zkpverify.DASubmissionResult.tx_hash":
 		value := x.TxHash
 		return protoreflect.ValueOfString(value)
@@ -250,7 +250,7 @@ func (x *fastReflection_DASubmissionResult) Set(fd protoreflect.FieldDescriptor,
 	case "fiamma.zkpverify.DASubmissionResult.block_hash":
 		x.BlockHash = value.Interface().(string)
 	case "fiamma.zkpverify.DASubmissionResult.block_height":
-		x.BlockHeight = value.Interface().(string)
+		x.BlockHeight = value.Uint()
 	case "fiamma.zkpverify.DASubmissionResult.tx_hash":
 		x.TxHash = value.Interface().(string)
 	case "fiamma.zkpverify.DASubmissionResult.namespace":
@@ -307,7 +307,7 @@ func (x *fastReflection_DASubmissionResult) NewField(fd protoreflect.FieldDescri
 	case "fiamma.zkpverify.DASubmissionResult.block_hash":
 		return protoreflect.ValueOfString("")
 	case "fiamma.zkpverify.DASubmissionResult.block_height":
-		return protoreflect.ValueOfString("")
+		return protoreflect.ValueOfUint64(uint64(0))
 	case "fiamma.zkpverify.DASubmissionResult.tx_hash":
 		return protoreflect.ValueOfString("")
 	case "fiamma.zkpverify.DASubmissionResult.namespace":
@@ -392,9 +392,8 @@ func (x *fastReflection_DASubmissionResult) ProtoMethods() *protoiface.Methods {
 		if l > 0 {
 			n += 1 + l + runtime.Sov(uint64(l))
 		}
-		l = len(x.BlockHeight)
-		if l > 0 {
-			n += 1 + l + runtime.Sov(uint64(l))
+		if x.BlockHeight != 0 {
+			n += 1 + runtime.Sov(uint64(x.BlockHeight))
 		}
 		l = len(x.TxHash)
 		if l > 0 {
@@ -447,12 +446,10 @@ func (x *fastReflection_DASubmissionResult) ProtoMethods() *protoiface.Methods {
 			i--
 			dAtA[i] = 0x2a
 		}
-		if len(x.BlockHeight) > 0 {
-			i -= len(x.BlockHeight)
-			copy(dAtA[i:], x.BlockHeight)
-			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.BlockHeight)))
+		if x.BlockHeight != 0 {
+			i = runtime.EncodeVarint(dAtA, i, uint64(x.BlockHeight))
 			i--
-			dAtA[i] = 0x22
+			dAtA[i] = 0x20
 		}
 		if len(x.BlockHash) > 0 {
 			i -= len(x.BlockHash)
@@ -606,10 +603,10 @@ func (x *fastReflection_DASubmissionResult) ProtoMethods() *protoiface.Methods {
 				x.BlockHash = string(dAtA[iNdEx:postIndex])
 				iNdEx = postIndex
 			case 4:
-				if wireType != 2 {
+				if wireType != 0 {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field BlockHeight", wireType)
 				}
-				var stringLen uint64
+				x.BlockHeight = 0
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
 						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
@@ -619,24 +616,11 @@ func (x *fastReflection_DASubmissionResult) ProtoMethods() *protoiface.Methods {
 					}
 					b := dAtA[iNdEx]
 					iNdEx++
-					stringLen |= uint64(b&0x7F) << shift
+					x.BlockHeight |= uint64(b&0x7F) << shift
 					if b < 0x80 {
 						break
 					}
 				}
-				intStringLen := int(stringLen)
-				if intStringLen < 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
-				}
-				postIndex := iNdEx + intStringLen
-				if postIndex < 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
-				}
-				if postIndex > l {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
-				}
-				x.BlockHeight = string(dAtA[iNdEx:postIndex])
-				iNdEx = postIndex
 			case 5:
 				if wireType != 2 {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field TxHash", wireType)
@@ -2932,7 +2916,7 @@ type DASubmissionResult struct {
 	ProofId      string       `protobuf:"bytes,1,opt,name=proof_id,json=proofId,proto3" json:"proof_id,omitempty"`
 	DataLocation DataLocation `protobuf:"varint,2,opt,name=data_location,json=dataLocation,proto3,enum=fiamma.zkpverify.DataLocation" json:"data_location,omitempty"`
 	BlockHash    string       `protobuf:"bytes,3,opt,name=block_hash,json=blockHash,proto3" json:"block_hash,omitempty"`
-	BlockHeight  string       `protobuf:"bytes,4,opt,name=block_height,json=blockHeight,proto3" json:"block_height,omitempty"`
+	BlockHeight  uint64       `protobuf:"varint,4,opt,name=block_height,json=blockHeight,proto3" json:"block_height,omitempty"`
 	TxHash       string       `protobuf:"bytes,5,opt,name=tx_hash,json=txHash,proto3" json:"tx_hash,omitempty"`
 	Namespace    string       `protobuf:"bytes,6,opt,name=namespace,proto3" json:"namespace,omitempty"`
 }
@@ -2978,11 +2962,11 @@ func (x *DASubmissionResult) GetBlockHash() string {
 	return ""
 }
 
-func (x *DASubmissionResult) GetBlockHeight() string {
+func (x *DASubmissionResult) GetBlockHeight() uint64 {
 	if x != nil {
 		return x.BlockHeight
 	}
-	return ""
+	return 0
 }
 
 func (x *DASubmissionResult) GetTxHash() string {
@@ -3226,7 +3210,7 @@ var file_fiamma_zkpverify_zkpverify_proto_rawDesc = []byte{
 	0x61, 0x74, 0x61, 0x4c, 0x6f, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x1d, 0x0a, 0x0a, 0x62,
 	0x6c, 0x6f, 0x63, 0x6b, 0x5f, 0x68, 0x61, 0x73, 0x68, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52,
 	0x09, 0x62, 0x6c, 0x6f, 0x63, 0x6b, 0x48, 0x61, 0x73, 0x68, 0x12, 0x21, 0x0a, 0x0c, 0x62, 0x6c,
-	0x6f, 0x63, 0x6b, 0x5f, 0x68, 0x65, 0x69, 0x67, 0x68, 0x74, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09,
+	0x6f, 0x63, 0x6b, 0x5f, 0x68, 0x65, 0x69, 0x67, 0x68, 0x74, 0x18, 0x04, 0x20, 0x01, 0x28, 0x04,
 	0x52, 0x0b, 0x62, 0x6c, 0x6f, 0x63, 0x6b, 0x48, 0x65, 0x69, 0x67, 0x68, 0x74, 0x12, 0x17, 0x0a,
 	0x07, 0x74, 0x78, 0x5f, 0x68, 0x61, 0x73, 0x68, 0x18, 0x05, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06,
 	0x74, 0x78, 0x48, 0x61, 0x73, 0x68, 0x12, 0x1c, 0x0a, 0x09, 0x6e, 0x61, 0x6d, 0x65, 0x73, 0x70,

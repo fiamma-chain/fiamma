@@ -138,11 +138,13 @@ message QueryDASubmitterResponse {
 }
 
 // QueryDASubmissionQueueRequest is request type for the Query/DASubmissionQueue RPC method.
-message QueryDASubmissionQueueRequest {}
+message QueryDASubmissionQueueRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
 
 // QueryDASubmissionQueueResponse is response type for the Query/DASubmissionQueue RPC method.
 message QueryDASubmissionQueueResponse {
-  repeated fiamma.zkpverify.DASubmissionData da_submission_data = 1;
+  repeated fiamma.zkpverify.DASubmissionData da_submission_data = 1 [(gogoproto.nullable) = false];
   cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }
 

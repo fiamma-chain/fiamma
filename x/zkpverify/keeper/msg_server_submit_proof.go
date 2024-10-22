@@ -13,9 +13,6 @@ import (
 func (k msgServer) SubmitProof(goCtx context.Context, msg *types.MsgSubmitProof) (*types.MsgSubmitProofResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
-	currentHeight := ctx.BlockHeight()
-	proposerAddress := k.GetBlockProposer(ctx, currentHeight)
-
 	if err := msg.ValidateBasic(); err != nil {
 		return &types.MsgSubmitProofResponse{}, err
 	}
@@ -26,11 +23,12 @@ func (k msgServer) SubmitProof(goCtx context.Context, msg *types.MsgSubmitProof)
 	}
 
 	proofData := types.ProofData{
-		Namespace:   msg.Namespace,
-		ProofSystem: types.ProofSystem(types.ProofSystem_value[msg.ProofSystem]),
-		Proof:       msg.Proof,
-		PublicInput: msg.PublicInput,
-		Vk:          msg.Vk,
+		Namespace:    msg.Namespace,
+		DataLocation: types.DataLocation(types.DataLocation_value[msg.DataLocation]),
+		ProofSystem:  types.ProofSystem(types.ProofSystem_value[msg.ProofSystem]),
+		Proof:        msg.Proof,
+		PublicInput:  msg.PublicInput,
+		Vk:           msg.Vk,
 	}
 
 	proofId, err := k.GetProofId(proofData)
@@ -39,63 +37,49 @@ func (k msgServer) SubmitProof(goCtx context.Context, msg *types.MsgSubmitProof)
 		return nil, types.ErrGetProofId
 
 	}
-
-	// submit proof data to DA
-	dataCommitmentStr, dataLocation, err := k.SubmitProofData(ctx, proofId[:], proofData)
-	if err != nil {
-		k.Logger().Info("Error submitting proof to DA:", "error", err)
-		return nil, types.ErrSubmitProof
-	}
-
-	proofIdStr := hex.EncodeToString(proofId[:])
-
 	// The chain first verifies the correctness of the proofs submitted by the user, and saves the results.
 	// The observer may challenge the result at a later stage.
 	result, witness := k.verifyProof(&proofData)
+	k.AddPendingProofIndex(ctx, proofId[:])
 
-	// store witness if the proof system is BitVM
-	if proofData.ProofSystem == types.ProofSystem_GROTH16_BN254_BITVM {
-		// TODO: remove this
-		// This is a buggy proofId for testing the bitvm challenge process
-		if proofIdStr == "12b16425935e229b45436571f22e5cbf051b0d5430c717e6ab209d4e98944691" {
-			result = false
-		}
-		bitvmChallengeData := types.BitVMChallengeData{
-			VerifyResult: result,
-			Witness:      witness,
-			Vk:           msg.Vk,
-			PublicInput:  msg.PublicInput,
-			Proposer:     proposerAddress,
-		}
-		k.SetBitVMChallengeData(ctx, proofId[:], bitvmChallengeData)
+	proofIdHex := hex.EncodeToString(proofId[:])
 
+	// TODO: remove this
+	// This is a buggy proofId for testing the bitvm challenge process
+	if proofIdHex == "12b16425935e229b45436571f22e5cbf051b0d5430c717e6ab209d4e98944691" {
+		result = false
 	}
+
+	// get the proposer address
+	currentHeight := ctx.BlockHeight()
+	proposerAddress := k.GetBlockProposer(ctx, currentHeight)
+
+	// enqueue the proof for data availability submission and bitvm challenge
+	daSubmissionData := types.DASubmissionData{
+		ProofId:       proofIdHex,
+		ProofData:     &proofData,
+		Witness:       witness,
+		BlockProposer: proposerAddress,
+	}
+	k.EnqueueDASubmission(ctx, daSubmissionData)
 
 	// store verify data in the store
 	verifyResult := types.VerifyResult{
-		ProofId:                    proofIdStr,
+		ProofId:                    proofIdHex,
 		ProofSystem:                proofData.ProofSystem,
-		DataCommitment:             dataCommitmentStr,
-		DataLocation:               dataLocation,
 		Result:                     result,
 		Status:                     types.VerificationStatus_INITIAL_VALIDATION,
 		CommunityVerificationCount: uint64(0),
 		Namespace:                  proofData.Namespace,
 	}
-
-	k.AddPendingProofIndex(ctx, proofId[:])
-	k.SetVerifyResult(ctx, proofId[:], verifyResult)
+	k.SetVerifyResult(ctx, verifyResult)
 
 	event := sdk.NewEvent("SubmitProof",
 		sdk.NewAttribute("namespace", proofData.Namespace),
 		sdk.NewAttribute("proofSystem", msg.ProofSystem),
-		sdk.NewAttribute("proofId", proofIdStr),
-		sdk.NewAttribute("dataCommitment", dataCommitmentStr),
-		sdk.NewAttribute("dataLocation", dataLocation.String()),
+		sdk.NewAttribute("proofId", proofIdHex),
 		sdk.NewAttribute("verifyResult", strconv.FormatBool(result)),
-		sdk.NewAttribute("proposer", proposerAddress),
 	)
-
 	ctx.EventManager().EmitEvent(event)
 
 	return &types.MsgSubmitProofResponse{}, nil

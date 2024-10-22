@@ -16,6 +16,7 @@ func (k Keeper) GetProofId(proofData types.ProofData) ([32]byte, error) {
 	buf.Write(proofData.Proof)
 	buf.Write(proofData.PublicInput)
 	buf.Write(proofData.Vk)
+	buf.Write([]byte(proofData.DataLocation.String()))
 
 	hash := sha256.Sum256(buf.Bytes())
 	return hash, nil

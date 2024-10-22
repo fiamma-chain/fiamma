@@ -28,7 +28,7 @@ message DASubmissionResult {
   string proof_id = 1;
   DataLocation data_location = 2;
   string block_hash = 3;
-  string block_height = 4;
+  uint64 block_height = 4;
   string tx_hash = 5;
   string namespace = 6;
 }

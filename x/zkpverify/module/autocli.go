@@ -52,10 +52,17 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 				},
 
 				{
-					RpcMethod:      "BitVMChallengeData",
-					Use:            "get-bitvm-challenge-data [proof_id]",
-					Short:          "Query bitvm chanllenge data stored in the fiamma by proof_id",
-					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "proof_id"}},
+					RpcMethod:      "DASubmissionQueue",
+					Use:            "get-da-submission-queue",
+					Short:          "Query DA submission queue",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{},
+				},
+
+				{
+					RpcMethod:      "DASubmitter",
+					Use:            "get-da-submitter",
+					Short:          "Query DA submitter address",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{},
 				},
 
 				// this line is used by ignite scaffolding # autocli/query
@@ -71,9 +78,9 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 				},
 				{
 					RpcMethod:      "SubmitProof",
-					Use:            "submit-proof [namespace] [proof_system] [proof] [public_input] [vk]",
+					Use:            "submit-proof [namespace] [proof_system] [proof] [public_input] [vk] [data_location]",
 					Short:          "Send a zkp proof verify tx" + "\n" + "Currently supported proof systems: " + "[GROTH16_BN254_BITVM, FFPLONK_BN254_BITVM]",
-					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "namespace"}, {ProtoField: "proof_system"}, {ProtoField: "proof"}, {ProtoField: "public_input"}, {ProtoField: "vk"}},
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "namespace"}, {ProtoField: "proof_system"}, {ProtoField: "proof"}, {ProtoField: "public_input"}, {ProtoField: "vk"}, {ProtoField: "data_location"}},
 				},
 				{
 					RpcMethod:      "SubmitCommunityVerification",
@@ -81,6 +88,21 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					Short:          "submit a community zkp proof verify tx" + "\n" + "Currently supported proof systems: " + "[GROTH16_BN254_BITVM, FFPLONK_BN254_BITVM]",
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "proof_id"}, {ProtoField: "verify_result"}},
 				},
+
+				{
+					RpcMethod:      "UpdateDASubmitter",
+					Use:            "update-da-submitter [da_submitter]",
+					Short:          "Update DA submitter address",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "da_submitter"}},
+				},
+
+				{
+					RpcMethod:      "UpdateDASubmissionResults",
+					Use:            "update-da-submission-results [da_submission_result]",
+					Short:          "Update DA submission results",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "da_submission_result"}},
+				},
+
 				// this line is used by ignite scaffolding # autocli/tx
 			},
 		},

@@ -10,6 +10,7 @@ import (
 	"github.com/cosmos/cosmos-sdk/codec"
 	"github.com/cosmos/cosmos-sdk/runtime"
 	sdk "github.com/cosmos/cosmos-sdk/types"
+	"github.com/cosmos/cosmos-sdk/types/query"
 
 	"fiamma/nubitda"
 	"fiamma/x/zkpverify/types"
@@ -70,10 +71,10 @@ func (k Keeper) Logger() log.Logger {
 }
 
 // SetVerifyResult stores proof verification information
-func (k Keeper) SetVerifyResult(ctx sdk.Context, proofId []byte, verifyResult types.VerifyResult) {
+func (k Keeper) SetVerifyResult(ctx sdk.Context, verifyResult types.VerifyResult) {
 	store := k.VerifyResultStore(ctx)
 	bz := k.cdc.MustMarshal(&verifyResult)
-	store.Set(proofId, bz)
+	store.Set([]byte(verifyResult.ProofId), bz)
 }
 
 // GetVerifyResult retrieves proof verification information
@@ -107,25 +108,6 @@ func (k Keeper) GetProofData(ctx context.Context, proofId []byte) (types.ProofDa
 	return proofData, true
 }
 
-// SetBitVMChallengeData stores witness data
-func (k Keeper) SetBitVMChallengeData(ctx context.Context, proofId []byte, challengeData types.BitVMChallengeData) {
-	store := k.bitVMChallengeDataStore(ctx)
-	bz := k.cdc.MustMarshal(&challengeData)
-	store.Set(proofId, bz)
-}
-
-// GetBitVMChallengeData retrieves witness data from the chain
-func (k Keeper) GetBitVMChallengeData(ctx context.Context, proofId []byte) (types.BitVMChallengeData, bool) {
-	store := k.bitVMChallengeDataStore(ctx)
-	bz := store.Get(proofId)
-	if bz == nil {
-		return types.BitVMChallengeData{}, false
-	}
-	var challengeData types.BitVMChallengeData
-	k.cdc.MustUnmarshal(bz, &challengeData)
-	return challengeData, true
-}
-
 // IsPendingProof checks if a proof ID is in the pending proofs index
 func (k Keeper) IsPendingProof(ctx context.Context, proofId []byte) bool {
 	store := k.PendingProofsIndexStore(ctx)
@@ -155,6 +137,55 @@ func (k Keeper) GetBlockProposer(ctx context.Context, height int64) string {
 	return string(bz)
 }
 
+func (k Keeper) GetDASubmissionQueue(ctx context.Context, pagination *query.PageRequest) ([]types.DASubmissionData, *query.PageResponse, error) {
+	store := k.DASubmissionQueueStore(ctx)
+	var daSubmissionList []types.DASubmissionData
+	pageRes, err := query.Paginate(store, pagination, func(key []byte, value []byte) error {
+		var daSubmission types.DASubmissionData
+		k.cdc.MustUnmarshal(value, &daSubmission)
+		daSubmissionList = append(daSubmissionList, daSubmission)
+		return nil
+	})
+	return daSubmissionList, pageRes, err
+}
+
+func (k Keeper) EnqueueDASubmission(ctx context.Context, daSubmissionData types.DASubmissionData) {
+	store := k.DASubmissionQueueStore(ctx)
+	store.Set([]byte(daSubmissionData.ProofId), k.cdc.MustMarshal(&daSubmissionData))
+}
+
+func (k Keeper) DequeueDASubmission(ctx context.Context, proofId string) {
+	store := k.DASubmissionQueueStore(ctx)
+	store.Delete([]byte(proofId))
+}
+
+func (k Keeper) SetDASubmissionResult(ctx context.Context, result *types.DASubmissionResult) {
+	store := k.DASubmissionResultsStore(ctx)
+	store.Set([]byte(result.ProofId), k.cdc.MustMarshal(result))
+}
+
+func (k Keeper) GetDASubmissionResult(ctx context.Context, proofId string) (types.DASubmissionResult, bool) {
+	store := k.DASubmissionResultsStore(ctx)
+	bz := store.Get([]byte(proofId))
+	if bz == nil {
+		return types.DASubmissionResult{}, false
+	}
+	var result types.DASubmissionResult
+	k.cdc.MustUnmarshal(bz, &result)
+	return result, true
+}
+
+func (k Keeper) SetDASubmitter(ctx context.Context, submitter string) {
+	store := k.DASubmitterStore(ctx)
+	store.Set(types.DASubmitterKey, []byte(submitter))
+}
+
+func (k Keeper) GetDASubmitter(ctx context.Context) string {
+	store := k.DASubmitterStore(ctx)
+	bz := store.Get(types.DASubmitterKey)
+	return string(bz)
+}
+
 func (k Keeper) proofDataStore(ctx context.Context) prefix.Store {
 	storeAdapter := runtime.KVStoreAdapter(k.storeService.OpenKVStore(ctx))
 	return prefix.NewStore(storeAdapter, types.ProofDataKey)
@@ -163,11 +194,6 @@ func (k Keeper) proofDataStore(ctx context.Context) prefix.Store {
 func (k Keeper) VerifyResultStore(ctx context.Context) prefix.Store {
 	storeAdapter := runtime.KVStoreAdapter(k.storeService.OpenKVStore(ctx))
 	return prefix.NewStore(storeAdapter, types.VerifyResultKey)
-}
-
-func (k Keeper) bitVMChallengeDataStore(ctx context.Context) prefix.Store {
-	storeAdapter := runtime.KVStoreAdapter(k.storeService.OpenKVStore(ctx))
-	return prefix.NewStore(storeAdapter, types.BitVMChallengeDataKey)
 }
 
 func (k Keeper) blockProposerStore(ctx context.Context) prefix.Store {
@@ -179,4 +205,22 @@ func (k Keeper) blockProposerStore(ctx context.Context) prefix.Store {
 func (k Keeper) PendingProofsIndexStore(ctx context.Context) prefix.Store {
 	storeAdapter := runtime.KVStoreAdapter(k.storeService.OpenKVStore(ctx))
 	return prefix.NewStore(storeAdapter, types.PendingProofsIndexKey)
+}
+
+// DASubmissionQueueStore returns a prefix store for the DA submission data
+func (k Keeper) DASubmissionQueueStore(ctx context.Context) prefix.Store {
+	storeAdapter := runtime.KVStoreAdapter(k.storeService.OpenKVStore(ctx))
+	return prefix.NewStore(storeAdapter, types.DASubmissionQueueKey)
+}
+
+// DASubmissionResultsStore returns a prefix store for the DA submission results
+func (k Keeper) DASubmissionResultsStore(ctx context.Context) prefix.Store {
+	storeAdapter := runtime.KVStoreAdapter(k.storeService.OpenKVStore(ctx))
+	return prefix.NewStore(storeAdapter, types.DASubmissionResultsKey)
+}
+
+// DASubmitterStore returns a prefix store for the DA submitter
+func (k Keeper) DASubmitterStore(ctx context.Context) prefix.Store {
+	storeAdapter := runtime.KVStoreAdapter(k.storeService.OpenKVStore(ctx))
+	return prefix.NewStore(storeAdapter, []byte{})
 }
