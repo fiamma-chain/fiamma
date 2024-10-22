@@ -14,4 +14,7 @@ message GenesisState {
     (gogoproto.nullable) = false,
     (amino.dont_omitempty) = true
   ];
+
+  string da_submitter = 2;
+  
 }

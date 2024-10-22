@@ -22,6 +22,8 @@ const (
 	Msg_UpdateParams_FullMethodName                = "/fiamma.zkpverify.Msg/UpdateParams"
 	Msg_SubmitProof_FullMethodName                 = "/fiamma.zkpverify.Msg/SubmitProof"
 	Msg_SubmitCommunityVerification_FullMethodName = "/fiamma.zkpverify.Msg/SubmitCommunityVerification"
+	Msg_UpdateDASubmitter_FullMethodName           = "/fiamma.zkpverify.Msg/UpdateDASubmitter"
+	Msg_UpdateDASubmissionResults_FullMethodName   = "/fiamma.zkpverify.Msg/UpdateDASubmissionResults"
 )
 
 // MsgClient is the client API for Msg service.
@@ -35,6 +37,10 @@ type MsgClient interface {
 	SubmitProof(ctx context.Context, in *MsgSubmitProof, opts ...grpc.CallOption) (*MsgSubmitProofResponse, error)
 	// SubmitCommunityVerification defines a community (zkpverify) operation for verifying a proof.
 	SubmitCommunityVerification(ctx context.Context, in *MsgSubmitCommunityVerification, opts ...grpc.CallOption) (*MsgSubmitCommunityVerificationResponse, error)
+	// UpdateDASubmitter defines a (zkpverify) operation for updating the DA submitter address.
+	UpdateDASubmitter(ctx context.Context, in *MsgUpdateDASubmitter, opts ...grpc.CallOption) (*MsgUpdateDASubmitterResponse, error)
+	// UpdateDASubmissionResults defines a (zkpverify) operation for updating the DA submission result.
+	UpdateDASubmissionResults(ctx context.Context, in *MsgUpdateDASubmissionResults, opts ...grpc.CallOption) (*MsgUpdateDASubmissionResultsResponse, error)
 }
 
 type msgClient struct {
@@ -72,6 +78,24 @@ func (c *msgClient) SubmitCommunityVerification(ctx context.Context, in *MsgSubm
 	return out, nil
 }
 
+func (c *msgClient) UpdateDASubmitter(ctx context.Context, in *MsgUpdateDASubmitter, opts ...grpc.CallOption) (*MsgUpdateDASubmitterResponse, error) {
+	out := new(MsgUpdateDASubmitterResponse)
+	err := c.cc.Invoke(ctx, Msg_UpdateDASubmitter_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *msgClient) UpdateDASubmissionResults(ctx context.Context, in *MsgUpdateDASubmissionResults, opts ...grpc.CallOption) (*MsgUpdateDASubmissionResultsResponse, error) {
+	out := new(MsgUpdateDASubmissionResultsResponse)
+	err := c.cc.Invoke(ctx, Msg_UpdateDASubmissionResults_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // MsgServer is the server API for Msg service.
 // All implementations must embed UnimplementedMsgServer
 // for forward compatibility
@@ -83,6 +107,10 @@ type MsgServer interface {
 	SubmitProof(context.Context, *MsgSubmitProof) (*MsgSubmitProofResponse, error)
 	// SubmitCommunityVerification defines a community (zkpverify) operation for verifying a proof.
 	SubmitCommunityVerification(context.Context, *MsgSubmitCommunityVerification) (*MsgSubmitCommunityVerificationResponse, error)
+	// UpdateDASubmitter defines a (zkpverify) operation for updating the DA submitter address.
+	UpdateDASubmitter(context.Context, *MsgUpdateDASubmitter) (*MsgUpdateDASubmitterResponse, error)
+	// UpdateDASubmissionResults defines a (zkpverify) operation for updating the DA submission result.
+	UpdateDASubmissionResults(context.Context, *MsgUpdateDASubmissionResults) (*MsgUpdateDASubmissionResultsResponse, error)
 	mustEmbedUnimplementedMsgServer()
 }
 
@@ -98,6 +126,12 @@ func (UnimplementedMsgServer) SubmitProof(context.Context, *MsgSubmitProof) (*Ms
 }
 func (UnimplementedMsgServer) SubmitCommunityVerification(context.Context, *MsgSubmitCommunityVerification) (*MsgSubmitCommunityVerificationResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SubmitCommunityVerification not implemented")
+}
+func (UnimplementedMsgServer) UpdateDASubmitter(context.Context, *MsgUpdateDASubmitter) (*MsgUpdateDASubmitterResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateDASubmitter not implemented")
+}
+func (UnimplementedMsgServer) UpdateDASubmissionResults(context.Context, *MsgUpdateDASubmissionResults) (*MsgUpdateDASubmissionResultsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateDASubmissionResults not implemented")
 }
 func (UnimplementedMsgServer) mustEmbedUnimplementedMsgServer() {}
 
@@ -166,6 +200,42 @@ func _Msg_SubmitCommunityVerification_Handler(srv interface{}, ctx context.Conte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Msg_UpdateDASubmitter_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgUpdateDASubmitter)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MsgServer).UpdateDASubmitter(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Msg_UpdateDASubmitter_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MsgServer).UpdateDASubmitter(ctx, req.(*MsgUpdateDASubmitter))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Msg_UpdateDASubmissionResults_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgUpdateDASubmissionResults)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MsgServer).UpdateDASubmissionResults(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Msg_UpdateDASubmissionResults_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MsgServer).UpdateDASubmissionResults(ctx, req.(*MsgUpdateDASubmissionResults))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Msg_ServiceDesc is the grpc.ServiceDesc for Msg service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -184,6 +254,14 @@ var Msg_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SubmitCommunityVerification",
 			Handler:    _Msg_SubmitCommunityVerification_Handler,
+		},
+		{
+			MethodName: "UpdateDASubmitter",
+			Handler:    _Msg_UpdateDASubmitter_Handler,
+		},
+		{
+			MethodName: "UpdateDASubmissionResults",
+			Handler:    _Msg_UpdateDASubmissionResults_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
