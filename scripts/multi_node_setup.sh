@@ -15,10 +15,6 @@ staker_addresses=()
 babylonContractAddr=fiamma14hj2tavq8fpesdwxxcu44rty3hh90vhujrvcmstl4zr3txmfvw9sgx3jav
 btcStakingContractAddr=fiamma1nc5tatafv6eyq7llkr2gv50ff9e22mnf70qgjlv737ktmt4eswrqyn5sl2
 
-# nubit da rpc url and authkey
-
-rpc="http://127.0.0.1:26658"
-authkey=""
 
 
 if [ $# -lt 1 ]; then
@@ -44,9 +40,6 @@ for node in "$@"; do
     docker run --rm -it -v $(pwd)/testnet-nodes/$node:/root/.fiamma --entrypoint sed ghcr.io/fiamma-chain/fiamma -i 's/"btc_staking_contract_address": ""/"btc_staking_contract_address": "'"$btcStakingContractAddr"'"/g' /root/.fiamma/config/genesis.json
     docker run --rm -v $(pwd)/testnet-nodes/$node:/root/.fiamma -it ghcr.io/fiamma-chain/fiamma config set app minimum-gas-prices "$minimum_gas_price$token"
     docker run --rm -v $(pwd)/testnet-nodes/$node:/root/.fiamma -it ghcr.io/fiamma-chain/fiamma config set app pruning "nothing" 
-
-    docker run --rm -v $(pwd)/testnet-nodes/$node:/root/.fiamma -it ghcr.io/fiamma-chain/fiamma config set app da-config.rpc "$rpc"
-    docker run --rm -v $(pwd)/testnet-nodes/$node:/root/.fiamma -it ghcr.io/fiamma-chain/fiamma config set app da-config.authkey "$authkey"
 
     node_id=$(docker run --rm -i -v $(pwd)/testnet-nodes/$node:/root/.fiamma ghcr.io/fiamma-chain/fiamma tendermint show-node-id)
     node_ids+=($node_id)

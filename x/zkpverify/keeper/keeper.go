@@ -12,7 +12,6 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/types/query"
 
-	"fiamma/nubitda"
 	"fiamma/x/zkpverify/types"
 )
 
@@ -28,9 +27,6 @@ type (
 
 		stakingKeeper types.StakingKeeper
 
-		// Nubit Data Availability
-		nubitDA *nubitda.NubitDA
-
 		bitvmstakerKeeper types.BitvmstakerKeeper
 	}
 )
@@ -42,7 +38,6 @@ func NewKeeper(
 	authority string,
 
 	stakingKeeper types.StakingKeeper,
-	nubitDA *nubitda.NubitDA,
 	bitvmstakerKeeper types.BitvmstakerKeeper,
 ) Keeper {
 	if _, err := sdk.AccAddressFromBech32(authority); err != nil {
@@ -54,7 +49,6 @@ func NewKeeper(
 		storeService:      storeService,
 		authority:         authority,
 		logger:            logger,
-		nubitDA:           nubitDA,
 		stakingKeeper:     stakingKeeper,
 		bitvmstakerKeeper: bitvmstakerKeeper,
 	}

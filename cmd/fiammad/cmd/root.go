@@ -25,7 +25,6 @@ import (
 	"github.com/spf13/pflag"
 
 	"fiamma/app"
-	"fiamma/nubitda"
 )
 
 // NewRootCmd creates a new root command for fiammad. It is called once in the main function.
@@ -37,14 +36,12 @@ func NewRootCmd() *cobra.Command {
 		autoCliOpts        autocli.AppOptions
 		moduleBasicManager module.BasicManager
 		clientCtx          client.Context
-		nubitDA            *nubitda.NubitDA
 	)
 
 	if err := depinject.Inject(
 		depinject.Configs(app.AppConfig(),
 			depinject.Supply(
 				log.NewNopLogger(),
-				nubitDA,
 			),
 			depinject.Provide(
 				ProvideClientContext,

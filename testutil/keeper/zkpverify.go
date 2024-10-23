@@ -18,7 +18,6 @@ import (
 	govtypes "github.com/cosmos/cosmos-sdk/x/gov/types"
 	"github.com/stretchr/testify/require"
 
-	"fiamma/nubitda"
 	"fiamma/x/zkpverify/keeper"
 	"fiamma/x/zkpverify/types"
 )
@@ -61,7 +60,6 @@ func ZkpVerifyKeeper(t testing.TB) (keeper.Keeper, sdk.Context) {
 		log.NewNopLogger(),
 		authority.String(),
 		nil,
-		&nubitda.NewMockNubitDA().NubitDA,
 		mockBitvmstakerKeeper,
 	)
 

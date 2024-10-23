@@ -2,6 +2,7 @@ package cmd
 
 import (
 	cmtcfg "github.com/cometbft/cometbft/config"
+	serverconfig "github.com/cosmos/cosmos-sdk/server/config"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
 	"fiamma/app"
@@ -38,9 +39,14 @@ func initCometBFTConfig() *cmtcfg.Config {
 // initAppConfig helps to override default appConfig template and configs.
 // return "", nil if no custom configuration is required for the application.
 func initAppConfig() (string, interface{}) {
-	fiammaConfig := DefaultFiammaConfig()
-	fiammaTemplate := DefaultFiammaTemplate()
+	// The following code snippet is just for reference.
+	type CustomAppConfig struct {
+		serverconfig.Config `mapstructure:",squash"`
+	}
 
+	// Optionally allow the chain developer to overwrite the SDK's default
+	// server config.
+	srvCfg := serverconfig.DefaultConfig()
 	// The SDK's default minimum gas price is set to "" (empty value) inside
 	// app.toml. If left empty by validators, the node will halt on startup.
 	// However, the chain developer can set a default app.toml value for their
@@ -56,11 +62,11 @@ func initAppConfig() (string, interface{}) {
 	// srvCfg.MinGasPrices = "0stake"
 	// srvCfg.BaseConfig.IAVLDisableFastNode = true // disable fastnode by default
 
-	// customAppConfig := CustomAppConfig{
-	// 	Config: *srvCfg,
-	// }
+	customAppConfig := CustomAppConfig{
+		Config: *srvCfg,
+	}
 
-	// customAppTemplate := serverconfig.DefaultConfigTemplate
+	customAppTemplate := serverconfig.DefaultConfigTemplate
 	// Edit the default template file
 	//
 	// customAppTemplate := serverconfig.DefaultConfigTemplate + `
@@ -71,5 +77,5 @@ func initAppConfig() (string, interface{}) {
 	// # Warning: this is currently unstable and may lead to crashes, best to keep for 0 unless testing locally
 	// lru_size = 0`
 
-	return fiammaTemplate, fiammaConfig
+	return customAppTemplate, customAppConfig
 }
