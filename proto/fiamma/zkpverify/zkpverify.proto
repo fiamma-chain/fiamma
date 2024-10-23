@@ -37,8 +37,6 @@ message DASubmissionResult {
 message DASubmissionData {
   string proof_id = 1;
   ProofData proof_data = 2;
-  bytes witness = 3;
-  string block_proposer = 4;
 }
 
 
@@ -60,4 +58,10 @@ message VerifyResult {
   VerificationStatus status = 4;
   uint64 community_verification_count = 5;
   string namespace = 6;
+}
+
+
+message BitVMChallengeData {
+  bytes witness = 1;
+  string proposer = 2;
 }

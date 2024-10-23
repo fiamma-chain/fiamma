@@ -65,10 +65,10 @@ func (k Keeper) Logger() log.Logger {
 }
 
 // SetVerifyResult stores proof verification information
-func (k Keeper) SetVerifyResult(ctx sdk.Context, verifyResult types.VerifyResult) {
+func (k Keeper) SetVerifyResult(ctx sdk.Context, proofId []byte, verifyResult types.VerifyResult) {
 	store := k.VerifyResultStore(ctx)
 	bz := k.cdc.MustMarshal(&verifyResult)
-	store.Set([]byte(verifyResult.ProofId), bz)
+	store.Set(proofId, bz)
 }
 
 // GetVerifyResult retrieves proof verification information
@@ -100,6 +100,25 @@ func (k Keeper) GetProofData(ctx context.Context, proofId []byte) (types.ProofDa
 	var proofData types.ProofData
 	k.cdc.MustUnmarshal(bz, &proofData)
 	return proofData, true
+}
+
+// SetBitVMChallengeData stores witness data
+func (k Keeper) SetBitVMChallengeData(ctx context.Context, proofId []byte, challengeData types.BitVMChallengeData) {
+	store := k.bitVMChallengeDataStore(ctx)
+	bz := k.cdc.MustMarshal(&challengeData)
+	store.Set(proofId, bz)
+}
+
+// GetBitVMChallengeData retrieves witness data from the chain
+func (k Keeper) GetBitVMChallengeData(ctx context.Context, proofId []byte) (types.BitVMChallengeData, bool) {
+	store := k.bitVMChallengeDataStore(ctx)
+	bz := store.Get(proofId)
+	if bz == nil {
+		return types.BitVMChallengeData{}, false
+	}
+	var challengeData types.BitVMChallengeData
+	k.cdc.MustUnmarshal(bz, &challengeData)
+	return challengeData, true
 }
 
 // IsPendingProof checks if a proof ID is in the pending proofs index
@@ -143,24 +162,35 @@ func (k Keeper) GetDASubmissionQueue(ctx context.Context, pagination *query.Page
 	return daSubmissionList, pageRes, err
 }
 
-func (k Keeper) EnqueueDASubmission(ctx context.Context, daSubmissionData types.DASubmissionData) {
+func (k Keeper) EnqueueDASubmission(ctx context.Context, proofId []byte, daSubmissionData types.DASubmissionData) {
 	store := k.DASubmissionQueueStore(ctx)
-	store.Set([]byte(daSubmissionData.ProofId), k.cdc.MustMarshal(&daSubmissionData))
+	store.Set(proofId, k.cdc.MustMarshal(&daSubmissionData))
 }
 
-func (k Keeper) DequeueDASubmission(ctx context.Context, proofId string) {
+func (k Keeper) GetDASubmissionData(ctx context.Context, proofId []byte) (types.DASubmissionData, bool) {
 	store := k.DASubmissionQueueStore(ctx)
-	store.Delete([]byte(proofId))
+	bz := store.Get(proofId)
+	if bz == nil {
+		return types.DASubmissionData{}, false
+	}
+	var daSubmissionData types.DASubmissionData
+	k.cdc.MustUnmarshal(bz, &daSubmissionData)
+	return daSubmissionData, true
 }
 
-func (k Keeper) SetDASubmissionResult(ctx context.Context, result *types.DASubmissionResult) {
-	store := k.DASubmissionResultsStore(ctx)
-	store.Set([]byte(result.ProofId), k.cdc.MustMarshal(result))
+func (k Keeper) DequeueDASubmission(ctx context.Context, proofId []byte) {
+	store := k.DASubmissionQueueStore(ctx)
+	store.Delete(proofId)
 }
 
-func (k Keeper) GetDASubmissionResult(ctx context.Context, proofId string) (types.DASubmissionResult, bool) {
+func (k Keeper) SetDASubmissionResult(ctx context.Context, proofId []byte, result *types.DASubmissionResult) {
 	store := k.DASubmissionResultsStore(ctx)
-	bz := store.Get([]byte(proofId))
+	store.Set(proofId, k.cdc.MustMarshal(result))
+}
+
+func (k Keeper) GetDASubmissionResult(ctx context.Context, proofId []byte) (types.DASubmissionResult, bool) {
+	store := k.DASubmissionResultsStore(ctx)
+	bz := store.Get(proofId)
 	if bz == nil {
 		return types.DASubmissionResult{}, false
 	}
@@ -188,6 +218,11 @@ func (k Keeper) proofDataStore(ctx context.Context) prefix.Store {
 func (k Keeper) VerifyResultStore(ctx context.Context) prefix.Store {
 	storeAdapter := runtime.KVStoreAdapter(k.storeService.OpenKVStore(ctx))
 	return prefix.NewStore(storeAdapter, types.VerifyResultKey)
+}
+
+func (k Keeper) bitVMChallengeDataStore(ctx context.Context) prefix.Store {
+	storeAdapter := runtime.KVStoreAdapter(k.storeService.OpenKVStore(ctx))
+	return prefix.NewStore(storeAdapter, types.BitVMChallengeDataKey)
 }
 
 func (k Keeper) blockProposerStore(ctx context.Context) prefix.Store {

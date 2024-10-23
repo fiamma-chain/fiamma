@@ -65,6 +65,13 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{},
 				},
 
+				{
+					RpcMethod:      "BitVMChallengeData",
+					Use:            "get-bitvm-challenge-data [proof_id]",
+					Short:          "Query BitVM challenge data by proof_id",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "proof_id"}},
+				},
+
 				// this line is used by ignite scaffolding # autocli/query
 			},
 		},

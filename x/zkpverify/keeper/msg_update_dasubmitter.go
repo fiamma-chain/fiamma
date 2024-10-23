@@ -2,6 +2,7 @@ package keeper
 
 import (
 	"context"
+
 	"fiamma/x/zkpverify/types"
 
 	errorsmod "cosmossdk.io/errors"
@@ -26,5 +27,4 @@ func (k msgServer) UpdateDASubmitter(goCtx context.Context, msg *types.MsgUpdate
 	k.SetDASubmitter(ctx, msg.DaSubmitter)
 
 	return &types.MsgUpdateDASubmitterResponse{}, nil
-
 }

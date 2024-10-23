@@ -5,6 +5,7 @@ import (
 
 	keepertest "fiamma/testutil/keeper"
 	"fiamma/testutil/nullify"
+	"fiamma/testutil/sample"
 	zkpverify "fiamma/x/zkpverify/module"
 	"fiamma/x/zkpverify/types"
 
@@ -13,8 +14,8 @@ import (
 
 func TestGenesis(t *testing.T) {
 	genesisState := types.GenesisState{
-		Params: types.DefaultParams(),
-
+		Params:      types.DefaultParams(),
+		DaSubmitter: sample.AccAddress(),
 		// this line is used by starport scaffolding # genesis/test/state
 	}
 

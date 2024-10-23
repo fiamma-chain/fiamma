@@ -27,6 +27,7 @@ const (
 	Query_PendingProofByNamespace_FullMethodName  = "/fiamma.zkpverify.Query/PendingProofByNamespace"
 	Query_DASubmitter_FullMethodName              = "/fiamma.zkpverify.Query/DASubmitter"
 	Query_DASubmissionQueue_FullMethodName        = "/fiamma.zkpverify.Query/DASubmissionQueue"
+	Query_BitVMChallengeData_FullMethodName       = "/fiamma.zkpverify.Query/BitVMChallengeData"
 )
 
 // QueryClient is the client API for Query service.
@@ -46,6 +47,7 @@ type QueryClient interface {
 	PendingProofByNamespace(ctx context.Context, in *QueryPendingProofByNamespaceRequest, opts ...grpc.CallOption) (*QueryPendingProofByNamespaceResponse, error)
 	DASubmitter(ctx context.Context, in *QueryDASubmitterRequest, opts ...grpc.CallOption) (*QueryDASubmitterResponse, error)
 	DASubmissionQueue(ctx context.Context, in *QueryDASubmissionQueueRequest, opts ...grpc.CallOption) (*QueryDASubmissionQueueResponse, error)
+	BitVMChallengeData(ctx context.Context, in *QueryBitVMChallengeDataRequest, opts ...grpc.CallOption) (*QueryBitVMChallengeDataResponse, error)
 }
 
 type queryClient struct {
@@ -128,6 +130,15 @@ func (c *queryClient) DASubmissionQueue(ctx context.Context, in *QueryDASubmissi
 	return out, nil
 }
 
+func (c *queryClient) BitVMChallengeData(ctx context.Context, in *QueryBitVMChallengeDataRequest, opts ...grpc.CallOption) (*QueryBitVMChallengeDataResponse, error) {
+	out := new(QueryBitVMChallengeDataResponse)
+	err := c.cc.Invoke(ctx, Query_BitVMChallengeData_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // QueryServer is the server API for Query service.
 // All implementations must embed UnimplementedQueryServer
 // for forward compatibility
@@ -145,6 +156,7 @@ type QueryServer interface {
 	PendingProofByNamespace(context.Context, *QueryPendingProofByNamespaceRequest) (*QueryPendingProofByNamespaceResponse, error)
 	DASubmitter(context.Context, *QueryDASubmitterRequest) (*QueryDASubmitterResponse, error)
 	DASubmissionQueue(context.Context, *QueryDASubmissionQueueRequest) (*QueryDASubmissionQueueResponse, error)
+	BitVMChallengeData(context.Context, *QueryBitVMChallengeDataRequest) (*QueryBitVMChallengeDataResponse, error)
 	mustEmbedUnimplementedQueryServer()
 }
 
@@ -175,6 +187,9 @@ func (UnimplementedQueryServer) DASubmitter(context.Context, *QueryDASubmitterRe
 }
 func (UnimplementedQueryServer) DASubmissionQueue(context.Context, *QueryDASubmissionQueueRequest) (*QueryDASubmissionQueueResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DASubmissionQueue not implemented")
+}
+func (UnimplementedQueryServer) BitVMChallengeData(context.Context, *QueryBitVMChallengeDataRequest) (*QueryBitVMChallengeDataResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method BitVMChallengeData not implemented")
 }
 func (UnimplementedQueryServer) mustEmbedUnimplementedQueryServer() {}
 
@@ -333,6 +348,24 @@ func _Query_DASubmissionQueue_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Query_BitVMChallengeData_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryBitVMChallengeDataRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QueryServer).BitVMChallengeData(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Query_BitVMChallengeData_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QueryServer).BitVMChallengeData(ctx, req.(*QueryBitVMChallengeDataRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Query_ServiceDesc is the grpc.ServiceDesc for Query service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -371,6 +404,10 @@ var Query_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DASubmissionQueue",
 			Handler:    _Query_DASubmissionQueue_Handler,
+		},
+		{
+			MethodName: "BitVMChallengeData",
+			Handler:    _Query_BitVMChallengeData_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

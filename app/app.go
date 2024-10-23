@@ -209,7 +209,6 @@ func New(
 	appOpts servertypes.AppOptions,
 	baseAppOptions ...func(*baseapp.BaseApp),
 ) (*App, error) {
-
 	var (
 		app        = &App{}
 		appBuilder *runtime.AppBuilder

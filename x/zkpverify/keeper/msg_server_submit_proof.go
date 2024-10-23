@@ -56,12 +56,16 @@ func (k msgServer) SubmitProof(goCtx context.Context, msg *types.MsgSubmitProof)
 
 	// enqueue the proof for data availability submission and bitvm challenge
 	daSubmissionData := types.DASubmissionData{
-		ProofId:       proofIdHex,
-		ProofData:     &proofData,
-		Witness:       witness,
-		BlockProposer: proposerAddress,
+		ProofId:   proofIdHex,
+		ProofData: &proofData,
 	}
-	k.EnqueueDASubmission(ctx, daSubmissionData)
+	k.EnqueueDASubmission(ctx, proofId[:], daSubmissionData)
+
+	bitVMChallengeData := types.BitVMChallengeData{
+		Witness:  witness,
+		Proposer: proposerAddress,
+	}
+	k.SetBitVMChallengeData(ctx, proofId[:], bitVMChallengeData)
 
 	// store verify data in the store
 	verifyResult := types.VerifyResult{
@@ -72,7 +76,7 @@ func (k msgServer) SubmitProof(goCtx context.Context, msg *types.MsgSubmitProof)
 		CommunityVerificationCount: uint64(0),
 		Namespace:                  proofData.Namespace,
 	}
-	k.SetVerifyResult(ctx, verifyResult)
+	k.SetVerifyResult(ctx, proofId[:], verifyResult)
 
 	event := sdk.NewEvent("SubmitProof",
 		sdk.NewAttribute("namespace", proofData.Namespace),

@@ -54,6 +54,10 @@ service Query {
     option (google.api.http).get = "/fiamma/zkpverify/da_submission_queue";
   }
 
+  rpc BitVMChallengeData(QueryBitVMChallengeDataRequest) returns (QueryBitVMChallengeDataResponse) {
+    option (google.api.http).get = "/fiamma/zkpverify/bitvm_challenge_data";
+  }
+
 }
 // QueryParamsRequest is request type for the Query/Params RPC method.
 message QueryParamsRequest {}
@@ -148,3 +152,12 @@ message QueryDASubmissionQueueResponse {
   cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }
 
+// QueryBitVMChallengeDataRequest is request type for the Query/BitVMChallengeData RPC method.
+message QueryBitVMChallengeDataRequest {
+  string proof_id = 1;
+}
+
+// QueryBitVMChallengeDataResponse is response type for the Query/BitVMChallengeData RPC method.
+message QueryBitVMChallengeDataResponse {
+  fiamma.zkpverify.BitVMChallengeData bitvm_challenge_data = 1;
+}
