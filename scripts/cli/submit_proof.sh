@@ -14,19 +14,22 @@ fi
 : ${NODE:="http://127.0.0.1:26657"}
 : ${FEES:=2000ufia}
 : ${GAS:=80000000}
+: ${PROOF_FILE:=../../prover_examples/bitvm/proof.bitvm}
+: ${PUBLIC_INPUT_FILE:=../../prover_examples/bitvm/public_input.bitvm}
 : ${VK_FILE:=../../prover_examples/bitvm/vk.bitvm}
-: ${VK_FILE_CHALLENGE:=../../prover_examples/bitvm_challenge/vk.bitvm}
+: ${PROOF_SYSTEM:="GROTH16_BN254_BITVM"}
+: ${NAMESPACE:="TEST"}
+: ${DATA_LOCATION:="FIAMMA"}
 
-fiammad tx bitvmstaker register-vk \
+
+fiammad tx zkpverify submit-proof \
   --from $ACCOUNT --chain-id $CHAIN_ID  \
   --gas $GAS --fees $FEES \
   --node $NODE \
-  $VK_FILE
-
-sleep 2
-
-fiammad tx bitvmstaker register-vk \
-  --from $ACCOUNT --chain-id $CHAIN_ID  \
-  --gas $GAS --fees $FEES \
-  --node $NODE \
-  $VK_FILE_CHALLENGE
+  --keyring-backend test \
+  $NAMESPACE \
+  $PROOF_SYSTEM \
+  $PROOF_FILE \
+	$PUBLIC_INPUT_FILE \
+	$VK_FILE \
+	$DATA_LOCATION

@@ -1,7 +1,9 @@
 package keeper
 
 import (
+	"bytes"
 	"context"
+	"crypto/sha256"
 	"encoding/hex"
 	"strconv"
 
@@ -24,11 +26,11 @@ func (k msgServer) SubmitProof(goCtx context.Context, msg *types.MsgSubmitProof)
 
 	proofData := types.ProofData{
 		Namespace:    msg.Namespace,
-		DataLocation: types.DataLocation(types.DataLocation_value[msg.DataLocation]),
 		ProofSystem:  types.ProofSystem(types.ProofSystem_value[msg.ProofSystem]),
 		Proof:        msg.Proof,
 		PublicInput:  msg.PublicInput,
 		Vk:           msg.Vk,
+		DataLocation: types.DataLocation(types.DataLocation_value[msg.DataLocation]),
 	}
 
 	proofId, err := k.GetProofId(proofData)
@@ -46,7 +48,7 @@ func (k msgServer) SubmitProof(goCtx context.Context, msg *types.MsgSubmitProof)
 
 	// TODO: remove this
 	// This is a buggy proofId for testing the bitvm challenge process
-	if proofIdHex == "12b16425935e229b45436571f22e5cbf051b0d5430c717e6ab209d4e98944691" {
+	if proofIdHex == "1735e881fa5e58408e4710a4e8cbea0a7995f029eefdf85d7e59775b0b6c44c5" {
 		result = false
 	}
 
@@ -54,12 +56,17 @@ func (k msgServer) SubmitProof(goCtx context.Context, msg *types.MsgSubmitProof)
 	currentHeight := ctx.BlockHeight()
 	proposerAddress := k.GetBlockProposer(ctx, currentHeight)
 
-	// enqueue the proof for data availability submission and bitvm challenge
-	daSubmissionData := types.DASubmissionData{
-		ProofId:   proofIdHex,
-		ProofData: &proofData,
+	if proofData.DataLocation != types.DataLocation_FIAMMA {
+		// enqueue the proof for data availability submission and bitvm challenge
+		daSubmissionData := types.DASubmissionData{
+			ProofId:   proofIdHex,
+			ProofData: &proofData,
+		}
+		k.EnqueueDASubmission(ctx, proofId[:], daSubmissionData)
+	} else {
+		// store the proof data in the fiamma store
+		k.SetProofData(ctx, proofId[:], proofData)
 	}
-	k.EnqueueDASubmission(ctx, proofId[:], daSubmissionData)
 
 	bitVMChallengeData := types.BitVMChallengeData{
 		Witness:  witness,
@@ -87,4 +94,18 @@ func (k msgServer) SubmitProof(goCtx context.Context, msg *types.MsgSubmitProof)
 	ctx.EventManager().EmitEvent(event)
 
 	return &types.MsgSubmitProofResponse{}, nil
+}
+
+// GetProofId returns the proof id
+func (k Keeper) GetProofId(proofData types.ProofData) ([32]byte, error) {
+	var buf bytes.Buffer
+	buf.Write([]byte(proofData.Namespace))
+	buf.Write([]byte(proofData.ProofSystem.String()))
+	buf.Write(proofData.Proof)
+	buf.Write(proofData.PublicInput)
+	buf.Write(proofData.Vk)
+	buf.Write([]byte(proofData.DataLocation.String()))
+
+	hash := sha256.Sum256(buf.Bytes())
+	return hash, nil
 }
