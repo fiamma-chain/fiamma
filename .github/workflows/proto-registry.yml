@@ -3,7 +3,7 @@ name: Publish to Buf Schema Registry
 # This workflow is only run when a .proto file has been changed
 on:
   push:
-    branches: [main]
+    branches: [main, develop]
     tags: [v*]
     paths:
       - proto/**
