@@ -24,6 +24,7 @@ enum ProofSystem {
   FFPLONK_BN254_BITVM = 1;
 }
 
+// DASubmissionResult is the data structure for the DA submission result
 message DASubmissionResult {
   string proof_id = 1;
   DataLocation data_location = 2;
@@ -33,7 +34,7 @@ message DASubmissionResult {
   string namespace = 6;
 }
 
-
+// DASubmissionData is the data structure for the DA submission data
 message DASubmissionData {
   string proof_id = 1;
   ProofData proof_data = 2;
@@ -60,7 +61,7 @@ message VerifyResult {
   string namespace = 6;
 }
 
-
+// BitVMChallengeData is the data structure for the bitvm challenge data
 message BitVMChallengeData {
   bytes witness = 1;
   string proposer = 2;
