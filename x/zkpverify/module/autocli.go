@@ -3,7 +3,7 @@ package zkpverify
 import (
 	autocliv1 "cosmossdk.io/api/cosmos/autocli/v1"
 
-	modulev1 "fiamma/api/fiamma/zkpverify"
+	modulev1 "github.com/fiamma-chain/fiamma/api/fiamma/zkpverify"
 )
 
 // AutoCLIOptions implements the autocli.HasAutoCLIConfig interface.

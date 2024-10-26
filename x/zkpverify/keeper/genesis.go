@@ -3,7 +3,7 @@ package keeper
 import (
 	"context"
 
-	"fiamma/x/zkpverify/types"
+	"github.com/fiamma-chain/fiamma/x/zkpverify/types"
 )
 
 // InitGenesis initializes the module's state from a provided genesis state.

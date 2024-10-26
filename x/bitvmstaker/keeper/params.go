@@ -5,7 +5,7 @@ import (
 
 	"github.com/cosmos/cosmos-sdk/runtime"
 
-	"fiamma/x/bitvmstaker/types"
+	"github.com/fiamma-chain/fiamma/x/bitvmstaker/types"
 )
 
 // GetParams get all parameters as types.Params

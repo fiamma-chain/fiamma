@@ -4,7 +4,7 @@ import (
 	"context"
 	"encoding/binary"
 
-	"fiamma/x/bitvmstaker/types"
+	"github.com/fiamma-chain/fiamma/x/bitvmstaker/types"
 
 	"cosmossdk.io/store/prefix"
 	"github.com/cosmos/cosmos-sdk/runtime"

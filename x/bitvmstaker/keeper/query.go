@@ -1,7 +1,7 @@
 package keeper
 
 import (
-	"fiamma/x/bitvmstaker/types"
+	"github.com/fiamma-chain/fiamma/x/bitvmstaker/types"
 )
 
 var _ types.QueryServer = Keeper{}

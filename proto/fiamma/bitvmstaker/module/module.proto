@@ -6,7 +6,7 @@ import "cosmos/app/v1alpha1/module.proto";
 // Module is the config object for the module.
 message Module {
   option (cosmos.app.v1alpha1.module) = {
-    go_import: "fiamma/x/bitvmstaker"
+    go_import: "github.com/fiamma-chain/fiamma/x/bitvmstaker"
   };
 
   // authority defines the custom module authority. If not set, defaults to the governance module.

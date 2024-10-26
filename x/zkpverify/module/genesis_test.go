@@ -3,11 +3,12 @@ package zkpverify_test
 import (
 	"testing"
 
-	keepertest "fiamma/testutil/keeper"
-	"fiamma/testutil/nullify"
-	"fiamma/testutil/sample"
-	zkpverify "fiamma/x/zkpverify/module"
-	"fiamma/x/zkpverify/types"
+	zkpverify "github.com/fiamma-chain/fiamma/x/zkpverify/module"
+	"github.com/fiamma-chain/fiamma/x/zkpverify/types"
+
+	keepertest "github.com/fiamma-chain/fiamma/testutil/keeper"
+	"github.com/fiamma-chain/fiamma/testutil/nullify"
+	"github.com/fiamma-chain/fiamma/testutil/sample"
 
 	"github.com/stretchr/testify/require"
 )

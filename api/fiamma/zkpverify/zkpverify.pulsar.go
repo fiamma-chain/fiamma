@@ -3264,6 +3264,7 @@ func (ProofSystem) EnumDescriptor() ([]byte, []int) {
 	return file_fiamma_zkpverify_zkpverify_proto_rawDescGZIP(), []int{2}
 }
 
+// DASubmissionResult is the data structure for the DA submission result
 type DASubmissionResult struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -3339,6 +3340,7 @@ func (x *DASubmissionResult) GetNamespace() string {
 	return ""
 }
 
+// DASubmissionData is the data structure for the DA submission data
 type DASubmissionData struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -3534,6 +3536,7 @@ func (x *VerifyResult) GetNamespace() string {
 	return ""
 }
 
+// BitVMChallengeData is the data structure for the bitvm challenge data
 type BitVMChallengeData struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache

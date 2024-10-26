@@ -20,9 +20,9 @@ import (
 
 	// this line is used by starport scaffolding # 1
 
-	modulev1 "fiamma/api/fiamma/zkpverify/module"
-	"fiamma/x/zkpverify/keeper"
-	"fiamma/x/zkpverify/types"
+	modulev1 "github.com/fiamma-chain/fiamma/api/fiamma/zkpverify/module"
+	"github.com/fiamma-chain/fiamma/x/zkpverify/keeper"
+	"github.com/fiamma-chain/fiamma/x/zkpverify/types"
 )
 
 var (

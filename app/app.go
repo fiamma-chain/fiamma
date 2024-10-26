@@ -75,18 +75,18 @@ import (
 	ibctransferkeeper "github.com/cosmos/ibc-go/v8/modules/apps/transfer/keeper"
 	ibckeeper "github.com/cosmos/ibc-go/v8/modules/core/keeper"
 
-	zkpverifymodulekeeper "fiamma/x/zkpverify/keeper"
+	zkpverifymodulekeeper "github.com/fiamma-chain/fiamma/x/zkpverify/keeper"
 
 	wasmkeeper "github.com/CosmWasm/wasmd/x/wasm/keeper"
 	tmproto "github.com/cometbft/cometbft/proto/tendermint/types"
 
-	bitvmstakermodulekeeper "fiamma/x/bitvmstaker/keeper"
+	bitvmstakermodulekeeper "github.com/fiamma-chain/fiamma/x/bitvmstaker/keeper"
 
 	bbnkeeper "github.com/babylonlabs-io/babylon-sdk/x/babylon/keeper"
 
 	// this line is used by starport scaffolding # stargate/app/moduleImport
 
-	"fiamma/docs"
+	"github.com/fiamma-chain/fiamma/docs"
 )
 
 const (

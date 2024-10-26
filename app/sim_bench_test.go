@@ -14,7 +14,7 @@ import (
 	simcli "github.com/cosmos/cosmos-sdk/x/simulation/client/cli"
 	"github.com/stretchr/testify/require"
 
-	"fiamma/app"
+	"github.com/fiamma-chain/fiamma/app"
 )
 
 // Profile with:

@@ -3,8 +3,8 @@ package zkpverify
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"fiamma/x/zkpverify/keeper"
-	"fiamma/x/zkpverify/types"
+	"github.com/fiamma-chain/fiamma/x/zkpverify/keeper"
+	"github.com/fiamma-chain/fiamma/x/zkpverify/types"
 )
 
 // InitGenesis initializes the module's state from a provided genesis state.

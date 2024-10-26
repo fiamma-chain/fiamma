@@ -5,7 +5,7 @@ import (
 	serverconfig "github.com/cosmos/cosmos-sdk/server/config"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"fiamma/app"
+	"github.com/fiamma-chain/fiamma/app"
 )
 
 func initSDKConfig() {

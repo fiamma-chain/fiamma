@@ -4,12 +4,12 @@ import (
 	"context"
 	"testing"
 
-	keepertest "fiamma/testutil/keeper"
+	keepertest "github.com/fiamma-chain/fiamma/testutil/keeper"
 
 	"github.com/stretchr/testify/require"
 
-	"fiamma/x/zkpverify/keeper"
-	"fiamma/x/zkpverify/types"
+	"github.com/fiamma-chain/fiamma/x/zkpverify/keeper"
+	"github.com/fiamma-chain/fiamma/x/zkpverify/types"
 )
 
 func setupMsgServer(t testing.TB) (keeper.Keeper, types.MsgServer, context.Context) {

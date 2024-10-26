@@ -9,7 +9,7 @@ import "cosmos/base/query/v1beta1/pagination.proto";
 import "fiamma/zkpverify/params.proto";
 import "fiamma/zkpverify/zkpverify.proto";
 
-option go_package = "fiamma/x/zkpverify/types";
+option go_package = "github.com/fiamma-chain/fiamma/x/zkpverify/types";
 
 // Query defines the gRPC querier service.
 service Query {

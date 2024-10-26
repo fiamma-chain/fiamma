@@ -3,7 +3,7 @@ package keeper
 import (
 	"context"
 
-	"fiamma/x/zkpverify/types"
+	"github.com/fiamma-chain/fiamma/x/zkpverify/types"
 
 	errorsmod "cosmossdk.io/errors"
 	sdk "github.com/cosmos/cosmos-sdk/types"

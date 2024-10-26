@@ -7,7 +7,7 @@ import (
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 
-	"fiamma/x/zkpverify/types"
+	"github.com/fiamma-chain/fiamma/x/zkpverify/types"
 )
 
 func (k Keeper) DASubmitter(goCtx context.Context, req *types.QueryDASubmitterRequest) (*types.QueryDASubmitterResponse, error) {

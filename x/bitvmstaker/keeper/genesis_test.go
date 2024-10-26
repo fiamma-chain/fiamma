@@ -3,9 +3,10 @@ package keeper_test
 import (
 	"testing"
 
-	keppertest "fiamma/testutil/keeper"
-	"fiamma/testutil/sample"
-	"fiamma/x/bitvmstaker/types"
+	keppertest "github.com/fiamma-chain/fiamma/testutil/keeper"
+	"github.com/fiamma-chain/fiamma/testutil/sample"
+
+	"github.com/fiamma-chain/fiamma/x/bitvmstaker/types"
 
 	"github.com/stretchr/testify/require"
 )

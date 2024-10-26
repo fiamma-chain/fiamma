@@ -6,7 +6,7 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/stretchr/testify/require"
 
-	"fiamma/x/bitvmstaker/types"
+	"github.com/fiamma-chain/fiamma/x/bitvmstaker/types"
 )
 
 func TestMsgUpdateParams(t *testing.T) {

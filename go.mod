@@ -1,4 +1,4 @@
-module fiamma
+module github.com/fiamma-chain/fiamma
 
 go 1.22.3
 

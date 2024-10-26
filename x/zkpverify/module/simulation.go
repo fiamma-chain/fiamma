@@ -8,9 +8,10 @@ import (
 	simtypes "github.com/cosmos/cosmos-sdk/types/simulation"
 	"github.com/cosmos/cosmos-sdk/x/simulation"
 
-	"fiamma/testutil/sample"
-	zkpverifysimulation "fiamma/x/zkpverify/simulation"
-	"fiamma/x/zkpverify/types"
+	zkpverifysimulation "github.com/fiamma-chain/fiamma/x/zkpverify/simulation"
+	"github.com/fiamma-chain/fiamma/x/zkpverify/types"
+
+	"github.com/fiamma-chain/fiamma/testutil/sample"
 )
 
 // avoid unused import issue

@@ -5,7 +5,7 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"fiamma/x/zkpverify/types"
+	"github.com/fiamma-chain/fiamma/x/zkpverify/types"
 )
 
 func (k Keeper) DASubmissionQueue(goCtx context.Context, req *types.QueryDASubmissionQueueRequest) (*types.QueryDASubmissionQueueResponse, error) {

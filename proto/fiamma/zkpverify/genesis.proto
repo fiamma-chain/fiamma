@@ -5,7 +5,7 @@ import "amino/amino.proto";
 import "gogoproto/gogo.proto";
 import "fiamma/zkpverify/params.proto";
 
-option go_package = "fiamma/x/zkpverify/types";
+option go_package = "github.com/fiamma-chain/fiamma/x/zkpverify/types";
 
 // GenesisState defines the zkpverify module's genesis state.
 message GenesisState {

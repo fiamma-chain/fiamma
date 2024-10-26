@@ -1,8 +1,8 @@
 package keeper
 
 import (
-	"fiamma/x/zkpverify/types"
-	"fiamma/x/zkpverify/verifiers"
+	"github.com/fiamma-chain/fiamma/x/zkpverify/types"
+	"github.com/fiamma-chain/fiamma/x/zkpverify/verifiers"
 )
 
 func (k Keeper) verifyProof(proofData *types.ProofData) (bool, []byte) {

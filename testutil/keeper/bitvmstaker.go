@@ -17,8 +17,8 @@ import (
 	govtypes "github.com/cosmos/cosmos-sdk/x/gov/types"
 	"github.com/stretchr/testify/require"
 
-	"fiamma/x/bitvmstaker/keeper"
-	"fiamma/x/bitvmstaker/types"
+	"github.com/fiamma-chain/fiamma/x/bitvmstaker/keeper"
+	"github.com/fiamma-chain/fiamma/x/bitvmstaker/types"
 )
 
 func BitvmstakerKeeper(t testing.TB) (keeper.Keeper, sdk.Context) {

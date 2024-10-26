@@ -3,7 +3,7 @@ package fiamma.bitvmstaker;
 
 import "gogoproto/gogo.proto";
 
-option go_package = "fiamma/x/bitvmstaker/types";
+option go_package = "github.com/fiamma-chain/fiamma/x/bitvmstaker/types";
 
 
 // StakerInfo is the data structure for the BitVM staker information

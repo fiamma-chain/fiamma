@@ -1,7 +1,7 @@
 syntax = "proto3";
 package fiamma.zkpverify;
 
-option go_package = "fiamma/x/zkpverify/types";
+option go_package = "github.com/fiamma-chain/fiamma/x/zkpverify/types";
 
 // VerificationStatus is the verification status enum for the proof verification
 enum VerificationStatus { 

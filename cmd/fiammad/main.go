@@ -6,8 +6,8 @@ import (
 
 	svrcmd "github.com/cosmos/cosmos-sdk/server/cmd"
 
-	"fiamma/app"
-	"fiamma/cmd/fiammad/cmd"
+	"github.com/fiamma-chain/fiamma/app"
+	"github.com/fiamma-chain/fiamma/cmd/fiammad/cmd"
 )
 
 func main() {

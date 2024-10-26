@@ -19,7 +19,7 @@ fi
 : ${VK_FILE:=../../prover_examples/bitvm/vk.bitvm}
 : ${PROOF_SYSTEM:="GROTH16_BN254_BITVM"}
 : ${NAMESPACE:="TEST"}
-: ${DATA_LOCATION:="FIAMMA"}
+: ${DATA_LOCATION:="CELESTIA"}
 
 
 fiammad tx zkpverify submit-proof \

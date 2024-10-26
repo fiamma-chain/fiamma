@@ -3,8 +3,8 @@ package bitvmstaker
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"fiamma/x/bitvmstaker/keeper"
-	"fiamma/x/bitvmstaker/types"
+	"github.com/fiamma-chain/fiamma/x/bitvmstaker/keeper"
+	"github.com/fiamma-chain/fiamma/x/bitvmstaker/types"
 )
 
 // InitGenesis initializes the module's state from a provided genesis state.

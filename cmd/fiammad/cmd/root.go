@@ -24,7 +24,7 @@ import (
 	"github.com/spf13/cobra"
 	"github.com/spf13/pflag"
 
-	"fiamma/app"
+	"github.com/fiamma-chain/fiamma/app"
 )
 
 // NewRootCmd creates a new root command for fiammad. It is called once in the main function.

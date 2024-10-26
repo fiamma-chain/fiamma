@@ -8,7 +8,7 @@ import "cosmos_proto/cosmos.proto";
 import "gogoproto/gogo.proto";
 import "fiamma/zkpverify/params.proto";
 import "fiamma/zkpverify/zkpverify.proto";
-option go_package = "fiamma/x/zkpverify/types";
+option go_package = "github.com/fiamma-chain/fiamma/x/zkpverify/types";
 
 // Msg defines the Msg service.
 service Msg {
@@ -35,7 +35,7 @@ service Msg {
 // MsgUpdateParams is the Msg/UpdateParams request type.
 message MsgUpdateParams {
   option (cosmos.msg.v1.signer) = "authority";
-  option (amino.name) = "fiamma/x/zkpverify/MsgUpdateParams";
+  option (amino.name) = "github.com/fiamma-chain/fiamma/x/zkpverify/MsgUpdateParams";
 
   // authority is the address that controls the module (defaults to x/gov unless
   // overwritten).
