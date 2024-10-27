@@ -12,19 +12,18 @@ fi
 
 : ${CHAIN_ID:="fiamma-testnet-1"}
 : ${NODE:="http://127.0.0.1:26657"}
-: ${FEES:=2000ufia}
 : ${GAS:=80000000}
 : ${PROOF_FILE:=../../prover_examples/bitvm/proof.bitvm}
 : ${PUBLIC_INPUT_FILE:=../../prover_examples/bitvm/public_input.bitvm}
 : ${VK_FILE:=../../prover_examples/bitvm/vk.bitvm}
 : ${PROOF_SYSTEM:="GROTH16_BN254_BITVM"}
 : ${NAMESPACE:="TEST"}
-: ${DATA_LOCATION:="CELESTIA"}
+: ${DATA_LOCATION:="FIAMMA"}
 
 
 fiammad tx zkpverify submit-proof \
   --from $ACCOUNT --chain-id $CHAIN_ID  \
-  --gas $GAS --fees $FEES \
+  --gas $GAS  \
   --node $NODE \
   --keyring-backend test \
   $NAMESPACE \

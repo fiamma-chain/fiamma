@@ -17,18 +17,6 @@ func (msg *MsgUpdateDASubmissionResults) ValidateBasic() error {
 		if result.ProofId == "" {
 			return ErrInvalidProofId
 		}
-		if result.BlockHash == "" {
-			return ErrInvalidBlockHash
-		}
-		if result.BlockHeight == 0 {
-			return ErrInvalidBlockHeight
-		}
-		if result.Namespace == "" {
-			return ErrInvalidNamespace
-		}
-		if result.TxHash == "" {
-			return ErrInvalidTxHash
-		}
 	}
 	return nil
 }

@@ -15,7 +15,6 @@ fi
 : ${PROOF_FILE:=../../prover_examples/bitvm/proof.bitvm}
 : ${PUBLIC_INPUT_FILE:=../../prover_examples/bitvm/public_input.bitvm}
 : ${VK_FILE:=../../prover_examples/bitvm/vk.bitvm}
-: ${FEES:=2000ufia}
 : ${GAS:=80000000}
 : ${NAMESPACE:="TEST"}
 : ${PROOF_SYSTEM:="GROTH16_BN254_BITVM"}
@@ -40,7 +39,7 @@ proof_id=$(echo -n "$allDataHex" | xxd -r -p | sha256sum | awk '{print $1}')
 
 fiammad tx zkpverify submit-community-verification \
   --from $ACCOUNT --chain-id $CHAIN_ID  \
-  --gas $GAS --fees $FEES \
+  --gas $GAS  \
   --node $NODE \
   --keyring-backend test \
   $proof_id \
