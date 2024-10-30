@@ -3,8 +3,8 @@ package simulation
 import (
 	"math/rand"
 
-	"fiamma/x/bitvmstaker/keeper"
-	"fiamma/x/bitvmstaker/types"
+	"github.com/fiamma-chain/fiamma/x/bitvmstaker/keeper"
+	"github.com/fiamma-chain/fiamma/x/bitvmstaker/types"
 
 	"github.com/cosmos/cosmos-sdk/baseapp"
 	sdk "github.com/cosmos/cosmos-sdk/types"

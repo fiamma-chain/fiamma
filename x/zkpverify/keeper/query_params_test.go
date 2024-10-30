@@ -3,11 +3,11 @@ package keeper_test
 import (
 	"testing"
 
-	keepertest "fiamma/testutil/keeper"
+	keepertest "github.com/fiamma-chain/fiamma/testutil/keeper"
 
 	"github.com/stretchr/testify/require"
 
-	"fiamma/x/zkpverify/types"
+	"github.com/fiamma-chain/fiamma/x/zkpverify/types"
 )
 
 func TestParamsQuery(t *testing.T) {

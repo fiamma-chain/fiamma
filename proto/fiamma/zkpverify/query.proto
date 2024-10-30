@@ -9,7 +9,7 @@ import "cosmos/base/query/v1beta1/pagination.proto";
 import "fiamma/zkpverify/params.proto";
 import "fiamma/zkpverify/zkpverify.proto";
 
-option go_package = "fiamma/x/zkpverify/types";
+option go_package = "github.com/fiamma-chain/fiamma/x/zkpverify/types";
 
 // Query defines the gRPC querier service.
 service Query {
@@ -36,12 +36,6 @@ service Query {
     option (google.api.http).get = "/fiamma/zkpverify/get_verify_result";
   }
 
-  // Queries bitvm witness by proof id
-  rpc BitVMChallengeData(QueryBitVMChallengeDataRequest)
-      returns (QueryBitVMChallengeDataResponse) {
-    option (google.api.http).get = "/fiamma/zkpverify/get_bitvm_challenge_data";
-  }
-
   // Queries a list of VerifyResult items by namespace.
   rpc VerifyResultsByNamespace(QueryVerifyResultsByNamespaceRequest) returns (QueryVerifyResultsByNamespaceResponse) {
     option (google.api.http).get = "/fiamma/zkpverify/verify_results_by_namespace";
@@ -50,6 +44,26 @@ service Query {
   // Queries a list of PendingProofByNamespace items.
   rpc PendingProofByNamespace(QueryPendingProofByNamespaceRequest) returns (QueryPendingProofByNamespaceResponse) {
     option (google.api.http).get = "/fiamma/zkpverify/pending_proof_by_namespace";
+  }
+
+  rpc DASubmitter(QueryDASubmitterRequest) returns (QueryDASubmitterResponse) {
+    option (google.api.http).get = "/fiamma/zkpverify/da_submitter";
+  }
+
+  rpc DASubmissionQueue(QueryDASubmissionQueueRequest) returns (QueryDASubmissionQueueResponse) {
+    option (google.api.http).get = "/fiamma/zkpverify/da_submission_queue";
+  }
+
+  rpc BitVMChallengeData(QueryBitVMChallengeDataRequest) returns (QueryBitVMChallengeDataResponse) {
+    option (google.api.http).get = "/fiamma/zkpverify/bitvm_challenge_data";
+  }
+
+  rpc DaSubmissionData(QueryDaSubmissionDataRequest) returns (QueryDaSubmissionDataResponse) {
+    option (google.api.http).get = "/fiamma/zkpverify/da_submission_data/{proof_id}";
+  }
+
+  rpc DaSubmissionResult(QueryDaSubmissionResultRequest) returns (QueryDaSubmissionResultResponse) {
+    option (google.api.http).get = "/fiamma/zkpverify/da_submission_result/{proof_id}";
   }
 
 }
@@ -102,18 +116,6 @@ message QueryVerifyResultResponse {
 }
 
 
-// QueryBitVMChallengeDataRequest is request type for the Query/BitVMChallengeData RPC 
-// method.
-message QueryBitVMChallengeDataRequest {
-  string proof_id = 1;
-}
-
-// QueryBitVMChallengeDataResponse is response type for the Query/BitVMChallengeData RPC
-// method.
-message QueryBitVMChallengeDataResponse {
-  fiamma.zkpverify.BitVMChallengeData bitvm_challenge_data = 1;
-}
-
 
 // QueryVerifyResultsByNamespaceRequest is the request type for the Query/VerifyResultsByNamespace RPC method.
 message QueryVerifyResultsByNamespaceRequest {
@@ -137,4 +139,50 @@ message QueryPendingProofByNamespaceRequest {
 message QueryPendingProofByNamespaceResponse {
   repeated fiamma.zkpverify.VerifyResult pending_proofs = 1;
   cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
+// QueryDASubmitterRequest is request type for the Query/DASubmitter RPC method.
+message QueryDASubmitterRequest {}
+
+// QueryDASubmitterResponse is response type for the Query/DASubmitter RPC method.
+message QueryDASubmitterResponse {
+  string da_submitter = 1;
+}
+
+// QueryDASubmissionQueueRequest is request type for the Query/DASubmissionQueue RPC method.
+message QueryDASubmissionQueueRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+// QueryDASubmissionQueueResponse is response type for the Query/DASubmissionQueue RPC method.
+message QueryDASubmissionQueueResponse {
+  repeated fiamma.zkpverify.DASubmissionData da_submission_data = 1 [(gogoproto.nullable) = false];
+  cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
+// QueryBitVMChallengeDataRequest is request type for the Query/BitVMChallengeData RPC method.
+message QueryBitVMChallengeDataRequest {
+  string proof_id = 1;
+}
+
+// QueryBitVMChallengeDataResponse is response type for the Query/BitVMChallengeData RPC method.
+message QueryBitVMChallengeDataResponse {
+  fiamma.zkpverify.BitVMChallengeData bitvm_challenge_data = 1;
+}
+
+
+message QueryDaSubmissionDataRequest {
+  string proof_id = 1;
+}
+
+message QueryDaSubmissionDataResponse {
+  fiamma.zkpverify.DASubmissionData da_submission_data = 1;
+}
+
+message QueryDaSubmissionResultRequest {
+  string proof_id = 1;
+}
+
+message QueryDaSubmissionResultResponse {
+  fiamma.zkpverify.DASubmissionResult da_submission_result = 1;
 }

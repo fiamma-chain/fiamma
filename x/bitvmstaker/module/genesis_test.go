@@ -3,11 +3,12 @@ package bitvmstaker_test
 import (
 	"testing"
 
-	keepertest "fiamma/testutil/keeper"
-	"fiamma/testutil/nullify"
-	"fiamma/testutil/sample"
-	bitvmstaker "fiamma/x/bitvmstaker/module"
-	"fiamma/x/bitvmstaker/types"
+	keepertest "github.com/fiamma-chain/fiamma/testutil/keeper"
+	"github.com/fiamma-chain/fiamma/testutil/nullify"
+	"github.com/fiamma-chain/fiamma/testutil/sample"
+
+	bitvmstaker "github.com/fiamma-chain/fiamma/x/bitvmstaker/module"
+	"github.com/fiamma-chain/fiamma/x/bitvmstaker/types"
 
 	"github.com/stretchr/testify/require"
 )

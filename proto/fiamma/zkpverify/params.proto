@@ -4,10 +4,10 @@ package fiamma.zkpverify;
 import "amino/amino.proto";
 import "gogoproto/gogo.proto";
 
-option go_package = "fiamma/x/zkpverify/types";
+option go_package = "github.com/fiamma-chain/fiamma/x/zkpverify/types";
 
 // Params defines the parameters for the module.
 message Params {
-  option (amino.name) = "fiamma/x/zkpverify/Params";
+  option (amino.name) = "github.com/fiamma-chain/fiamma/x/zkpverify/Params";
   option (gogoproto.equal) = true;
 }

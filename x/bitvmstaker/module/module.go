@@ -21,9 +21,10 @@ import (
 
 	// this line is used by starport scaffolding # 1
 
-	modulev1 "fiamma/api/fiamma/bitvmstaker/module"
-	"fiamma/x/bitvmstaker/keeper"
-	"fiamma/x/bitvmstaker/types"
+	modulev1 "github.com/fiamma-chain/fiamma/api/fiamma/bitvmstaker/module"
+
+	"github.com/fiamma-chain/fiamma/x/bitvmstaker/keeper"
+	"github.com/fiamma-chain/fiamma/x/bitvmstaker/types"
 )
 
 var (

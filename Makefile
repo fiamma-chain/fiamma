@@ -131,7 +131,7 @@ all: tools build lint test
 ###############################################################################
 
 golangci_lint_cmd=golangci-lint
-golangci_version=v1.59.1
+golangci_version=latest
 
 lint:
 	@echo "--> Running linter"

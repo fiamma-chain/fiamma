@@ -13,7 +13,7 @@ CHAIN_BINARY=fiammad
 : ${CHAIN_ID:="fiamma-testnet-1"}
 : ${MINIMUM_GAS_PRICES="0ufia"}
 
-: ${PEER_ADDR="54.65.75.57"}
+: ${PEER_ADDR="127.0.0.1"}
 
 PEER_ARRAY=(${PEER_ADDR//,/ })
 

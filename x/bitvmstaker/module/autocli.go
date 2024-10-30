@@ -3,7 +3,7 @@ package bitvmstaker
 import (
 	autocliv1 "cosmossdk.io/api/cosmos/autocli/v1"
 
-	modulev1 "fiamma/api/fiamma/bitvmstaker"
+	modulev1 "github.com/fiamma-chain/fiamma/api/fiamma/bitvmstaker"
 )
 
 // AutoCLIOptions implements the autocli.HasAutoCLIConfig interface.

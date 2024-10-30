@@ -1,7 +1,7 @@
 package keeper
 
 import (
-	"fiamma/x/zkpverify/types"
+	"github.com/fiamma-chain/fiamma/x/zkpverify/types"
 )
 
 var _ types.QueryServer = Keeper{}

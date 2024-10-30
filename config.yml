@@ -32,6 +32,8 @@ genesis:
     bitvmstaker:
       committee_address: fiamma13k3wqnp4zcrlwtph6xk7l6feunu5ae2k6pqnaw
       staker_addresses: [fiammavaloper13k3wqnp4zcrlwtph6xk7l6feunu5ae2k4lsqwf]
+    zkpverify:
+      da_submitter: fiamma13k3wqnp4zcrlwtph6xk7l6feunu5ae2k6pqnaw
     babylon:
       params:
         babylon_contract_address: fiamma14hj2tavq8fpesdwxxcu44rty3hh90vhujrvcmstl4zr3txmfvw9sgx3jav

@@ -18,6 +18,11 @@ func (msg *MsgSubmitProof) ValidateBasic() error {
 		return ErrInvalidProofSystem
 	}
 
+	// check if the data location is valid
+	if _, ok := DataLocation_value[msg.DataLocation]; !ok {
+		return ErrInvalidDataLocation
+	}
+
 	// check if the proof is valid
 	if len(msg.Proof) == 0 {
 		return ErrInvalidProof

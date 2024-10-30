@@ -4,11 +4,11 @@ import (
 	"context"
 	"testing"
 
-	keepertest "fiamma/testutil/keeper"
+	keepertest "github.com/fiamma-chain/fiamma/testutil/keeper"
 
-	"fiamma/x/zkpverify/keeper"
+	"github.com/fiamma-chain/fiamma/x/zkpverify/keeper"
 
-	"fiamma/x/zkpverify/types"
+	"github.com/fiamma-chain/fiamma/x/zkpverify/types"
 
 	"github.com/stretchr/testify/require"
 )
@@ -28,12 +28,13 @@ func TestSubmitProof(t *testing.T) {
 		{
 			name: "valid proof",
 			msg: &types.MsgSubmitProof{
-				Creator:     "creator",
-				Proof:       []byte("valid proof"),
-				ProofSystem: "GROTH16_BN254_BITVM",
-				PublicInput: []byte("valid public input"),
-				Vk:          []byte("valid_vk"),
-				Namespace:   "test",
+				Creator:      "creator",
+				Proof:        []byte("valid proof"),
+				ProofSystem:  "GROTH16_BN254_BITVM",
+				PublicInput:  []byte("valid public input"),
+				Vk:           []byte("valid_vk"),
+				DataLocation: "FIAMMA",
+				Namespace:    "test",
 			},
 			want:    &types.MsgSubmitProofResponse{},
 			wantErr: false,
@@ -57,6 +58,40 @@ func TestSubmitProof(t *testing.T) {
 			want:    nil,
 			wantErr: true,
 		},
+		{
+			name: "invalid vk",
+			msg: &types.MsgSubmitProof{
+				Creator:     "creator",
+				Proof:       []byte("valid proof"),
+				ProofSystem: "GROTH16_BN254_BITVM",
+				Vk:          []byte("invalid_vk"),
+			},
+			want:    nil,
+			wantErr: true,
+		},
+		{
+			name: "invalid public input",
+			msg: &types.MsgSubmitProof{
+				Creator:     "creator",
+				Proof:       []byte("valid proof"),
+				ProofSystem: "GROTH16_BN254_BITVM",
+				PublicInput: []byte{},
+			},
+			want:    nil,
+			wantErr: true,
+		},
+		{
+			name: "invalid data location",
+			msg: &types.MsgSubmitProof{
+				Creator:      "creator",
+				Proof:        []byte("valid proof"),
+				ProofSystem:  "GROTH16_BN254_BITVM",
+				PublicInput:  []byte("valid public input"),
+				DataLocation: "INVALID",
+			},
+			want:    nil,
+			wantErr: true,
+		},
 	}
 
 	for _, tt := range tests {
@@ -71,11 +106,12 @@ func TestSubmitProof(t *testing.T) {
 
 			// check if the proof id is valid
 			proofId, _ := k.GetProofId(types.ProofData{
-				Proof:       tt.msg.Proof,
-				ProofSystem: types.ProofSystem_GROTH16_BN254_BITVM,
-				Namespace:   "test",
-				PublicInput: tt.msg.PublicInput,
-				Vk:          tt.msg.Vk,
+				Proof:        tt.msg.Proof,
+				ProofSystem:  types.ProofSystem_GROTH16_BN254_BITVM,
+				Namespace:    "test",
+				PublicInput:  tt.msg.PublicInput,
+				Vk:           tt.msg.Vk,
+				DataLocation: types.DataLocation_FIAMMA,
 			})
 			// Check if the proof is in the pending proofs index
 			isPending := k.IsPendingProof(ctx, proofId[:])
@@ -84,6 +120,10 @@ func TestSubmitProof(t *testing.T) {
 			verifyResult, found := k.GetVerifyResult(ctx, proofId[:])
 			require.True(t, found)
 			require.NotNil(t, verifyResult)
+
+			daSubmissionData, found := k.GetDASubmissionData(ctx, proofId[:])
+			require.True(t, found)
+			require.NotNil(t, daSubmissionData)
 		})
 	}
 }
@@ -94,12 +134,13 @@ func TestSubmitProofConcurrency(t *testing.T) {
 	wctx := ctx.WithContext(context.Background())
 
 	msg := &types.MsgSubmitProof{
-		Creator:     "creator",
-		Proof:       []byte("valid proof"),
-		ProofSystem: "GROTH16_BN254_BITVM",
-		PublicInput: []byte("valid public input"),
-		Vk:          []byte("valid_vk"),
-		Namespace:   "test",
+		Creator:      "creator",
+		Proof:        []byte("valid proof"),
+		ProofSystem:  "GROTH16_BN254_BITVM",
+		PublicInput:  []byte("valid public input"),
+		Vk:           []byte("valid_vk"),
+		Namespace:    "test",
+		DataLocation: "FIAMMA",
 	}
 
 	// simulate concurrent submissions
@@ -133,4 +174,8 @@ func TestSubmitProofConcurrency(t *testing.T) {
 	verifyResult, found := k.GetVerifyResult(ctx, proofId[:])
 	require.True(t, found)
 	require.NotNil(t, verifyResult)
+
+	daSubmissionData, found := k.GetDASubmissionData(ctx, proofId[:])
+	require.True(t, found)
+	require.NotNil(t, daSubmissionData)
 }

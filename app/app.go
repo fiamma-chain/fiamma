@@ -75,20 +75,18 @@ import (
 	ibctransferkeeper "github.com/cosmos/ibc-go/v8/modules/apps/transfer/keeper"
 	ibckeeper "github.com/cosmos/ibc-go/v8/modules/core/keeper"
 
-	zkpverifymodulekeeper "fiamma/x/zkpverify/keeper"
-
-	"fiamma/nubitda"
+	zkpverifymodulekeeper "github.com/fiamma-chain/fiamma/x/zkpverify/keeper"
 
 	wasmkeeper "github.com/CosmWasm/wasmd/x/wasm/keeper"
 	tmproto "github.com/cometbft/cometbft/proto/tendermint/types"
 
-	bitvmstakermodulekeeper "fiamma/x/bitvmstaker/keeper"
+	bitvmstakermodulekeeper "github.com/fiamma-chain/fiamma/x/bitvmstaker/keeper"
 
 	bbnkeeper "github.com/babylonlabs-io/babylon-sdk/x/babylon/keeper"
 
 	// this line is used by starport scaffolding # stargate/app/moduleImport
 
-	"fiamma/docs"
+	"github.com/fiamma-chain/fiamma/docs"
 )
 
 const (
@@ -211,13 +209,6 @@ func New(
 	appOpts servertypes.AppOptions,
 	baseAppOptions ...func(*baseapp.BaseApp),
 ) (*App, error) {
-	daConfig := nubitda.ParseDAOptionsFromConfig(appOpts)
-	// Initialize the DA backend
-	nubitDA, err := nubitda.NewNubitDA(daConfig)
-	if err != nil {
-		panic(err)
-	}
-
 	var (
 		app        = &App{}
 		appBuilder *runtime.AppBuilder
@@ -231,8 +222,6 @@ func New(
 				// Supply the application options
 				appOpts,
 
-				// Supply the DA backend
-				nubitDA,
 				// Supply with IBC keeper getter for the IBC modules with App Wiring.
 				// The IBC Keeper cannot be passed because it has not been initiated yet.
 				// Passing the getter, the app IBC Keeper will always be accessible.

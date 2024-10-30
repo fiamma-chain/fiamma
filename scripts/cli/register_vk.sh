@@ -12,13 +12,21 @@ fi
 
 : ${CHAIN_ID:="fiamma-testnet-1"}
 : ${NODE:="http://127.0.0.1:26657"}
-: ${FEES:=2000ufia}
+
 : ${GAS:=80000000}
 : ${VK_FILE:=../../prover_examples/bitvm/vk.bitvm}
-
+: ${VK_FILE_CHALLENGE:=../../prover_examples/bitvm_challenge/vk.bitvm}
 
 fiammad tx bitvmstaker register-vk \
   --from $ACCOUNT --chain-id $CHAIN_ID  \
-  --gas $GAS --fees $FEES \
+  --gas $GAS  \
   --node $NODE \
   $VK_FILE
+
+sleep 2
+
+fiammad tx bitvmstaker register-vk \
+  --from $ACCOUNT --chain-id $CHAIN_ID  \
+  --gas $GAS  \
+  --node $NODE \
+  $VK_FILE_CHALLENGE

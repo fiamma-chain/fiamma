@@ -15,10 +15,6 @@ staker_addresses=()
 babylonContractAddr=fiamma14hj2tavq8fpesdwxxcu44rty3hh90vhujrvcmstl4zr3txmfvw9sgx3jav
 btcStakingContractAddr=fiamma1nc5tatafv6eyq7llkr2gv50ff9e22mnf70qgjlv737ktmt4eswrqyn5sl2
 
-# nubit da rpc url and authkey
-
-rpc="http://127.0.0.1:26658"
-authkey=""
 
 
 if [ $# -lt 1 ]; then
@@ -45,14 +41,15 @@ for node in "$@"; do
     docker run --rm -v $(pwd)/testnet-nodes/$node:/root/.fiamma -it ghcr.io/fiamma-chain/fiamma config set app minimum-gas-prices "$minimum_gas_price$token"
     docker run --rm -v $(pwd)/testnet-nodes/$node:/root/.fiamma -it ghcr.io/fiamma-chain/fiamma config set app pruning "nothing" 
 
-    docker run --rm -v $(pwd)/testnet-nodes/$node:/root/.fiamma -it ghcr.io/fiamma-chain/fiamma config set app da-config.rpc "$rpc"
-    docker run --rm -v $(pwd)/testnet-nodes/$node:/root/.fiamma -it ghcr.io/fiamma-chain/fiamma config set app da-config.authkey "$authkey"
-
     node_id=$(docker run --rm -i -v $(pwd)/testnet-nodes/$node:/root/.fiamma ghcr.io/fiamma-chain/fiamma tendermint show-node-id)
     node_ids+=($node_id)
 
     echo "Node ID for $node: $node_id"
 done
+
+echo "Setting max validators to 21..."
+jq '.app_state.staking.params.max_validators = 21' $(pwd)/testnet-nodes/$1/config/genesis.json > $(pwd)/testnet-nodes/$1/config/genesis.json.tmp
+mv $(pwd)/testnet-nodes/$1/config/genesis.json.tmp $(pwd)/testnet-nodes/$1/config/genesis.json
 
 for (( i=1; i <= "$#"; i++ )); do
     echo "Creating key for ${!i} user..."
@@ -67,7 +64,11 @@ for (( i=1; i <= "$#"; i++ )); do
         committee_address=$(echo $PASSWORD | docker run --rm -i -v $(pwd)/testnet-nodes/${!i}:/root/.fiamma ghcr.io/fiamma-chain/fiamma keys --keyring-backend file --keyring-dir /root/.fiamma/keys show val_${!i} --address)
         echo "Committee address: $committee_address"
         jq '.app_state.bitvmstaker.committee_address = "'$committee_address'"' $(pwd)/testnet-nodes/$1/config/genesis.json > $(pwd)/testnet-nodes/$1/config/genesis.json.tmp
-        mv $(pwd)/testnet-nodes/$1/config/genesis.json.tmp $(pwd)/testnet-nodes/$1/config/genesis.json  
+        mv $(pwd)/testnet-nodes/$1/config/genesis.json.tmp $(pwd)/testnet-nodes/$1/config/genesis.json
+        
+        echo "Setting zkpverify da_submitter in genesis..."
+        jq '.app_state.zkpverify.da_submitter = "'$committee_address'"' $(pwd)/testnet-nodes/$1/config/genesis.json > $(pwd)/testnet-nodes/$1/config/genesis.json.tmp
+        mv $(pwd)/testnet-nodes/$1/config/genesis.json.tmp $(pwd)/testnet-nodes/$1/config/genesis.json
     fi
 
     echo "Adding val_operator_${!i} to genesis staker_addresses..."

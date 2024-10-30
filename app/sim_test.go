@@ -31,7 +31,7 @@ import (
 	"github.com/spf13/viper"
 	"github.com/stretchr/testify/require"
 
-	"fiamma/app"
+	"github.com/fiamma-chain/fiamma/app"
 )
 
 const (

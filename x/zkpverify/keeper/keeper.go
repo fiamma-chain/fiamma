@@ -10,9 +10,9 @@ import (
 	"github.com/cosmos/cosmos-sdk/codec"
 	"github.com/cosmos/cosmos-sdk/runtime"
 	sdk "github.com/cosmos/cosmos-sdk/types"
+	"github.com/cosmos/cosmos-sdk/types/query"
 
-	"fiamma/nubitda"
-	"fiamma/x/zkpverify/types"
+	"github.com/fiamma-chain/fiamma/x/zkpverify/types"
 )
 
 type (
@@ -27,9 +27,6 @@ type (
 
 		stakingKeeper types.StakingKeeper
 
-		// Nubit Data Availability
-		nubitDA *nubitda.NubitDA
-
 		bitvmstakerKeeper types.BitvmstakerKeeper
 	}
 )
@@ -41,7 +38,6 @@ func NewKeeper(
 	authority string,
 
 	stakingKeeper types.StakingKeeper,
-	nubitDA *nubitda.NubitDA,
 	bitvmstakerKeeper types.BitvmstakerKeeper,
 ) Keeper {
 	if _, err := sdk.AccAddressFromBech32(authority); err != nil {
@@ -53,7 +49,6 @@ func NewKeeper(
 		storeService:      storeService,
 		authority:         authority,
 		logger:            logger,
-		nubitDA:           nubitDA,
 		stakingKeeper:     stakingKeeper,
 		bitvmstakerKeeper: bitvmstakerKeeper,
 	}
@@ -155,6 +150,66 @@ func (k Keeper) GetBlockProposer(ctx context.Context, height int64) string {
 	return string(bz)
 }
 
+func (k Keeper) GetDASubmissionQueue(ctx context.Context, pagination *query.PageRequest) ([]types.DASubmissionData, *query.PageResponse, error) {
+	store := k.DASubmissionQueueStore(ctx)
+	var daSubmissionList []types.DASubmissionData
+	pageRes, err := query.Paginate(store, pagination, func(key []byte, value []byte) error {
+		var daSubmission types.DASubmissionData
+		k.cdc.MustUnmarshal(value, &daSubmission)
+		daSubmissionList = append(daSubmissionList, daSubmission)
+		return nil
+	})
+	return daSubmissionList, pageRes, err
+}
+
+func (k Keeper) EnqueueDASubmission(ctx context.Context, proofId []byte, daSubmissionData types.DASubmissionData) {
+	store := k.DASubmissionQueueStore(ctx)
+	store.Set(proofId, k.cdc.MustMarshal(&daSubmissionData))
+}
+
+func (k Keeper) GetDASubmissionData(ctx context.Context, proofId []byte) (types.DASubmissionData, bool) {
+	store := k.DASubmissionQueueStore(ctx)
+	bz := store.Get(proofId)
+	if bz == nil {
+		return types.DASubmissionData{}, false
+	}
+	var daSubmissionData types.DASubmissionData
+	k.cdc.MustUnmarshal(bz, &daSubmissionData)
+	return daSubmissionData, true
+}
+
+func (k Keeper) DequeueDASubmission(ctx context.Context, proofId []byte) {
+	store := k.DASubmissionQueueStore(ctx)
+	store.Delete(proofId)
+}
+
+func (k Keeper) SetDASubmissionResult(ctx context.Context, proofId []byte, result *types.DASubmissionResult) {
+	store := k.DASubmissionResultsStore(ctx)
+	store.Set(proofId, k.cdc.MustMarshal(result))
+}
+
+func (k Keeper) GetDASubmissionResult(ctx context.Context, proofId []byte) (types.DASubmissionResult, bool) {
+	store := k.DASubmissionResultsStore(ctx)
+	bz := store.Get(proofId)
+	if bz == nil {
+		return types.DASubmissionResult{}, false
+	}
+	var result types.DASubmissionResult
+	k.cdc.MustUnmarshal(bz, &result)
+	return result, true
+}
+
+func (k Keeper) SetDASubmitter(ctx context.Context, submitter string) {
+	store := k.DASubmitterStore(ctx)
+	store.Set(types.DASubmitterKey, []byte(submitter))
+}
+
+func (k Keeper) GetDASubmitter(ctx context.Context) string {
+	store := k.DASubmitterStore(ctx)
+	bz := store.Get(types.DASubmitterKey)
+	return string(bz)
+}
+
 func (k Keeper) proofDataStore(ctx context.Context) prefix.Store {
 	storeAdapter := runtime.KVStoreAdapter(k.storeService.OpenKVStore(ctx))
 	return prefix.NewStore(storeAdapter, types.ProofDataKey)
@@ -179,4 +234,22 @@ func (k Keeper) blockProposerStore(ctx context.Context) prefix.Store {
 func (k Keeper) PendingProofsIndexStore(ctx context.Context) prefix.Store {
 	storeAdapter := runtime.KVStoreAdapter(k.storeService.OpenKVStore(ctx))
 	return prefix.NewStore(storeAdapter, types.PendingProofsIndexKey)
+}
+
+// DASubmissionQueueStore returns a prefix store for the DA submission data
+func (k Keeper) DASubmissionQueueStore(ctx context.Context) prefix.Store {
+	storeAdapter := runtime.KVStoreAdapter(k.storeService.OpenKVStore(ctx))
+	return prefix.NewStore(storeAdapter, types.DASubmissionQueueKey)
+}
+
+// DASubmissionResultsStore returns a prefix store for the DA submission results
+func (k Keeper) DASubmissionResultsStore(ctx context.Context) prefix.Store {
+	storeAdapter := runtime.KVStoreAdapter(k.storeService.OpenKVStore(ctx))
+	return prefix.NewStore(storeAdapter, types.DASubmissionResultsKey)
+}
+
+// DASubmitterStore returns a prefix store for the DA submitter
+func (k Keeper) DASubmitterStore(ctx context.Context) prefix.Store {
+	storeAdapter := runtime.KVStoreAdapter(k.storeService.OpenKVStore(ctx))
+	return prefix.NewStore(storeAdapter, []byte{})
 }

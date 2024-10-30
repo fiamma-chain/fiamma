@@ -7,8 +7,8 @@ import "cosmos/msg/v1/msg.proto";
 import "cosmos_proto/cosmos.proto";
 import "gogoproto/gogo.proto";
 import "fiamma/zkpverify/params.proto";
-
-option go_package = "fiamma/x/zkpverify/types";
+import "fiamma/zkpverify/zkpverify.proto";
+option go_package = "github.com/fiamma-chain/fiamma/x/zkpverify/types";
 
 // Msg defines the Msg service.
 service Msg {
@@ -23,11 +23,19 @@ service Msg {
 
   // SubmitCommunityVerification defines a community (zkpverify) operation for verifying a proof.
   rpc SubmitCommunityVerification(MsgSubmitCommunityVerification) returns (MsgSubmitCommunityVerificationResponse);
+
+  // UpdateDASubmitter defines a (zkpverify) operation for updating the DA submitter address.
+  rpc UpdateDASubmitter(MsgUpdateDASubmitter) returns (MsgUpdateDASubmitterResponse);
+
+  // UpdateDASubmissionResults defines a (zkpverify) operation for updating the DA submission result.
+  rpc UpdateDASubmissionResults(MsgUpdateDASubmissionResults) returns (MsgUpdateDASubmissionResultsResponse);
+
+
 }
 // MsgUpdateParams is the Msg/UpdateParams request type.
 message MsgUpdateParams {
   option (cosmos.msg.v1.signer) = "authority";
-  option (amino.name) = "fiamma/x/zkpverify/MsgUpdateParams";
+  option (amino.name) = "github.com/fiamma-chain/fiamma/x/zkpverify/MsgUpdateParams";
 
   // authority is the address that controls the module (defaults to x/gov unless
   // overwritten).
@@ -52,7 +60,8 @@ message MsgSubmitProof {
   bytes proof = 3;
   bytes public_input = 4;
   bytes vk = 5;
-  string namespace = 6;
+  string data_location = 6;
+  string namespace = 7;
 }
 
 // MsgSubmitProofResponse defines the response structure for executing MsgSubmitProof
@@ -71,3 +80,24 @@ message MsgSubmitCommunityVerification {
 
 // MsgSubmitCommunityVerificationResponse defines the response structure for executing MsgSubmitCommunityVerification
 message MsgSubmitCommunityVerificationResponse {}
+
+
+// MsgUpdateDASubmitter is the request type for updating the DA submitter address.
+message MsgUpdateDASubmitter {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator = 1;   
+  string da_submitter = 2;
+}
+
+// MsgUpdateDASubmitterResponse defines the response structure for executing MsgUpdateDASubmitter   
+message MsgUpdateDASubmitterResponse {}
+
+// MsgUpdateDASubmissions is the request type for updating the DA submission result.
+message MsgUpdateDASubmissionResults {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator = 1;
+  repeated fiamma.zkpverify.DASubmissionResult da_submission_result = 2;
+}
+
+// MsgUpdateDASubmissionResultsResponse defines the response structure for executing MsgUpdateDASubmissionResults
+message MsgUpdateDASubmissionResultsResponse {}

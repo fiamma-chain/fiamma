@@ -8,9 +8,10 @@ import (
 	simtypes "github.com/cosmos/cosmos-sdk/types/simulation"
 	"github.com/cosmos/cosmos-sdk/x/simulation"
 
-	"fiamma/testutil/sample"
-	bitvmstakersimulation "fiamma/x/bitvmstaker/simulation"
-	"fiamma/x/bitvmstaker/types"
+	"github.com/fiamma-chain/fiamma/testutil/sample"
+
+	bitvmstakersimulation "github.com/fiamma-chain/fiamma/x/bitvmstaker/simulation"
+	"github.com/fiamma-chain/fiamma/x/bitvmstaker/types"
 )
 
 // avoid unused import issue

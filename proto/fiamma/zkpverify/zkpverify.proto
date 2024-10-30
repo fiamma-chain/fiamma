@@ -1,7 +1,7 @@
 syntax = "proto3";
 package fiamma.zkpverify;
 
-option go_package = "fiamma/x/zkpverify/types";
+option go_package = "github.com/fiamma-chain/fiamma/x/zkpverify/types";
 
 // VerificationStatus is the verification status enum for the proof verification
 enum VerificationStatus { 
@@ -14,13 +14,30 @@ enum VerificationStatus {
 enum DataLocation {
   FIAMMA = 0; 
   NUBITDA = 1;
-  AVAILDA = 2;
+  CELESTIA = 2;
+  AVAILDA = 3;
 }
 
 // ProofSystem is the proof system enum for the proof verification
 enum ProofSystem {
   GROTH16_BN254_BITVM = 0; 
   FFPLONK_BN254_BITVM = 1;
+}
+
+// DASubmissionResult is the data structure for the DA submission result
+message DASubmissionResult {
+  string proof_id = 1;
+  DataLocation data_location = 2;
+  string block_hash = 3;
+  uint64 block_height = 4;
+  string tx_hash = 5;
+  string namespace = 6;
+}
+
+// DASubmissionData is the data structure for the DA submission data
+message DASubmissionData {
+  string proof_id = 1;
+  ProofData proof_data = 2;
 }
 
 
@@ -30,26 +47,22 @@ message ProofData {
   bytes proof = 2;
   bytes public_input = 3;
   bytes vk = 4;
-  string namespace = 5;
+  DataLocation data_location = 5;
+  string namespace = 6;
 }
 
 // VerifyResult is the data structure for the proof verification result
 message VerifyResult {
   string proof_id = 1;
   ProofSystem proof_system = 2;
-  string data_commitment = 3;
-  DataLocation data_location = 4;
-  bool result = 5;
-  VerificationStatus status = 6;
-  uint64 community_verification_count = 7;
-  string namespace = 8;
+  bool result = 3;  
+  VerificationStatus status = 4;
+  uint64 community_verification_count = 5;
+  string namespace = 6;
 }
 
-
+// BitVMChallengeData is the data structure for the bitvm challenge data
 message BitVMChallengeData {
-  bool verify_result = 1;
-  bytes witness = 2;
-  bytes vk = 3;
-  bytes public_input = 4;
-  string proposer = 5;
+  bytes witness = 1;
+  string proposer = 2;
 }

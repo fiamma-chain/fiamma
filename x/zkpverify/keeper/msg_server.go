@@ -1,7 +1,7 @@
 package keeper
 
 import (
-	"fiamma/x/zkpverify/types"
+	"github.com/fiamma-chain/fiamma/x/zkpverify/types"
 )
 
 type msgServer struct {

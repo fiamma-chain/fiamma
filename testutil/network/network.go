@@ -7,7 +7,7 @@ import (
 	"github.com/cosmos/cosmos-sdk/testutil/network"
 	"github.com/stretchr/testify/require"
 
-	"fiamma/app"
+	"github.com/fiamma-chain/fiamma/app"
 )
 
 type (

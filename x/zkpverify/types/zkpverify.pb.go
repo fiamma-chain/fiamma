@@ -55,21 +55,24 @@ func (VerificationStatus) EnumDescriptor() ([]byte, []int) {
 type DataLocation int32
 
 const (
-	DataLocation_FIAMMA  DataLocation = 0
-	DataLocation_NUBITDA DataLocation = 1
-	DataLocation_AVAILDA DataLocation = 2
+	DataLocation_FIAMMA   DataLocation = 0
+	DataLocation_NUBITDA  DataLocation = 1
+	DataLocation_CELESTIA DataLocation = 2
+	DataLocation_AVAILDA  DataLocation = 3
 )
 
 var DataLocation_name = map[int32]string{
 	0: "FIAMMA",
 	1: "NUBITDA",
-	2: "AVAILDA",
+	2: "CELESTIA",
+	3: "AVAILDA",
 }
 
 var DataLocation_value = map[string]int32{
-	"FIAMMA":  0,
-	"NUBITDA": 1,
-	"AVAILDA": 2,
+	"FIAMMA":   0,
+	"NUBITDA":  1,
+	"CELESTIA": 2,
+	"AVAILDA":  3,
 }
 
 func (x DataLocation) String() string {
@@ -106,20 +109,159 @@ func (ProofSystem) EnumDescriptor() ([]byte, []int) {
 	return fileDescriptor_5d31b59671d261aa, []int{2}
 }
 
+// DASubmissionResult is the data structure for the DA submission result
+type DASubmissionResult struct {
+	ProofId      string       `protobuf:"bytes,1,opt,name=proof_id,json=proofId,proto3" json:"proof_id,omitempty"`
+	DataLocation DataLocation `protobuf:"varint,2,opt,name=data_location,json=dataLocation,proto3,enum=fiamma.zkpverify.DataLocation" json:"data_location,omitempty"`
+	BlockHash    string       `protobuf:"bytes,3,opt,name=block_hash,json=blockHash,proto3" json:"block_hash,omitempty"`
+	BlockHeight  uint64       `protobuf:"varint,4,opt,name=block_height,json=blockHeight,proto3" json:"block_height,omitempty"`
+	TxHash       string       `protobuf:"bytes,5,opt,name=tx_hash,json=txHash,proto3" json:"tx_hash,omitempty"`
+	Namespace    string       `protobuf:"bytes,6,opt,name=namespace,proto3" json:"namespace,omitempty"`
+}
+
+func (m *DASubmissionResult) Reset()         { *m = DASubmissionResult{} }
+func (m *DASubmissionResult) String() string { return proto.CompactTextString(m) }
+func (*DASubmissionResult) ProtoMessage()    {}
+func (*DASubmissionResult) Descriptor() ([]byte, []int) {
+	return fileDescriptor_5d31b59671d261aa, []int{0}
+}
+func (m *DASubmissionResult) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *DASubmissionResult) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_DASubmissionResult.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *DASubmissionResult) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_DASubmissionResult.Merge(m, src)
+}
+func (m *DASubmissionResult) XXX_Size() int {
+	return m.Size()
+}
+func (m *DASubmissionResult) XXX_DiscardUnknown() {
+	xxx_messageInfo_DASubmissionResult.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_DASubmissionResult proto.InternalMessageInfo
+
+func (m *DASubmissionResult) GetProofId() string {
+	if m != nil {
+		return m.ProofId
+	}
+	return ""
+}
+
+func (m *DASubmissionResult) GetDataLocation() DataLocation {
+	if m != nil {
+		return m.DataLocation
+	}
+	return DataLocation_FIAMMA
+}
+
+func (m *DASubmissionResult) GetBlockHash() string {
+	if m != nil {
+		return m.BlockHash
+	}
+	return ""
+}
+
+func (m *DASubmissionResult) GetBlockHeight() uint64 {
+	if m != nil {
+		return m.BlockHeight
+	}
+	return 0
+}
+
+func (m *DASubmissionResult) GetTxHash() string {
+	if m != nil {
+		return m.TxHash
+	}
+	return ""
+}
+
+func (m *DASubmissionResult) GetNamespace() string {
+	if m != nil {
+		return m.Namespace
+	}
+	return ""
+}
+
+// DASubmissionData is the data structure for the DA submission data
+type DASubmissionData struct {
+	ProofId   string     `protobuf:"bytes,1,opt,name=proof_id,json=proofId,proto3" json:"proof_id,omitempty"`
+	ProofData *ProofData `protobuf:"bytes,2,opt,name=proof_data,json=proofData,proto3" json:"proof_data,omitempty"`
+}
+
+func (m *DASubmissionData) Reset()         { *m = DASubmissionData{} }
+func (m *DASubmissionData) String() string { return proto.CompactTextString(m) }
+func (*DASubmissionData) ProtoMessage()    {}
+func (*DASubmissionData) Descriptor() ([]byte, []int) {
+	return fileDescriptor_5d31b59671d261aa, []int{1}
+}
+func (m *DASubmissionData) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *DASubmissionData) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_DASubmissionData.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *DASubmissionData) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_DASubmissionData.Merge(m, src)
+}
+func (m *DASubmissionData) XXX_Size() int {
+	return m.Size()
+}
+func (m *DASubmissionData) XXX_DiscardUnknown() {
+	xxx_messageInfo_DASubmissionData.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_DASubmissionData proto.InternalMessageInfo
+
+func (m *DASubmissionData) GetProofId() string {
+	if m != nil {
+		return m.ProofId
+	}
+	return ""
+}
+
+func (m *DASubmissionData) GetProofData() *ProofData {
+	if m != nil {
+		return m.ProofData
+	}
+	return nil
+}
+
 // ProofData is the data structure for the proof verification request
 type ProofData struct {
-	ProofSystem ProofSystem `protobuf:"varint,1,opt,name=proof_system,json=proofSystem,proto3,enum=fiamma.zkpverify.ProofSystem" json:"proof_system,omitempty"`
-	Proof       []byte      `protobuf:"bytes,2,opt,name=proof,proto3" json:"proof,omitempty"`
-	PublicInput []byte      `protobuf:"bytes,3,opt,name=public_input,json=publicInput,proto3" json:"public_input,omitempty"`
-	Vk          []byte      `protobuf:"bytes,4,opt,name=vk,proto3" json:"vk,omitempty"`
-	Namespace   string      `protobuf:"bytes,5,opt,name=namespace,proto3" json:"namespace,omitempty"`
+	ProofSystem  ProofSystem  `protobuf:"varint,1,opt,name=proof_system,json=proofSystem,proto3,enum=fiamma.zkpverify.ProofSystem" json:"proof_system,omitempty"`
+	Proof        []byte       `protobuf:"bytes,2,opt,name=proof,proto3" json:"proof,omitempty"`
+	PublicInput  []byte       `protobuf:"bytes,3,opt,name=public_input,json=publicInput,proto3" json:"public_input,omitempty"`
+	Vk           []byte       `protobuf:"bytes,4,opt,name=vk,proto3" json:"vk,omitempty"`
+	DataLocation DataLocation `protobuf:"varint,5,opt,name=data_location,json=dataLocation,proto3,enum=fiamma.zkpverify.DataLocation" json:"data_location,omitempty"`
+	Namespace    string       `protobuf:"bytes,6,opt,name=namespace,proto3" json:"namespace,omitempty"`
 }
 
 func (m *ProofData) Reset()         { *m = ProofData{} }
 func (m *ProofData) String() string { return proto.CompactTextString(m) }
 func (*ProofData) ProtoMessage()    {}
 func (*ProofData) Descriptor() ([]byte, []int) {
-	return fileDescriptor_5d31b59671d261aa, []int{0}
+	return fileDescriptor_5d31b59671d261aa, []int{2}
 }
 func (m *ProofData) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -176,6 +318,13 @@ func (m *ProofData) GetVk() []byte {
 	return nil
 }
 
+func (m *ProofData) GetDataLocation() DataLocation {
+	if m != nil {
+		return m.DataLocation
+	}
+	return DataLocation_FIAMMA
+}
+
 func (m *ProofData) GetNamespace() string {
 	if m != nil {
 		return m.Namespace
@@ -187,19 +336,17 @@ func (m *ProofData) GetNamespace() string {
 type VerifyResult struct {
 	ProofId                    string             `protobuf:"bytes,1,opt,name=proof_id,json=proofId,proto3" json:"proof_id,omitempty"`
 	ProofSystem                ProofSystem        `protobuf:"varint,2,opt,name=proof_system,json=proofSystem,proto3,enum=fiamma.zkpverify.ProofSystem" json:"proof_system,omitempty"`
-	DataCommitment             string             `protobuf:"bytes,3,opt,name=data_commitment,json=dataCommitment,proto3" json:"data_commitment,omitempty"`
-	DataLocation               DataLocation       `protobuf:"varint,4,opt,name=data_location,json=dataLocation,proto3,enum=fiamma.zkpverify.DataLocation" json:"data_location,omitempty"`
-	Result                     bool               `protobuf:"varint,5,opt,name=result,proto3" json:"result,omitempty"`
-	Status                     VerificationStatus `protobuf:"varint,6,opt,name=status,proto3,enum=fiamma.zkpverify.VerificationStatus" json:"status,omitempty"`
-	CommunityVerificationCount uint64             `protobuf:"varint,7,opt,name=community_verification_count,json=communityVerificationCount,proto3" json:"community_verification_count,omitempty"`
-	Namespace                  string             `protobuf:"bytes,8,opt,name=namespace,proto3" json:"namespace,omitempty"`
+	Result                     bool               `protobuf:"varint,3,opt,name=result,proto3" json:"result,omitempty"`
+	Status                     VerificationStatus `protobuf:"varint,4,opt,name=status,proto3,enum=fiamma.zkpverify.VerificationStatus" json:"status,omitempty"`
+	CommunityVerificationCount uint64             `protobuf:"varint,5,opt,name=community_verification_count,json=communityVerificationCount,proto3" json:"community_verification_count,omitempty"`
+	Namespace                  string             `protobuf:"bytes,6,opt,name=namespace,proto3" json:"namespace,omitempty"`
 }
 
 func (m *VerifyResult) Reset()         { *m = VerifyResult{} }
 func (m *VerifyResult) String() string { return proto.CompactTextString(m) }
 func (*VerifyResult) ProtoMessage()    {}
 func (*VerifyResult) Descriptor() ([]byte, []int) {
-	return fileDescriptor_5d31b59671d261aa, []int{1}
+	return fileDescriptor_5d31b59671d261aa, []int{3}
 }
 func (m *VerifyResult) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -242,20 +389,6 @@ func (m *VerifyResult) GetProofSystem() ProofSystem {
 	return ProofSystem_GROTH16_BN254_BITVM
 }
 
-func (m *VerifyResult) GetDataCommitment() string {
-	if m != nil {
-		return m.DataCommitment
-	}
-	return ""
-}
-
-func (m *VerifyResult) GetDataLocation() DataLocation {
-	if m != nil {
-		return m.DataLocation
-	}
-	return DataLocation_FIAMMA
-}
-
 func (m *VerifyResult) GetResult() bool {
 	if m != nil {
 		return m.Result
@@ -284,19 +417,17 @@ func (m *VerifyResult) GetNamespace() string {
 	return ""
 }
 
+// BitVMChallengeData is the data structure for the bitvm challenge data
 type BitVMChallengeData struct {
-	VerifyResult bool   `protobuf:"varint,1,opt,name=verify_result,json=verifyResult,proto3" json:"verify_result,omitempty"`
-	Witness      []byte `protobuf:"bytes,2,opt,name=witness,proto3" json:"witness,omitempty"`
-	Vk           []byte `protobuf:"bytes,3,opt,name=vk,proto3" json:"vk,omitempty"`
-	PublicInput  []byte `protobuf:"bytes,4,opt,name=public_input,json=publicInput,proto3" json:"public_input,omitempty"`
-	Proposer     string `protobuf:"bytes,5,opt,name=proposer,proto3" json:"proposer,omitempty"`
+	Witness  []byte `protobuf:"bytes,1,opt,name=witness,proto3" json:"witness,omitempty"`
+	Proposer string `protobuf:"bytes,2,opt,name=proposer,proto3" json:"proposer,omitempty"`
 }
 
 func (m *BitVMChallengeData) Reset()         { *m = BitVMChallengeData{} }
 func (m *BitVMChallengeData) String() string { return proto.CompactTextString(m) }
 func (*BitVMChallengeData) ProtoMessage()    {}
 func (*BitVMChallengeData) Descriptor() ([]byte, []int) {
-	return fileDescriptor_5d31b59671d261aa, []int{2}
+	return fileDescriptor_5d31b59671d261aa, []int{4}
 }
 func (m *BitVMChallengeData) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -325,30 +456,9 @@ func (m *BitVMChallengeData) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_BitVMChallengeData proto.InternalMessageInfo
 
-func (m *BitVMChallengeData) GetVerifyResult() bool {
-	if m != nil {
-		return m.VerifyResult
-	}
-	return false
-}
-
 func (m *BitVMChallengeData) GetWitness() []byte {
 	if m != nil {
 		return m.Witness
-	}
-	return nil
-}
-
-func (m *BitVMChallengeData) GetVk() []byte {
-	if m != nil {
-		return m.Vk
-	}
-	return nil
-}
-
-func (m *BitVMChallengeData) GetPublicInput() []byte {
-	if m != nil {
-		return m.PublicInput
 	}
 	return nil
 }
@@ -364,6 +474,8 @@ func init() {
 	proto.RegisterEnum("fiamma.zkpverify.VerificationStatus", VerificationStatus_name, VerificationStatus_value)
 	proto.RegisterEnum("fiamma.zkpverify.DataLocation", DataLocation_name, DataLocation_value)
 	proto.RegisterEnum("fiamma.zkpverify.ProofSystem", ProofSystem_name, ProofSystem_value)
+	proto.RegisterType((*DASubmissionResult)(nil), "fiamma.zkpverify.DASubmissionResult")
+	proto.RegisterType((*DASubmissionData)(nil), "fiamma.zkpverify.DASubmissionData")
 	proto.RegisterType((*ProofData)(nil), "fiamma.zkpverify.ProofData")
 	proto.RegisterType((*VerifyResult)(nil), "fiamma.zkpverify.VerifyResult")
 	proto.RegisterType((*BitVMChallengeData)(nil), "fiamma.zkpverify.BitVMChallengeData")
@@ -372,45 +484,153 @@ func init() {
 func init() { proto.RegisterFile("fiamma/zkpverify/zkpverify.proto", fileDescriptor_5d31b59671d261aa) }
 
 var fileDescriptor_5d31b59671d261aa = []byte{
-	// 593 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x94, 0x54, 0xcb, 0x6e, 0xd3, 0x40,
-	0x14, 0xf5, 0xb8, 0x6d, 0xd2, 0xdc, 0xb8, 0xc1, 0x0c, 0xa8, 0x98, 0xaa, 0x58, 0xa1, 0x20, 0x11,
-	0x75, 0x11, 0x44, 0x28, 0xac, 0x90, 0xa8, 0x93, 0x28, 0x74, 0x84, 0xe3, 0x54, 0x53, 0x13, 0x09,
-	0x36, 0x96, 0x9b, 0xb8, 0x60, 0x25, 0x7e, 0x28, 0x1e, 0x07, 0xc2, 0x4f, 0xc0, 0x37, 0xf0, 0x0d,
-	0x7c, 0x04, 0xcb, 0x2e, 0x59, 0xa2, 0xe4, 0x47, 0x90, 0xc7, 0x26, 0x71, 0x93, 0x15, 0x3b, 0x9f,
-	0x73, 0xcf, 0x5c, 0xdf, 0x33, 0xf7, 0x68, 0xa0, 0x7a, 0xe5, 0xda, 0x9e, 0x67, 0x3f, 0xfd, 0x3a,
-	0x0a, 0xa7, 0xce, 0xc4, 0xbd, 0x9a, 0xad, 0xbe, 0xea, 0xe1, 0x24, 0x60, 0x01, 0x96, 0x53, 0x45,
-	0x7d, 0xc9, 0x1f, 0xfd, 0x44, 0x50, 0x3a, 0x9f, 0x04, 0xc1, 0x55, 0xdb, 0x66, 0x36, 0x3e, 0x05,
-	0x29, 0x4c, 0x80, 0x15, 0xcd, 0x22, 0xe6, 0x78, 0x0a, 0xaa, 0xa2, 0x5a, 0xa5, 0xf1, 0xa0, 0xbe,
-	0x7e, 0xac, 0xce, 0x8f, 0x5c, 0x70, 0x11, 0x2d, 0x87, 0x2b, 0x80, 0xef, 0xc2, 0x0e, 0x87, 0x8a,
-	0x58, 0x45, 0x35, 0x89, 0xa6, 0x00, 0x3f, 0x04, 0x29, 0x8c, 0x2f, 0xc7, 0xee, 0xc0, 0x72, 0xfd,
-	0x30, 0x66, 0xca, 0x16, 0x2f, 0x96, 0x53, 0x8e, 0x24, 0x14, 0xae, 0x80, 0x38, 0x1d, 0x29, 0xdb,
-	0xbc, 0x20, 0x4e, 0x47, 0xf8, 0x10, 0x4a, 0xbe, 0xed, 0x39, 0x51, 0x68, 0x0f, 0x1c, 0x65, 0xa7,
-	0x8a, 0x6a, 0x25, 0xba, 0x22, 0x8e, 0xbe, 0x6d, 0x81, 0xd4, 0xe7, 0xa3, 0x50, 0x27, 0x8a, 0xc7,
-	0x0c, 0xdf, 0x87, 0xdd, 0x74, 0x72, 0x77, 0xc8, 0xa7, 0x2e, 0xd1, 0x22, 0xc7, 0x64, 0xb8, 0x61,
-	0x4a, 0xfc, 0x6f, 0x53, 0x4f, 0xe0, 0xd6, 0xd0, 0x66, 0xb6, 0x35, 0x08, 0x3c, 0xcf, 0x65, 0x9e,
-	0xe3, 0xa7, 0x0e, 0x4a, 0xb4, 0x92, 0xd0, 0xad, 0x25, 0x8b, 0x5b, 0xb0, 0xc7, 0x85, 0xe3, 0x60,
-	0x60, 0x33, 0x37, 0xf0, 0xb9, 0x9f, 0x4a, 0x43, 0xdd, 0xfc, 0x57, 0x72, 0xdd, 0x7a, 0xa6, 0xa2,
-	0xd2, 0x30, 0x87, 0xf0, 0x3e, 0x14, 0x26, 0xdc, 0x14, 0xb7, 0xbd, 0x4b, 0x33, 0x84, 0x5f, 0x41,
-	0x21, 0x62, 0x36, 0x8b, 0x23, 0xa5, 0xc0, 0xbb, 0x3e, 0xde, 0xec, 0xca, 0xaf, 0xc4, 0x4d, 0xfb,
-	0x5c, 0x70, 0x2d, 0xcd, 0xce, 0xe0, 0x53, 0x38, 0x4c, 0xc6, 0x8f, 0x7d, 0x97, 0xcd, 0xac, 0x69,
-	0x4e, 0x67, 0x0d, 0x82, 0xd8, 0x67, 0x4a, 0xb1, 0x8a, 0x6a, 0xdb, 0xf4, 0x60, 0xa9, 0xc9, 0xb7,
-	0x6a, 0x25, 0x8a, 0x9b, 0x1b, 0xd9, 0x5d, 0xdf, 0xc8, 0x0f, 0x04, 0xb8, 0xe9, 0xb2, 0x7e, 0xb7,
-	0xf5, 0xc9, 0x1e, 0x8f, 0x1d, 0xff, 0xa3, 0xc3, 0x13, 0xf5, 0x08, 0xf6, 0xd2, 0xd9, 0xac, 0xcc,
-	0x13, 0xe2, 0x9e, 0xa4, 0x69, 0x7e, 0x79, 0x0a, 0x14, 0x3f, 0xbb, 0xcc, 0x77, 0xa2, 0x28, 0x8b,
-	0xcd, 0x3f, 0x98, 0xa5, 0x62, 0x6b, 0x99, 0x8a, 0xf5, 0x20, 0x6d, 0x6f, 0x06, 0xe9, 0x80, 0x27,
-	0x21, 0x0c, 0x22, 0x67, 0x92, 0xe5, 0x66, 0x89, 0x8f, 0x29, 0xe0, 0xcd, 0x2b, 0xc2, 0xfb, 0x80,
-	0x89, 0x41, 0x4c, 0xa2, 0xe9, 0x56, 0x5f, 0xd3, 0x49, 0x5b, 0x33, 0x49, 0xcf, 0x90, 0x05, 0x7c,
-	0x1b, 0xf6, 0x2e, 0x7a, 0x1d, 0xd3, 0xea, 0x10, 0x43, 0xd3, 0x89, 0xf9, 0x5e, 0x46, 0x09, 0x75,
-	0xa6, 0xd1, 0xf6, 0x8a, 0x12, 0x8f, 0x4f, 0x40, 0xca, 0x2f, 0x13, 0x03, 0x14, 0x3a, 0x44, 0xeb,
-	0x76, 0x35, 0x59, 0xc0, 0x65, 0x28, 0x1a, 0xef, 0x9a, 0xc4, 0x6c, 0x6b, 0x32, 0x4a, 0x80, 0xd6,
-	0xd7, 0x88, 0xde, 0xd6, 0x64, 0xf1, 0xf8, 0x35, 0x94, 0x73, 0x71, 0xc3, 0xf7, 0xe0, 0xce, 0x1b,
-	0xda, 0x33, 0xcf, 0x9e, 0xbd, 0xb4, 0x9a, 0x46, 0xe3, 0xc5, 0x89, 0xd5, 0x24, 0x66, 0xbf, 0x2b,
-	0x0b, 0x49, 0xa1, 0xd3, 0x39, 0xd7, 0x7b, 0xc6, 0xdb, 0x1b, 0x05, 0xd4, 0x6c, 0xfc, 0x9a, 0xab,
-	0xe8, 0x7a, 0xae, 0xa2, 0x3f, 0x73, 0x15, 0x7d, 0x5f, 0xa8, 0xc2, 0xf5, 0x42, 0x15, 0x7e, 0x2f,
-	0x54, 0xe1, 0x83, 0x92, 0x3d, 0x03, 0x5f, 0x72, 0x0f, 0x01, 0x9b, 0x85, 0x4e, 0x74, 0x59, 0xe0,
-	0xaf, 0xc0, 0xf3, 0xbf, 0x01, 0x00, 0x00, 0xff, 0xff, 0x4e, 0xfc, 0xe8, 0x55, 0x29, 0x04, 0x00,
-	0x00,
+	// 677 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x9c, 0x54, 0x5d, 0x6f, 0x12, 0x41,
+	0x14, 0x65, 0x69, 0x0b, 0xe5, 0xb2, 0x25, 0xeb, 0x68, 0x5a, 0xac, 0x2d, 0xc1, 0xc6, 0x87, 0xa6,
+	0x89, 0x54, 0xf1, 0xe3, 0xc1, 0x98, 0xd8, 0x05, 0x8a, 0x9d, 0xca, 0x47, 0x33, 0xac, 0x24, 0xfa,
+	0xb2, 0x19, 0x96, 0x6d, 0x99, 0xc0, 0x7e, 0x84, 0x99, 0xc5, 0xe2, 0xaf, 0xf0, 0x2f, 0xf8, 0x6f,
+	0x7c, 0xec, 0xa3, 0x8f, 0xa6, 0x7d, 0xf6, 0x07, 0xf8, 0x66, 0x76, 0x96, 0x52, 0x2c, 0xb1, 0x8d,
+	0xbe, 0xed, 0xb9, 0xf7, 0xcc, 0x99, 0x7b, 0xce, 0xdd, 0x0c, 0xe4, 0x8f, 0x19, 0x75, 0x1c, 0xba,
+	0xfb, 0xb9, 0xef, 0x8f, 0xec, 0x21, 0x3b, 0x1e, 0x5f, 0x7d, 0x15, 0xfc, 0xa1, 0x27, 0x3c, 0xa4,
+	0x45, 0x8c, 0xc2, 0xb4, 0xbe, 0xf5, 0x53, 0x01, 0x54, 0xd1, 0x5b, 0x41, 0xc7, 0x61, 0x9c, 0x33,
+	0xcf, 0x25, 0x36, 0x0f, 0x06, 0x02, 0xdd, 0x87, 0x65, 0x7f, 0xe8, 0x79, 0xc7, 0x26, 0xeb, 0x66,
+	0x95, 0xbc, 0xb2, 0x9d, 0x22, 0x49, 0x89, 0x71, 0x17, 0x95, 0x61, 0xa5, 0x4b, 0x05, 0x35, 0x07,
+	0x9e, 0x45, 0x05, 0xf3, 0xdc, 0x6c, 0x3c, 0xaf, 0x6c, 0x67, 0x8a, 0xb9, 0xc2, 0x75, 0xed, 0x42,
+	0x85, 0x0a, 0x5a, 0x9b, 0xb0, 0x88, 0xda, 0x9d, 0x41, 0x68, 0x13, 0xa0, 0x33, 0xf0, 0xac, 0xbe,
+	0xd9, 0xa3, 0xbc, 0x97, 0x5d, 0x90, 0x37, 0xa4, 0x64, 0xe5, 0x80, 0xf2, 0x1e, 0x7a, 0x08, 0xea,
+	0xa4, 0x6d, 0xb3, 0x93, 0x9e, 0xc8, 0x2e, 0xe6, 0x95, 0xed, 0x45, 0x92, 0x8e, 0x08, 0xb2, 0x84,
+	0xd6, 0x20, 0x29, 0x4e, 0xa3, 0xe3, 0x4b, 0xf2, 0x78, 0x42, 0x9c, 0xca, 0xb3, 0x1b, 0x90, 0x72,
+	0xa9, 0x63, 0x73, 0x9f, 0x5a, 0x76, 0x36, 0x11, 0x29, 0x4f, 0x0b, 0x5b, 0x0c, 0xb4, 0x59, 0xbb,
+	0xe1, 0x88, 0x37, 0x99, 0x7d, 0x05, 0x10, 0xb5, 0xc2, 0xe9, 0xa5, 0xd3, 0x74, 0xf1, 0xc1, 0xbc,
+	0xd3, 0xa3, 0x90, 0x13, 0x6a, 0x91, 0x94, 0x7f, 0xf9, 0xb9, 0xf5, 0x4b, 0x81, 0xd4, 0xb4, 0x81,
+	0xf6, 0x40, 0x8d, 0x94, 0xf8, 0x98, 0x0b, 0xdb, 0x91, 0x17, 0x65, 0x8a, 0x9b, 0x7f, 0xd1, 0x6a,
+	0x49, 0x12, 0x49, 0xfb, 0x57, 0x00, 0xdd, 0x83, 0x25, 0x09, 0xe5, 0x18, 0x2a, 0x89, 0x40, 0x18,
+	0x95, 0x1f, 0x74, 0x06, 0xcc, 0x32, 0x99, 0xeb, 0x07, 0x42, 0x66, 0xa9, 0x92, 0x74, 0x54, 0xc3,
+	0x61, 0x09, 0x65, 0x20, 0x3e, 0xea, 0xcb, 0x0c, 0x55, 0x12, 0x1f, 0xf5, 0xe7, 0x37, 0xb8, 0xf4,
+	0x1f, 0x1b, 0xbc, 0x39, 0xe6, 0xaf, 0x71, 0x50, 0xdb, 0x52, 0xe3, 0xf6, 0x1f, 0xea, 0x7a, 0x32,
+	0xf1, 0x7f, 0x4e, 0x66, 0x15, 0x12, 0x43, 0x79, 0x8d, 0x74, 0xbf, 0x4c, 0x26, 0x08, 0xbd, 0x86,
+	0x04, 0x17, 0x54, 0x04, 0x5c, 0x9a, 0xcf, 0x14, 0x1f, 0xcd, 0x6b, 0xca, 0x21, 0x59, 0xe4, 0xa9,
+	0x25, 0xb9, 0x64, 0x72, 0x06, 0xed, 0xc1, 0x86, 0xe5, 0x39, 0x4e, 0xe0, 0x32, 0x31, 0x36, 0x47,
+	0x33, 0x3c, 0xd3, 0xf2, 0x02, 0x57, 0xc8, 0xd4, 0x16, 0xc9, 0xfa, 0x94, 0x33, 0x2b, 0x55, 0x0e,
+	0x19, 0xb7, 0x64, 0x74, 0x08, 0xa8, 0xc4, 0x44, 0xbb, 0x5e, 0xee, 0xd1, 0xc1, 0xc0, 0x76, 0x4f,
+	0x6c, 0xf9, 0x9f, 0x64, 0x21, 0xf9, 0x89, 0x09, 0xd7, 0xe6, 0x5c, 0xe6, 0xa4, 0x92, 0x4b, 0x88,
+	0xd6, 0x65, 0x84, 0xbe, 0xc7, 0xed, 0xa1, 0xcc, 0x28, 0x45, 0xa6, 0x78, 0x87, 0x00, 0x9a, 0x77,
+	0x82, 0x56, 0x01, 0xe1, 0x06, 0x36, 0xb0, 0x5e, 0x33, 0xdb, 0x7a, 0x0d, 0x57, 0x74, 0x03, 0x37,
+	0x1b, 0x5a, 0x0c, 0xdd, 0x81, 0x95, 0x56, 0xb3, 0x6a, 0x98, 0x55, 0xdc, 0xd0, 0x6b, 0xd8, 0xf8,
+	0xa0, 0x29, 0x61, 0xe9, 0x40, 0x27, 0x95, 0xab, 0x52, 0x7c, 0xa7, 0x04, 0xea, 0xec, 0xfe, 0x11,
+	0x40, 0xa2, 0x8a, 0xf5, 0x7a, 0x5d, 0xd7, 0x62, 0x28, 0x0d, 0xc9, 0xc6, 0xfb, 0x12, 0x36, 0x2a,
+	0xba, 0xa6, 0x20, 0x15, 0x96, 0xcb, 0xfb, 0xb5, 0xfd, 0x96, 0x81, 0x75, 0x2d, 0x1e, 0xb6, 0xf4,
+	0xb6, 0x8e, 0x6b, 0x15, 0x5d, 0x5b, 0xd8, 0x79, 0x03, 0xe9, 0x99, 0xad, 0xa1, 0x35, 0xb8, 0xfb,
+	0x96, 0x34, 0x8d, 0x83, 0xa7, 0x2f, 0xcd, 0x52, 0xa3, 0xf8, 0xe2, 0xb9, 0x59, 0xc2, 0x46, 0xbb,
+	0xae, 0xc5, 0xc2, 0x46, 0xb5, 0x7a, 0x54, 0x6b, 0x36, 0xde, 0xfd, 0xd1, 0x50, 0x4a, 0x87, 0xdf,
+	0xce, 0x73, 0xca, 0xd9, 0x79, 0x4e, 0xf9, 0x71, 0x9e, 0x53, 0xbe, 0x5c, 0xe4, 0x62, 0x67, 0x17,
+	0xb9, 0xd8, 0xf7, 0x8b, 0x5c, 0xec, 0xe3, 0x93, 0x13, 0x26, 0x7a, 0x41, 0xa7, 0x60, 0x79, 0xce,
+	0x6e, 0xb4, 0xd6, 0xc7, 0x56, 0x8f, 0x32, 0x77, 0x02, 0x76, 0x4f, 0x67, 0xde, 0x41, 0x31, 0xf6,
+	0x6d, 0xde, 0x49, 0xc8, 0x47, 0xf0, 0xd9, 0xef, 0x00, 0x00, 0x00, 0xff, 0xff, 0xc7, 0xdd, 0xbe,
+	0xbf, 0x28, 0x05, 0x00, 0x00,
+}
+
+func (m *DASubmissionResult) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *DASubmissionResult) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *DASubmissionResult) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.Namespace) > 0 {
+		i -= len(m.Namespace)
+		copy(dAtA[i:], m.Namespace)
+		i = encodeVarintZkpverify(dAtA, i, uint64(len(m.Namespace)))
+		i--
+		dAtA[i] = 0x32
+	}
+	if len(m.TxHash) > 0 {
+		i -= len(m.TxHash)
+		copy(dAtA[i:], m.TxHash)
+		i = encodeVarintZkpverify(dAtA, i, uint64(len(m.TxHash)))
+		i--
+		dAtA[i] = 0x2a
+	}
+	if m.BlockHeight != 0 {
+		i = encodeVarintZkpverify(dAtA, i, uint64(m.BlockHeight))
+		i--
+		dAtA[i] = 0x20
+	}
+	if len(m.BlockHash) > 0 {
+		i -= len(m.BlockHash)
+		copy(dAtA[i:], m.BlockHash)
+		i = encodeVarintZkpverify(dAtA, i, uint64(len(m.BlockHash)))
+		i--
+		dAtA[i] = 0x1a
+	}
+	if m.DataLocation != 0 {
+		i = encodeVarintZkpverify(dAtA, i, uint64(m.DataLocation))
+		i--
+		dAtA[i] = 0x10
+	}
+	if len(m.ProofId) > 0 {
+		i -= len(m.ProofId)
+		copy(dAtA[i:], m.ProofId)
+		i = encodeVarintZkpverify(dAtA, i, uint64(len(m.ProofId)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *DASubmissionData) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *DASubmissionData) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *DASubmissionData) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.ProofData != nil {
+		{
+			size, err := m.ProofData.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintZkpverify(dAtA, i, uint64(size))
+		}
+		i--
+		dAtA[i] = 0x12
+	}
+	if len(m.ProofId) > 0 {
+		i -= len(m.ProofId)
+		copy(dAtA[i:], m.ProofId)
+		i = encodeVarintZkpverify(dAtA, i, uint64(len(m.ProofId)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
 }
 
 func (m *ProofData) Marshal() (dAtA []byte, err error) {
@@ -438,7 +658,12 @@ func (m *ProofData) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 		copy(dAtA[i:], m.Namespace)
 		i = encodeVarintZkpverify(dAtA, i, uint64(len(m.Namespace)))
 		i--
-		dAtA[i] = 0x2a
+		dAtA[i] = 0x32
+	}
+	if m.DataLocation != 0 {
+		i = encodeVarintZkpverify(dAtA, i, uint64(m.DataLocation))
+		i--
+		dAtA[i] = 0x28
 	}
 	if len(m.Vk) > 0 {
 		i -= len(m.Vk)
@@ -494,17 +719,17 @@ func (m *VerifyResult) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 		copy(dAtA[i:], m.Namespace)
 		i = encodeVarintZkpverify(dAtA, i, uint64(len(m.Namespace)))
 		i--
-		dAtA[i] = 0x42
+		dAtA[i] = 0x32
 	}
 	if m.CommunityVerificationCount != 0 {
 		i = encodeVarintZkpverify(dAtA, i, uint64(m.CommunityVerificationCount))
 		i--
-		dAtA[i] = 0x38
+		dAtA[i] = 0x28
 	}
 	if m.Status != 0 {
 		i = encodeVarintZkpverify(dAtA, i, uint64(m.Status))
 		i--
-		dAtA[i] = 0x30
+		dAtA[i] = 0x20
 	}
 	if m.Result {
 		i--
@@ -514,19 +739,7 @@ func (m *VerifyResult) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 			dAtA[i] = 0
 		}
 		i--
-		dAtA[i] = 0x28
-	}
-	if m.DataLocation != 0 {
-		i = encodeVarintZkpverify(dAtA, i, uint64(m.DataLocation))
-		i--
-		dAtA[i] = 0x20
-	}
-	if len(m.DataCommitment) > 0 {
-		i -= len(m.DataCommitment)
-		copy(dAtA[i:], m.DataCommitment)
-		i = encodeVarintZkpverify(dAtA, i, uint64(len(m.DataCommitment)))
-		i--
-		dAtA[i] = 0x1a
+		dAtA[i] = 0x18
 	}
 	if m.ProofSystem != 0 {
 		i = encodeVarintZkpverify(dAtA, i, uint64(m.ProofSystem))
@@ -568,38 +781,14 @@ func (m *BitVMChallengeData) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 		copy(dAtA[i:], m.Proposer)
 		i = encodeVarintZkpverify(dAtA, i, uint64(len(m.Proposer)))
 		i--
-		dAtA[i] = 0x2a
-	}
-	if len(m.PublicInput) > 0 {
-		i -= len(m.PublicInput)
-		copy(dAtA[i:], m.PublicInput)
-		i = encodeVarintZkpverify(dAtA, i, uint64(len(m.PublicInput)))
-		i--
-		dAtA[i] = 0x22
-	}
-	if len(m.Vk) > 0 {
-		i -= len(m.Vk)
-		copy(dAtA[i:], m.Vk)
-		i = encodeVarintZkpverify(dAtA, i, uint64(len(m.Vk)))
-		i--
-		dAtA[i] = 0x1a
+		dAtA[i] = 0x12
 	}
 	if len(m.Witness) > 0 {
 		i -= len(m.Witness)
 		copy(dAtA[i:], m.Witness)
 		i = encodeVarintZkpverify(dAtA, i, uint64(len(m.Witness)))
 		i--
-		dAtA[i] = 0x12
-	}
-	if m.VerifyResult {
-		i--
-		if m.VerifyResult {
-			dAtA[i] = 1
-		} else {
-			dAtA[i] = 0
-		}
-		i--
-		dAtA[i] = 0x8
+		dAtA[i] = 0xa
 	}
 	return len(dAtA) - i, nil
 }
@@ -615,6 +804,54 @@ func encodeVarintZkpverify(dAtA []byte, offset int, v uint64) int {
 	dAtA[offset] = uint8(v)
 	return base
 }
+func (m *DASubmissionResult) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.ProofId)
+	if l > 0 {
+		n += 1 + l + sovZkpverify(uint64(l))
+	}
+	if m.DataLocation != 0 {
+		n += 1 + sovZkpverify(uint64(m.DataLocation))
+	}
+	l = len(m.BlockHash)
+	if l > 0 {
+		n += 1 + l + sovZkpverify(uint64(l))
+	}
+	if m.BlockHeight != 0 {
+		n += 1 + sovZkpverify(uint64(m.BlockHeight))
+	}
+	l = len(m.TxHash)
+	if l > 0 {
+		n += 1 + l + sovZkpverify(uint64(l))
+	}
+	l = len(m.Namespace)
+	if l > 0 {
+		n += 1 + l + sovZkpverify(uint64(l))
+	}
+	return n
+}
+
+func (m *DASubmissionData) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.ProofId)
+	if l > 0 {
+		n += 1 + l + sovZkpverify(uint64(l))
+	}
+	if m.ProofData != nil {
+		l = m.ProofData.Size()
+		n += 1 + l + sovZkpverify(uint64(l))
+	}
+	return n
+}
+
 func (m *ProofData) Size() (n int) {
 	if m == nil {
 		return 0
@@ -636,6 +873,9 @@ func (m *ProofData) Size() (n int) {
 	if l > 0 {
 		n += 1 + l + sovZkpverify(uint64(l))
 	}
+	if m.DataLocation != 0 {
+		n += 1 + sovZkpverify(uint64(m.DataLocation))
+	}
 	l = len(m.Namespace)
 	if l > 0 {
 		n += 1 + l + sovZkpverify(uint64(l))
@@ -655,13 +895,6 @@ func (m *VerifyResult) Size() (n int) {
 	}
 	if m.ProofSystem != 0 {
 		n += 1 + sovZkpverify(uint64(m.ProofSystem))
-	}
-	l = len(m.DataCommitment)
-	if l > 0 {
-		n += 1 + l + sovZkpverify(uint64(l))
-	}
-	if m.DataLocation != 0 {
-		n += 1 + sovZkpverify(uint64(m.DataLocation))
 	}
 	if m.Result {
 		n += 2
@@ -685,18 +918,7 @@ func (m *BitVMChallengeData) Size() (n int) {
 	}
 	var l int
 	_ = l
-	if m.VerifyResult {
-		n += 2
-	}
 	l = len(m.Witness)
-	if l > 0 {
-		n += 1 + l + sovZkpverify(uint64(l))
-	}
-	l = len(m.Vk)
-	if l > 0 {
-		n += 1 + l + sovZkpverify(uint64(l))
-	}
-	l = len(m.PublicInput)
 	if l > 0 {
 		n += 1 + l + sovZkpverify(uint64(l))
 	}
@@ -712,6 +934,340 @@ func sovZkpverify(x uint64) (n int) {
 }
 func sozZkpverify(x uint64) (n int) {
 	return sovZkpverify(uint64((x << 1) ^ uint64((int64(x) >> 63))))
+}
+func (m *DASubmissionResult) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowZkpverify
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: DASubmissionResult: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: DASubmissionResult: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ProofId", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowZkpverify
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthZkpverify
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthZkpverify
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.ProofId = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 2:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field DataLocation", wireType)
+			}
+			m.DataLocation = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowZkpverify
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.DataLocation |= DataLocation(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 3:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field BlockHash", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowZkpverify
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthZkpverify
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthZkpverify
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.BlockHash = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 4:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field BlockHeight", wireType)
+			}
+			m.BlockHeight = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowZkpverify
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.BlockHeight |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 5:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field TxHash", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowZkpverify
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthZkpverify
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthZkpverify
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.TxHash = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 6:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Namespace", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowZkpverify
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthZkpverify
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthZkpverify
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Namespace = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipZkpverify(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthZkpverify
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *DASubmissionData) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowZkpverify
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: DASubmissionData: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: DASubmissionData: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ProofId", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowZkpverify
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthZkpverify
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthZkpverify
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.ProofId = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ProofData", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowZkpverify
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthZkpverify
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthZkpverify
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.ProofData == nil {
+				m.ProofData = &ProofData{}
+			}
+			if err := m.ProofData.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipZkpverify(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthZkpverify
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
 }
 func (m *ProofData) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
@@ -864,6 +1420,25 @@ func (m *ProofData) Unmarshal(dAtA []byte) error {
 			}
 			iNdEx = postIndex
 		case 5:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field DataLocation", wireType)
+			}
+			m.DataLocation = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowZkpverify
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.DataLocation |= DataLocation(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 6:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Namespace", wireType)
 			}
@@ -997,57 +1572,6 @@ func (m *VerifyResult) Unmarshal(dAtA []byte) error {
 				}
 			}
 		case 3:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field DataCommitment", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowZkpverify
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthZkpverify
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthZkpverify
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.DataCommitment = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		case 4:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field DataLocation", wireType)
-			}
-			m.DataLocation = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowZkpverify
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.DataLocation |= DataLocation(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		case 5:
 			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Result", wireType)
 			}
@@ -1067,7 +1591,7 @@ func (m *VerifyResult) Unmarshal(dAtA []byte) error {
 				}
 			}
 			m.Result = bool(v != 0)
-		case 6:
+		case 4:
 			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Status", wireType)
 			}
@@ -1086,7 +1610,7 @@ func (m *VerifyResult) Unmarshal(dAtA []byte) error {
 					break
 				}
 			}
-		case 7:
+		case 5:
 			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field CommunityVerificationCount", wireType)
 			}
@@ -1105,7 +1629,7 @@ func (m *VerifyResult) Unmarshal(dAtA []byte) error {
 					break
 				}
 			}
-		case 8:
+		case 6:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Namespace", wireType)
 			}
@@ -1188,26 +1712,6 @@ func (m *BitVMChallengeData) Unmarshal(dAtA []byte) error {
 		}
 		switch fieldNum {
 		case 1:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field VerifyResult", wireType)
-			}
-			var v int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowZkpverify
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				v |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			m.VerifyResult = bool(v != 0)
-		case 2:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Witness", wireType)
 			}
@@ -1241,75 +1745,7 @@ func (m *BitVMChallengeData) Unmarshal(dAtA []byte) error {
 				m.Witness = []byte{}
 			}
 			iNdEx = postIndex
-		case 3:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Vk", wireType)
-			}
-			var byteLen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowZkpverify
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				byteLen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if byteLen < 0 {
-				return ErrInvalidLengthZkpverify
-			}
-			postIndex := iNdEx + byteLen
-			if postIndex < 0 {
-				return ErrInvalidLengthZkpverify
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Vk = append(m.Vk[:0], dAtA[iNdEx:postIndex]...)
-			if m.Vk == nil {
-				m.Vk = []byte{}
-			}
-			iNdEx = postIndex
-		case 4:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field PublicInput", wireType)
-			}
-			var byteLen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowZkpverify
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				byteLen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if byteLen < 0 {
-				return ErrInvalidLengthZkpverify
-			}
-			postIndex := iNdEx + byteLen
-			if postIndex < 0 {
-				return ErrInvalidLengthZkpverify
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.PublicInput = append(m.PublicInput[:0], dAtA[iNdEx:postIndex]...)
-			if m.PublicInput == nil {
-				m.PublicInput = []byte{}
-			}
-			iNdEx = postIndex
-		case 5:
+		case 2:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Proposer", wireType)
 			}

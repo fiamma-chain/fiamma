@@ -3,13 +3,13 @@ package app
 import (
 	"time"
 
-	zkpverifymodulev1 "fiamma/api/fiamma/zkpverify/module"
-	_ "fiamma/x/zkpverify/module" // import for side-effects
-	zkpverifymoduletypes "fiamma/x/zkpverify/types"
+	zkpverifymodulev1 "github.com/fiamma-chain/fiamma/api/fiamma/zkpverify/module"
+	_ "github.com/fiamma-chain/fiamma/x/zkpverify/module" // import for side-effects
+	zkpverifymoduletypes "github.com/fiamma-chain/fiamma/x/zkpverify/types"
 
-	bitvmstakermodulev1 "fiamma/api/fiamma/bitvmstaker/module"
-	_ "fiamma/x/bitvmstaker/module" // import for side-effects
-	bitvmstakermoduletypes "fiamma/x/bitvmstaker/types"
+	bitvmstakermodulev1 "github.com/fiamma-chain/fiamma/api/fiamma/bitvmstaker/module"
+	_ "github.com/fiamma-chain/fiamma/x/bitvmstaker/module" // import for side-effects
+	bitvmstakermoduletypes "github.com/fiamma-chain/fiamma/x/bitvmstaker/types"
 
 	runtimev1alpha1 "cosmossdk.io/api/cosmos/app/runtime/v1alpha1"
 	appv1alpha1 "cosmossdk.io/api/cosmos/app/v1alpha1"

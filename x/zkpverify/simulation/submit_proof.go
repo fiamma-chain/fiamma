@@ -3,8 +3,8 @@ package simulation
 import (
 	"math/rand"
 
-	"fiamma/x/zkpverify/keeper"
-	"fiamma/x/zkpverify/types"
+	"github.com/fiamma-chain/fiamma/x/zkpverify/keeper"
+	"github.com/fiamma-chain/fiamma/x/zkpverify/types"
 
 	"github.com/cosmos/cosmos-sdk/baseapp"
 	sdk "github.com/cosmos/cosmos-sdk/types"

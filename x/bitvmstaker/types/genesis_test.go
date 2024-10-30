@@ -3,8 +3,9 @@ package types_test
 import (
 	"testing"
 
-	"fiamma/testutil/sample"
-	"fiamma/x/bitvmstaker/types"
+	"github.com/fiamma-chain/fiamma/testutil/sample"
+
+	"github.com/fiamma-chain/fiamma/x/bitvmstaker/types"
 
 	"github.com/stretchr/testify/require"
 )

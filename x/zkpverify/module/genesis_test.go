@@ -3,18 +3,20 @@ package zkpverify_test
 import (
 	"testing"
 
-	keepertest "fiamma/testutil/keeper"
-	"fiamma/testutil/nullify"
-	zkpverify "fiamma/x/zkpverify/module"
-	"fiamma/x/zkpverify/types"
+	zkpverify "github.com/fiamma-chain/fiamma/x/zkpverify/module"
+	"github.com/fiamma-chain/fiamma/x/zkpverify/types"
+
+	keepertest "github.com/fiamma-chain/fiamma/testutil/keeper"
+	"github.com/fiamma-chain/fiamma/testutil/nullify"
+	"github.com/fiamma-chain/fiamma/testutil/sample"
 
 	"github.com/stretchr/testify/require"
 )
 
 func TestGenesis(t *testing.T) {
 	genesisState := types.GenesisState{
-		Params: types.DefaultParams(),
-
+		Params:      types.DefaultParams(),
+		DaSubmitter: sample.AccAddress(),
 		// this line is used by starport scaffolding # genesis/test/state
 	}
 

@@ -1,25 +1,9 @@
 package keeper
 
 import (
-	"bytes"
-	"crypto/sha256"
-
-	"fiamma/x/zkpverify/types"
-	"fiamma/x/zkpverify/verifiers"
+	"github.com/fiamma-chain/fiamma/x/zkpverify/types"
+	"github.com/fiamma-chain/fiamma/x/zkpverify/verifiers"
 )
-
-// GetProofId returns the proof id
-func (k Keeper) GetProofId(proofData types.ProofData) ([32]byte, error) {
-	var buf bytes.Buffer
-	buf.Write([]byte(proofData.Namespace))
-	buf.Write([]byte(proofData.ProofSystem.String()))
-	buf.Write(proofData.Proof)
-	buf.Write(proofData.PublicInput)
-	buf.Write(proofData.Vk)
-
-	hash := sha256.Sum256(buf.Bytes())
-	return hash, nil
-}
 
 func (k Keeper) verifyProof(proofData *types.ProofData) (bool, []byte) {
 	switch proofData.ProofSystem {

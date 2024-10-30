@@ -5,8 +5,9 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	keepertest "fiamma/testutil/keeper"
-	"fiamma/x/bitvmstaker/types"
+	keepertest "github.com/fiamma-chain/fiamma/testutil/keeper"
+
+	"github.com/fiamma-chain/fiamma/x/bitvmstaker/types"
 )
 
 func TestGetParams(t *testing.T) {
