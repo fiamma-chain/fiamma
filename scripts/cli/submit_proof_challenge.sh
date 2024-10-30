@@ -18,7 +18,7 @@ fi
 : ${VK_FILE:=../../prover_examples/bitvm_challenge/vk.bitvm}
 : ${NAMESPACE:="TEST"}
 : ${PROOF_SYSTEM:="GROTH16_BN254_BITVM"}
-: ${DATA_LOCATION:="CELESTIA"}
+: ${DATA_LOCATION:="FIAMMA"}
 
 fiammad tx zkpverify submit-proof \
   --from $ACCOUNT --chain-id $CHAIN_ID  \

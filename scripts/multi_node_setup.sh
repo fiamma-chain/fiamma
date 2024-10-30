@@ -47,6 +47,10 @@ for node in "$@"; do
     echo "Node ID for $node: $node_id"
 done
 
+echo "Setting max validators to 21..."
+jq '.app_state.staking.params.max_validators = 21' $(pwd)/testnet-nodes/$1/config/genesis.json > $(pwd)/testnet-nodes/$1/config/genesis.json.tmp
+mv $(pwd)/testnet-nodes/$1/config/genesis.json.tmp $(pwd)/testnet-nodes/$1/config/genesis.json
+
 for (( i=1; i <= "$#"; i++ )); do
     echo "Creating key for ${!i} user..."
     printf "$PASSWORD\n$PASSWORD\n" | docker run --rm -i -v $(pwd)/testnet-nodes/${!i}:/root/.fiamma ghcr.io/fiamma-chain/fiamma keys --keyring-backend file --keyring-dir /root/.fiamma/keys add val_${!i} > /dev/null 2> $(pwd)/testnet-nodes/${!i}/mnemonic.txt
@@ -60,7 +64,11 @@ for (( i=1; i <= "$#"; i++ )); do
         committee_address=$(echo $PASSWORD | docker run --rm -i -v $(pwd)/testnet-nodes/${!i}:/root/.fiamma ghcr.io/fiamma-chain/fiamma keys --keyring-backend file --keyring-dir /root/.fiamma/keys show val_${!i} --address)
         echo "Committee address: $committee_address"
         jq '.app_state.bitvmstaker.committee_address = "'$committee_address'"' $(pwd)/testnet-nodes/$1/config/genesis.json > $(pwd)/testnet-nodes/$1/config/genesis.json.tmp
-        mv $(pwd)/testnet-nodes/$1/config/genesis.json.tmp $(pwd)/testnet-nodes/$1/config/genesis.json  
+        mv $(pwd)/testnet-nodes/$1/config/genesis.json.tmp $(pwd)/testnet-nodes/$1/config/genesis.json
+        
+        echo "Setting zkpverify da_submitter in genesis..."
+        jq '.app_state.zkpverify.da_submitter = "'$committee_address'"' $(pwd)/testnet-nodes/$1/config/genesis.json > $(pwd)/testnet-nodes/$1/config/genesis.json.tmp
+        mv $(pwd)/testnet-nodes/$1/config/genesis.json.tmp $(pwd)/testnet-nodes/$1/config/genesis.json
     fi
 
     echo "Adding val_operator_${!i} to genesis staker_addresses..."

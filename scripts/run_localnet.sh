@@ -82,6 +82,9 @@ committee_address=$val_address
 jq '.app_state.bitvmstaker.committee_address = "'$committee_address'"' ~/.fiamma/config/genesis.json > ~/.fiamma/config/genesis.json.tmp
 mv ~/.fiamma/config/genesis.json.tmp ~/.fiamma/config/genesis.json
 
+echo "Setting zkpverify da_submitter in genesis..."
+jq '.app_state.zkpverify.da_submitter = "'$committee_address'"' ~/.fiamma/config/genesis.json > ~/.fiamma/config/genesis.json.tmp
+mv ~/.fiamma/config/genesis.json.tmp ~/.fiamma/config/genesis.json
 
 # Set staker addresses
 val_operator=$(fiammad keys show $node --keyring-backend test -a --bech val)
