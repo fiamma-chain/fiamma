@@ -58,6 +58,14 @@ service Query {
     option (google.api.http).get = "/fiamma/zkpverify/bitvm_challenge_data";
   }
 
+  rpc DaSubmissionData(QueryDaSubmissionDataRequest) returns (QueryDaSubmissionDataResponse) {
+    option (google.api.http).get = "/fiamma/zkpverify/da_submission_data/{proof_id}";
+  }
+
+  rpc DaSubmissionResult(QueryDaSubmissionResultRequest) returns (QueryDaSubmissionResultResponse) {
+    option (google.api.http).get = "/fiamma/zkpverify/da_submission_result/{proof_id}";
+  }
+
 }
 // QueryParamsRequest is request type for the Query/Params RPC method.
 message QueryParamsRequest {}
@@ -160,4 +168,21 @@ message QueryBitVMChallengeDataRequest {
 // QueryBitVMChallengeDataResponse is response type for the Query/BitVMChallengeData RPC method.
 message QueryBitVMChallengeDataResponse {
   fiamma.zkpverify.BitVMChallengeData bitvm_challenge_data = 1;
+}
+
+
+message QueryDaSubmissionDataRequest {
+  string proof_id = 1;
+}
+
+message QueryDaSubmissionDataResponse {
+  fiamma.zkpverify.DASubmissionData da_submission_data = 1;
+}
+
+message QueryDaSubmissionResultRequest {
+  string proof_id = 1;
+}
+
+message QueryDaSubmissionResultResponse {
+  fiamma.zkpverify.DASubmissionResult da_submission_result = 1;
 }

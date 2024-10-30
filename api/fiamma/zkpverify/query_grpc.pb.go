@@ -28,6 +28,8 @@ const (
 	Query_DASubmitter_FullMethodName              = "/fiamma.zkpverify.Query/DASubmitter"
 	Query_DASubmissionQueue_FullMethodName        = "/fiamma.zkpverify.Query/DASubmissionQueue"
 	Query_BitVMChallengeData_FullMethodName       = "/fiamma.zkpverify.Query/BitVMChallengeData"
+	Query_DaSubmissionData_FullMethodName         = "/fiamma.zkpverify.Query/DaSubmissionData"
+	Query_DaSubmissionResult_FullMethodName       = "/fiamma.zkpverify.Query/DaSubmissionResult"
 )
 
 // QueryClient is the client API for Query service.
@@ -48,6 +50,8 @@ type QueryClient interface {
 	DASubmitter(ctx context.Context, in *QueryDASubmitterRequest, opts ...grpc.CallOption) (*QueryDASubmitterResponse, error)
 	DASubmissionQueue(ctx context.Context, in *QueryDASubmissionQueueRequest, opts ...grpc.CallOption) (*QueryDASubmissionQueueResponse, error)
 	BitVMChallengeData(ctx context.Context, in *QueryBitVMChallengeDataRequest, opts ...grpc.CallOption) (*QueryBitVMChallengeDataResponse, error)
+	DaSubmissionData(ctx context.Context, in *QueryDaSubmissionDataRequest, opts ...grpc.CallOption) (*QueryDaSubmissionDataResponse, error)
+	DaSubmissionResult(ctx context.Context, in *QueryDaSubmissionResultRequest, opts ...grpc.CallOption) (*QueryDaSubmissionResultResponse, error)
 }
 
 type queryClient struct {
@@ -139,6 +143,24 @@ func (c *queryClient) BitVMChallengeData(ctx context.Context, in *QueryBitVMChal
 	return out, nil
 }
 
+func (c *queryClient) DaSubmissionData(ctx context.Context, in *QueryDaSubmissionDataRequest, opts ...grpc.CallOption) (*QueryDaSubmissionDataResponse, error) {
+	out := new(QueryDaSubmissionDataResponse)
+	err := c.cc.Invoke(ctx, Query_DaSubmissionData_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *queryClient) DaSubmissionResult(ctx context.Context, in *QueryDaSubmissionResultRequest, opts ...grpc.CallOption) (*QueryDaSubmissionResultResponse, error) {
+	out := new(QueryDaSubmissionResultResponse)
+	err := c.cc.Invoke(ctx, Query_DaSubmissionResult_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // QueryServer is the server API for Query service.
 // All implementations must embed UnimplementedQueryServer
 // for forward compatibility
@@ -157,6 +179,8 @@ type QueryServer interface {
 	DASubmitter(context.Context, *QueryDASubmitterRequest) (*QueryDASubmitterResponse, error)
 	DASubmissionQueue(context.Context, *QueryDASubmissionQueueRequest) (*QueryDASubmissionQueueResponse, error)
 	BitVMChallengeData(context.Context, *QueryBitVMChallengeDataRequest) (*QueryBitVMChallengeDataResponse, error)
+	DaSubmissionData(context.Context, *QueryDaSubmissionDataRequest) (*QueryDaSubmissionDataResponse, error)
+	DaSubmissionResult(context.Context, *QueryDaSubmissionResultRequest) (*QueryDaSubmissionResultResponse, error)
 	mustEmbedUnimplementedQueryServer()
 }
 
@@ -190,6 +214,12 @@ func (UnimplementedQueryServer) DASubmissionQueue(context.Context, *QueryDASubmi
 }
 func (UnimplementedQueryServer) BitVMChallengeData(context.Context, *QueryBitVMChallengeDataRequest) (*QueryBitVMChallengeDataResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method BitVMChallengeData not implemented")
+}
+func (UnimplementedQueryServer) DaSubmissionData(context.Context, *QueryDaSubmissionDataRequest) (*QueryDaSubmissionDataResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DaSubmissionData not implemented")
+}
+func (UnimplementedQueryServer) DaSubmissionResult(context.Context, *QueryDaSubmissionResultRequest) (*QueryDaSubmissionResultResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DaSubmissionResult not implemented")
 }
 func (UnimplementedQueryServer) mustEmbedUnimplementedQueryServer() {}
 
@@ -366,6 +396,42 @@ func _Query_BitVMChallengeData_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Query_DaSubmissionData_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryDaSubmissionDataRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QueryServer).DaSubmissionData(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Query_DaSubmissionData_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QueryServer).DaSubmissionData(ctx, req.(*QueryDaSubmissionDataRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Query_DaSubmissionResult_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryDaSubmissionResultRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QueryServer).DaSubmissionResult(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Query_DaSubmissionResult_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QueryServer).DaSubmissionResult(ctx, req.(*QueryDaSubmissionResultRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Query_ServiceDesc is the grpc.ServiceDesc for Query service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -408,6 +474,14 @@ var Query_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "BitVMChallengeData",
 			Handler:    _Query_BitVMChallengeData_Handler,
+		},
+		{
+			MethodName: "DaSubmissionData",
+			Handler:    _Query_DaSubmissionData_Handler,
+		},
+		{
+			MethodName: "DaSubmissionResult",
+			Handler:    _Query_DaSubmissionResult_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

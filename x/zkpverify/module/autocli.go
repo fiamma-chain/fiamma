@@ -72,6 +72,20 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "proof_id"}},
 				},
 
+				{
+					RpcMethod:      "DaSubmissionData",
+					Use:            "get-da-submission-data [proof_id]",
+					Short:          "Query DA submission data by proof_id",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "proof_id"}},
+				},
+
+				{
+					RpcMethod:      "DaSubmissionResult",
+					Use:            "get-da-submission-result [proof_id]",
+					Short:          "Query DA submission result by proof_id",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "proof_id"}},
+				},
+
 				// this line is used by ignite scaffolding # autocli/query
 			},
 		},
