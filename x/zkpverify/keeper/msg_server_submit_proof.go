@@ -46,12 +46,6 @@ func (k msgServer) SubmitProof(goCtx context.Context, msg *types.MsgSubmitProof)
 
 	proofIdHex := hex.EncodeToString(proofId[:])
 
-	// TODO: remove this
-	// This is a buggy proofId for testing the bitvm challenge process
-	if proofIdHex == "1735e881fa5e58408e4710a4e8cbea0a7995f029eefdf85d7e59775b0b6c44c5" {
-		result = false
-	}
-
 	// get the proposer address
 	currentHeight := ctx.BlockHeight()
 	proposerAddress := k.GetBlockProposer(ctx, currentHeight)
