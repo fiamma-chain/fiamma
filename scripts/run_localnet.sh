@@ -4,21 +4,15 @@ set -e
 
 # Basic settings
 CHAIN_ID="fiamma-testnet-1"
-PASSWORD="password"
 token="ufia"
-initial_balance="10000000000000"
-initial_faucet_balance="10000000000"
-initial_stake="10000000"
-minimum_gas_price="0"
+initial_balance="1000000000000000"
+initial_stake="50000000000000"
+minimum_gas_price="0.002"
 committee_address=""
 staker_addresses=()
 
 babylonContractAddr=fiamma14hj2tavq8fpesdwxxcu44rty3hh90vhujrvcmstl4zr3txmfvw9sgx3jav
 btcStakingContractAddr=fiamma1nc5tatafv6eyq7llkr2gv50ff9e22mnf70qgjlv737ktmt4eswrqyn5sl2
-
-# RPC and Auth Key settings
-rpc="http://127.0.0.1:26658"
-authkey=""
 
 # Ensure that node name is provided
 if [ $# -lt 1 ]; then
@@ -66,8 +60,6 @@ sed -i '' 's/"btc_staking_contract_address": ""/"btc_staking_contract_address": 
 
 fiammad config set app minimum-gas-prices "$minimum_gas_price$token"
 fiammad config set app pruning "nothing"
-fiammad config set app da-config.rpc "$rpc"
-fiammad config set app da-config.authkey "$authkey"
 
 # Key generation and setup
 echo "Creating key for $node..."
@@ -94,8 +86,7 @@ jq --argjson staker_addresses "$(printf '%s\n' "${staker_addresses[@]}" | jq -R 
 mv ~/.fiamma/config/genesis.json.tmp ~/.fiamma/config/genesis.json
 
 # Setup genesis
-faucet_initial_balance=$((initial_faucet_balance + initial_stake))
-fiammad genesis add-genesis-account $val_address $faucet_initial_balance$token
+fiammad genesis add-genesis-account $val_address $initial_balance$token
 
 # Configure staking and genesis
 fiammad genesis gentx $node $initial_stake$token --keyring-backend test --chain-id $CHAIN_ID --gas 1000000 --gas-prices $minimum_gas_price$token

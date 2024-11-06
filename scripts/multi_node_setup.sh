@@ -5,10 +5,9 @@ set -e
 : "${CHAIN_ID:=fiamma-testnet-1}"
 : "${PASSWORD:=password}"
 token="ufia"
-initial_balance=10000000000000
-initial_faucet_balance=10000000000
-initial_stake=10000000
-minimum_gas_price=0
+initial_balance=250000000000000
+initial_stake=50000000000000
+minimum_gas_price=0.002
 committee_address=""
 staker_addresses=()
 
@@ -76,12 +75,7 @@ for (( i=1; i <= "$#"; i++ )); do
     staker_addresses+=($val_operator)
 
     echo "Giving val_${!i} some tokens..."
-    if [ $i -eq 1 ]; then
-        faucet_initial_balance=$((initial_faucet_balance + initial_stake))
-        docker run --rm -it -v $(pwd)/testnet-nodes/${!i}:/root/.fiamma ghcr.io/fiamma-chain/fiamma genesis add-genesis-account $val_address $faucet_initial_balance$token
-    else
-        docker run --rm -it -v $(pwd)/testnet-nodes/${!i}:/root/.fiamma ghcr.io/fiamma-chain/fiamma genesis add-genesis-account $val_address $initial_balance$token
-    fi
+    docker run --rm -it -v $(pwd)/testnet-nodes/${!i}:/root/.fiamma ghcr.io/fiamma-chain/fiamma genesis add-genesis-account $val_address $initial_balance$token
 
     if [ $((i+1)) -le "$#" ]; then
         j=$((i+1))
