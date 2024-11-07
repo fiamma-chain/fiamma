@@ -1,8 +1,6 @@
 module github.com/fiamma-chain/fiamma
 
-go 1.22.7
-
-toolchain go1.23.2
+go 1.23.2
 
 replace (
 	// fix upstream GHSA-h395-qcrw-5vmq vulnerability.
