@@ -106,7 +106,7 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 				{
 					RpcMethod:      "SubmitCommunityVerification",
 					Use:            "submit-community-verification [proof_id] [verify_result]",
-					Short:          "submit a community zkp proof verify tx" + "\n" + "Currently supported proof systems: " + "[GROTH16_BN254_BITVM, FFPLONK_BN254_BITVM]",
+					Short:          "submit a community zkp proof verify tx",
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "proof_id"}, {ProtoField: "verify_result"}},
 				},
 

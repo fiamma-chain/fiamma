@@ -64,6 +64,7 @@ func (k msgServer) SubmitProof(goCtx context.Context, msg *types.MsgSubmitProof)
 
 	bitVMChallengeData := types.BitVMChallengeData{
 		Witness:  witness,
+		Vk:       msg.Vk,
 		Proposer: proposerAddress,
 	}
 	k.SetBitVMChallengeData(ctx, proofId[:], bitVMChallengeData)

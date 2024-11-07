@@ -13,9 +13,9 @@ enum VerificationStatus {
 // DataLocation is the proof data location enum for the proof verification
 enum DataLocation {
   FIAMMA = 0; 
-  NUBITDA = 1;
+  NUBIT = 1;
   CELESTIA = 2;
-  AVAILDA = 3;
+  AVAIL = 3;
 }
 
 // ProofSystem is the proof system enum for the proof verification
@@ -64,5 +64,6 @@ message VerifyResult {
 // BitVMChallengeData is the data structure for the bitvm challenge data
 message BitVMChallengeData {
   bytes witness = 1;
-  string proposer = 2;
+  bytes vk = 2;
+  string proposer = 3;
 }
