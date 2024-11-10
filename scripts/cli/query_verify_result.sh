@@ -4,7 +4,7 @@ set -e
 
 
 : ${CHAIN_ID:="fiamma-testnet-1"}
-: ${NODE:="http://127.0.0.1:26657"}
+: ${NODE:="https://testnet-rpc.fiammachain.io"}
 : ${PROOF_FILE:=../../prover_examples/bitvm/proof.bitvm}
 : ${PUBLIC_INPUT_FILE:=../../prover_examples/bitvm/public_input.bitvm}
 : ${VK_FILE:=../../prover_examples/bitvm/vk.bitvm}
@@ -29,6 +29,5 @@ allDataHex="${NEW_NAMESPACE}${NEW_PROOF_SYSTEM}${NEW_PROOF}${NEW_PUBLIC_INPUT}${
 
 proof_id=$(echo -n "$allDataHex" | xxd -r -p | sha256sum | awk '{print $1}')
 
-echo $proof_id
 
 fiammad query zkpverify get-verify-result $proof_id --node $NODE

@@ -11,7 +11,7 @@ else
 fi
 
 
-: ${NODE:="http://127.0.0.1:26657"}
+: ${NODE:="https://testnet-rpc.fiammachain.io"}
 
 
 fiammad query zkpverify get-verify-results-by-namespace $NAMESPACE --node $NODE

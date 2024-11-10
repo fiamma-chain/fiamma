@@ -37,6 +37,8 @@ SEQUENCE=$(jq -r '.account.sequence' account_info.json)
 : ${PUBLIC_INPUT_FILE:=../../prover_examples/bitvm/public_input.bitvm}
 : ${VK_FILE:=../../prover_examples/bitvm/vk.bitvm}
 : ${PROOF_SYSTEM:="GROTH16_BN254_BITVM"}
+: ${DATA_LOCATION:="FIAMMA"}
+: ${NAMESPACE:="TEST"}
 
 rm account_info.json
 echo "Account: $ACCOUNT"
@@ -50,15 +52,18 @@ do
     --chain-id $CHAIN_ID \
     --fees 20ufia \
     --offline \
-    --gas 20000000 \
+    --gas 60000000 \
+    --fees 120000ufia \
     --sequence $SEQUENCE \
     --account-number $ACCOUNT_NUMBER \
     --node $NODE_RPC \
     --yes \
-    "Fiamma" \
+    $NAMESPACE \
     $PROOF_SYSTEM \
     $PROOF_FILE \
     $PUBLIC_INPUT_FILE \
-    $VK_FILE
+    $VK_FILE \
+    $DATA_LOCATION
+
   let SEQUENCE++
 done
