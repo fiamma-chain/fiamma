@@ -11,9 +11,9 @@ fi
 NODE_HOME=$HOME/.fiamma
 CHAIN_BINARY=fiammad
 : ${CHAIN_ID:="fiamma-testnet-1"}
-: ${MINIMUM_GAS_PRICES="0ufia"}
+: ${MINIMUM_GAS_PRICES="0.002ufia"}
 
-: ${PEER_ADDR="18.182.20.173, 35.73.202.182"}
+: ${PEER_ADDR="18.182.20.173"}
 
 PEER_ARRAY=(${PEER_ADDR//,/ })
 
