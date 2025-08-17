@@ -30,7 +30,7 @@ func (h Hooks) AfterValidatorCreated(ctx context.Context, valAddr sdk.ValAddress
 
 	_, found := h.k.GetStaker(ctx, valAddr.String())
 	if !found {
-		return types.ErrVaildatorNotStaker
+		return types.ErrValidatorNotStaker
 	}
 	return nil
 }
