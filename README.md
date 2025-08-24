@@ -6,7 +6,7 @@
 [![GoDoc](https://img.shields.io/badge/godoc-reference-blue?style=flat-square&logo=go)](https://pkg.go.dev/github.com/fiamma-chain/fiamma)
 [![Go Report Card](https://goreportcard.com/badge/github.com/fiamma-chain/fiamma)](https://goreportcard.com/report/github.com/fiamma-chain/fiamma)
 [![codecov](https://codecov.io/gh/fiamma-chain/fiamma/branch/master/graph/badge.svg)](https://codecov.io/gh/fiamma-chain/fiamma)
-[![License:Apache-2.0](https://img.shields.io/github/license/fiamma-chain/fiamma.svg?style=flat-square)](https://github.com/fiamma-chain/fiamma/LICENSE)
+[![License:Apache-2.0](https://img.shields.io/github/license/fiamma-chain/fiamma.svg?style=flat-square)](https://github.com/fiamma-chain/fiamma/blob/main/LICENSE)
 
 Founded by seasoned ZK (zero-knowledge) developers, researchers, and strategists in fintech and crypto, we are the first to enable Bitcoin to verify ZKPs optimistically under the BitVM2 paradigm. We hold a deep conviction that ZK technology is the key to unlocking Bitcoin’s full potential.
 
